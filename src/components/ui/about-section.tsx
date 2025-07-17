@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Target, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function AboutSection() {
   return (

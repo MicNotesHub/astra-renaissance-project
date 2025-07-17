@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
@@ -16,16 +17,27 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="animate-fade-in">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           {/* Star icon */}
-          <div className="flex justify-center mb-8">
+          <motion.div 
+            className="flex justify-center mb-8"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
             <div className="relative">
-              <Star className="h-16 w-16 text-white animate-glow-pulse" fill="currentColor" />
-              <div className="absolute inset-0 animate-float">
-                <Star className="h-16 w-16 text-white/30" fill="currentColor" />
-              </div>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <Star className="h-16 w-16 text-white" fill="currentColor" />
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
@@ -59,7 +71,7 @@ export function HeroSection() {
               Contattaci
             </Button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in" style={{ animationDelay: "1s" }}>

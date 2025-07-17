@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Users, Lightbulb, Globe, GraduationCap, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 
 const services = [
   {
