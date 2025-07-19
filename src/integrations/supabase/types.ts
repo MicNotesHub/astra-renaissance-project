@@ -14,7 +14,170 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      event_registrations: {
+        Row: {
+          attendance_status: string | null
+          event_id: string
+          id: string
+          registration_date: string
+          user_email: string
+          user_name: string
+        }
+        Insert: {
+          attendance_status?: string | null
+          event_id: string
+          id?: string
+          registration_date?: string
+          user_email: string
+          user_name: string
+        }
+        Update: {
+          attendance_status?: string | null
+          event_id?: string
+          id?: string
+          registration_date?: string
+          user_email?: string
+          user_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_registrations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string
+          current_participants: number | null
+          description: string | null
+          end_date: string | null
+          event_type: string
+          id: string
+          image_url: string | null
+          is_online: boolean | null
+          location: string | null
+          max_participants: number | null
+          meeting_link: string | null
+          organizer_contact: string | null
+          organizer_name: string | null
+          registration_deadline: string | null
+          registration_required: boolean | null
+          start_date: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_participants?: number | null
+          description?: string | null
+          end_date?: string | null
+          event_type: string
+          id?: string
+          image_url?: string | null
+          is_online?: boolean | null
+          location?: string | null
+          max_participants?: number | null
+          meeting_link?: string | null
+          organizer_contact?: string | null
+          organizer_name?: string | null
+          registration_deadline?: string | null
+          registration_required?: boolean | null
+          start_date: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_participants?: number | null
+          description?: string | null
+          end_date?: string | null
+          event_type?: string
+          id?: string
+          image_url?: string | null
+          is_online?: boolean | null
+          location?: string | null
+          max_participants?: number | null
+          meeting_link?: string | null
+          organizer_contact?: string | null
+          organizer_name?: string | null
+          registration_deadline?: string | null
+          registration_required?: boolean | null
+          start_date?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      resources: {
+        Row: {
+          academic_year: string
+          course_code: string | null
+          course_name: string
+          created_at: string
+          description: string | null
+          downloads_count: number | null
+          file_size: number | null
+          file_url: string | null
+          id: string
+          is_public: boolean | null
+          resource_type: string
+          semester: number | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+          upload_date: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          academic_year: string
+          course_code?: string | null
+          course_name: string
+          created_at?: string
+          description?: string | null
+          downloads_count?: number | null
+          file_size?: number | null
+          file_url?: string | null
+          id?: string
+          is_public?: boolean | null
+          resource_type: string
+          semester?: number | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          upload_date?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          academic_year?: string
+          course_code?: string | null
+          course_name?: string
+          created_at?: string
+          description?: string | null
+          downloads_count?: number | null
+          file_size?: number | null
+          file_url?: string | null
+          id?: string
+          is_public?: boolean | null
+          resource_type?: string
+          semester?: number | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          upload_date?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
