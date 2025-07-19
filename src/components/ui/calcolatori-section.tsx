@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calculator, TrendingUp, MapPin, Calendar, Brain, Target } from "lucide-react";
+import { CalculatorModal } from "../calculators/calculator-modal";
 
 export const CalcolatoriSection = () => {
+  const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
   const calcolatori = [
     {
+      id: "gpa",
       title: "Calcolatore GPA",
       description: "Calcola la tua media ponderata e scopri il tuo GPA attuale",
       icon: TrendingUp,
@@ -14,6 +18,7 @@ export const CalcolatoriSection = () => {
       features: ["Media ponderata", "Proiezioni future", "Analisi per anno"]
     },
     {
+      id: "study-plan",
       title: "Piano di Studi",
       description: "Pianifica il tuo percorso accademico e ottimizza gli esami",
       icon: Brain,
@@ -22,6 +27,7 @@ export const CalcolatoriSection = () => {
       features: ["Prerequisiti", "Carico di lavoro", "Timeline ottimale"]
     },
     {
+      id: "exchange",
       title: "Exchange Planner",
       description: "Progetta il tuo semestre all'estero e calcola i crediti",
       icon: MapPin,
@@ -30,6 +36,7 @@ export const CalcolatoriSection = () => {
       features: ["Equivalenze esami", "Costi stimati", "Università partner"]
     },
     {
+      id: "simulator",
       title: "Simulatore Voti",
       description: "Simula diversi scenari per raggiungere i tuoi obiettivi",
       icon: Target,
@@ -38,6 +45,7 @@ export const CalcolatoriSection = () => {
       features: ["Voti necessari", "Scenari multipli", "Goal tracking"]
     },
     {
+      id: "planner",
       title: "Planner Sessioni",
       description: "Organizza le tue sessioni d'esame in modo strategico",
       icon: Calendar,
@@ -46,6 +54,7 @@ export const CalcolatoriSection = () => {
       features: ["Date appelli", "Distribuzione carico", "Reminder automatici"]
     },
     {
+      id: "performance",
       title: "Analisi Performance",
       description: "Analizza le tue performance e identifica aree di miglioramento",
       icon: Calculator,
@@ -109,7 +118,10 @@ export const CalcolatoriSection = () => {
                       </ul>
                     </div>
                     
-                    <Button className="w-full group-hover:bg-primary-light transition-colors">
+                    <Button 
+                      className="w-full group-hover:bg-primary-light transition-colors"
+                      onClick={() => setSelectedCalculator(calc.id)}
+                    >
                       Usa Calcolatore
                     </Button>
                   </CardContent>
@@ -140,6 +152,12 @@ export const CalcolatoriSection = () => {
           </Card>
         </motion.div>
       </div>
+
+      <CalculatorModal 
+        isOpen={selectedCalculator !== null}
+        onClose={() => setSelectedCalculator(null)}
+        calculatorType={selectedCalculator || ''}
+      />
     </section>
   );
 };
