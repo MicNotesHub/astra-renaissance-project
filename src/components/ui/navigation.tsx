@@ -4,16 +4,13 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { name: "CHI SIAMO", href: "#about" },
-  { name: "COSA FACCIAMO", href: "#servizi" },
-  { name: "VALORI", href: "#valori" },
-  { name: "ASTRA GPT", href: "#astragpt" },
-  { name: "RAPPRESENTANTI", href: "#rappresentanti" },
-  { name: "DISPENSE", href: "#dispense" },
-  { name: "EXCHANGE", href: "#exchange" },
-  { name: "RUBRICA", href: "#rubrica" },
-  { name: "GUIDE", href: "#guide" },
-  { name: "Contattaci", href: "#contatti" }
+  { name: "Chi Siamo", href: "#about" },
+  { name: "Dispense", href: "#dispensen" },
+  { name: "Calcolatori", href: "#calcolatori" },
+  { name: "Astra Polare", href: "#astra-polare" },
+  { name: "Marketplace", href: "#marketplace" },
+  { name: "Eventi", href: "#eventi" },
+  { name: "Team", href: "#team" },
 ];
 
 export function Navigation() {

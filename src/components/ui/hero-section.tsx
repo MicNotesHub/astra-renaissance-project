@@ -41,16 +41,15 @@ export function HeroSection() {
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Per Aspera, ad{" "}
-            <span className="block text-6xl md:text-8xl font-bold mt-2">
-              ASTRA
+            ASTRA{" "}
+            <span className="block text-6xl md:text-8xl font-bold mt-2 hero-text">
+              Bocconi
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-            La nostra visione della rappresentanza si sviluppa attraverso tre aspetti fondamentali 
-            dell'esperienza universitaria
+            La rappresentanza studentesca che mette al centro l'innovazione, la community e il futuro degli studenti Bocconi.
           </p>
 
           {/* CTA Buttons */}
