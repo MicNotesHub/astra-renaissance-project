@@ -7,6 +7,7 @@ import { AstraPolareSection } from "@/components/ui/astra-polare-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
 import { EventiSection } from "@/components/ui/eventi-section";
 import { TeamSection } from "@/components/ui/team-section";
+import { AstraGPTSection } from "@/components/ui/astra-gpt-section";
 import { AstraGPTChatbot } from "@/components/ui/astra-gpt-chatbot";
 import { Footer } from "@/components/ui/footer";
 
@@ -21,6 +22,7 @@ const Index = () => {
       <AstraPolareSection />
       <MarketplaceSection />
       <EventiSection />
+      <AstraGPTSection />
       <TeamSection />
       <Footer />
       

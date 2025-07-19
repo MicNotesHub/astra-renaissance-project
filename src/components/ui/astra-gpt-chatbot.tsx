@@ -59,19 +59,39 @@ export const AstraGPTChatbot = () => {
       return "Perfetto! Puoi trovare tutte le dispense nella sezione dedicata. Abbiamo materiale per Matematica, Economia, Diritto e molto altro. Vuoi che ti mostri le dispense di una materia specifica? 📚";
     }
     
-    if (lowerInput.includes("rappresentanti") || lowerInput.includes("contatt")) {
-      return "Puoi contattare i rappresentanti in diversi modi: tramite email, LinkedIn o UniLink. Nella sezione Team trovi tutti i contatti. Per questioni urgenti, scrivi al nostro Presidente Marco Rossi! 👥";
+    if (lowerInput.includes("rappresentanti") || lowerInput.includes("contatt") || lowerInput.includes("team")) {
+      return "Puoi contattare i rappresentanti in diversi modi: tramite email, LinkedIn o UniLink. Nella sezione Team trovi tutti i contatti. Per questioni urgenti, scrivi al nostro Presidente Marco Andreoli! 👥";
     }
     
-    if (lowerInput.includes("eventi") || lowerInput.includes("calendar")) {
-      return "Questa settimana abbiamo il Career Day (15 Marzo) e il Workshop Excel Avanzato (22 Marzo). Controlla la sezione Eventi per tutti i dettagli e per registrarti! 📅";
+    if (lowerInput.includes("eventi") || lowerInput.includes("calendar") || lowerInput.includes("conferenze")) {
+      return "Questa settimana abbiamo eventi interessanti! Controlla la sezione Eventi per tutti i dettagli e per registrarti. Organizziamo regolarmente career talks, workshop e networking! 📅";
     }
     
-    if (lowerInput.includes("calcolator") || lowerInput.includes("gpa")) {
+    if (lowerInput.includes("calcolator") || lowerInput.includes("gpa") || lowerInput.includes("piano")) {
       return "Abbiamo diversi calcolatori utili: GPA Calculator, Piano di Studi, Exchange Planner e altro! Li trovi nella sezione Calcolatori. Quale ti interessa di più? 🧮";
     }
     
-    return "Interessante! Per questioni specifiche, ti consiglio di contattare direttamente i nostri rappresentanti. Oppure esplora le diverse sezioni del sito per trovare quello che cerchi. Posso aiutarti con altro? 🎯";
+    if (lowerInput.includes("exchange") || lowerInput.includes("erasmus") || lowerInput.includes("estero")) {
+      return "Per tutto quello che riguarda i programmi di scambio, contatta Luca Bianchi, il nostro Responsabile Exchange! Può aiutarti con domande, documenti e consigli. 🌍";
+    }
+    
+    if (lowerInput.includes("astra polare") || lowerInput.includes("media") || lowerInput.includes("video")) {
+      return "Astra Polare è la nostra rubrica con contenuti video e social! Trovi interviste, recap eventi e molto altro. Seguici sui social per non perdere nulla! 📺";
+    }
+    
+    if (lowerInput.includes("marketplace") || lowerInput.includes("unimarket") || lowerInput.includes("prodotti")) {
+      return "Il Marketplace Astra x UniMarket offre prodotti esclusivi per gli studenti Bocconi! Felpe, zaini, gadgets e molto altro. Dai un'occhiata! 🛍️";
+    }
+    
+    if (lowerInput.includes("welfare") || lowerInput.includes("benessere") || lowerInput.includes("supporto")) {
+      return "Per questioni di welfare e benessere studentesco, contatta Chiara Conti! Si occupa di servizi di supporto e iniziative per migliorare la qualità della vita universitaria. 💚";
+    }
+    
+    if (lowerInput.includes("didattica") || lowerInput.includes("esami") || lowerInput.includes("orari")) {
+      return "Per questioni didattiche, orari e rapporti con i docenti, il riferimento è Alessandro Martini, Responsabile Didattica del Senato Accademico! 📖";
+    }
+    
+    return "Interessante! Per questioni specifiche, ti consiglio di contattare direttamente i nostri rappresentanti nella sezione Team. Oppure esplora le diverse sezioni del sito per trovare quello che cerchi. Posso aiutarti con altro? 🎯";
   };
 
   return (
@@ -85,6 +105,7 @@ export const AstraGPTChatbot = () => {
       >
         <Button
           onClick={() => setIsOpen(true)}
+          data-chat-trigger
           className="w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary-light relative overflow-hidden group"
         >
           <MessageCircle className="h-6 w-6 group-hover:scale-110 transition-transform" />

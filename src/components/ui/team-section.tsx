@@ -12,98 +12,128 @@ export const TeamSection = () => {
 
   const teamMembers = [
     {
-      name: "Marco Rossi",
-      role: "Presidente ASTRA",
-      organo: "Direttivo",
+      name: "Marco Andreoli",
+      role: "Presidente",
+      organo: "Presidenza",
       year: "3° Anno",
       course: "BIEM",
-      bio: "Appassionato di innovazione e tecnologia, coordina le attività della rappresentanza studentesca",
+      bio: "Coordina le attività della rappresentanza e mantiene i rapporti istituzionali con l'università",
       image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
       contacts: {
-        email: "marco.rossi@studbocconi.it",
-        linkedin: "marco-rossi-bocconi",
-        unilink: "@marcorossi"
+        email: "marco.andreoli@studenti.unibocconi.it",
+        linkedin: "marcoandreolix",
+        unilink: "@marcoandreolix"
       },
-      expertise: ["Leadership", "Innovazione", "Networking"]
+      expertise: ["Leadership", "Relazioni Istituzionali", "Strategia"]
     },
     {
       name: "Sofia Chen",
       role: "Vice Presidente",
-      organo: "Direttivo", 
+      organo: "Presidenza",
       year: "2° Anno",
       course: "BESS",
-      bio: "Responsabile delle relazioni esterne e coordinamento eventi",
+      bio: "Supporta il presidente nelle attività di coordinamento e gestisce i progetti strategici",
       image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
       contacts: {
-        email: "sofia.chen@studbocconi.it",
-        linkedin: "sofia-chen-bocconi",
+        email: "sofia.chen@studenti.unibocconi.it",
+        linkedin: "sofiachen",
         unilink: "@sofiachen"
       },
-      expertise: ["Eventi", "Relazioni Esterne", "Comunicazione"]
+      expertise: ["Coordinamento", "Progetti Strategici", "Management"]
     },
     {
-      name: "Alessandro Bianchi",
-      role: "Rappresentante Lauree Triennali",
-      organo: "Consiglio di Scuola",
+      name: "Alessandro Martini",
+      role: "Responsabile Didattica",
+      organo: "Senato Accademico",
       year: "3° Anno",
-      course: "CLEAM",
-      bio: "Rappresenta gli studenti triennali nelle decisioni accademiche",
+      course: "BAFIN",
+      bio: "Si occupa di questioni didattiche, orari e rapporti con i docenti",
       image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
       contacts: {
-        email: "alessandro.bianchi@studbocconi.it",
-        linkedin: "alessandro-bianchi",
-        unilink: "@alessandrobianchi"
+        email: "alessandro.martini@studenti.unibocconi.it",
+        linkedin: "alessandromartini",
+        unilink: "@alemartini"
       },
-      expertise: ["Didattica", "Advocacy", "Policy"]
-    },
-    {
-      name: "Emma Martinez",
-      role: "Coordinatrice Dispense",
-      organo: "Progetti Speciali",
-      year: "2° Anno", 
-      course: "BIG",
-      bio: "Gestisce la piattaforma dispense e coordina i tutor",
-      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-      contacts: {
-        email: "emma.martinez@studbocconi.it",
-        linkedin: "emma-martinez",
-        unilink: "@emmamartinez"
-      },
-      expertise: ["Tutoring", "Gestione Contenuti", "Support"]
-    },
-    {
-      name: "Luca Ferrari",
-      role: "Responsabile Tecnologia",
-      organo: "Progetti Speciali",
-      year: "1° Anno",
-      course: "BIEM",
-      bio: "Sviluppo e manutenzione delle piattaforme digitali ASTRA",
-      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      contacts: {
-        email: "luca.ferrari@studbocconi.it",
-        linkedin: "luca-ferrari-dev",
-        unilink: "@lucaferrari"
-      },
-      expertise: ["Sviluppo", "AI", "Tech Innovation"]
+      expertise: ["Didattica", "Policy Accademica", "Docenza"]
     },
     {
       name: "Giulia Romano",
-      role: "Social Media Manager", 
-      organo: "Comunicazione",
+      role: "Responsabile Eventi",
+      organo: "Eventi",
       year: "2° Anno",
-      course: "BESS",
-      bio: "Gestisce i canali social e la comunicazione digitale",
+      course: "WBB",
+      bio: "Organizza conferenze, workshop e attività di networking per la community studentesca",
       image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
       contacts: {
-        email: "giulia.romano@studbocconi.it",
-        linkedin: "giulia-romano-social",
+        email: "giulia.romano@studenti.unibocconi.it",
+        linkedin: "giuliaromano",
         unilink: "@giuliaromano"
       },
-      expertise: ["Social Media", "Content Creation", "Branding"]
+      expertise: ["Event Planning", "Networking", "Community Building"]
+    },
+    {
+      name: "Matteo Ferrari",
+      role: "Responsabile IT & Innovazione",
+      organo: "Innovazione",
+      year: "3° Anno",
+      course: "BEMACS",
+      bio: "Gestisce i sistemi digitali, il sito web e sviluppa soluzioni tecnologiche per gli studenti",
+      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+      contacts: {
+        email: "matteo.ferrari@studenti.unibocconi.it",
+        linkedin: "matteoferrari",
+        unilink: "@matteoferrari"
+      },
+      expertise: ["Sviluppo Web", "AI", "Digital Innovation"]
+    },
+    {
+      name: "Elena Rossi",
+      role: "Responsabile Comunicazione",
+      organo: "Comunicazione",
+      year: "2° Anno",
+      course: "CLES",
+      bio: "Gestisce i social media, la comunicazione istituzionale e le relazioni con i media",
+      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+      contacts: {
+        email: "elena.rossi@studenti.unibocconi.it",
+        linkedin: "elenarossi",
+        unilink: "@elenarossi"
+      },
+      expertise: ["Social Media", "Comunicazione", "PR"]
+    },
+    {
+      name: "Luca Bianchi",
+      role: "Responsabile Exchange",
+      organo: "Exchange",
+      year: "3° Anno",
+      course: "BIG",
+      bio: "Supporta gli studenti nei programmi di scambio internazionale e nelle partnership estere",
+      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+      contacts: {
+        email: "luca.bianchi@studenti.unibocconi.it",
+        linkedin: "lucabianchi",
+        unilink: "@lucabianchi"
+      },
+      expertise: ["Exchange Programs", "International Relations", "Mobility"]
+    },
+    {
+      name: "Chiara Conti",
+      role: "Responsabile Welfare",
+      organo: "Welfare",
+      year: "2° Anno",
+      course: "BIEF",
+      bio: "Si occupa del benessere studentesco, servizi di supporto e iniziative per la qualità della vita",
+      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+      contacts: {
+        email: "chiara.conti@studenti.unibocconi.it",
+        linkedin: "chiaraconti",
+        unilink: "@chiaraconti"
+      },
+      expertise: ["Student Welfare", "Support Services", "Mental Health"]
     }
   ];
 
-  const organi = ["tutti", "Direttivo", "Consiglio di Scuola", "Progetti Speciali", "Comunicazione"];
+  const organi = ["tutti", "Presidenza", "Senato Accademico", "Eventi", "Innovazione", "Comunicazione", "Exchange", "Welfare"];
 
   const filteredMembers = teamMembers.filter(member => {
     const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

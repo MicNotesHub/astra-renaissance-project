@@ -1,237 +1,170 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Bot, Sparkles, ExternalLink, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bot, MessageCircle, Zap, Brain, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function AstraGPTSection() {
+  const features = [
+    {
+      icon: MessageCircle,
+      title: "Chat Intelligente",
+      description: "Risposte immediate alle tue domande su procedure, scadenze e servizi universitari"
+    },
+    {
+      icon: Brain,
+      title: "Conoscenza Integrata",
+      description: "Accesso istantaneo a dispense, guide e informazioni sui rappresentanti"
+    },
+    {
+      icon: Users,
+      title: "Connessione Diretta",
+      description: "Ti mette in contatto con il rappresentante giusto per ogni esigenza specifica"
+    },
+    {
+      icon: Zap,
+      title: "Sempre Disponibile",
+      description: "24/7 a tua disposizione, anche quando gli uffici sono chiusi"
+    }
+  ];
+
   return (
-    <section id="astragpt" className="py-32 bg-gradient-hero relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <motion.div 
-          className="absolute top-1/4 left-1/4 w-32 h-32 bg-white/10 rounded-full"
-          animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute top-3/4 right-1/4 w-24 h-24 bg-white/5 rounded-full"
-          animate={{ y: [0, 15, 0], x: [0, -15, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-        <motion.div 
-          className="absolute top-1/2 left-3/4 w-16 h-16 bg-white/10 rounded-full"
-          animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 left-1/6 w-20 h-20 bg-white/8 rounded-full"
-          animate={{ y: [0, 12, 0], x: [0, -8, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        />
+    <section id="astra-gpt" className="py-32 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full animate-float blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/20 rounded-full animate-float blur-2xl" style={{ animationDelay: "2s" }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left side - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <motion.div 
-              className="flex items-center mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative">
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Bot className="h-12 w-12 text-white mr-4" />
-                </motion.div>
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  className="absolute -top-2 -right-2"
-                >
-                  <Sparkles className="h-6 w-6 text-yellow-300" />
-                </motion.div>
-              </div>
-              <h2 className="text-5xl md:text-6xl font-bold text-white">
-                ASTRA GPT
-              </h2>
-            </motion.div>
-            
-            <motion.p 
-              className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              Prova il nuovo <span className="font-bold text-yellow-300">ASTRA GPT</span>, 
-              una risorsa importante per qualsiasi informazione riguardante l'Università Bocconi ed ASTRA!
-            </motion.p>
-            
-            <div className="space-y-4 mb-10">
-              {[
-                "Informazioni su corsi e programmi",
-                "Servizi e supporto studentesco", 
-                "Eventi e iniziative ASTRA",
-                "Procedure universitarie"
-              ].map((feature, index) => (
-                <motion.div 
-                  key={index} 
-                  className="flex items-center text-white/80"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ x: 10 }}
-                >
-                  <MessageSquare className="h-5 w-5 mr-3 text-yellow-300" />
-                  {feature}
-                </motion.div>
-              ))}
-            </div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              viewport={{ once: true }}
-            >
-              <Button 
-                size="lg" 
-                className="bg-white text-primary hover:bg-white/90 transition-all duration-300 font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl hover:scale-105 group"
-                onClick={() => window.open('https://chatgpt.com/g/g-QAGU04uut-astra-gpt', '_blank')}
-              >
-                Inizia a chattare
-                <ExternalLink className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-          </motion.div>
+        <div className="text-center mb-20 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
+            <Bot className="h-5 w-5 text-primary" />
+            <span className="text-primary font-semibold">Powered by AI</span>
+          </div>
           
-          {/* Right side - Visual */}
+          <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+            Astra <span className="text-primary">GPT</span>
+          </h2>
+          <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            Il tuo assistente virtuale intelligente per navigare la vita universitaria Bocconi. 
+            Sempre disponibile, sempre aggiornato.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          {/* Left side - Features */}
+          <div className="space-y-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                viewport={{ once: true }}
+                className="flex gap-4 group"
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <feature.icon className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Right side - Demo Card */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            <motion.div
-              whileHover={{ scale: 1.02, y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Card className="glass-card premium-shadow border-white/20 backdrop-blur-lg overflow-hidden group hover:shadow-glow transition-all duration-500">
-                <CardContent className="p-0">
-                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 p-8">
-                    {/* Chat interface mockup */}
-                    <div className="space-y-4">
-                      <motion.div 
-                        className="flex items-center mb-6"
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.8 }}
-                        viewport={{ once: true }}
-                      >
-                        <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center mr-3">
-                          <Bot className="h-5 w-5 text-white" />
-                        </div>
-                        <span className="text-white font-semibold">ASTRA GPT</span>
-                        <motion.div 
-                          className="ml-auto w-2 h-2 bg-green-400 rounded-full"
-                          animate={{ scale: [1, 1.3, 1] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        />
-                      </motion.div>
-                    
-                    {/* Mock chat messages */}
-                    <div className="space-y-3">
-                      <motion.div 
-                        className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-white/90 text-sm"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 1 }}
-                        viewport={{ once: true }}
-                      >
-                        Ciao! Come posso aiutarti con le informazioni su Bocconi?
-                      </motion.div>
-                      <motion.div 
-                        className="bg-primary/20 backdrop-blur-sm rounded-lg p-3 text-white/90 text-sm ml-8"
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 1.3 }}
-                        viewport={{ once: true }}
-                      >
-                        Quali sono gli orari della biblioteca?
-                      </motion.div>
-                      <motion.div 
-                        className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-white/90 text-sm"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 1.6 }}
-                        viewport={{ once: true }}
-                      >
-                        La biblioteca è aperta dal lunedì al venerdì dalle 8:00 alle 24:00...
-                      </motion.div>
+            <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-500 overflow-hidden">
+              <CardContent className="p-8">
+                <div className="space-y-4">
+                  {/* Chat Example */}
+                  <div className="space-y-3">
+                    <div className="flex justify-end">
+                      <div className="bg-primary text-white px-4 py-2 rounded-2xl rounded-br-md max-w-xs">
+                        Come posso trovare le dispense di Matematica?
+                      </div>
                     </div>
                     
-                    {/* Typing indicator */}
-                    <motion.div 
-                      className="flex items-center text-white/60"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 1.9 }}
-                      viewport={{ once: true }}
-                    >
-                      <div className="flex space-x-1 mr-2">
-                        <motion.div 
-                          className="w-1 h-1 bg-white/60 rounded-full"
-                          animate={{ y: [0, -4, 0] }}
-                          transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
-                        />
-                        <motion.div 
-                          className="w-1 h-1 bg-white/60 rounded-full"
-                          animate={{ y: [0, -4, 0] }}
-                          transition={{ duration: 0.6, repeat: Infinity, delay: 0.1 }}
-                        />
-                        <motion.div 
-                          className="w-1 h-1 bg-white/60 rounded-full"
-                          animate={{ y: [0, -4, 0] }}
-                          transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
-                        />
+                    <div className="flex gap-2">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                        <Bot className="h-4 w-4 text-white" />
                       </div>
-                      ASTRA GPT sta scrivendo...
-                    </motion.div>
-                   </div>
-                   
-                   {/* Floating sparkles */}
-                   <motion.div 
-                     className="absolute top-4 right-4"
-                     animate={{ rotate: 360 }}
-                     transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                   >
-                     <Sparkles className="h-4 w-4 text-yellow-300" />
-                   </motion.div>
-                   <motion.div 
-                     className="absolute bottom-6 left-6"
-                     animate={{ scale: [1, 1.2, 1] }}
-                     transition={{ duration: 3, repeat: Infinity }}
-                   >
-                     <Sparkles className="h-3 w-3 text-blue-300" />
-                   </motion.div>
-                 </div>
-               </CardContent>
-             </Card>
-             </motion.div>
-           </motion.div>
-         </div>
-       </div>
-     </section>
-   );
- }
+                      <div className="bg-muted px-4 py-2 rounded-2xl rounded-bl-md max-w-xs">
+                        Perfetto! Puoi trovarle nella sezione Dispense. Abbiamo tutto il materiale di Matematica Generale e Analisi I. Vuoi che ti mostri i link diretti? 📚
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-end">
+                      <div className="bg-primary text-white px-4 py-2 rounded-2xl rounded-br-md max-w-xs">
+                        Sì, grazie! E chi posso contattare per dubbi specifici?
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                        <Bot className="h-4 w-4 text-white" />
+                      </div>
+                      <div className="bg-muted px-4 py-2 rounded-2xl rounded-bl-md max-w-xs">
+                        Per questioni didattiche contatta Alessandro Martini! È il nostro Responsabile Didattica del Senato Accademico 👨‍🎓
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-border">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      Astra GPT è online e pronto ad aiutarti
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center">
+          <Card className="glass-card premium-shadow max-w-4xl mx-auto">
+            <CardContent className="p-8 md:p-12">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+                Prova Astra GPT ora!
+              </h3>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Clicca sull'icona del chat in basso a destra per iniziare una conversazione. 
+                Astra GPT è qui per semplificare la tua esperienza universitaria.
+              </p>
+              <Button 
+                size="lg" 
+                className="group"
+                onClick={() => {
+                  // Scroll to bottom right to highlight the chat button
+                  const chatButton = document.querySelector('[data-chat-trigger]');
+                  if (chatButton) {
+                    (chatButton as HTMLElement).style.animation = 'pulse 1s ease-in-out 3';
+                  }
+                }}
+              >
+                <MessageCircle className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                Inizia a chattare
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}
