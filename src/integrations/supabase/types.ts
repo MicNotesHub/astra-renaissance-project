@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      dispense_uploads: {
+        Row: {
+          created_at: string
+          extraction_path: string | null
+          file_name: string
+          file_path: string
+          file_size: number | null
+          id: string
+          processed_files: number | null
+          processing_status: string
+          total_files: number | null
+          updated_at: string
+          upload_date: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          extraction_path?: string | null
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          id?: string
+          processed_files?: number | null
+          processing_status?: string
+          total_files?: number | null
+          updated_at?: string
+          upload_date?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          extraction_path?: string | null
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          processed_files?: number | null
+          processing_status?: string
+          total_files?: number | null
+          updated_at?: string
+          upload_date?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
       event_registrations: {
         Row: {
           attendance_status: string | null
@@ -117,6 +162,71 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      extracted_dispense: {
+        Row: {
+          academic_year: string | null
+          category: string | null
+          course_code: string | null
+          course_name: string | null
+          created_at: string
+          extracted_at: string
+          file_name: string
+          file_path: string
+          file_size: number | null
+          file_type: string | null
+          id: string
+          metadata: Json | null
+          relative_path: string
+          semester: number | null
+          updated_at: string
+          upload_id: string
+        }
+        Insert: {
+          academic_year?: string | null
+          category?: string | null
+          course_code?: string | null
+          course_name?: string | null
+          created_at?: string
+          extracted_at?: string
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          metadata?: Json | null
+          relative_path: string
+          semester?: number | null
+          updated_at?: string
+          upload_id: string
+        }
+        Update: {
+          academic_year?: string | null
+          category?: string | null
+          course_code?: string | null
+          course_name?: string | null
+          created_at?: string
+          extracted_at?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          metadata?: Json | null
+          relative_path?: string
+          semester?: number | null
+          updated_at?: string
+          upload_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "extracted_dispense_upload_id_fkey"
+            columns: ["upload_id"]
+            isOneToOne: false
+            referencedRelation: "dispense_uploads"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       resources: {
         Row: {
