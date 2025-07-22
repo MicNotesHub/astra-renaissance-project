@@ -166,8 +166,8 @@ export type Database = {
       extracted_dispense: {
         Row: {
           academic_year: string | null
-          category: string | null
           course_code: string | null
+          course_folder: string | null
           course_name: string | null
           created_at: string
           extracted_at: string
@@ -175,17 +175,17 @@ export type Database = {
           file_path: string
           file_size: number | null
           file_type: string | null
+          folder_path: string
           id: string
-          metadata: Json | null
           relative_path: string
-          semester: number | null
           updated_at: string
           upload_id: string
+          year_folder: string | null
         }
         Insert: {
           academic_year?: string | null
-          category?: string | null
           course_code?: string | null
+          course_folder?: string | null
           course_name?: string | null
           created_at?: string
           extracted_at?: string
@@ -193,17 +193,17 @@ export type Database = {
           file_path: string
           file_size?: number | null
           file_type?: string | null
+          folder_path?: string
           id?: string
-          metadata?: Json | null
           relative_path: string
-          semester?: number | null
           updated_at?: string
           upload_id: string
+          year_folder?: string | null
         }
         Update: {
           academic_year?: string | null
-          category?: string | null
           course_code?: string | null
+          course_folder?: string | null
           course_name?: string | null
           created_at?: string
           extracted_at?: string
@@ -211,12 +211,12 @@ export type Database = {
           file_path?: string
           file_size?: number | null
           file_type?: string | null
+          folder_path?: string
           id?: string
-          metadata?: Json | null
           relative_path?: string
-          semester?: number | null
           updated_at?: string
           upload_id?: string
+          year_folder?: string | null
         }
         Relationships: [
           {
