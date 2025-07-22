@@ -4,13 +4,13 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { name: "Chi Siamo", href: "#about" },
-  { name: "Dispense", href: "#dispensen" },
-  { name: "Calcolatori", href: "#calcolatori" },
-  { name: "Astra Polare", href: "#astra-polare" },
-  { name: "Marketplace", href: "#marketplace" },
-  { name: "Eventi", href: "#eventi" },
-  { name: "Team", href: "#team" },
+  { name: "ELEZIONI 2025", href: "#elezioni" },
+  { name: "RAPPRESENTANTI", href: "#team" },
+  { name: "DISPENSE", href: "#dispensen" },
+  { name: "EXCHANGE", href: "#astra-polare" },
+  { name: "RUBRICA", href: "#marketplace" },
+  { name: "GUIDE", href: "#calcolatori" },
+  { name: "ABOUT", href: "#about" },
 ];
 
 export function Navigation() {
@@ -51,16 +51,17 @@ export function Navigation() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className={cn(
-                    "text-sm font-medium transition-smooth hover:text-primary",
-                    item.name === "Contattaci" 
-                      ? "text-primary hover:text-primary-dark" 
-                      : "text-foreground/80 hover:text-foreground"
-                  )}
+                  className="text-sm font-medium text-white/90 hover:text-white transition-smooth"
                 >
                   {item.name}
                 </a>
               ))}
+              <Button 
+                size="sm"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-full text-sm"
+              >
+                Contattaci
+              </Button>
             </div>
           </div>
 

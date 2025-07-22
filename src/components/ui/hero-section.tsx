@@ -1,12 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import heroImage from "@/assets/bocconi-campus-hero.jpg";
 
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-95"></div>
+      {/* Background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      ></div>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-800/60 to-blue-900/80"></div>
       
       {/* Animated background elements */}
       <div className="absolute inset-0">
@@ -40,10 +46,10 @@ export function HeroSection() {
           </motion.div>
 
           {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            ASTRA{" "}
-            <span className="block text-6xl md:text-8xl font-bold mt-2 hero-text">
-              Bocconi
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+            Per Aspera, ad{" "}
+            <span className="block text-5xl md:text-7xl font-bold mt-2 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+              ASTRA
             </span>
           </h1>
 
@@ -56,16 +62,15 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               size="lg" 
-              className="bg-white text-primary hover:bg-white/90 transition-spring font-semibold px-8 py-4 text-lg shadow-lg"
+              className="bg-teal-500 hover:bg-teal-600 text-white font-medium px-8 py-3 text-base rounded-md transition-smooth shadow-lg"
             >
               Chi Siamo
-              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
             <Button 
               variant="outline" 
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-primary transition-spring font-semibold px-8 py-4 text-lg"
+              className="border-white text-white hover:bg-white hover:text-blue-900 transition-smooth font-medium px-8 py-3 text-base rounded-md"
             >
               Contattaci
             </Button>
