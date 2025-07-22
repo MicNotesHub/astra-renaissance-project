@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@/assets/bocconi-campus-hero.jpg";
+const heroImage = "/lovable-uploads/4d017d22-3cc7-43d7-b5ea-9a4e70e08369.png";
 
 export function HeroSection() {
   return (
@@ -12,7 +12,7 @@ export function HeroSection() {
         style={{ backgroundImage: `url(${heroImage})` }}
       ></div>
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-800/60 to-blue-900/80"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
       
       {/* Animated background elements */}
       <div className="absolute inset-0">
@@ -28,27 +28,29 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Star icon */}
+          {/* Astra Logo */}
           <motion.div 
             className="flex justify-center mb-8"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <div className="relative">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                <Star className="h-16 w-16 text-white" fill="currentColor" />
-              </motion.div>
-            </div>
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <img 
+                src="/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png" 
+                alt="ASTRA Bocconi" 
+                className="h-20 w-auto filter brightness-0 invert"
+              />
+            </motion.div>
           </motion.div>
 
           {/* Main heading */}
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-            Per Aspera, ad{" "}
-            <span className="block text-5xl md:text-7xl font-bold mt-2 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+            <span className="block text-3xl md:text-5xl font-light mb-2 text-white/90">Per Aspera, ad</span>
+            <span className="block text-6xl md:text-8xl font-bold bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
               ASTRA
             </span>
           </h1>
