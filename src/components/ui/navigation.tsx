@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { name: "ELEZIONI 2025", href: "#elezioni" },
   { name: "RAPPRESENTANTI", href: "#team" },
-  { name: "DISPENSE", href: "#dispensen" },
+  { name: "DISPENSE", href: "/dispense" },
   { name: "EXCHANGE", href: "#astra-polare" },
   { name: "RUBRICA", href: "#marketplace" },
   { name: "GUIDE", href: "#calcolatori" },
