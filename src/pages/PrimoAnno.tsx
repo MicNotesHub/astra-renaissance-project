@@ -8,13 +8,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 interface HandoutFile {
-  id: string;
-  title: string;
-  course_name: string;
-  academic_year: string;
-  file_url: string | null;
-  upload_date: string;
-  resource_type: string;
+  id: number;
+  subject: string;
+  filename: string;
+  year: string;
+  file_url: string;
+  uploaded_at: string;
 }
 
 interface SubjectFiles {
@@ -33,10 +32,10 @@ const PrimoAnno = () => {
   const fetchHandouts = async () => {
     try {
       const { data, error } = await supabase
-        .from('resources')
+        .from('handouts' as any)
         .select('*')
-        .eq('is_public', true)
-        .order('course_name', { ascending: true });
+        .eq('year', 'First Year')
+        .order('subject', { ascending: true });
 
       if (error) {
         console.error('Error fetching handouts:', error);
@@ -48,18 +47,25 @@ const PrimoAnno = () => {
         return;
       }
 
-      // Group files by course
+      // Group files by subject (course)
       const groupedFiles: SubjectFiles = {};
       
       if (data) {
-        data.forEach((resource) => {
-          const course = resource.course_name || 'Generale';
+        (data as any[]).forEach((handout: any) => {
+          const course = handout.subject || 'Generale';
           
           if (!groupedFiles[course]) {
             groupedFiles[course] = [];
           }
           
-          groupedFiles[course].push(resource);
+          groupedFiles[course].push({
+            id: handout.id,
+            subject: handout.subject,
+            filename: handout.filename,
+            year: handout.year,
+            file_url: handout.file_url,
+            uploaded_at: handout.uploaded_at
+          });
         });
       }
 
