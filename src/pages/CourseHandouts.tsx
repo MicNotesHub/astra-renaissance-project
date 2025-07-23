@@ -8,13 +8,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 interface HandoutFile {
-  id: string;
-  title: string;
-  course_name: string;
-  academic_year: string;
-  file_url: string | null;
-  upload_date: string;
-  resource_type: string;
+  id: number;
+  subject: string;
+  filename: string;
+  year: string;
+  file_url: string;
+  uploaded_at: string;
 }
 
 const CourseHandouts = () => {
@@ -34,11 +33,11 @@ const CourseHandouts = () => {
   const fetchCourseHandouts = async () => {
     try {
       const { data, error } = await supabase
-        .from('resources')
+        .from('handouts' as any)
         .select('*')
-        .eq('is_public', true)
-        .eq('course_name', decodedCourseName)
-        .order('upload_date', { ascending: false });
+        .eq('subject', decodedCourseName)
+        .eq('year', 'First Year')
+        .order('uploaded_at', { ascending: false });
 
       if (error) {
         console.error('Error fetching handouts:', error);
@@ -50,7 +49,7 @@ const CourseHandouts = () => {
         return;
       }
 
-      setFiles(data || []);
+      setFiles((data as any[]) || []);
     } catch (error) {
       console.error('Error:', error);
       toast({
@@ -181,10 +180,10 @@ const CourseHandouts = () => {
                         <FileText className="w-5 h-5 text-primary" />
                         <div>
                           <h4 className="font-medium group-hover:text-primary transition-colors">
-                            {file.title}
+                            {file.filename}
                           </h4>
                           <p className="text-sm text-muted-foreground">
-                            {file.resource_type} • Anno: {file.academic_year} • Caricato: {formatDate(file.upload_date)}
+                            PDF • Anno: {file.year} • Caricato: {formatDate(file.uploaded_at)}
                           </p>
                         </div>
                       </div>
