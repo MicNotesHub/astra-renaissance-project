@@ -19,6 +19,9 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Check if we're on a page with white background
+  const isOnWhitePage = window.location.pathname.includes('/dispense');
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -31,7 +34,7 @@ export function Navigation() {
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-smooth",
-      isScrolled 
+      isScrolled || isOnWhitePage
         ? "glass-card shadow-lg" 
         : "bg-transparent"
     )}>
@@ -56,7 +59,10 @@ export function Navigation() {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="text-sm font-medium text-white/90 hover:text-white transition-smooth"
+                    className={cn(
+                      "text-sm font-medium transition-smooth",
+                      isOnWhitePage ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
+                    )}
                   >
                     {item.name}
                   </Link>
@@ -64,7 +70,10 @@ export function Navigation() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-sm font-medium text-white/90 hover:text-white transition-smooth"
+                    className={cn(
+                      "text-sm font-medium transition-smooth",
+                      isOnWhitePage ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
+                    )}
                   >
                     {item.name}
                   </a>
