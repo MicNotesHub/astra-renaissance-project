@@ -28,7 +28,7 @@ export const SecondoAnno: React.FC = () => {
       const { data, error } = await supabase
         .from('handouts')
         .select('*')
-        .ilike('year', '%Second%')
+        .eq('year', 'Second Year')
         .order('subject', { ascending: true })
         .order('filename', { ascending: true });
 
