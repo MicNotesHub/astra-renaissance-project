@@ -2,7 +2,7 @@ import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Download, ArrowLeft } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -18,17 +18,24 @@ interface HandoutFile {
 
 const CourseHandouts = () => {
   const { courseName } = useParams<{ courseName: string }>();
+  const location = useLocation();
   const [files, setFiles] = useState<HandoutFile[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
   const decodedCourseName = courseName ? decodeURIComponent(courseName) : '';
+  
+  // Determine the year and back link based on the current path
+  const isSecondYear = location.pathname.includes('/secondo-anno');
+  const yearFilter = isSecondYear ? 'Second Year' : 'First Year';
+  const backLink = isSecondYear ? '/dispense/secondo-anno' : '/dispense/primo-anno';
+  const backText = isSecondYear ? 'Torna al Secondo Anno' : 'Torna al Primo Anno';
 
   useEffect(() => {
     if (decodedCourseName) {
       fetchCourseHandouts();
     }
-  }, [decodedCourseName]);
+  }, [decodedCourseName, yearFilter]);
 
   const fetchCourseHandouts = async () => {
     try {
@@ -36,7 +43,7 @@ const CourseHandouts = () => {
         .from('handouts' as any)
         .select('*')
         .eq('subject', decodedCourseName)
-        .eq('year', 'First Year')
+        .eq('year', yearFilter)
         .order('uploaded_at', { ascending: false });
 
       if (error) {
@@ -133,10 +140,10 @@ const CourseHandouts = () => {
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center mb-6">
-              <Link to="/dispense/primo-anno" className="mr-6">
+              <Link to={backLink} className="mr-6">
                 <Button variant="outline" size="sm">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Torna ai Corsi
+                  {backText}
                 </Button>
               </Link>
             </div>
