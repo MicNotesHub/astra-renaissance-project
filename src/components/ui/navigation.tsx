@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link, useNavigate } from "react-router-dom";
 
 const navItems = [
   { name: "ELEZIONI 2025", href: "#elezioni" },
@@ -16,6 +17,7 @@ const navItems = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,24 +39,36 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <img 
-              src="/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png" 
-              alt="ASTRA Bocconi" 
-              className="h-8 w-auto"
-            />
+            <Link to="/" className="cursor-pointer">
+              <img 
+                src="/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png" 
+                alt="ASTRA Bocconi" 
+                className="h-8 w-auto hover:opacity-80 transition-opacity"
+              />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-medium text-white/90 hover:text-white transition-smooth"
-                >
-                  {item.name}
-                </a>
+                item.href.startsWith('/') ? (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className="text-sm font-medium text-white/90 hover:text-white transition-smooth"
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="text-sm font-medium text-white/90 hover:text-white transition-smooth"
+                  >
+                    {item.name}
+                  </a>
+                )
               ))}
               <Button 
                 size="sm"
@@ -83,19 +97,35 @@ export function Navigation() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 glass-card mt-2 rounded-lg">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    "block px-3 py-2 rounded-md text-sm font-medium transition-smooth",
-                    item.name === "Contattaci"
-                      ? "text-primary hover:bg-primary/10"
-                      : "text-foreground/80 hover:text-foreground hover:bg-muted"
-                  )}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
+                item.href.startsWith('/') ? (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={cn(
+                      "block px-3 py-2 rounded-md text-sm font-medium transition-smooth",
+                      item.name === "Contattaci"
+                        ? "text-primary hover:bg-primary/10"
+                        : "text-foreground/80 hover:text-foreground hover:bg-muted"
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "block px-3 py-2 rounded-md text-sm font-medium transition-smooth",
+                      item.name === "Contattaci"
+                        ? "text-primary hover:bg-primary/10"
+                        : "text-foreground/80 hover:text-foreground hover:bg-muted"
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                )
               ))}
             </div>
           </div>
