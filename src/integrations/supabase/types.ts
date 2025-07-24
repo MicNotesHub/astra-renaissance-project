@@ -228,6 +228,33 @@ export type Database = {
           },
         ]
       }
+      handouts: {
+        Row: {
+          file_url: string
+          filename: string
+          id: number
+          subject: string
+          uploaded_at: string | null
+          year: string
+        }
+        Insert: {
+          file_url: string
+          filename: string
+          id?: number
+          subject: string
+          uploaded_at?: string | null
+          year: string
+        }
+        Update: {
+          file_url?: string
+          filename?: string
+          id?: number
+          subject?: string
+          uploaded_at?: string | null
+          year?: string
+        }
+        Relationships: []
+      }
       resources: {
         Row: {
           academic_year: string
