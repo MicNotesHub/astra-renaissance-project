@@ -62,6 +62,27 @@ export type Database = {
         }
         Relationships: []
       }
+      course_subjects: {
+        Row: {
+          cfu: number | null
+          course: string
+          id: number
+          subject: string | null
+        }
+        Insert: {
+          cfu?: number | null
+          course: string
+          id?: number
+          subject?: string | null
+        }
+        Update: {
+          cfu?: number | null
+          course?: string
+          id?: number
+          subject?: string | null
+        }
+        Relationships: []
+      }
       dispense_uploads: {
         Row: {
           created_at: string

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Calculator } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Subject {
   id: number;
@@ -36,12 +37,16 @@ export function GraduationGradeCalculator() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        // Hardcoded courses from the database query we did earlier
-        const courseList = [
-          'BAI', 'BEMACC', 'BEMACS', 'BESS', 'BGL', 'BGL-Domestic Lawyers',
-          'BIEF-Econ', 'BIEF-Fin', 'BIEM', 'CLEACC', 'CLEAM', 'CLEF'
-        ];
-        setCourses(courseList);
+        const { data, error } = await supabase
+          .from('course_subjects')
+          .select('course')
+          .order('course');
+
+        if (error) throw error;
+
+        // Get unique courses
+        const uniqueCourses = [...new Set(data?.map(item => item.course) || [])];
+        setCourses(uniqueCourses);
       } catch (error) {
         toast({
           title: "Errore",
@@ -61,14 +66,24 @@ export function GraduationGradeCalculator() {
     const fetchSubjects = async () => {
       setLoading(true);
       try {
-        // For demo purposes, we'll create mock data based on the selected course
-        // In a real implementation, you would fetch from the database
-        const mockSubjects: Subject[] = generateMockSubjects(selectedCourse);
+        const { data, error } = await supabase
+          .from('course_subjects')
+          .select('id, subject, cfu')
+          .eq('course', selectedCourse)
+          .order('subject');
+
+        if (error) throw error;
+
+        const fetchedSubjects: Subject[] = data?.map(item => ({
+          id: item.id,
+          subject: item.subject || '',
+          cfu: item.cfu || 0
+        })) || [];
         
-        setSubjects(mockSubjects);
+        setSubjects(fetchedSubjects);
         
         // Initialize exam grades
-        const initialGrades: ExamGrade[] = mockSubjects.map(subject => ({
+        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
           id: subject.id,
           subject: subject.subject,
           cfu: subject.cfu,
@@ -91,42 +106,6 @@ export function GraduationGradeCalculator() {
     fetchSubjects();
   }, [selectedCourse, toast]);
 
-  const generateMockSubjects = (course: string): Subject[] => {
-    const baseSubjects = {
-      'BEMACS': [
-        { id: 1, subject: 'Microeconomics', cfu: 8 },
-        { id: 2, subject: 'Mathematics and Statistics (Module 1)', cfu: 8 },
-        { id: 3, subject: 'Fundamentals of Computer Science', cfu: 8 },
-        { id: 4, subject: 'Mathematics and Statistics (Module 2)', cfu: 8 },
-        { id: 5, subject: 'Principles of Management', cfu: 8 },
-        { id: 6, subject: 'Macroeconomics', cfu: 8 },
-        { id: 7, subject: 'Financial Accounting', cfu: 8 },
-        { id: 8, subject: 'Business Law', cfu: 6 },
-        { id: 9, subject: 'Statistics for Data Science', cfu: 8 },
-        { id: 10, subject: 'Linear Algebra', cfu: 6 }
-      ],
-      'CLEAM': [
-        { id: 11, subject: 'Microeconomia', cfu: 8 },
-        { id: 12, subject: 'Matematica Generale', cfu: 8 },
-        { id: 13, subject: 'Storia Economica', cfu: 6 },
-        { id: 14, subject: 'Macroeconomia', cfu: 8 },
-        { id: 15, subject: 'Ragioneria', cfu: 8 },
-        { id: 16, subject: 'Diritto Privato', cfu: 6 },
-        { id: 17, subject: 'Statistica', cfu: 8 },
-        { id: 18, subject: 'Economia Aziendale', cfu: 8 },
-        { id: 19, subject: 'Diritto Commerciale', cfu: 6 },
-        { id: 20, subject: 'Finanza Aziendale', cfu: 8 }
-      ]
-    };
-
-    return baseSubjects[course as keyof typeof baseSubjects] || [
-      { id: 1, subject: 'Esame 1', cfu: 8 },
-      { id: 2, subject: 'Esame 2', cfu: 6 },
-      { id: 3, subject: 'Esame 3', cfu: 8 },
-      { id: 4, subject: 'Esame 4', cfu: 6 },
-      { id: 5, subject: 'Esame 5', cfu: 8 }
-    ];
-  };
 
   const updateExamGrade = (id: number, field: keyof ExamGrade, value: any) => {
     setExamGrades(prev => prev.map(exam => 
