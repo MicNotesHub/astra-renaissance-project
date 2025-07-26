@@ -196,7 +196,7 @@ const Guide = () => {
                               href={guide.file_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={`p-6 rounded-2xl border-2 border-transparent transition-all duration-300 cursor-pointer ${colorClasses}`}
+                              className={`p-6 rounded-2xl border-2 border-transparent transition-all duration-300 cursor-pointer flex items-center justify-center ${colorClasses}`}
                             >
                               <IconComponent size={48} />
                             </a>
