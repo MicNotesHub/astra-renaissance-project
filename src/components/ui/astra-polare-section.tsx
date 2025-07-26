@@ -2,45 +2,33 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Heart, Share2, MessageCircle, TrendingUp } from "lucide-react";
-import { useState } from "react";
+import { Play, Heart, Share2, MessageCircle, TrendingUp, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+interface MediaContent {
+  id: string;
+  title: string;
+  description: string | null;
+  platform: 'TikTok' | 'Instagram';
+  thumbnail_url: string;
+  media_link: string;
+  content_type: 'video' | 'carousel';
+  duration: string | null;
+  slides: number | null;
+  views: string;
+  likes: number;
+  created_at: string;
+}
 
 export const AstraPolareSection = () => {
   const [activeTab, setActiveTab] = useState("recenti");
+  const [mediaContent, setMediaContent] = useState<MediaContent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const mediaContent = [
-    {
-      type: "video",
-      title: "Come Sopravvivere agli Esami 📚",
-      description: "Tips and tricks per affrontare la sessione",
-      thumbnail: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      duration: "2:34",
-      views: "1.2K",
-      likes: 89,
-      platform: "TikTok"
-    },
-    {
-      type: "carousel",
-      title: "Exchange Stories 🌍",
-      description: "Esperienze di studenti Bocconi all'estero",
-      thumbnail: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-      slides: 8,
-      views: "856",
-      likes: 67,
-      platform: "Instagram"
-    },
-    {
-      type: "video",
-      title: "Networking Events Recap ✨",
-      description: "Highlights dell'ultimo evento ASTRA",
-      thumbnail: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      duration: "1:45",
-      views: "2.1K",
-      likes: 134,
-      platform: "Instagram"
-    }
-  ];
-
+  // Hardcoded trending data (static for now, can be made dynamic later)
   const trending = [
     { title: "Guida alle Tesi", views: "3.4K", growth: "+45%" },
     { title: "Vita in Campus", views: "2.8K", growth: "+32%" },
@@ -52,6 +40,100 @@ export const AstraPolareSection = () => {
     { id: "popolari", label: "Più Visti" },
     { id: "trending", label: "Trending" }
   ];
+
+  // Fetch media content from Supabase
+  const fetchMediaContent = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const { data, error } = await supabase
+        .from('astra_polare_media_content')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      setMediaContent((data || []) as MediaContent[]);
+    } catch (err) {
+      console.error('Error fetching media content:', err);
+      setError('Errore nel caricamento dei contenuti');
+      toast.error('Errore nel caricamento dei contenuti');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Setup realtime subscription
+  useEffect(() => {
+    // Initial fetch
+    fetchMediaContent();
+
+    // Setup realtime subscription
+    const channel = supabase
+      .channel('astra-polare-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // Listen to all events (INSERT, UPDATE, DELETE)
+          schema: 'public',
+          table: 'astra_polare_media_content'
+        },
+        (payload) => {
+          console.log('Realtime change detected:', payload);
+          
+          if (payload.eventType === 'INSERT') {
+            setMediaContent(prev => [payload.new as MediaContent, ...prev]);
+            toast.success('Nuovo contenuto aggiunto!');
+          } else if (payload.eventType === 'UPDATE') {
+            setMediaContent(prev => 
+              prev.map(item => 
+                item.id === payload.new.id ? payload.new as MediaContent : item
+              )
+            );
+            toast.info('Contenuto aggiornato');
+          } else if (payload.eventType === 'DELETE') {
+            setMediaContent(prev => 
+              prev.filter(item => item.id !== payload.old.id)
+            );
+            toast.info('Contenuto rimosso');
+          }
+        }
+      )
+      .subscribe();
+
+    // Cleanup subscription on unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  // Sort content based on active tab
+  const getSortedContent = () => {
+    if (activeTab === "recenti") {
+      return [...mediaContent].sort((a, b) => 
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    } else if (activeTab === "popolari") {
+      return [...mediaContent].sort((a, b) => {
+        // Parse view count (e.g., "1.2K" -> 1200)
+        const parseViews = (views: string) => {
+          const num = parseFloat(views);
+          if (views.includes('K')) return num * 1000;
+          if (views.includes('M')) return num * 1000000;
+          return num;
+        };
+        return parseViews(b.views) - parseViews(a.views);
+      });
+    }
+    return mediaContent;
+  };
+
+  const handlePlayClick = (mediaLink: string) => {
+    window.open(mediaLink, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <section id="astra-polare" className="py-20 bg-gradient-subtle">
@@ -93,12 +175,30 @@ export const AstraPolareSection = () => {
           </div>
         </motion.div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="flex justify-center items-center py-12">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <span className="ml-2 text-muted-foreground">Caricamento contenuti...</span>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && !loading && (
+          <div className="text-center py-12">
+            <p className="text-red-500 mb-4">{error}</p>
+            <Button onClick={fetchMediaContent} variant="outline">
+              Riprova
+            </Button>
+          </div>
+        )}
+
         {/* Content Grid */}
-        {activeTab !== "trending" ? (
+        {!loading && !error && activeTab !== "trending" && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {mediaContent.map((item, index) => (
+            {getSortedContent().map((item, index) => (
               <motion.div
-                key={index}
+                key={item.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -107,7 +207,7 @@ export const AstraPolareSection = () => {
                 <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden">
                   <div className="relative">
                     <img 
-                      src={item.thumbnail} 
+                      src={item.thumbnail_url} 
                       alt={item.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -118,14 +218,18 @@ export const AstraPolareSection = () => {
                         </Badge>
                       </div>
                       <div className="absolute top-3 right-3">
-                        {item.type === "video" ? (
+                        {item.content_type === "video" ? (
                           <Badge className="text-xs">{item.duration}</Badge>
                         ) : (
                           <Badge className="text-xs">{item.slides} slides</Badge>
                         )}
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <Button size="sm" className="rounded-full w-12 h-12 p-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button 
+                          size="sm" 
+                          className="rounded-full w-12 h-12 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={() => handlePlayClick(item.media_link)}
+                        >
                           <Play className="h-5 w-5" />
                         </Button>
                       </div>
@@ -164,8 +268,17 @@ export const AstraPolareSection = () => {
               </motion.div>
             ))}
           </div>
-        ) : (
-          /* Trending Section */
+        )}
+
+        {/* Empty State */}
+        {!loading && !error && activeTab !== "trending" && mediaContent.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Nessun contenuto disponibile al momento.</p>
+          </div>
+        )}
+
+        {/* Trending Section */}
+        {activeTab === "trending" && !loading && !error && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

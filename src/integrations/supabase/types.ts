@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      astra_polare_media_content: {
+        Row: {
+          content_type: string
+          created_at: string
+          description: string | null
+          duration: string | null
+          id: string
+          likes: number | null
+          media_link: string
+          platform: string
+          slides: number | null
+          thumbnail_url: string
+          title: string
+          updated_at: string
+          views: string
+        }
+        Insert: {
+          content_type: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          likes?: number | null
+          media_link: string
+          platform: string
+          slides?: number | null
+          thumbnail_url: string
+          title: string
+          updated_at?: string
+          views: string
+        }
+        Update: {
+          content_type?: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          likes?: number | null
+          media_link?: string
+          platform?: string
+          slides?: number | null
+          thumbnail_url?: string
+          title?: string
+          updated_at?: string
+          views?: string
+        }
+        Relationships: []
+      }
       dispense_uploads: {
         Row: {
           created_at: string
