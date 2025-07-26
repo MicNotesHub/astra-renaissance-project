@@ -69,7 +69,7 @@ export function HeroSection() {
               Chi Siamo
             </Button>
             
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-900 transition-smooth font-medium px-8 py-3 text-base rounded-md">
+            <Button variant="outline" size="lg" className="border-white hover:bg-white transition-smooth font-medium px-8 py-3 text-base rounded-md text-indigo-950">
               Contattaci
             </Button>
           </div>
