@@ -265,38 +265,41 @@ export function GraduationGradeCalculator() {
             <CardTitle>Esami - {selectedCourse}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {examGrades.map((exam) => (
                 <motion.div
                   key={exam.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="flex items-center gap-4 p-4 border rounded-lg"
+                  className="border rounded-lg p-4 bg-card hover:shadow-md transition-shadow"
                 >
-                  <Checkbox
-                    checked={exam.completed}
-                    onCheckedChange={(checked) => 
-                      updateExamGrade(exam.id, 'completed', checked)
-                    }
-                  />
-                  
-                  <div className="flex-1">
-                    <div className="font-medium">{exam.subject}</div>
-                    <Badge variant="secondary">{exam.cfu} CFU</Badge>
-                  </div>
-                  
-                  <div className="w-24">
-                    <Label className="sr-only">Voto</Label>
-                    <Input
-                      type="number"
-                      min="18"
-                      max="31"
-                      value={exam.grade}
-                      onChange={(e) => updateExamGrade(exam.id, 'grade', e.target.value)}
-                      disabled={!exam.completed}
-                      placeholder="Voto"
-                      className="text-center"
-                    />
+                  <div className="space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="font-medium text-sm leading-tight">{exam.subject}</div>
+                        <Badge variant="secondary" className="mt-1">{exam.cfu} CFU</Badge>
+                      </div>
+                      <Checkbox
+                        checked={exam.completed}
+                        onCheckedChange={(checked) => 
+                          updateExamGrade(exam.id, 'completed', checked)
+                        }
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label className="text-xs text-muted-foreground">Voto</Label>
+                      <Input
+                        type="number"
+                        min="18"
+                        max="31"
+                        value={exam.grade}
+                        onChange={(e) => updateExamGrade(exam.id, 'grade', e.target.value)}
+                        disabled={!exam.completed}
+                        placeholder="18-31"
+                        className="text-center mt-1"
+                      />
+                    </div>
                   </div>
                 </motion.div>
               ))}
