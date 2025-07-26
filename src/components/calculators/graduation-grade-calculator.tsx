@@ -211,56 +211,82 @@ export function GraduationGradeCalculator() {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-6"
         >
-          {/* Central Summary Card */}
-          <Card className="bg-gradient-to-br from-primary/5 to-secondary/10 border-primary/20">
-            <CardContent className="p-8">
-              <div className="text-center space-y-6">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <GraduationCap className="h-6 w-6 text-primary" />
-                  <h2 className="text-xl font-semibold">La tua media</h2>
-                </div>
-                
-                <div className="w-12 h-0.5 bg-primary mx-auto rounded-full"></div>
-                
-                <div className="space-y-2">
-                  <div className={`text-5xl font-bold ${getGradeColor(results.graduationGradeWithBonus)}`}>
-                    {results.completedCfu > 0 ? results.graduationGradeWithBonus : '--'}
-                    <span className="text-2xl text-muted-foreground">/110</span>
+          {/* Summary Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* GPA Card */}
+            <Card>
+              <CardContent className="p-6">
+                <div className="text-center space-y-3">
+                  <div className="flex items-center justify-center gap-2">
+                    <Calculator className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold">GPA</h3>
                   </div>
-                  <div className="text-lg text-muted-foreground">
-                    GPA: {results.completedCfu > 0 ? results.gpa : '--'}
+                  <div className="space-y-1">
+                    <div className="text-3xl font-bold text-primary">
+                      {results.completedCfu > 0 ? results.gpa : '--'}
+                    </div>
+                    <div className="text-sm text-muted-foreground">su 30</div>
                   </div>
                 </div>
+              </CardContent>
+            </Card>
 
-                {results.completedCfu === 0 && (
-                  <div className="bg-primary/10 rounded-lg p-4 mt-4">
-                    <p className="text-primary font-medium">Inserisci voti</p>
+            {/* Graduation Grade Card */}
+            <Card>
+              <CardContent className="p-6">
+                <div className="text-center space-y-3">
+                  <div className="flex items-center justify-center gap-2">
+                    <GraduationCap className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold">Voto di Laurea</h3>
                   </div>
-                )}
-
-                {results.completedCfu > 0 && (
-                  <Button 
-                    variant="outline" 
-                    onClick={scrollToExams}
-                    className="mt-4"
-                  >
-                    Inserisci voti <ChevronDown className="h-4 w-4 ml-2" />
-                  </Button>
-                )}
-
-                <div className="grid grid-cols-2 gap-4 mt-6 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Crediti totali:</span>
-                    <div className="font-medium">{results.totalCfu}</div>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Esami inseriti:</span>
-                    <div className="font-medium">{results.completedCfu}</div>
+                  <div className="space-y-1">
+                    <div className={`text-3xl font-bold ${getGradeColor(results.graduationGradeWithBonus)}`}>
+                      {results.completedCfu > 0 ? results.graduationGradeWithBonus : '--'}
+                    </div>
+                    <div className="text-sm text-muted-foreground">su 110</div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            {/* Progress Card */}
+            <Card>
+              <CardContent className="p-6">
+                <div className="text-center space-y-3">
+                  <div className="flex items-center justify-center gap-2">
+                    <Target className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold">Progressi</h3>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-sm">
+                      <span className="text-muted-foreground">Esami inseriti:</span>
+                      <div className="font-medium">{examGrades.filter(e => e.completed).length}</div>
+                    </div>
+                    <div className="text-sm">
+                      <span className="text-muted-foreground">Crediti totali:</span>
+                      <div className="font-medium">{results.completedCfu}/{results.totalCfu}</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Action Button */}
+          {results.completedCfu === 0 ? (
+            <div className="text-center bg-primary/10 rounded-lg p-4">
+              <p className="text-primary font-medium">Inserisci i tuoi voti per vedere il calcolo</p>
+            </div>
+          ) : (
+            <div className="text-center">
+              <Button 
+                variant="outline" 
+                onClick={scrollToExams}
+              >
+                Inserisci voti <ChevronDown className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          )}
 
         </motion.div>
       )}
