@@ -59,7 +59,7 @@ export function HeroSection() {
           
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed font-thin md:text-base">
             La rappresentanza studentesca che mette al centro l'innovazione, la community e il futuro degli studenti Bocconi.
           </p>
 
@@ -80,7 +80,7 @@ export function HeroSection() {
         animationDelay: "1s"
       }}>
           <div className="flex flex-col items-center text-white/70">
-            <span className="text-sm mb-2">Scopri di più</span>
+            
             <div className="w-px h-8 bg-white/50 animate-pulse"></div>
           </div>
         </div>
