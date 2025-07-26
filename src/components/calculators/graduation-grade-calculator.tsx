@@ -262,63 +262,6 @@ export function GraduationGradeCalculator() {
             </CardContent>
           </Card>
 
-          {/* Goals Section */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Target className="h-5 w-5" />
-                <h3 className="text-lg font-semibold">Obiettivi</h3>
-              </div>
-              
-              <div className="space-y-4">
-                {/* Predefined goal */}
-                <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
-                  <span className="font-medium">Per la lode</span>
-                  <div className="flex items-center gap-2">
-                    {results.completedCfu > 0 && (
-                      <span className={`text-sm font-medium ${
-                        results.graduationGradeWithBonus >= 107 
-                          ? 'text-green-600' 
-                          : 'text-orange-600'
-                      }`}>
-                        {results.graduationGradeWithBonus >= 107 
-                          ? 'Raggiunto!' 
-                          : `+${(107 - results.graduationGradeWithBonus).toFixed(1)}`
-                        }
-                      </span>
-                    )}
-                    <span className="text-lg font-bold">+27.0</span>
-                  </div>
-                </div>
-
-                {/* Custom target input */}
-                <div className="space-y-2">
-                  <Label className="text-sm font-medium">Target personalizzato</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      type="number"
-                      min="66"
-                      max="110"
-                      step="0.1"
-                      value={customTarget}
-                      onChange={(e) => setCustomTarget(e.target.value)}
-                      placeholder="Es. 26.3"
-                      className="flex-1"
-                    />
-                    {customTarget && results.completedCfu > 0 && (
-                      <div className="flex items-center px-3 py-2 bg-secondary/50 rounded-md">
-                        <span className={`text-sm font-medium ${
-                          getTargetStatus(results.gpa, Number(customTarget)).color
-                        }`}>
-                          {getTargetStatus(results.gpa, Number(customTarget)).text}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </motion.div>
       )}
 
