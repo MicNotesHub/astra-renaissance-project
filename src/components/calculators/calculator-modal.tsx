@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { GPACalculator } from "./gpa-calculator";
 import { ExchangePlanner } from "./exchange-planner";
 import { StudyPlanCalculator } from "./study-plan-calculator";
+import { GraduationGradeCalculator } from "./graduation-grade-calculator";
 import { X } from "lucide-react";
 
 interface CalculatorModalProps {
@@ -21,6 +22,8 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
         return <ExchangePlanner />;
       case 'study-plan':
         return <StudyPlanCalculator />;
+      case 'graduation':
+        return <GraduationGradeCalculator />;
       default:
         return (
           <div className="text-center py-12">
@@ -41,6 +44,8 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
         return 'Exchange Planner';
       case 'study-plan':
         return 'Piano di Studi';
+      case 'graduation':
+        return 'Undergraduate Graduation Grade Calculator';
       case 'simulator':
         return 'Simulatore Voti';
       case 'planner':

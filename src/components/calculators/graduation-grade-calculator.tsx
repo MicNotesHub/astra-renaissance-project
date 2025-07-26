@@ -1,0 +1,337 @@
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
+import { GraduationCap, Calculator } from "lucide-react";
+import { motion } from "framer-motion";
+import { useToast } from "@/hooks/use-toast";
+
+interface Subject {
+  id: number;
+  subject: string;
+  cfu: number;
+}
+
+interface ExamGrade {
+  id: number;
+  subject: string;
+  cfu: number;
+  grade: number | '';
+  completed: boolean;
+}
+
+export function GraduationGradeCalculator() {
+  const [courses, setCourses] = useState<string[]>([]);
+  const [selectedCourse, setSelectedCourse] = useState<string>("");
+  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [examGrades, setExamGrades] = useState<ExamGrade[]>([]);
+  const [bonus, setBonus] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  // Fetch available courses
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        // Hardcoded courses from the database query we did earlier
+        const courseList = [
+          'BAI', 'BEMACC', 'BEMACS', 'BESS', 'BGL', 'BGL-Domestic Lawyers',
+          'BIEF-Econ', 'BIEF-Fin', 'BIEM', 'CLEACC', 'CLEAM', 'CLEF'
+        ];
+        setCourses(courseList);
+      } catch (error) {
+        toast({
+          title: "Errore",
+          description: "Impossibile caricare i corsi di laurea",
+          variant: "destructive",
+        });
+      }
+    };
+
+    fetchCourses();
+  }, [toast]);
+
+  // Fetch subjects for selected course
+  useEffect(() => {
+    if (!selectedCourse) return;
+
+    const fetchSubjects = async () => {
+      setLoading(true);
+      try {
+        // For demo purposes, we'll create mock data based on the selected course
+        // In a real implementation, you would fetch from the database
+        const mockSubjects: Subject[] = generateMockSubjects(selectedCourse);
+        
+        setSubjects(mockSubjects);
+        
+        // Initialize exam grades
+        const initialGrades: ExamGrade[] = mockSubjects.map(subject => ({
+          id: subject.id,
+          subject: subject.subject,
+          cfu: subject.cfu,
+          grade: '',
+          completed: false
+        }));
+        
+        setExamGrades(initialGrades);
+      } catch (error) {
+        toast({
+          title: "Errore",
+          description: "Impossibile caricare gli esami per questo corso",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSubjects();
+  }, [selectedCourse, toast]);
+
+  const generateMockSubjects = (course: string): Subject[] => {
+    const baseSubjects = {
+      'BEMACS': [
+        { id: 1, subject: 'Microeconomics', cfu: 8 },
+        { id: 2, subject: 'Mathematics and Statistics (Module 1)', cfu: 8 },
+        { id: 3, subject: 'Fundamentals of Computer Science', cfu: 8 },
+        { id: 4, subject: 'Mathematics and Statistics (Module 2)', cfu: 8 },
+        { id: 5, subject: 'Principles of Management', cfu: 8 },
+        { id: 6, subject: 'Macroeconomics', cfu: 8 },
+        { id: 7, subject: 'Financial Accounting', cfu: 8 },
+        { id: 8, subject: 'Business Law', cfu: 6 },
+        { id: 9, subject: 'Statistics for Data Science', cfu: 8 },
+        { id: 10, subject: 'Linear Algebra', cfu: 6 }
+      ],
+      'CLEAM': [
+        { id: 11, subject: 'Microeconomia', cfu: 8 },
+        { id: 12, subject: 'Matematica Generale', cfu: 8 },
+        { id: 13, subject: 'Storia Economica', cfu: 6 },
+        { id: 14, subject: 'Macroeconomia', cfu: 8 },
+        { id: 15, subject: 'Ragioneria', cfu: 8 },
+        { id: 16, subject: 'Diritto Privato', cfu: 6 },
+        { id: 17, subject: 'Statistica', cfu: 8 },
+        { id: 18, subject: 'Economia Aziendale', cfu: 8 },
+        { id: 19, subject: 'Diritto Commerciale', cfu: 6 },
+        { id: 20, subject: 'Finanza Aziendale', cfu: 8 }
+      ]
+    };
+
+    return baseSubjects[course as keyof typeof baseSubjects] || [
+      { id: 1, subject: 'Esame 1', cfu: 8 },
+      { id: 2, subject: 'Esame 2', cfu: 6 },
+      { id: 3, subject: 'Esame 3', cfu: 8 },
+      { id: 4, subject: 'Esame 4', cfu: 6 },
+      { id: 5, subject: 'Esame 5', cfu: 8 }
+    ];
+  };
+
+  const updateExamGrade = (id: number, field: keyof ExamGrade, value: any) => {
+    setExamGrades(prev => prev.map(exam => 
+      exam.id === id ? { ...exam, [field]: value } : exam
+    ));
+  };
+
+  const calculateResults = () => {
+    const completedExams = examGrades.filter(exam => exam.completed && exam.grade !== '');
+    
+    if (completedExams.length === 0) {
+      return {
+        gpa: 0,
+        graduationGrade: 0,
+        graduationGradeWithBonus: 0,
+        totalCfu: 0,
+        completedCfu: 0
+      };
+    }
+
+    const totalWeightedGrades = completedExams.reduce((sum, exam) => {
+      return sum + (Number(exam.grade) * exam.cfu);
+    }, 0);
+
+    const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
+    const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
+    
+    const gpa = totalWeightedGrades / completedCfu;
+    const graduationGrade = (gpa * 110) / 30;
+    const graduationGradeWithBonus = Math.min(110, graduationGrade + bonus);
+
+    return {
+      gpa: Number(gpa.toFixed(2)),
+      graduationGrade: Number(graduationGrade.toFixed(1)),
+      graduationGradeWithBonus: Number(graduationGradeWithBonus.toFixed(1)),
+      totalCfu,
+      completedCfu
+    };
+  };
+
+  const results = calculateResults();
+
+  const getGradeColor = (grade: number) => {
+    if (grade >= 105) return "text-green-600 dark:text-green-400";
+    if (grade >= 100) return "text-blue-600 dark:text-blue-400";
+    if (grade >= 95) return "text-yellow-600 dark:text-yellow-400";
+    return "text-gray-600 dark:text-gray-400";
+  };
+
+  const getGradeLabel = (grade: number) => {
+    if (grade >= 105) return "Eccellente";
+    if (grade >= 100) return "Ottimo";
+    if (grade >= 95) return "Buono";
+    if (grade >= 90) return "Discreto";
+    return "Sufficiente";
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Course Selection */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <GraduationCap className="h-5 w-5" />
+            Seleziona Corso di Laurea
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Select value={selectedCourse} onValueChange={setSelectedCourse}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Scegli il tuo corso di laurea" />
+            </SelectTrigger>
+            <SelectContent>
+              {courses.map(course => (
+                <SelectItem key={course} value={course}>
+                  {course}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </CardContent>
+      </Card>
+
+      {/* Results Panel */}
+      {selectedCourse && results.completedCfu > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        >
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary">{results.gpa}</div>
+                <div className="text-sm text-muted-foreground">GPA su 30</div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-center">
+                <div className={`text-2xl font-bold ${getGradeColor(results.graduationGradeWithBonus)}`}>
+                  {results.graduationGradeWithBonus}/110
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {getGradeLabel(results.graduationGradeWithBonus)}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary">{results.completedCfu}</div>
+                <div className="text-sm text-muted-foreground">
+                  CFU completati su {results.totalCfu}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
+
+      {/* Bonus Selection */}
+      {selectedCourse && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Calculator className="h-5 w-5" />
+              Bonus Aggiuntivi
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              <Label>Seleziona bonus applicabile:</Label>
+              <Select value={bonus.toString()} onValueChange={(value) => setBonus(Number(value))}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0">Nessun bonus</SelectItem>
+                  <SelectItem value="1">+1 punto (tirocinio/internazionale)</SelectItem>
+                  <SelectItem value="3">+3 punti (tesi eccellente/merito)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Exams Table */}
+      {selectedCourse && !loading && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Esami - {selectedCourse}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {examGrades.map((exam) => (
+                <motion.div
+                  key={exam.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex items-center gap-4 p-4 border rounded-lg"
+                >
+                  <Checkbox
+                    checked={exam.completed}
+                    onCheckedChange={(checked) => 
+                      updateExamGrade(exam.id, 'completed', checked)
+                    }
+                  />
+                  
+                  <div className="flex-1">
+                    <div className="font-medium">{exam.subject}</div>
+                    <Badge variant="secondary">{exam.cfu} CFU</Badge>
+                  </div>
+                  
+                  <div className="w-24">
+                    <Label className="sr-only">Voto</Label>
+                    <Input
+                      type="number"
+                      min="18"
+                      max="31"
+                      value={exam.grade}
+                      onChange={(e) => updateExamGrade(exam.id, 'grade', e.target.value)}
+                      disabled={!exam.completed}
+                      placeholder="Voto"
+                      className="text-center"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {loading && (
+        <div className="text-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-2 text-muted-foreground">Caricamento esami...</p>
+        </div>
+      )}
+    </div>
+  );
+}

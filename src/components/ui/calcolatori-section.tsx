@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp, MapPin, Calendar, Brain, Target } from "lucide-react";
+import { Calculator, TrendingUp, MapPin, Calendar, Brain, Target, GraduationCap } from "lucide-react";
 import { CalculatorModal } from "../calculators/calculator-modal";
 
 export const CalcolatoriSection = () => {
@@ -34,6 +34,15 @@ export const CalcolatoriSection = () => {
       color: "text-green-500",
       bgColor: "bg-green-50 dark:bg-green-950/30", 
       features: ["Equivalenze esami", "Costi stimati", "Università partner"]
+    },
+    {
+      id: "graduation",
+      title: "Graduation Grade Calculator",
+      description: "Calcola il tuo voto di laurea previsto basato sui tuoi esami",
+      icon: GraduationCap,
+      color: "text-indigo-500",
+      bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+      features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"]
     },
     {
       id: "simulator",
