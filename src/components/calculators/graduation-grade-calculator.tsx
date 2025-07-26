@@ -5,7 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Calculator } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { GraduationCap, Calculator, Target, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -31,6 +32,7 @@ export function GraduationGradeCalculator() {
   const [examGrades, setExamGrades] = useState<ExamGrade[]>([]);
   const [bonus, setBonus] = useState<number>(0);
   const [loading, setLoading] = useState(false);
+  const [customTarget, setCustomTarget] = useState<string>("");
   const { toast } = useToast();
 
   // Fetch available courses
@@ -163,6 +165,19 @@ export function GraduationGradeCalculator() {
     return "Sufficiente";
   };
 
+  const scrollToExams = () => {
+    const examsSection = document.getElementById('exams-section');
+    if (examsSection) {
+      examsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const getTargetStatus = (currentGrade: number, targetGrade: number) => {
+    const diff = targetGrade - currentGrade;
+    if (diff <= 0) return { status: 'reached', color: 'text-green-600', text: 'Raggiunto!' };
+    return { status: 'needs', color: 'text-orange-600', text: `+${diff.toFixed(1)}` };
+  };
+
   return (
     <div className="space-y-6">
       {/* Course Selection */}
@@ -189,41 +204,117 @@ export function GraduationGradeCalculator() {
         </CardContent>
       </Card>
 
-      {/* Results Panel */}
-      {selectedCourse && results.completedCfu > 0 && (
+      {/* Main Results Panel */}
+      {selectedCourse && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          className="space-y-6"
         >
-          <Card>
-            <CardContent className="p-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">{results.gpa}</div>
-                <div className="text-sm text-muted-foreground">GPA su 30</div>
+          {/* Central Summary Card */}
+          <Card className="bg-gradient-to-br from-primary/5 to-secondary/10 border-primary/20">
+            <CardContent className="p-8">
+              <div className="text-center space-y-6">
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <GraduationCap className="h-6 w-6 text-primary" />
+                  <h2 className="text-xl font-semibold">La tua media</h2>
+                </div>
+                
+                <div className="w-12 h-0.5 bg-primary mx-auto rounded-full"></div>
+                
+                <div className="space-y-2">
+                  <div className={`text-5xl font-bold ${getGradeColor(results.graduationGradeWithBonus)}`}>
+                    {results.completedCfu > 0 ? results.graduationGradeWithBonus : '--'}
+                    <span className="text-2xl text-muted-foreground">/110</span>
+                  </div>
+                  <div className="text-lg text-muted-foreground">
+                    GPA: {results.completedCfu > 0 ? results.gpa : '--'}
+                  </div>
+                </div>
+
+                {results.completedCfu === 0 && (
+                  <div className="bg-primary/10 rounded-lg p-4 mt-4">
+                    <p className="text-primary font-medium">Inserisci voti</p>
+                  </div>
+                )}
+
+                {results.completedCfu > 0 && (
+                  <Button 
+                    variant="outline" 
+                    onClick={scrollToExams}
+                    className="mt-4"
+                  >
+                    Inserisci voti <ChevronDown className="h-4 w-4 ml-2" />
+                  </Button>
+                )}
+
+                <div className="grid grid-cols-2 gap-4 mt-6 text-sm">
+                  <div>
+                    <span className="text-muted-foreground">Crediti totali:</span>
+                    <div className="font-medium">{results.totalCfu}</div>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Esami inseriti:</span>
+                    <div className="font-medium">{results.completedCfu}</div>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
-          
+
+          {/* Goals Section */}
           <Card>
             <CardContent className="p-6">
-              <div className="text-center">
-                <div className={`text-2xl font-bold ${getGradeColor(results.graduationGradeWithBonus)}`}>
-                  {results.graduationGradeWithBonus}/110
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {getGradeLabel(results.graduationGradeWithBonus)}
-                </div>
+              <div className="flex items-center gap-2 mb-4">
+                <Target className="h-5 w-5" />
+                <h3 className="text-lg font-semibold">Obiettivi</h3>
               </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">{results.completedCfu}</div>
-                <div className="text-sm text-muted-foreground">
-                  CFU completati su {results.totalCfu}
+              
+              <div className="space-y-4">
+                {/* Predefined goal */}
+                <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
+                  <span className="font-medium">Per la lode</span>
+                  <div className="flex items-center gap-2">
+                    {results.completedCfu > 0 && (
+                      <span className={`text-sm font-medium ${
+                        results.graduationGradeWithBonus >= 107 
+                          ? 'text-green-600' 
+                          : 'text-orange-600'
+                      }`}>
+                        {results.graduationGradeWithBonus >= 107 
+                          ? 'Raggiunto!' 
+                          : `+${(107 - results.graduationGradeWithBonus).toFixed(1)}`
+                        }
+                      </span>
+                    )}
+                    <span className="text-lg font-bold">+27.0</span>
+                  </div>
+                </div>
+
+                {/* Custom target input */}
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium">Target personalizzato</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      min="66"
+                      max="110"
+                      step="0.1"
+                      value={customTarget}
+                      onChange={(e) => setCustomTarget(e.target.value)}
+                      placeholder="Es. 26.3"
+                      className="flex-1"
+                    />
+                    {customTarget && results.completedCfu > 0 && (
+                      <div className="flex items-center px-3 py-2 bg-secondary/50 rounded-md">
+                        <span className={`text-sm font-medium ${
+                          getTargetStatus(results.gpa, Number(customTarget)).color
+                        }`}>
+                          {getTargetStatus(results.gpa, Number(customTarget)).text}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -260,7 +351,7 @@ export function GraduationGradeCalculator() {
 
       {/* Exams Table */}
       {selectedCourse && !loading && (
-        <Card>
+        <Card id="exams-section">
           <CardHeader>
             <CardTitle>Esami - {selectedCourse}</CardTitle>
           </CardHeader>
