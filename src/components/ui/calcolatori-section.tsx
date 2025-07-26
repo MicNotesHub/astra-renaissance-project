@@ -9,24 +9,6 @@ export const CalcolatoriSection = () => {
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
   const calcolatori = [
     {
-      id: "gpa",
-      title: "Calcolatore GPA",
-      description: "Calcola la tua media ponderata e scopri il tuo GPA attuale",
-      icon: TrendingUp,
-      color: "text-blue-500",
-      bgColor: "bg-blue-50 dark:bg-blue-950/30",
-      features: ["Media ponderata", "Proiezioni future", "Analisi per anno"]
-    },
-    {
-      id: "study-plan",
-      title: "Piano di Studi",
-      description: "Pianifica il tuo percorso accademico e ottimizza gli esami",
-      icon: Brain,
-      color: "text-purple-500", 
-      bgColor: "bg-purple-50 dark:bg-purple-950/30",
-      features: ["Prerequisiti", "Carico di lavoro", "Timeline ottimale"]
-    },
-    {
       id: "exchange",
       title: "Exchange Planner",
       description: "Progetta il tuo semestre all'estero e calcola i crediti",
@@ -52,24 +34,6 @@ export const CalcolatoriSection = () => {
       color: "text-orange-500",
       bgColor: "bg-orange-50 dark:bg-orange-950/30",
       features: ["Voti necessari", "Scenari multipli", "Goal tracking"]
-    },
-    {
-      id: "planner",
-      title: "Planner Sessioni",
-      description: "Organizza le tue sessioni d'esame in modo strategico",
-      icon: Calendar,
-      color: "text-red-500",
-      bgColor: "bg-red-50 dark:bg-red-950/30",
-      features: ["Date appelli", "Distribuzione carico", "Reminder automatici"]
-    },
-    {
-      id: "performance",
-      title: "Analisi Performance",
-      description: "Analizza le tue performance e identifica aree di miglioramento",
-      icon: Calculator,
-      color: "text-indigo-500",
-      bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-      features: ["Trend analysis", "Punti di forza", "Aree miglioramento"]
     }
   ];
 
