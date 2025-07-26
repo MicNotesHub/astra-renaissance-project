@@ -155,32 +155,34 @@ const Guide = () => {
                 </h3>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 max-w-6xl mx-auto">
-                {categoryGuides.map((guide) => {
-                  const IconComponent = getGuideIcon(guide);
-                  const colorClasses = getGuideColor(guide, category);
-                  
-                  return (
-                    <motion.div
-                      key={guide.id}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex flex-col items-center space-y-3"
-                    >
-                      <a
-                        href={guide.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-6 rounded-2xl border-2 border-transparent transition-all duration-300 cursor-pointer ${colorClasses}`}
+              <div className="flex justify-center">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center">
+                  {categoryGuides.map((guide) => {
+                    const IconComponent = getGuideIcon(guide);
+                    const colorClasses = getGuideColor(guide, category);
+                    
+                    return (
+                      <motion.div
+                        key={guide.id}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex flex-col items-center space-y-3"
                       >
-                        <IconComponent size={48} />
-                      </a>
-                      <p className="text-sm font-medium text-center text-foreground leading-tight">
-                        {guide.title}
-                      </p>
-                    </motion.div>
-                  );
-                })}
+                        <a
+                          href={guide.file_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`p-6 rounded-2xl border-2 border-transparent transition-all duration-300 cursor-pointer ${colorClasses}`}
+                        >
+                          <IconComponent size={48} />
+                        </a>
+                        <p className="text-sm font-medium text-center text-foreground leading-tight">
+                          {guide.title}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
             </motion.div>
           ))}
