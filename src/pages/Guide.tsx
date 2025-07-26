@@ -51,12 +51,20 @@ const Guide = () => {
   }, {} as Record<string, Guide[]>);
 
   const categoryTitles: Record<string, string> = {
-    'associazioni': 'Associazioni 101: tutto sulle associazioni!',
+    'associations': 'Associations 101: scopri le associazioni Bocconi!',
     'opzionali': 'Opzionali 101: le nostre guide per la scelta dei tuoi opzionali!',
     'graduate': 'Graduate 101: le nostre guide per la tua magistrale!',
     'stage': 'Stage 101: le nostre guide per il tuo stage!',
     'freemover': 'Freemover 101: le nostre guide per il freemover!',
-    'exchange': 'Exchange 101: le nostre guide per l\'exchange!'
+    'residenze': 'Residenze 101: le nostre guide per le residenze degli studenti!',
+    'exchange_magistrale': 'Exchange 101: le nostre guide per il tuo exchange magistrale!',
+    'exchange_triennale': 'Exchange 101: le nostre guide per il tuo exchange triennale!',
+    'university': 'University 101: le nostre guide al primo anno di Università!',
+    'milan': 'Milan 101: scopri Milano prima di trasferirti!',
+    'burocrazia': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
+    'master_admissions': 'Master Admissions',
+    'tesi': 'Tesi 101: guida per la tesi triennale',
+    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere'
   };
 
   if (loading) {
