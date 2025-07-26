@@ -321,10 +321,17 @@ export const AstraPolareSection = () => {
                 Non perdere i nostri contenuti! Seguici su TikTok e Instagram per restare aggiornato.
               </p>
               <div className="flex justify-center gap-4">
-                <Button className="flex items-center gap-2">
+                <Button 
+                  className="flex items-center gap-2"
+                  onClick={() => window.open('https://www.tiktok.com/@astrabocconi?_t=ZN-8yM6RRp0ryg&_r=1', '_blank', 'noopener,noreferrer')}
+                >
                   📱 TikTok
                 </Button>
-                <Button variant="outline" className="flex items-center gap-2">
+                <Button 
+                  variant="outline" 
+                  className="flex items-center gap-2"
+                  onClick={() => window.open('https://www.instagram.com/astrabocconi?igsh=YmU0anJ6MXNqNHk2', '_blank', 'noopener,noreferrer')}
+                >
                   📸 Instagram
                 </Button>
               </div>
