@@ -67,25 +67,27 @@ const Guide = () => {
     'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere'
   };
 
-  const getGuideIcon = (guide: Guide) => {
-    const titleLower = guide.title.toLowerCase();
-    if (titleLower.includes('association') || titleLower.includes('associazioni')) return Users;
-    if (titleLower.includes('opzional') || titleLower.includes('course')) return BookOpen;
-    if (titleLower.includes('graduate') || titleLower.includes('magistrale')) return GraduationCap;
-    if (titleLower.includes('stage') || titleLower.includes('internship')) return Briefcase;
-    if (titleLower.includes('freemover') || titleLower.includes('exchange')) return Plane;
-    if (titleLower.includes('residenz') || titleLower.includes('housing')) return Home;
-    if (titleLower.includes('university') || titleLower.includes('università')) return Building;
-    if (titleLower.includes('milan') || titleLower.includes('milano')) return MapPin;
-    if (titleLower.includes('burocrazia') || titleLower.includes('tesi')) return FileText;
-    if (titleLower.includes('master') || titleLower.includes('admission')) return Trophy;
-    if (titleLower.includes('ecdl') || titleLower.includes('computer')) return Monitor;
-    if (titleLower.includes('calculator') || titleLower.includes('calcolator')) return Calculator;
-    if (titleLower.includes('payment') || titleLower.includes('finance')) return CreditCard;
-    return Globe; // default icon
+  const getCategoryIcon = (category: string) => {
+    const iconMap: Record<string, any> = {
+      'associations': Users,
+      'opzionali': BookOpen,
+      'graduate': GraduationCap,
+      'stage': Briefcase,
+      'freemover': Plane,
+      'residenze': Home,
+      'exchange_magistrale': Plane,
+      'exchange_triennale': Plane,
+      'university': Building,
+      'milan': MapPin,
+      'burocrazia': FileText,
+      'master_admissions': Trophy,
+      'tesi': FileText,
+      'ecdl': Monitor
+    };
+    return iconMap[category] || Globe;
   };
 
-  const getGuideColor = (guide: Guide, category: string) => {
+  const getCategoryColor = (category: string) => {
     const colorMap: Record<string, string> = {
       'associations': 'text-blue-500 bg-blue-50 hover:bg-blue-100',
       'opzionali': 'text-green-500 bg-green-50 hover:bg-green-100',
@@ -158,8 +160,8 @@ const Guide = () => {
               <div className="flex justify-center w-full">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center max-w-4xl mx-auto">
                   {categoryGuides.map((guide) => {
-                    const IconComponent = getGuideIcon(guide);
-                    const colorClasses = getGuideColor(guide, category);
+                    const IconComponent = getCategoryIcon(category);
+                    const colorClasses = getCategoryColor(category);
                     
                     return (
                       <motion.div
