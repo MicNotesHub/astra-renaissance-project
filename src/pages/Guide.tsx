@@ -88,15 +88,15 @@ const Guide = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16 max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
             Guide
           </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-4">
+          <h2 className="text-2xl md:text-4xl font-semibold text-primary mb-6">
             Ti serve aiuto? Nessun problema!
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Le nostre guide, dagli studenti per gli studenti
           </p>
         </motion.div>
@@ -111,11 +111,13 @@ const Guide = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="space-y-6"
             >
-              <h3 className="text-2xl font-bold text-foreground">
-                {categoryTitles[category] || category}
-              </h3>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+                  {categoryTitles[category] || category}
+                </h3>
+              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {categoryGuides.map((guide) => (
                   <Card key={guide.id} className="group hover:shadow-lg transition-shadow duration-300">
                     <CardContent className="p-6">
