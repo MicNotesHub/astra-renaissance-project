@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Calendar, Monitor } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, Calculator, CreditCard } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 
@@ -67,38 +67,42 @@ const Guide = () => {
     'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere'
   };
 
-  const categoryIcons: Record<string, any> = {
-    'associations': Users,
-    'opzionali': BookOpen,
-    'graduate': GraduationCap,
-    'stage': Briefcase,
-    'freemover': Plane,
-    'residenze': Home,
-    'exchange_magistrale': Plane,
-    'exchange_triennale': Plane,
-    'university': Building,
-    'milan': MapPin,
-    'burocrazia': FileText,
-    'master_admissions': Trophy,
-    'tesi': FileText,
-    'ecdl': Monitor
+  const getGuideIcon = (guide: Guide) => {
+    const titleLower = guide.title.toLowerCase();
+    if (titleLower.includes('association') || titleLower.includes('associazioni')) return Users;
+    if (titleLower.includes('opzional') || titleLower.includes('course')) return BookOpen;
+    if (titleLower.includes('graduate') || titleLower.includes('magistrale')) return GraduationCap;
+    if (titleLower.includes('stage') || titleLower.includes('internship')) return Briefcase;
+    if (titleLower.includes('freemover') || titleLower.includes('exchange')) return Plane;
+    if (titleLower.includes('residenz') || titleLower.includes('housing')) return Home;
+    if (titleLower.includes('university') || titleLower.includes('università')) return Building;
+    if (titleLower.includes('milan') || titleLower.includes('milano')) return MapPin;
+    if (titleLower.includes('burocrazia') || titleLower.includes('tesi')) return FileText;
+    if (titleLower.includes('master') || titleLower.includes('admission')) return Trophy;
+    if (titleLower.includes('ecdl') || titleLower.includes('computer')) return Monitor;
+    if (titleLower.includes('calculator') || titleLower.includes('calcolator')) return Calculator;
+    if (titleLower.includes('payment') || titleLower.includes('finance')) return CreditCard;
+    return Globe; // default icon
   };
 
-  const categoryColors: Record<string, string> = {
-    'associations': 'text-blue-500',
-    'opzionali': 'text-green-500',
-    'graduate': 'text-purple-500',
-    'stage': 'text-orange-500',
-    'freemover': 'text-cyan-500',
-    'residenze': 'text-emerald-500',
-    'exchange_magistrale': 'text-sky-500',
-    'exchange_triennale': 'text-indigo-500',
-    'university': 'text-rose-500',
-    'milan': 'text-pink-500',
-    'burocrazia': 'text-amber-500',
-    'master_admissions': 'text-yellow-500',
-    'tesi': 'text-teal-500',
-    'ecdl': 'text-slate-500'
+  const getGuideColor = (guide: Guide, category: string) => {
+    const colorMap: Record<string, string> = {
+      'associations': 'text-blue-500 bg-blue-50 hover:bg-blue-100',
+      'opzionali': 'text-green-500 bg-green-50 hover:bg-green-100',
+      'graduate': 'text-purple-500 bg-purple-50 hover:bg-purple-100',
+      'stage': 'text-orange-500 bg-orange-50 hover:bg-orange-100',
+      'freemover': 'text-cyan-500 bg-cyan-50 hover:bg-cyan-100',
+      'residenze': 'text-emerald-500 bg-emerald-50 hover:bg-emerald-100',
+      'exchange_magistrale': 'text-sky-500 bg-sky-50 hover:bg-sky-100',
+      'exchange_triennale': 'text-indigo-500 bg-indigo-50 hover:bg-indigo-100',
+      'university': 'text-rose-500 bg-rose-50 hover:bg-rose-100',
+      'milan': 'text-pink-500 bg-pink-50 hover:bg-pink-100',
+      'burocrazia': 'text-amber-500 bg-amber-50 hover:bg-amber-100',
+      'master_admissions': 'text-yellow-500 bg-yellow-50 hover:bg-yellow-100',
+      'tesi': 'text-teal-500 bg-teal-50 hover:bg-teal-100',
+      'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100'
+    };
+    return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
 
   if (loading) {
@@ -146,76 +150,37 @@ const Guide = () => {
               className="space-y-6"
             >
               <div className="text-center mb-8">
-                <div className="flex items-center justify-center gap-3 mb-4">
-                  {categoryIcons[category] && (
-                    <div className={`p-3 rounded-lg bg-background border ${categoryColors[category] || 'text-primary'}`}>
-                      {React.createElement(categoryIcons[category], { size: 32 })}
-                    </div>
-                  )}
-                </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground">
                   {categoryTitles[category] || category}
                 </h3>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {categoryGuides.map((guide) => (
-                  <Card key={guide.id} className="group hover:shadow-lg transition-shadow duration-300">
-                    <CardContent className="p-6">
-                      {guide.thumbnail_url && (
-                        <div className="mb-4 overflow-hidden rounded-lg">
-                          <img 
-                            src={guide.thumbnail_url} 
-                            alt={guide.title}
-                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      )}
-                      
-                      <h4 className="text-xl font-semibold text-foreground mb-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 max-w-6xl mx-auto">
+                {categoryGuides.map((guide) => {
+                  const IconComponent = getGuideIcon(guide);
+                  const colorClasses = getGuideColor(guide, category);
+                  
+                  return (
+                    <motion.div
+                      key={guide.id}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex flex-col items-center space-y-3"
+                    >
+                      <a
+                        href={guide.file_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`p-6 rounded-2xl border-2 border-transparent transition-all duration-300 cursor-pointer ${colorClasses}`}
+                      >
+                        <IconComponent size={48} />
+                      </a>
+                      <p className="text-sm font-medium text-center text-foreground leading-tight">
                         {guide.title}
-                      </h4>
-                      
-                      {guide.description && (
-                        <p className="text-muted-foreground mb-4">
-                          {guide.description}
-                        </p>
-                      )}
-                      
-                      <div className="flex gap-3">
-                        <Button 
-                          asChild 
-                          className="flex-1"
-                          variant="default"
-                        >
-                          <a 
-                            href={guide.file_url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2"
-                          >
-                            <Download className="h-4 w-4" />
-                            Scarica Guida
-                          </a>
-                        </Button>
-                        
-                        <Button 
-                          asChild 
-                          variant="outline" 
-                          size="icon"
-                        >
-                          <a 
-                            href={guide.file_url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                          </a>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      </p>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
