@@ -10,7 +10,7 @@ const navItems = [
   { name: "DISPENSE", href: "/dispense" },
   { name: "EXCHANGE", href: "#astra-polare" },
   { name: "RUBRICA", href: "#marketplace" },
-  { name: "GUIDE", href: "#calcolatori" },
+  { name: "GUIDE", href: "/guide" },
   { name: "ABOUT", href: "#about" },
 ];
 
