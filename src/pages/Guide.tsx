@@ -155,8 +155,8 @@ const Guide = () => {
                 </h3>
               </div>
               
-              <div className="flex justify-center">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center">
+              <div className="flex justify-center w-full">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center max-w-4xl mx-auto">
                   {categoryGuides.map((guide) => {
                     const IconComponent = getGuideIcon(guide);
                     const colorClasses = getGuideColor(guide, category);
