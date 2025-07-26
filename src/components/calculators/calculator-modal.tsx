@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { GPACalculator } from "./gpa-calculator";
 import { ExchangePlanner } from "./exchange-planner";
-import { StudyPlanCalculator } from "./study-plan-calculator";
 import { GraduationGradeCalculator } from "./graduation-grade-calculator";
 import { X } from "lucide-react";
 
@@ -16,12 +13,8 @@ interface CalculatorModalProps {
 export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorModalProps) {
   const getCalculatorComponent = () => {
     switch (calculatorType) {
-      case 'gpa':
-        return <GPACalculator />;
       case 'exchange':
         return <ExchangePlanner />;
-      case 'study-plan':
-        return <StudyPlanCalculator />;
       case 'graduation':
         return <GraduationGradeCalculator />;
       default:
@@ -29,7 +22,7 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
           <div className="text-center py-12">
             <h3 className="text-lg font-semibold mb-2">Calcolatore in Sviluppo</h3>
             <p className="text-muted-foreground">
-              Questo calcolatore sarà disponibile presto! 
+              Questo calcolatore sarà disponibile presto!
             </p>
           </div>
         );
@@ -38,20 +31,10 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
 
   const getTitle = () => {
     switch (calculatorType) {
-      case 'gpa':
-        return 'Calcolatore GPA';
       case 'exchange':
         return 'Exchange Planner';
-      case 'study-plan':
-        return 'Piano di Studi';
       case 'graduation':
         return 'Undergraduate Graduation Grade Calculator';
-      case 'simulator':
-        return 'Simulatore Voti';
-      case 'planner':
-        return 'Planner Sessioni';
-      case 'performance':
-        return 'Analisi Performance';
       default:
         return 'Calcolatore';
     }
@@ -73,7 +56,7 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
             <X className="h-4 w-4" />
           </Button>
         </DialogHeader>
-        
+
         <div className="mt-4">
           {getCalculatorComponent()}
         </div>
