@@ -56,12 +56,7 @@ export function HeroSection() {
           </motion.div>
 
           {/* Main heading */}
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-            <span className="block text-3xl md:text-5xl font-light mb-2 text-white/90 text-center">Per Aspera, ad</span>
-            <span className="block text-6xl md:text-8xl font-bold bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
-              ASTRA
-            </span>
-          </h1>
+          
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
