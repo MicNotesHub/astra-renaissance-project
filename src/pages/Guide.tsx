@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink } from "lucide-react";
+import { Download, ExternalLink, BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Calendar, Monitor } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 
@@ -67,6 +67,40 @@ const Guide = () => {
     'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere'
   };
 
+  const categoryIcons: Record<string, any> = {
+    'associations': Users,
+    'opzionali': BookOpen,
+    'graduate': GraduationCap,
+    'stage': Briefcase,
+    'freemover': Plane,
+    'residenze': Home,
+    'exchange_magistrale': Plane,
+    'exchange_triennale': Plane,
+    'university': Building,
+    'milan': MapPin,
+    'burocrazia': FileText,
+    'master_admissions': Trophy,
+    'tesi': FileText,
+    'ecdl': Monitor
+  };
+
+  const categoryColors: Record<string, string> = {
+    'associations': 'text-blue-500',
+    'opzionali': 'text-green-500',
+    'graduate': 'text-purple-500',
+    'stage': 'text-orange-500',
+    'freemover': 'text-cyan-500',
+    'residenze': 'text-emerald-500',
+    'exchange_magistrale': 'text-sky-500',
+    'exchange_triennale': 'text-indigo-500',
+    'university': 'text-rose-500',
+    'milan': 'text-pink-500',
+    'burocrazia': 'text-amber-500',
+    'master_admissions': 'text-yellow-500',
+    'tesi': 'text-teal-500',
+    'ecdl': 'text-slate-500'
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -112,6 +146,13 @@ const Guide = () => {
               className="space-y-6"
             >
               <div className="text-center mb-8">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  {categoryIcons[category] && (
+                    <div className={`p-3 rounded-lg bg-background border ${categoryColors[category] || 'text-primary'}`}>
+                      {React.createElement(categoryIcons[category], { size: 32 })}
+                    </div>
+                  )}
+                </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground">
                   {categoryTitles[category] || category}
                 </h3>
