@@ -19,7 +19,7 @@ export const CalcolatoriSection = () => {
     },
     {
       id: "graduation",
-      title: "Graduation Grade Calculator",
+      title: "GPA & Graduation Score",
       description: "Calcola il tuo voto di laurea previsto basato sui tuoi esami",
       icon: GraduationCap,
       color: "text-indigo-500",
