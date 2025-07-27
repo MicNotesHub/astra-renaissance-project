@@ -62,6 +62,27 @@ export type Database = {
         }
         Relationships: []
       }
+      "cours-subject_MS_exchange": {
+        Row: {
+          cfu: number | null
+          course: string
+          id: number
+          subject: string | null
+        }
+        Insert: {
+          cfu?: number | null
+          course: string
+          id?: number
+          subject?: string | null
+        }
+        Update: {
+          cfu?: number | null
+          course?: string
+          id?: number
+          subject?: string | null
+        }
+        Relationships: []
+      }
       course_subjects: {
         Row: {
           cfu: number | null
