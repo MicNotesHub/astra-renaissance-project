@@ -46,7 +46,7 @@ export const DispensenSection = () => {
         .select('*')
         .eq('year', selectedYear)
         .order('uploaded_at', { ascending: false })
-        .limit(6);
+        .limit(3);
 
       if (error) {
         console.error('Error fetching handouts:', error);
