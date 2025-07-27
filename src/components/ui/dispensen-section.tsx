@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Download, GraduationCap, ArrowRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { FileText, Download, GraduationCap, ArrowRight, Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
@@ -19,6 +20,8 @@ interface Handout {
 export const DispensenSection = () => {
   const [selectedYear, setSelectedYear] = useState("First Year");
   const [handouts, setHandouts] = useState<Handout[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const yearOptions = [
@@ -28,10 +31,15 @@ export const DispensenSection = () => {
   ];
 
   useEffect(() => {
-    fetchHandouts();
-  }, [selectedYear]);
+    if (searchTerm.trim()) {
+      searchHandouts();
+    } else {
+      fetchHandouts();
+    }
+  }, [selectedYear, searchTerm]);
 
   const fetchHandouts = async () => {
+    setLoading(true);
     try {
       const { data, error } = await supabase
         .from('handouts')
@@ -42,6 +50,31 @@ export const DispensenSection = () => {
 
       if (error) {
         console.error('Error fetching handouts:', error);
+        return;
+      }
+
+      setHandouts(data || []);
+      setIsSearching(false);
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const searchHandouts = async () => {
+    setLoading(true);
+    setIsSearching(true);
+    try {
+      const { data, error } = await supabase
+        .from('handouts')
+        .select('*')
+        .or(`subject.ilike.%${searchTerm}%,filename.ilike.%${searchTerm}%`)
+        .order('uploaded_at', { ascending: false })
+        .limit(20);
+
+      if (error) {
+        console.error('Error searching handouts:', error);
         return;
       }
 
@@ -78,26 +111,50 @@ export const DispensenSection = () => {
           </p>
         </motion.div>
 
-        {/* Year Selection */}
+        {/* Search Bar */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }} 
           viewport={{ once: true }} 
-          transition={{ duration: 0.6, delay: 0.2 }} 
-          className="mb-8 flex flex-wrap gap-4 items-center justify-center"
+          transition={{ duration: 0.6, delay: 0.3 }} 
+          className="mb-8 flex justify-center"
         >
-          {yearOptions.map(option => (
-            <Button 
-              key={option.key}
-              variant={selectedYear === option.key ? "default" : "outline"} 
-              size="lg"
-              onClick={() => setSelectedYear(option.key)}
-              className="min-w-[120px]"
-            >
-              {option.display}
-            </Button>
-          ))}
+          <div className="relative w-full max-w-md">
+            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Cerca per materia o nome file..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10"
+            />
+          </div>
         </motion.div>
+
+        {/* Year Selection */}
+        {!isSearching && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.6, delay: 0.4 }} 
+            className="mb-8 flex flex-wrap gap-4 items-center justify-center"
+          >
+            {yearOptions.map(option => (
+              <Button 
+                key={option.key}
+                variant={selectedYear === option.key ? "default" : "outline"} 
+                size="lg"
+                onClick={() => {
+                  setSelectedYear(option.key);
+                  setSearchTerm("");
+                }}
+                className="min-w-[120px]"
+              >
+                {option.display}
+              </Button>
+            ))}
+          </motion.div>
+        )}
 
         {loading ? (
           <div className="text-center py-12">
@@ -116,11 +173,16 @@ export const DispensenSection = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
                   <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <FileText className="h-8 w-8 text-primary mb-2" />
-                        <Badge variant="secondary">{selectedYearOption?.display}</Badge>
-                      </div>
+                     <CardHeader>
+                       <div className="flex items-start justify-between">
+                         <FileText className="h-8 w-8 text-primary mb-2" />
+                         <Badge variant="secondary">
+                           {isSearching 
+                             ? yearOptions.find(opt => opt.key === handout.year)?.display || handout.year
+                             : selectedYearOption?.display
+                           }
+                         </Badge>
+                       </div>
                       <CardTitle className="group-hover:text-primary transition-colors">
                         {handout.subject}
                       </CardTitle>
@@ -147,7 +209,7 @@ export const DispensenSection = () => {
             </div>
 
             {/* See More Button */}
-            {handouts.length > 0 && (
+            {handouts.length > 0 && !isSearching && (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
@@ -164,6 +226,27 @@ export const DispensenSection = () => {
               </motion.div>
             )}
 
+            {/* Search results count or see all dispense button for search */}
+            {isSearching && handouts.length > 0 && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }} 
+                transition={{ duration: 0.6 }} 
+                className="text-center"
+              >
+                <p className="text-muted-foreground mb-4">
+                  {handouts.length} risultat{handouts.length === 1 ? 'o' : 'i'} trovato per "{searchTerm}"
+                </p>
+                <Link to="/dispense">
+                  <Button size="lg" className="flex items-center gap-2">
+                    Vedi tutte le dispense
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </motion.div>
+            )}
+
             {handouts.length === 0 && (
               <motion.div 
                 initial={{ opacity: 0 }} 
@@ -173,7 +256,10 @@ export const DispensenSection = () => {
               >
                 <FileText className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
                 <p className="text-muted-foreground">
-                  Nessuna dispensa disponibile per {selectedYearOption?.display}.
+                  {isSearching 
+                    ? `Nessuna dispensa trovata per "${searchTerm}".`
+                    : `Nessuna dispensa disponibile per ${selectedYearOption?.display}.`
+                  }
                 </p>
               </motion.div>
             )}
