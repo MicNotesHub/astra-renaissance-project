@@ -47,8 +47,9 @@ export const CalcolatoriSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            🧮 Calcolatori Smart
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text flex items-center justify-center gap-3">
+            <Calculator className="h-12 w-12 text-primary" />
+            Calcolatori Smart
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Tool intelligenti per ottimizzare il tuo percorso universitario. Pianifica, calcola e raggiungi i tuoi obiettivi accademici.
