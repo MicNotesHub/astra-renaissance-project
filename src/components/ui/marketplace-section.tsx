@@ -64,7 +64,7 @@ export const MarketplaceSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            🛍️ ASTRA x UniMarket
+            🛍️ ASTRA x UniMarket©
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Il marketplace ufficiale per studenti Bocconi. Merchandising esclusivo e prodotti essenziali per la vita universitaria.
@@ -168,7 +168,7 @@ export const MarketplaceSection = () => {
                   size="lg" 
                   className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 text-lg px-8 py-4 mb-8 mx-auto"
                 >
-                  Visita UniMarket©
+                  Visita UniMarket
                   <ArrowRight className="h-6 w-6" />
                 </Button>
                 
