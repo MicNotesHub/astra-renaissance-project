@@ -54,7 +54,14 @@ export const MarketplaceSection = () => {
   ];
 
   return (
-    <section id="marketplace" className="py-20 bg-background">
+    <section
+  id="marketplace"
+  className="py-20"
+  style={{
+    background: "linear-gradient(135deg, #002F6C, #4D6D9A)",
+  }}
+>
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
