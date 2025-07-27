@@ -6,6 +6,7 @@ import { Play, Heart, Share2, MessageCircle, TrendingUp, Loader2 } from "lucide-
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import astraLogo from "@/assets/astra-logo.png";
 
 interface MediaContent {
   id: string;
