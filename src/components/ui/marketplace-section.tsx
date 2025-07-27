@@ -83,7 +83,8 @@ export const MarketplaceSection = () => {
             const IconComponent = feature.icon;
             return (
               <Card key={index} className="glass-card text-center p-6 hover:shadow-glow transition-all duration-300">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+
                   <IconComponent className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold mb-2">{feature.title}</h3>
