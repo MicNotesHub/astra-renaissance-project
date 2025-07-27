@@ -207,7 +207,7 @@ export const AstraPolareSection = () => {
                 <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden">
                   <div className="relative">
                     <img 
-                      src={item.thumbnail_url} 
+                      src={item.thumbnail_url || astraLogo} 
                       alt={item.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
