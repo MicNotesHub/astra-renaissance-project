@@ -160,22 +160,23 @@ export const MarketplaceSection = () => {
           <Card className="glass-card premium-shadow overflow-hidden">
             <div className="bg-gradient-hero p-8 md:p-12 text-white text-center">
               <div className="max-w-3xl mx-auto">
-                <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                <h3 className="text-3xl md:text-4xl font-bold mb-6">
                   Scopri il Marketplace Completo
                 </h3>
-                <p className="text-lg opacity-90 mb-8">
+                
+                <Button 
+                  size="lg" 
+                  className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 text-lg px-8 py-4 mb-8"
+                >
+                  Visita UniMarket
+                  <ArrowRight className="h-6 w-6" />
+                </Button>
+                
+                <p className="text-lg opacity-90 mb-6">
                   Oltre 200 prodotti esclusivi per studenti. Libri usati, merchandising ufficiale, gadget tech e molto altro.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-primary hover:bg-white/90 flex items-center gap-2"
-                  >
-                    Visita UniMarket
-                    <ArrowRight className="h-5 w-5" />
-                  </Button>
-                  
                   <div className="flex items-center gap-4 text-sm opacity-80">
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 fill-white" />
