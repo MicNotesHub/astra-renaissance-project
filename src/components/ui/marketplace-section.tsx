@@ -166,9 +166,9 @@ export const MarketplaceSection = () => {
                 
                 <Button 
                   size="lg" 
-                  className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 text-lg px-8 py-4 mb-8"
+                  className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 text-lg px-8 py-4 mb-8 mx-auto"
                 >
-                  Visita UniMarket
+                  Visita UniMarket©
                   <ArrowRight className="h-6 w-6" />
                 </Button>
                 
