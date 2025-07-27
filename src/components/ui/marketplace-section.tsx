@@ -82,7 +82,7 @@ export const MarketplaceSection = () => {
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <Card key={index} className="glass-card text-center p-6 hover:shadow-glow transition-all duration-300">
+              <Card key={index} className="bg-gradient-to-br from-[#4D6D9A] to-[#002F6C] text-white shadow-xl text-center p-6 hover:shadow-glow transition-all duration-300">
                 <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
 
                   <IconComponent className="h-6 w-6 text-primary" />
