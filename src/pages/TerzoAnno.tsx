@@ -1,16 +1,15 @@
-import { Navigation } from "@/components/ui/navigation";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, FileText } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, BookOpen } from 'lucide-react';
+import { Navigation } from '@/components/ui/navigation';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface HandoutFile {
   id: number;
   subject: string;
   filename: string;
+  year: string;
   file_url: string;
   uploaded_at: string;
 }
@@ -19,9 +18,10 @@ interface SubjectFiles {
   [subject: string]: HandoutFile[];
 }
 
-export const TerzoAnno = () => {
+export const TerzoAnno: React.FC = () => {
   const [files, setFiles] = useState<SubjectFiles>({});
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
   const fetchHandouts = async () => {
     try {
@@ -29,11 +29,16 @@ export const TerzoAnno = () => {
         .from('handouts')
         .select('*')
         .eq('year', 'Third Year')
-        .order('subject', { ascending: true });
+        .order('subject', { ascending: true })
+        .order('filename', { ascending: true });
 
       if (error) {
         console.error('Error fetching handouts:', error);
-        toast.error('Errore nel caricamento delle dispense');
+        toast({
+          title: "Errore",
+          description: "Impossibile caricare le dispense",
+          variant: "destructive",
+        });
         return;
       }
 
@@ -47,10 +52,13 @@ export const TerzoAnno = () => {
       });
 
       setFiles(groupedFiles);
-      toast.success('Dispense caricate con successo');
     } catch (error) {
       console.error('Error:', error);
-      toast.error('Errore nel caricamento delle dispense');
+      toast({
+        title: "Errore",
+        description: "Si è verificato un errore imprevisto",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -62,12 +70,12 @@ export const TerzoAnno = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen bg-background">
         <Navigation />
-        <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-lg text-gray-600">Caricamento...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Caricamento...</p>
           </div>
         </div>
       </div>
@@ -77,60 +85,64 @@ export const TerzoAnno = () => {
   const subjects = Object.keys(files);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <Link to="/dispense">
-            <Button variant="ghost" className="mb-4">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Torna alle Dispense
-            </Button>
+      <div className="container mx-auto px-4 py-8 pt-24">
+        <div className="flex items-center gap-4 mb-8">
+          <Link
+            to="/dispense"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            onClick={() => {
+              console.log('Back button clicked - navigating to /dispense');
+            }}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Torna alle Dispense
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Terzo Anno</h1>
-          <p className="text-lg text-gray-600">
-            Trova tutte le dispense e i materiali di studio per il terzo anno
+        </div>
+
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">Terzo Anno</h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Accedi alle dispense e materiali didattici per i corsi del terzo anno
           </p>
         </div>
 
         {subjects.length === 0 ? (
-          <Card className="text-center py-12">
-            <CardContent>
-              <FileText className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                Nessuna dispensa trovata
-              </h3>
-              <p className="text-gray-600">
-                Non ci sono ancora dispense disponibili per il terzo anno.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="text-center py-12">
+            <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Nessun corso trovato</h3>
+            <p className="text-muted-foreground">
+              Non sono ancora disponibili dispense per il terzo anno.
+            </p>
+          </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {subjects.map((subject) => (
-              <Link 
+              <Link
                 key={subject}
                 to={`/dispense/terzo-anno/${encodeURIComponent(subject)}`}
+                className="group block"
               >
-                <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer group">
-                  <CardHeader>
-                    <CardTitle className="group-hover:text-blue-600 transition-colors">
-                      {subject}
-                    </CardTitle>
-                    <CardDescription>
-                      {files[subject].length} file{files[subject].length !== 1 ? '' : ''} disponibili
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">
-                        Materiali di studio
-                      </span>
-                      <FileText className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                <div className="bg-card border rounded-lg p-6 h-full transition-all duration-200 hover:shadow-lg hover:border-primary/50 group-hover:scale-[1.02]">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="bg-primary/10 p-3 rounded-lg">
+                      <BookOpen className="h-6 w-6 text-primary" />
                     </div>
-                  </CardContent>
-                </Card>
+                    <span className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded">
+                      {files[subject].length} file{files[subject].length !== 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                    {subject}
+                  </h3>
+                  
+                  <p className="text-sm text-muted-foreground">
+                    Visualizza le dispense disponibili per questo corso
+                  </p>
+                </div>
               </Link>
             ))}
           </div>

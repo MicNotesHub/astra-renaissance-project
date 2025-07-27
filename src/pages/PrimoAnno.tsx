@@ -1,11 +1,9 @@
-import { Navigation } from "@/components/ui/navigation";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FolderOpen, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, BookOpen } from 'lucide-react';
+import { Navigation } from '@/components/ui/navigation';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface HandoutFile {
   id: number;
@@ -17,145 +15,139 @@ interface HandoutFile {
 }
 
 interface SubjectFiles {
-  [course: string]: HandoutFile[];
+  [subject: string]: HandoutFile[];
 }
 
-const PrimoAnno = () => {
+export const PrimoAnno: React.FC = () => {
   const [files, setFiles] = useState<SubjectFiles>({});
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  useEffect(() => {
-    fetchHandouts();
-  }, []);
-
   const fetchHandouts = async () => {
     try {
       const { data, error } = await supabase
-        .from('handouts' as any)
+        .from('handouts')
         .select('*')
         .eq('year', 'First Year')
-        .order('subject', { ascending: true });
+        .order('subject', { ascending: true })
+        .order('filename', { ascending: true });
 
       if (error) {
         console.error('Error fetching handouts:', error);
         toast({
           title: "Errore",
           description: "Impossibile caricare le dispense",
-          variant: "destructive"
+          variant: "destructive",
         });
         return;
       }
 
-      // Group files by subject (course)
+      // Group files by subject
       const groupedFiles: SubjectFiles = {};
-      
-      if (data) {
-        (data as any[]).forEach((handout: any) => {
-          const course = handout.subject || 'Generale';
-          
-          if (!groupedFiles[course]) {
-            groupedFiles[course] = [];
-          }
-          
-          groupedFiles[course].push({
-            id: handout.id,
-            subject: handout.subject,
-            filename: handout.filename,
-            year: handout.year,
-            file_url: handout.file_url,
-            uploaded_at: handout.uploaded_at
-          });
-        });
-      }
+      data?.forEach((file) => {
+        if (!groupedFiles[file.subject]) {
+          groupedFiles[file.subject] = [];
+        }
+        groupedFiles[file.subject].push(file);
+      });
 
       setFiles(groupedFiles);
     } catch (error) {
       console.error('Error:', error);
       toast({
         title: "Errore",
-        description: "Errore nel caricamento delle dispense",
-        variant: "destructive"
+        description: "Si è verificato un errore imprevisto",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    fetchHandouts();
+  }, []);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
+      <div className="min-h-screen bg-background">
         <Navigation />
-        <div className="pt-24 pb-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <p className="text-lg">Caricamento dispense...</p>
-            </div>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Caricamento...</p>
           </div>
         </div>
       </div>
     );
   }
 
+  const subjects = Object.keys(files);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
+    <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="pt-24 pb-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center mb-6">
-              <Link to="/dispense" className="mr-6">
-                <Button variant="outline" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Torna alle Dispense
-                </Button>
-              </Link>
-            </div>
-            <h1 className="text-4xl font-bold text-foreground mb-4">
-              Corsi Primo Anno
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Seleziona un corso per accedere alle dispense
+      <div className="container mx-auto px-4 py-8 pt-24">
+        <div className="flex items-center gap-4 mb-8">
+          <Link
+            to="/dispense"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            onClick={() => {
+              console.log('Back button clicked - navigating to /dispense');
+            }}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Torna alle Dispense
+          </Link>
+        </div>
+
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">Primo Anno</h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Accedi alle dispense e materiali didattici per i corsi del primo anno
+          </p>
+        </div>
+
+        {subjects.length === 0 ? (
+          <div className="text-center py-12">
+            <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Nessun corso trovato</h3>
+            <p className="text-muted-foreground">
+              Non sono ancora disponibili dispense per il primo anno.
             </p>
           </div>
-
-          {/* Courses Grid */}
-          {Object.keys(files).length === 0 ? (
-            <div className="text-center py-12">
-              <FolderOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-xl font-semibold mb-2">Nessun corso trovato</h3>
-              <p className="text-muted-foreground">
-                I corsi per il primo anno non sono ancora disponibili.
-              </p>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Object.entries(files).map(([course, courseFiles]) => (
-                <Link key={course} to={`/dispense/primo-anno/${encodeURIComponent(course)}`}>
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <CardContent className="p-6 text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <FolderOpen className="w-8 h-8 text-primary" />
-                      </div>
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                        {course}
-                      </h3>
-                      <p className="text-muted-foreground text-sm">
-                        {courseFiles.length} dispense disponibili
-                      </p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {subjects.map((subject) => (
+              <Link
+                key={subject}
+                to={`/dispense/primo-anno/${encodeURIComponent(subject)}`}
+                className="group block"
+              >
+                <div className="bg-card border rounded-lg p-6 h-full transition-all duration-200 hover:shadow-lg hover:border-primary/50 group-hover:scale-[1.02]">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="bg-primary/10 p-3 rounded-lg">
+                      <BookOpen className="h-6 w-6 text-primary" />
+                    </div>
+                    <span className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded">
+                      {files[subject].length} file{files[subject].length !== 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                    {subject}
+                  </h3>
+                  
+                  <p className="text-sm text-muted-foreground">
+                    Visualizza le dispense disponibili per questo corso
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
-export default PrimoAnno;

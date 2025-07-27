@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Dispense from "./pages/Dispense";
-import PrimoAnno from "./pages/PrimoAnno";
+import { PrimoAnno } from "./pages/PrimoAnno";
 import { SecondoAnno } from "./pages/SecondoAnno";
 import { TerzoAnno } from "./pages/TerzoAnno";
 import CourseHandouts from "./pages/CourseHandouts";
