@@ -27,9 +27,21 @@ const CourseHandouts = () => {
   
   // Determine the year and back link based on the current path
   const isSecondYear = location.pathname.includes('/secondo-anno');
-  const yearFilter = isSecondYear ? 'Second Year' : 'First Year';
-  const backLink = isSecondYear ? '/dispense/secondo-anno' : '/dispense/primo-anno';
-  const backText = isSecondYear ? 'Torna al Secondo Anno' : 'Torna al Primo Anno';
+  const isThirdYear = location.pathname.includes('/terzo-anno');
+  
+  let yearFilter = 'First Year';
+  let backLink = '/dispense/primo-anno';
+  let backText = 'Torna al Primo Anno';
+  
+  if (isSecondYear) {
+    yearFilter = 'Second Year';
+    backLink = '/dispense/secondo-anno';
+    backText = 'Torna al Secondo Anno';
+  } else if (isThirdYear) {
+    yearFilter = 'Third Year';
+    backLink = '/dispense/terzo-anno';
+    backText = 'Torna al Terzo Anno';
+  }
 
   useEffect(() => {
     if (decodedCourseName) {
