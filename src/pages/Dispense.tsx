@@ -68,18 +68,20 @@ const Dispense = () => {
             </Card>
 
             {/* Third Year Card */}
-            <Card className="group opacity-50 cursor-not-allowed">
+            <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
               <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 bg-muted/10 rounded-full flex items-center justify-center">
-                  <FileText className="w-8 h-8 text-muted-foreground" />
+                <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <FileText className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4 text-muted-foreground">Terzo Anno</h3>
+                <h3 className="text-xl font-semibold mb-4">Terzo Anno</h3>
                 <p className="text-muted-foreground mb-6">
-                  Prossimamente disponibile
+                  Materiali per i corsi del terzo anno
                 </p>
-                <Button disabled className="w-full">
-                  Non Disponibile
-                </Button>
+                <Link to="/dispense/terzo-anno">
+                  <Button className="w-full">
+                    Accedi alle Dispense
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
