@@ -39,6 +39,7 @@ interface Destination {
   'ADDITIONAL ACADEMIC REQUIREMENTS': string;
   'ADDITIONAL LANGUAGE REQUIREMENT': string;
   NOTES: string;
+  'RESERVED/NOT AVAILABLE': string;
 }
 
 interface ExamGrade {
@@ -99,45 +100,23 @@ const ExchangeCalculator = () => {
       const uniqueCourses = [...new Set(coursesData?.map(item => item.course) || [])];
       setCourses(uniqueCourses);
 
-      // Mock data per ora finché non risolviamo l'accesso alle tabelle
-      const mockMultipliers = [
-        { id: 1, course: 'Management', 'GPA mult.': 1.07, 'NC mult': 0.83 },
-        { id: 2, course: 'International Management', 'GPA mult.': 0.97, 'NC mult': 0.96 },
-        { id: 3, course: 'Marketing Management', 'GPA mult.': 1.05, 'NC mult': 0.88 },
-        { id: 4, course: 'AFC', 'GPA mult.': 1.46, 'NC mult': -0.02 },
-        { id: 5, course: 'FIN', 'GPA mult.': 0.64, 'NC mult': 1.82 }
-      ];
-      setMultipliers(mockMultipliers);
+      // Fetch multipliers
+      const { data: multipliersData, error: multipliersError } = await supabase
+        .from('course multipliers estimation' as any)
+        .select('*')
+        .order('course');
+      
+      if (multipliersError) throw multipliersError;
+      setMultipliers(multipliersData as any || []);
 
-      const mockDestinations = [
-        {
-          ID: 1,
-          University: '2168 - Central European University, Graduate programs',
-          Continent: 'Europe',
-          'SLOTS 2024/25': 3,
-          'Highest Score': '933.042',
-          'Lowest Score': '880.926',
-          'OF WHICH': 'DSBA(1)',
-          Rankings: '',
-          'ADDITIONAL ACADEMIC REQUIREMENTS': '',
-          'ADDITIONAL LANGUAGE REQUIREMENT': '',
-          NOTES: ''
-        },
-        {
-          ID: 2,
-          University: '823 - WU - Wirtschaftsuniversität Wien',
-          Continent: 'Europe',
-          'SLOTS 2024/25': 4,
-          'Highest Score': '970.774',
-          'Lowest Score': '927.913',
-          'OF WHICH': 'IM(2), CLELI(1)',
-          Rankings: '',
-          'ADDITIONAL ACADEMIC REQUIREMENTS': '',
-          'ADDITIONAL LANGUAGE REQUIREMENT': '',
-          NOTES: ''
-        }
-      ];
-      setDestinations(mockDestinations);
+      // Fetch destinations
+      const { data: destinationsData, error: destinationsError } = await supabase
+        .from('dest_exc_msc' as any)
+        .select('*')
+        .order('University');
+      
+      if (destinationsError) throw destinationsError;
+      setDestinations(destinationsData as any || []);
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -269,9 +248,9 @@ const ExchangeCalculator = () => {
       return acc;
     }, {} as Record<string, any[]>);
 
-    // Sort destinations within each continent by acceptance rate
+    // Sort destinations within each continent by delta ascending (most accessible first)
     Object.keys(grouped).forEach(continent => {
-      grouped[continent].sort((a, b) => b.acceptanceRate - a.acceptanceRate);
+      grouped[continent].sort((a, b) => b.delta - a.delta);
     });
 
     return grouped;
@@ -471,51 +450,55 @@ const ExchangeCalculator = () => {
                             </Button>
                           </div>
 
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                            <div>
-                              <p className="font-medium">Posti Disponibili</p>
-                              <p>{dest['SLOTS 2024/25'] || 'N/A'}</p>
-                            </div>
-                            <div>
-                              <p className="font-medium">Punteggio Minimo</p>
-                              <p>{dest.minScore}</p>
-                            </div>
-                            <div>
-                              <p className="font-medium">Delta</p>
-                              <p className={dest.delta >= 0 ? 'text-green-600' : 'text-red-600'}>
-                                {dest.delta > 0 ? '+' : ''}{dest.delta}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="font-medium">Acceptance Rate</p>
-                              <Badge variant={dest.acceptanceRate > 50 ? "default" : dest.acceptanceRate > 20 ? "secondary" : "destructive"}>
-                                {Math.round(dest.acceptanceRate)}%
-                              </Badge>
-                            </div>
-                          </div>
+                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                             <div>
+                               <p className="font-medium text-muted-foreground">Posti Disponibili</p>
+                               <p className="font-semibold">{dest['SLOTS 2024/25'] || 'N/A'}</p>
+                             </div>
+                             <div>
+                               <p className="font-medium text-muted-foreground">Punteggio Minimo</p>
+                               <p className="font-semibold">{dest.minScore}</p>
+                               <p className="text-xs text-muted-foreground">Max: {dest.maxScore}</p>
+                             </div>
+                             <div>
+                               <p className="font-medium text-muted-foreground">Delta</p>
+                               <p className={`font-bold text-lg ${dest.delta >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                 {dest.delta > 0 ? '+' : ''}{Math.round(dest.delta)}
+                               </p>
+                             </div>
+                             <div>
+                               <p className="font-medium text-muted-foreground">Accessibilità</p>
+                               <Badge variant={dest.delta >= 0 ? "default" : dest.delta >= -50 ? "secondary" : "destructive"}>
+                                 {dest.delta >= 0 ? "Accessibile" : dest.delta >= -50 ? "Difficile" : "Molto Difficile"}
+                               </Badge>
+                             </div>
+                           </div>
 
-                          {(dest['ADDITIONAL ACADEMIC REQUIREMENTS'] || dest['ADDITIONAL LANGUAGE REQUIREMENT'] || dest.NOTES) && (
-                            <div className="text-xs text-muted-foreground space-y-1">
-                              {dest['ADDITIONAL ACADEMIC REQUIREMENTS'] && (
-                                <div className="flex items-center gap-1">
-                                  <AlertCircle className="h-3 w-3" />
-                                  <span>Requisiti: {dest['ADDITIONAL ACADEMIC REQUIREMENTS']}</span>
-                                </div>
-                              )}
-                              {dest['ADDITIONAL LANGUAGE REQUIREMENT'] && (
-                                <div className="flex items-center gap-1">
-                                  <AlertCircle className="h-3 w-3" />
-                                  <span>Lingue: {dest['ADDITIONAL LANGUAGE REQUIREMENT']}</span>
-                                </div>
-                              )}
-                              {dest.NOTES && (
-                                <div className="flex items-center gap-1">
-                                  <AlertCircle className="h-3 w-3" />
-                                  <span>Note: {dest.NOTES}</span>
-                                </div>
-                              )}
-                            </div>
-                          )}
+                           {(dest['ADDITIONAL ACADEMIC REQUIREMENTS'] || dest['ADDITIONAL LANGUAGE REQUIREMENT'] || dest.NOTES) && (
+                             <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 space-y-2">
+                               <div className="flex items-center gap-2 text-amber-800 font-medium text-sm">
+                                 <AlertCircle className="h-4 w-4" />
+                                 <span>Requisiti Aggiuntivi</span>
+                               </div>
+                               <div className="space-y-1 text-sm text-amber-700">
+                                 {dest['ADDITIONAL ACADEMIC REQUIREMENTS'] && (
+                                   <div>
+                                     <span className="font-medium">Requisiti Accademici:</span> {dest['ADDITIONAL ACADEMIC REQUIREMENTS']}
+                                   </div>
+                                 )}
+                                 {dest['ADDITIONAL LANGUAGE REQUIREMENT'] && (
+                                   <div>
+                                     <span className="font-medium">Requisiti Linguistici:</span> {dest['ADDITIONAL LANGUAGE REQUIREMENT']}
+                                   </div>
+                                 )}
+                                 {dest.NOTES && (
+                                   <div>
+                                     <span className="font-medium">Note:</span> {dest.NOTES}
+                                   </div>
+                                 )}
+                               </div>
+                             </div>
+                           )}
                         </div>
                       ))}
                     </div>
