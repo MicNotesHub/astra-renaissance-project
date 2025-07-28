@@ -73,6 +73,7 @@ const ExchangeCalculator = () => {
   });
   const [exchangeScore, setExchangeScore] = useState<number | null>(null);
   const [favoriteDestinations, setFavoriteDestinations] = useState<number[]>([]);
+  const [selectedContinent, setSelectedContinent] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -422,17 +423,31 @@ const ExchangeCalculator = () => {
                 </CardContent>
               </Card>
 
-              {Object.entries(destinationsByContinent).map(([continent, destinations]) => (
-                <Card key={continent}>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <MapPin className="h-5 w-5" />
-                      {continent}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPin className="h-5 w-5" />
+                    Destinazioni Exchange
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="continent">Seleziona Continente</Label>
+                    <Select value={selectedContinent} onValueChange={setSelectedContinent}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Scegli un continente" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.keys(destinationsByContinent).map(continent => (
+                          <SelectItem key={continent} value={continent}>{continent}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {selectedContinent && destinationsByContinent[selectedContinent] && (
                     <div className="grid gap-4">
-                      {destinations.slice(0, 10).map((dest: any) => (
+                      {destinationsByContinent[selectedContinent].map((dest: any) => (
                         <div key={dest.ID} className="border rounded-lg p-4 space-y-3">
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
@@ -473,13 +488,12 @@ const ExchangeCalculator = () => {
                                </Badge>
                              </div>
                            </div>
-
                         </div>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  )}
+                </CardContent>
+              </Card>
             </>
           )}
         </TabsContent>
