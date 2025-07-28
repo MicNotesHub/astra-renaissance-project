@@ -474,31 +474,6 @@ const ExchangeCalculator = () => {
                              </div>
                            </div>
 
-                           {(dest['ADDITIONAL ACADEMIC REQUIREMENTS'] || dest['ADDITIONAL LANGUAGE REQUIREMENT'] || dest.NOTES) && (
-                             <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 space-y-2">
-                               <div className="flex items-center gap-2 text-amber-800 font-medium text-sm">
-                                 <AlertCircle className="h-4 w-4" />
-                                 <span>Requisiti Aggiuntivi</span>
-                               </div>
-                               <div className="space-y-1 text-sm text-amber-700">
-                                 {dest['ADDITIONAL ACADEMIC REQUIREMENTS'] && (
-                                   <div>
-                                     <span className="font-medium">Requisiti Accademici:</span> {dest['ADDITIONAL ACADEMIC REQUIREMENTS']}
-                                   </div>
-                                 )}
-                                 {dest['ADDITIONAL LANGUAGE REQUIREMENT'] && (
-                                   <div>
-                                     <span className="font-medium">Requisiti Linguistici:</span> {dest['ADDITIONAL LANGUAGE REQUIREMENT']}
-                                   </div>
-                                 )}
-                                 {dest.NOTES && (
-                                   <div>
-                                     <span className="font-medium">Note:</span> {dest.NOTES}
-                                   </div>
-                                 )}
-                               </div>
-                             </div>
-                           )}
                         </div>
                       ))}
                     </div>
