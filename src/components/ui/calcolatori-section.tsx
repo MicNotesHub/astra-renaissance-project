@@ -2,21 +2,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp, MapPin, Calendar, Brain, Target, GraduationCap } from "lucide-react";
+import { Calculator, TrendingUp, GraduationCap } from "lucide-react";
 import { CalculatorModal } from "../calculators/calculator-modal";
 
 export const CalcolatoriSection = () => {
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
   const calcolatori = [
-    {
-      id: "exchange",
-      title: "Exchange Planner",
-      description: "Progetta il tuo semestre all'estero e calcola i crediti",
-      icon: MapPin,
-      color: "text-green-500",
-      bgColor: "bg-green-50 dark:bg-green-950/30", 
-      features: ["Equivalenze esami", "Costi stimati", "Università partner"]
-    },
     {
       id: "graduation",
       title: "GPA & Graduation Score",
@@ -34,15 +25,6 @@ export const CalcolatoriSection = () => {
       color: "text-purple-500",
       bgColor: "bg-purple-50 dark:bg-purple-950/30",
       features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
-    },
-    {
-      id: "simulator",
-      title: "Simulatore Voti",
-      description: "Simula diversi scenari per raggiungere i tuoi obiettivi",
-      icon: Target,
-      color: "text-orange-500",
-      bgColor: "bg-orange-50 dark:bg-orange-950/30",
-      features: ["Voti necessari", "Scenari multipli", "Goal tracking"]
     }
   ];
 

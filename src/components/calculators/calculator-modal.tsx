@@ -1,6 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ExchangePlanner } from "./exchange-planner";
 import { GraduationGradeCalculator } from "./graduation-grade-calculator";
 import ExchangeCalculator from "./exchange-calculator";
 import { X } from "lucide-react";
@@ -14,8 +13,6 @@ interface CalculatorModalProps {
 export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorModalProps) {
   const getCalculatorComponent = () => {
     switch (calculatorType) {
-      case 'exchange':
-        return <ExchangePlanner />;
       case 'graduation':
         return <GraduationGradeCalculator />;
       case 'exchange-calculator':
@@ -34,8 +31,6 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
 
   const getTitle = () => {
     switch (calculatorType) {
-      case 'exchange':
-        return 'Exchange Planner';
       case 'graduation':
         return 'Undergraduate Graduation Grade Calculator';
       case 'exchange-calculator':
