@@ -27,6 +27,12 @@ interface Multiplier {
   'NC mult': number;
 }
 
+interface NCMax {
+  id: number;
+  course: string;
+  NC_MAX: number;
+}
+
 interface Destination {
   ID: number;
   University: string;
@@ -34,12 +40,9 @@ interface Destination {
   'SLOTS 2024/25': number;
   'Highest Score': string;
   'Lowest Score': string;
-  'OF WHICH': string;
-  Rankings: string;
   'ADDITIONAL ACADEMIC REQUIREMENTS': string;
   'ADDITIONAL LANGUAGE REQUIREMENT': string;
   NOTES: string;
-  'RESERVED/NOT AVAILABLE': string;
 }
 
 interface ExamGrade {
@@ -52,11 +55,9 @@ interface CalculatorInputs {
   course: string;
   bachelorGrade: number;
   exams: ExamGrade[];
-  useEstimation: boolean;
-  manualWA?: number;
-  manualNC?: number;
-  manualWAMultiplier?: number;
-  manualNCMultiplier?: number;
+  useEstimatedValues: boolean;
+  waMultiplier?: number;
+  cfuMultiplier?: number;
 }
 
 const ExchangeCalculator = () => {
@@ -64,12 +65,13 @@ const ExchangeCalculator = () => {
   const [courses, setCourses] = useState<string[]>([]);
   const [courseSubjects, setCourseSubjects] = useState<Course[]>([]);
   const [multipliers, setMultipliers] = useState<Multiplier[]>([]);
+  const [ncMaxData, setNCMaxData] = useState<NCMax[]>([]);
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [inputs, setInputs] = useState<CalculatorInputs>({
     course: '',
     bachelorGrade: 110,
     exams: [],
-    useEstimation: true
+    useEstimatedValues: true
   });
   const [exchangeScore, setExchangeScore] = useState<number | null>(null);
   const [favoriteDestinations, setFavoriteDestinations] = useState<number[]>([]);
@@ -110,6 +112,15 @@ const ExchangeCalculator = () => {
       if (multipliersError) throw multipliersError;
       setMultipliers(multipliersData as any || []);
 
+      // Fetch NC_max data
+      const { data: ncMaxData, error: ncMaxError } = await supabase
+        .from('NC_max' as any)
+        .select('*')
+        .order('course');
+      
+      if (ncMaxError) throw ncMaxError;
+      setNCMaxData(ncMaxData as any || []);
+
       // Fetch destinations
       const { data: destinationsData, error: destinationsError } = await supabase
         .from('dest_exc_msc' as any)
@@ -145,7 +156,7 @@ const ExchangeCalculator = () => {
       // Initialize exams array with course subjects
       const initialExams = (data || []).map(subject => ({
         subject: subject.subject,
-        grade: 30,
+        grade: 0, // Start with 0 to calculate NC Achieved correctly
         cfu: subject.cfu
       }));
       
@@ -171,37 +182,59 @@ const ExchangeCalculator = () => {
       return;
     }
 
+    // Validate manual multipliers if not using estimated values
+    if (!inputs.useEstimatedValues && (!inputs.waMultiplier || !inputs.cfuMultiplier)) {
+      toast({
+        title: "Dati mancanti",
+        description: "Inserisci i moltiplicatori WA e CFU",
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
-      // Calculate student's WA (Weighted Average)
-      const totalCredits = inputs.exams.reduce((sum, exam) => sum + exam.cfu, 0);
-      const weightedSum = inputs.exams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
-      const studentWA = weightedSum / totalCredits;
+      // Calculate student's WA (Weighted Average) - only for exams with grade > 0
+      const passedExams = inputs.exams.filter(exam => exam.grade > 0);
+      const totalCredits = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
+      const weightedSum = passedExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
+      const studentWA = totalCredits > 0 ? weightedSum / totalCredits : 0;
 
-      // Calculate student's NC (Number of Credits)
-      const studentNC = totalCredits;
+      // Calculate NC Achieved (sum of CFU with grade > 0)
+      const ncAchieved = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
 
-      // Get multipliers for the course
-      const courseMultiplier = multipliers.find(m => m.course === inputs.course);
+      // Get Max NC for the course
+      const maxNCData = ncMaxData.find(nc => nc.course === inputs.course);
+      const maxNC = maxNCData?.NC_MAX || courseSubjects.reduce((sum, subject) => sum + subject.cfu, 0);
+
+      // Get multipliers
+      let waMultiplier, cfuMultiplier;
       
-      let waMultiplier, ncMultiplier;
-      
-      if (inputs.useEstimation && courseMultiplier) {
-        waMultiplier = courseMultiplier['GPA mult.'];
-        ncMultiplier = courseMultiplier['NC mult'];
+      if (inputs.useEstimatedValues) {
+        const courseMultiplier = multipliers.find(m => m.course === inputs.course);
+        waMultiplier = courseMultiplier?.['GPA mult.'] || 1;
+        cfuMultiplier = courseMultiplier?.['NC mult'] || 1;
       } else {
-        waMultiplier = inputs.manualWAMultiplier || 1;
-        ncMultiplier = inputs.manualNCMultiplier || 1;
+        waMultiplier = inputs.waMultiplier || 1;
+        cfuMultiplier = inputs.cfuMultiplier || 1;
       }
 
-      // Calculate max NC for the course
-      const maxNC = courseSubjects.reduce((sum, subject) => sum + subject.cfu, 0);
-
-      // Apply the formula
-      const waComponent = ((studentWA * waMultiplier) / 31) * 0.5;
-      const ncComponent = ((studentNC * ncMultiplier) / maxNC) * 0.2;
-      const bachelorComponent = (inputs.bachelorGrade / 111) * 0.3;
-      
-      const score = (waComponent + ncComponent + bachelorComponent) * 1000;
+      // Apply the formula based on whether using estimated values or not
+      let score;
+      if (inputs.useEstimatedValues) {
+        // Formula with estimated values
+        score = (
+          ((studentWA * waMultiplier) / 31) * 0.5 +
+          ((ncAchieved * cfuMultiplier) / maxNC) * 0.2 +
+          (inputs.bachelorGrade / 111) * 0.3
+        ) * 1000;
+      } else {
+        // Formula without estimated values
+        score = (
+          ((studentWA * waMultiplier) / 31) * 0.5 +
+          ((ncAchieved * cfuMultiplier) / maxNC) * 0.2 +
+          (inputs.bachelorGrade / 111) * 0.3
+        ) * 1000;
+      }
       
       setExchangeScore(Math.round(score));
       
@@ -236,22 +269,20 @@ const ExchangeCalculator = () => {
       const minScore = parseFloat(dest['Lowest Score']?.replace(',', '.') || '0');
       const maxScore = parseFloat(dest['Highest Score']?.replace(',', '.') || '0');
       const delta = exchangeScore - minScore;
-      const acceptanceRate = minScore > 0 ? Math.min(100, Math.max(0, (delta / minScore) * 100)) : 0;
       
       acc[continent].push({
         ...dest,
         minScore,
         maxScore,
-        delta,
-        acceptanceRate
+        delta
       });
       
       return acc;
     }, {} as Record<string, any[]>);
 
-    // Sort destinations within each continent by delta ascending (most accessible first)
+    // Sort destinations within each continent by delta ascending (smallest delta first)
     Object.keys(grouped).forEach(continent => {
-      grouped[continent].sort((a, b) => b.delta - a.delta);
+      grouped[continent].sort((a, b) => a.delta - b.delta);
     });
 
     return grouped;
@@ -327,34 +358,38 @@ const ExchangeCalculator = () => {
 
               <div className="flex items-center space-x-2">
                 <Switch
-                  id="useEstimation"
-                  checked={inputs.useEstimation}
-                  onCheckedChange={(checked) => setInputs(prev => ({ ...prev, useEstimation: checked }))}
+                  id="useEstimatedValues"
+                  checked={inputs.useEstimatedValues}
+                  onCheckedChange={(checked) => setInputs(prev => ({ ...prev, useEstimatedValues: checked }))}
                 />
-                <Label htmlFor="useEstimation">Usa i valori stimati (raccomandato)</Label>
+                <Label htmlFor="useEstimatedValues">Usa valori stimati (raccomandato)</Label>
               </div>
 
-              {!inputs.useEstimation && (
+              {!inputs.useEstimatedValues && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-muted rounded-lg">
                   <div className="space-y-2">
-                    <Label htmlFor="manualWAMultiplier">Moltiplicatore WA</Label>
+                    <Label htmlFor="waMultiplier">WA Multiplier</Label>
                     <Input
-                      id="manualWAMultiplier"
+                      id="waMultiplier"
                       type="number"
                       step="0.01"
-                      value={inputs.manualWAMultiplier || ''}
-                      onChange={(e) => setInputs(prev => ({ ...prev, manualWAMultiplier: parseFloat(e.target.value) }))}
+                      placeholder="es. 1.0"
+                      value={inputs.waMultiplier || ''}
+                      onChange={(e) => setInputs(prev => ({ ...prev, waMultiplier: parseFloat(e.target.value) }))}
                     />
+                    <p className="text-xs text-muted-foreground">{'>'} 1 = corso difficile, {'<'} 1 = corso facile</p>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="manualNCMultiplier">Moltiplicatore NC</Label>
+                    <Label htmlFor="cfuMultiplier">CFU Multiplier</Label>
                     <Input
-                      id="manualNCMultiplier"
+                      id="cfuMultiplier"
                       type="number"
                       step="0.01"
-                      value={inputs.manualNCMultiplier || ''}
-                      onChange={(e) => setInputs(prev => ({ ...prev, manualNCMultiplier: parseFloat(e.target.value) }))}
+                      placeholder="es. 1.0"
+                      value={inputs.cfuMultiplier || ''}
+                      onChange={(e) => setInputs(prev => ({ ...prev, cfuMultiplier: parseFloat(e.target.value) }))}
                     />
+                    <p className="text-xs text-muted-foreground">{'>'} 1 = corso difficile, {'<'} 1 = corso facile</p>
                   </div>
                 </div>
               )}
@@ -365,6 +400,7 @@ const ExchangeCalculator = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Voti degli Esami</CardTitle>
+                <p className="text-sm text-muted-foreground">Inserisci 0 per gli esami non ancora sostenuti</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4">
@@ -379,16 +415,20 @@ const ExchangeCalculator = () => {
                         <Input
                           id={`grade-${index}`}
                           type="number"
-                          min="18"
+                          min="0"
                           max="31"
                           value={exam.grade}
-                          onChange={(e) => updateExamGrade(index, parseInt(e.target.value))}
+                          onChange={(e) => updateExamGrade(index, parseInt(e.target.value) || 0)}
                         />
                       </div>
                       <div className="text-center">
-                        <Badge variant={exam.grade >= 27 ? "default" : exam.grade >= 24 ? "secondary" : "destructive"}>
-                          {exam.grade >= 27 ? "Ottimo" : exam.grade >= 24 ? "Buono" : "Sufficiente"}
-                        </Badge>
+                        {exam.grade === 0 ? (
+                          <Badge variant="outline">Non sostenuto</Badge>
+                        ) : (
+                          <Badge variant={exam.grade >= 27 ? "default" : exam.grade >= 24 ? "secondary" : "destructive"}>
+                            {exam.grade >= 27 ? "Ottimo" : exam.grade >= 24 ? "Buono" : "Sufficiente"}
+                          </Badge>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -452,9 +492,7 @@ const ExchangeCalculator = () => {
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <h3 className="font-semibold">{dest.University}</h3>
-                              {dest.Rankings && (
-                                <p className="text-sm text-muted-foreground">{dest.Rankings}</p>
-                              )}
+                              <p className="text-sm text-muted-foreground">{dest.Continent}</p>
                             </div>
                             <Button
                               variant="ghost"
@@ -465,29 +503,46 @@ const ExchangeCalculator = () => {
                             </Button>
                           </div>
 
-                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                             <div>
-                               <p className="font-medium text-muted-foreground">Posti Disponibili</p>
-                               <p className="font-semibold">{dest['SLOTS 2024/25'] || 'N/A'}</p>
-                             </div>
-                             <div>
-                               <p className="font-medium text-muted-foreground">Punteggio Minimo</p>
-                               <p className="font-semibold">{dest.minScore}</p>
-                               <p className="text-xs text-muted-foreground">Max: {dest.maxScore}</p>
-                             </div>
-                             <div>
-                               <p className="font-medium text-muted-foreground">Delta</p>
-                               <p className={`font-bold text-lg ${dest.delta >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                 {dest.delta > 0 ? '+' : ''}{Math.round(dest.delta)}
-                               </p>
-                             </div>
-                             <div>
-                               <p className="font-medium text-muted-foreground">Accessibilità</p>
-                               <Badge variant={dest.delta >= 0 ? "default" : dest.delta >= -50 ? "secondary" : "destructive"}>
-                                 {dest.delta >= 0 ? "Accessibile" : dest.delta >= -50 ? "Difficile" : "Molto Difficile"}
-                               </Badge>
-                             </div>
-                           </div>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div>
+                              <p className="font-medium text-muted-foreground">Posti Disponibili</p>
+                              <p className="font-semibold">{dest['SLOTS 2024/25'] || 'N/A'}</p>
+                            </div>
+                            <div>
+                              <p className="font-medium text-muted-foreground">Punteggio Min/Max</p>
+                              <p className="font-semibold">{dest.minScore}</p>
+                              <p className="text-xs text-muted-foreground">Max: {dest.maxScore}</p>
+                            </div>
+                            <div>
+                              <p className="font-medium text-muted-foreground">Delta</p>
+                              <p className={`font-bold text-lg ${dest.delta >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                {dest.delta > 0 ? '+' : ''}{Math.round(dest.delta)}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="font-medium text-muted-foreground">Accessibilità</p>
+                              <Badge variant={dest.delta >= 0 ? "default" : dest.delta >= -50 ? "secondary" : "destructive"}>
+                                {dest.delta >= 0 ? "Accessibile" : dest.delta >= -50 ? "Difficile" : "Molto Difficile"}
+                              </Badge>
+                            </div>
+                          </div>
+
+                          {(dest['ADDITIONAL ACADEMIC REQUIREMENTS'] || dest['ADDITIONAL LANGUAGE REQUIREMENT'] || dest.NOTES) && (
+                            <div className="pt-2 border-t">
+                              <p className="font-medium text-sm mb-1">Requisiti:</p>
+                              <div className="text-xs text-muted-foreground space-y-1">
+                                {dest['ADDITIONAL ACADEMIC REQUIREMENTS'] && (
+                                  <p>• Accademici: {dest['ADDITIONAL ACADEMIC REQUIREMENTS']}</p>
+                                )}
+                                {dest['ADDITIONAL LANGUAGE REQUIREMENT'] && (
+                                  <p>• Linguistici: {dest['ADDITIONAL LANGUAGE REQUIREMENT']}</p>
+                                )}
+                                {dest.NOTES && (
+                                  <p>• Note: {dest.NOTES}</p>
+                                )}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
