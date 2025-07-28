@@ -27,6 +27,15 @@ export const CalcolatoriSection = () => {
       features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"]
     },
     {
+      id: "exchange-calculator",
+      title: "Exchange Calculator MSc",
+      description: "Calcola il tuo Exchange Score e scopri le destinazioni disponibili",
+      icon: Calculator,
+      color: "text-purple-500",
+      bgColor: "bg-purple-50 dark:bg-purple-950/30",
+      features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
+    },
+    {
       id: "simulator",
       title: "Simulatore Voti",
       description: "Simula diversi scenari per raggiungere i tuoi obiettivi",
