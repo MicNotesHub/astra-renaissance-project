@@ -25,6 +25,15 @@ export const CalcolatoriSection = () => {
       color: "text-purple-500",
       bgColor: "bg-purple-50 dark:bg-purple-950/30",
       features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
+    },
+    {
+      id: "exchange-calculator-clmg",
+      title: "Exchange Calculator CLMG",
+      description: "Calcola il tuo punteggio per l'exchange in Giurisprudenza",
+      icon: TrendingUp,
+      color: "text-indigo-500",
+      bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+      features: ["Media pesata", "Destinazioni per continente", "Bonus 4° anno"]
     }
   ];
 
