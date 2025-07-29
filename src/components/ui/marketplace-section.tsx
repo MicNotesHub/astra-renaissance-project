@@ -5,26 +5,26 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Star, Truck, Shield, ArrowRight, Gift } from "lucide-react";
 export const MarketplaceSection = () => {
   const products = [{
-    name: "Felpa ASTRA",
+    name: "Pink Stanley bottle",
     price: "35€",
     originalPrice: "45€",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    image: "/lovable-uploads/1d2a1e96-a672-4efa-90cf-13c8ba41b345.png",
     rating: 4.8,
     reviews: 24,
     badge: "Bestseller"
   }, {
-    name: "Tazza Bocconi",
+    name: "Casio scientific calculator",
     price: "12€",
     originalPrice: "15€",
-    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+    image: "/lovable-uploads/7083fcc8-a051-4958-a1a7-f3a7cad5b1e7.png",
     rating: 4.6,
     reviews: 18,
     badge: "Nuovo"
   }, {
-    name: "Zaino Università",
+    name: "Adidas football",
     price: "89€",
     originalPrice: "120€",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    image: "/lovable-uploads/1dd53f35-970c-41f0-a409-7f8312c968ac.png",
     rating: 4.9,
     reviews: 31,
     badge: "Offerta"
