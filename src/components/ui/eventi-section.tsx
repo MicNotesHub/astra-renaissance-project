@@ -257,7 +257,7 @@ export const EventiSection = () => {
               <p className="text-muted-foreground mb-6">
                 Suggerisci workshop, conferenze o eventi che vorresti vedere organizzati da ASTRA!
               </p>
-              <Button className="flex items-center gap-2">
+              <Button className="flex items-center gap-2 mx-auto">
                 Proponi un Evento
                 <ArrowRight className="h-4 w-4" />
               </Button>
