@@ -3,66 +3,58 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Star, Truck, Shield, ArrowRight, Gift } from "lucide-react";
-
 export const MarketplaceSection = () => {
-  const products = [
-    {
-      name: "Felpa ASTRA",
-      price: "35€",
-      originalPrice: "45€",
-      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      rating: 4.8,
-      reviews: 24,
-      badge: "Bestseller"
-    },
-    {
-      name: "Tazza Bocconi",
-      price: "12€", 
-      originalPrice: "15€",
-      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-      rating: 4.6,
-      reviews: 18,
-      badge: "Nuovo"
-    },
-    {
-      name: "Zaino Università",
-      price: "89€",
-      originalPrice: "120€", 
-      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      rating: 4.9,
-      reviews: 31,
-      badge: "Offerta"
-    }
-  ];
-
-  const features = [
-    {
-      icon: Truck,
-      title: "Spedizione Gratuita",
-      description: "Per ordini sopra i 50€"
-    },
-    {
-      icon: Shield,
-      title: "Garanzia Qualità",
-      description: "Prodotti verificati"
-    },
-    {
-      icon: Gift,
-      title: "Sconti Studenti",
-      description: "Prezzi speciali per la community"
-    }
-  ];
-
-  return (
-    <section id="marketplace" className="py-20 bg-background">
+  const products = [{
+    name: "Felpa ASTRA",
+    price: "35€",
+    originalPrice: "45€",
+    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    rating: 4.8,
+    reviews: 24,
+    badge: "Bestseller"
+  }, {
+    name: "Tazza Bocconi",
+    price: "12€",
+    originalPrice: "15€",
+    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+    rating: 4.6,
+    reviews: 18,
+    badge: "Nuovo"
+  }, {
+    name: "Zaino Università",
+    price: "89€",
+    originalPrice: "120€",
+    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    rating: 4.9,
+    reviews: 31,
+    badge: "Offerta"
+  }];
+  const features = [{
+    icon: Truck,
+    title: "Spedizione Gratuita",
+    description: "Per ordini sopra i 50€"
+  }, {
+    icon: Shield,
+    title: "Garanzia Qualità",
+    description: "Prodotti verificati"
+  }, {
+    icon: Gift,
+    title: "Sconti Studenti",
+    description: "Prezzi speciali per la community"
+  }];
+  return <section id="marketplace" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.8
+      }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
             🛍️ ASTRA x UniMarket<sup className="text-lg">©</sup>
           </h2>
@@ -72,45 +64,50 @@ export const MarketplaceSection = () => {
         </motion.div>
 
         {/* Features */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid md:grid-cols-3 gap-6 mb-12"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.6,
+        delay: 0.2
+      }} className="grid md:grid-cols-3 gap-6 mb-12">
           {features.map((feature, index) => {
-            const IconComponent = feature.icon;
-            return (
-              <Card key={index} className="text-center p-6 hover:shadow-glow transition-all duration-300 rounded-2xl" style={{ backgroundColor: '#DCEBFA' }}>
+          const IconComponent = feature.icon;
+          return <Card key={index} className="text-center p-6 hover:shadow-glow transition-all duration-300 rounded-2xl" style={{
+            backgroundColor: '#DCEBFA'
+          }}>
                 <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
 
                   <IconComponent className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold mb-2">{feature.title}</h3>
                 <p className="text-sm text-muted-foreground">{feature.description}</p>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </motion.div>
 
         {/* Products Showcase */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {products.map((product, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
+          {products.map((product, index) => <motion.div key={index} initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6,
+          delay: index * 0.1
+        }}>
               <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden">
                 <div className="relative">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div className="absolute top-3 left-3">
                     <Badge className="text-xs">
                       {product.badge}
@@ -147,17 +144,22 @@ export const MarketplaceSection = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
 
         {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.8,
+        delay: 0.4
+      }}>
           <Card className="glass-card premium-shadow overflow-hidden">
             <div className="bg-gradient-hero p-8 md:p-12 text-white text-center">
               <div className="max-w-3xl mx-auto">
@@ -165,10 +167,7 @@ export const MarketplaceSection = () => {
                   Scopri il Marketplace Completo
                 </h3>
                 
-                <Button 
-                  size="lg" 
-                  className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 text-lg px-8 py-4 mb-8 mx-auto"
-                >
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 px-8 py-4 mb-8 mx-auto text-2xl rounded-2xl">
                   Visita UniMarket
                   <ArrowRight className="h-6 w-6" />
                 </Button>
@@ -179,11 +178,8 @@ export const MarketplaceSection = () => {
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <div className="flex items-center gap-4 text-sm opacity-80">
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-white" />
-                      <span>4.8/5 rating</span>
-                    </div>
-                    <div>1000+ studenti soddisfatti</div>
+                    
+                    
                   </div>
                 </div>
               </div>
@@ -191,6 +187,5 @@ export const MarketplaceSection = () => {
           </Card>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
