@@ -60,7 +60,7 @@ export const MarketplaceSection = () => {
       }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text relative inline-block">
   🛍️ ASTRA x UniMarket
-  <sup className="absolute -top-2 -right-4 text-sm" style={{ color: "#082cb4" }}>©</sup>
+  <sup className="absolute -top-0 -right-0 text-sm" style={{ color: "#082cb4" }}>©</sup>
 </h2>
 
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
