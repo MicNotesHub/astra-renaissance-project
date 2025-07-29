@@ -170,7 +170,7 @@ export const MarketplaceSection = () => {
                   Scopri il Marketplace Completo
                 </h3>
                 
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 mb-8 mx-auto px-[32px] py-[23px] text-center text-2xl rounded-3xl">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 mb-8 mx-auto px-[32px] py-[23px] text-center text-2xl rounded-3xl" onClick={() => window.open('https://uni-market.it', '_blank')}>
                   Visita UniMarket
                   <ArrowRight className="h-6 w-6" />
                 </Button>
