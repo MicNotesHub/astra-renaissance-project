@@ -3,64 +3,64 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock, ArrowRight, BookOpen } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const EventiSection = () => {
   const [activeView, setActiveView] = useState("prossimi");
+  const [eventi, setEventi] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const eventiProssimi = [
-    {
-      title: "Career Day 2024",
-      date: "15 Marzo 2024",
-      time: "09:00 - 18:00",
-      location: "Aula Magna Bocconi",
-      description: "Incontra le migliori aziende del settore e scopri opportunità di stage e lavoro",
-      attendees: 250,
-      type: "Networking",
-      featured: true
-    },
-    {
-      title: "Workshop: Excel Avanzato",
-      date: "22 Marzo 2024", 
-      time: "14:30 - 17:30",
-      location: "Lab Informatica A3",
-      description: "Masterclass su funzioni avanzate, pivot e automazione in Excel",
-      attendees: 45,
-      type: "Workshop",
-      featured: false
-    },
-    {
-      title: "Conferenza: Sostenibilità nel Business",
-      date: "28 Marzo 2024",
-      time: "18:00 - 20:00", 
-      location: "Aula N01",
-      description: "Esperti internazionali discutono il futuro sostenibile delle aziende",
-      attendees: 180,
-      type: "Conferenza",
-      featured: true
-    }
-  ];
+  useEffect(() => {
+    const fetchEventi = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('events')
+          .select('id, title, description, event_type, start_date, location, registration_link, status')
+          .order('start_date', { ascending: true });
 
-  const eventiPassati = [
-    {
-      title: "Presentazione ASTRA 2024",
-      date: "10 Gennaio 2024",
-      location: "Aula Magna",
-      description: "Presentazione del nuovo team e degli obiettivi per l'anno",
-      attendees: 300,
-      recap: "Disponibile",
-      photos: 25
-    },
-    {
-      title: "Networking Aperitivo",
-      date: "5 Febbraio 2024",
-      location: "Terrazza Bocconi",
-      description: "Evento di networking informale con studenti e alumni",
-      attendees: 120,
-      recap: "Disponibile", 
-      photos: 40
-    }
-  ];
+        if (error) {
+          console.error('Errore nel caricamento degli eventi:', error);
+          return;
+        }
+
+        setEventi(data || []);
+      } catch (error) {
+        console.error('Errore nel caricamento degli eventi:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEventi();
+  }, []);
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('it-IT', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const formatTime = (dateString: string) => {
+    return new Date(dateString).toLocaleTimeString('it-IT', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const eventiProssimi = eventi.filter(evento => {
+    const eventDate = new Date(evento.start_date);
+    const today = new Date();
+    return eventDate >= today && evento.status === 'upcoming';
+  });
+
+  const eventiPassati = eventi.filter(evento => {
+    const eventDate = new Date(evento.start_date);
+    const today = new Date();
+    return eventDate < today || evento.status === 'completed';
+  });
 
   return (
     <section id="eventi" className="py-20 bg-gradient-subtle">
@@ -109,123 +109,137 @@ export const EventiSection = () => {
         {/* Eventi Prossimi */}
         {activeView === "prossimi" && (
           <div className="space-y-6 mb-12">
-            {eventiProssimi.map((evento, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className={`glass-card premium-shadow hover:shadow-glow transition-all duration-300 group ${evento.featured ? 'ring-2 ring-primary/20' : ''}`}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <Badge variant={evento.featured ? "default" : "secondary"}>
-                            {evento.type}
-                          </Badge>
-                          {evento.featured && (
-                            <Badge variant="outline" className="text-primary border-primary">
-                              In Evidenza
+            {loading ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">Caricamento eventi...</p>
+              </div>
+            ) : eventiProssimi.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">Nessun evento prossimo disponibile</p>
+              </div>
+            ) : (
+              eventiProssimi.map((evento, index) => (
+                <motion.div
+                  key={evento.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group">
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <Badge variant="secondary">
+                              {evento.event_type}
                             </Badge>
-                          )}
-                        </div>
-                        <CardTitle className="text-2xl group-hover:text-primary transition-colors">
-                          {evento.title}
-                        </CardTitle>
-                        <CardDescription className="text-base">
-                          {evento.description}
-                        </CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          <Calendar className="h-5 w-5 text-primary" />
-                          <span>{evento.date}</span>
-                        </div>
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          <Clock className="h-5 w-5 text-primary" />
-                          <span>{evento.time}</span>
-                        </div>
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          <MapPin className="h-5 w-5 text-primary" />
-                          <span>{evento.location}</span>
-                        </div>
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          <Users className="h-5 w-5 text-primary" />
-                          <span>{evento.attendees} partecipanti registrati</span>
+                          </div>
+                          <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                            {evento.title}
+                          </CardTitle>
+                          <CardDescription className="text-base">
+                            {evento.description}
+                          </CardDescription>
                         </div>
                       </div>
-                      
-                      <div className="flex flex-col justify-between">
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-3">
-                          <Button className="w-full group-hover:bg-primary-light transition-colors">
-                            Registrati all'Evento
-                          </Button>
-                          <Button variant="outline" className="w-full">
-                            Aggiungi al Calendario
-                          </Button>
+                          <div className="flex items-center gap-3 text-muted-foreground">
+                            <Calendar className="h-5 w-5 text-primary" />
+                            <span>{formatDate(evento.start_date)}</span>
+                          </div>
+                          <div className="flex items-center gap-3 text-muted-foreground">
+                            <Clock className="h-5 w-5 text-primary" />
+                            <span>{formatTime(evento.start_date)}</span>
+                          </div>
+                          <div className="flex items-center gap-3 text-muted-foreground">
+                            <MapPin className="h-5 w-5 text-primary" />
+                            <span>{evento.location}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex flex-col justify-between">
+                          <div className="space-y-3">
+                            {evento.registration_link ? (
+                              <Button 
+                                className="w-full group-hover:bg-primary-light transition-colors"
+                                onClick={() => window.open(evento.registration_link, '_blank')}
+                              >
+                                Registrati all'Evento
+                              </Button>
+                            ) : (
+                              <Button 
+                                className="w-full group-hover:bg-primary-light transition-colors"
+                                disabled
+                              >
+                                Registrazione non disponibile
+                              </Button>
+                            )}
+                            <Button variant="outline" className="w-full">
+                              Aggiungi al Calendario
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))
+            )}
           </div>
         )}
 
         {/* Eventi Passati */}
         {activeView === "passati" && (
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {eventiPassati.map((evento, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group">
-                  <CardHeader>
-                    <CardTitle className="group-hover:text-primary transition-colors">
-                      {evento.title}
-                    </CardTitle>
-                    <CardDescription>{evento.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-3 text-muted-foreground">
-                        <Calendar className="h-4 w-4 text-primary" />
-                        <span>{evento.date}</span>
+            {loading ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">Caricamento eventi...</p>
+              </div>
+            ) : eventiPassati.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">Nessun evento passato disponibile</p>
+              </div>
+            ) : (
+              eventiPassati.map((evento, index) => (
+                <motion.div
+                  key={evento.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group">
+                    <CardHeader>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="outline">
+                          {evento.event_type}
+                        </Badge>
                       </div>
-                      <div className="flex items-center gap-3 text-muted-foreground">
-                        <MapPin className="h-4 w-4 text-primary" />
-                        <span>{evento.location}</span>
+                      <CardTitle className="group-hover:text-primary transition-colors">
+                        {evento.title}
+                      </CardTitle>
+                      <CardDescription>{evento.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                          <Calendar className="h-4 w-4 text-primary" />
+                          <span>{formatDate(evento.start_date)}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                          <MapPin className="h-4 w-4 text-primary" />
+                          <span>{evento.location}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-3 text-muted-foreground">
-                        <Users className="h-4 w-4 text-primary" />
-                        <span>{evento.attendees} partecipanti</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" className="flex items-center gap-2">
-                        <BookOpen className="h-4 w-4" />
-                        Recap Evento
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        📸 Foto ({evento.photos})
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))
+            )}
           </div>
         )}
 
