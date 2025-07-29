@@ -5,29 +5,32 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Star, Truck, Shield, ArrowRight, Gift } from "lucide-react";
 export const MarketplaceSection = () => {
   const products = [{
-    name: "Felpa ASTRA",
-    price: "35€",
+    name: "Pink Stanley bottle",
+    price: "19€",
     originalPrice: "45€",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    image: "/lovable-uploads/1d2a1e96-a672-4efa-90cf-13c8ba41b345.png",
     rating: 4.8,
     reviews: 24,
-    badge: "Bestseller"
+    badge: "Bestseller",
+    url: "https://www.uni-market.it/prodotto/auto-draft-4/"
   }, {
-    name: "Tazza Bocconi",
-    price: "12€",
+    name: "Casio scientific calculator",
+    price: "10€",
     originalPrice: "15€",
-    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+    image: "/lovable-uploads/7083fcc8-a051-4958-a1a7-f3a7cad5b1e7.png",
     rating: 4.6,
     reviews: 18,
-    badge: "Nuovo"
+    badge: "Nuovo",
+    url: "https://www.uni-market.it/prodotto/auto-draft-11/"
   }, {
-    name: "Zaino Università",
-    price: "89€",
+    name: "Adidas football",
+    price: "30€",
     originalPrice: "120€",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    image: "/lovable-uploads/1dd53f35-970c-41f0-a409-7f8312c968ac.png",
     rating: 4.9,
     reviews: 31,
-    badge: "Offerta"
+    badge: "Offerta",
+    url: "https://www.uni-market.it/prodotto/auto-draft-9/"
   }];
   const features = [{
     icon: Truck,
@@ -105,7 +108,7 @@ export const MarketplaceSection = () => {
           duration: 0.6,
           delay: index * 0.1
         }}>
-              <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden">
+              <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden cursor-pointer" onClick={() => window.open(product.url, '_blank')}>
                 <div className="relative">
                   <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div className="absolute top-3 left-3">
@@ -115,7 +118,7 @@ export const MarketplaceSection = () => {
                   </div>
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors">
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button size="sm" className="rounded-full">
+                      <Button size="sm" className="rounded-full" onClick={(e) => { e.stopPropagation(); window.open(product.url, '_blank'); }}>
                         <ShoppingBag className="h-4 w-4 mr-2" />
                         Aggiungi
                       </Button>
@@ -167,13 +170,10 @@ export const MarketplaceSection = () => {
                   Scopri il Marketplace Completo
                 </h3>
                 
-                <a href="https://uni-market.it" target="_blank" rel="noopener noreferrer">
-  <Button size="lg" className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 mb-8 mx-auto px-[32px] py-[23px] text-center text-2xl rounded-3xl">
-    Visita UniMarket
-    <ArrowRight className="h-6 w-6" />
-  </Button>
-</a>
-
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 mb-8 mx-auto px-[32px] py-[23px] text-center text-2xl rounded-3xl">
+                  Visita UniMarket
+                  <ArrowRight className="h-6 w-6" />
+                </Button>
                 
                 <p className="text-lg opacity-90 mb-6">
                   Oltre 200 prodotti esclusivi per studenti. Libri usati, merchandising ufficiale, gadget tech e molto altro.
