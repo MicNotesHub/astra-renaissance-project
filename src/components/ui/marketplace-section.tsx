@@ -33,17 +33,17 @@ export const MarketplaceSection = () => {
     url: "https://www.uni-market.it/prodotto/auto-draft-9/"
   }];
   const features = [{
-    icon: Truck,
-    title: "Spedizione Gratuita",
-    description: "Per ordini sopra i 50€"
+    icon: Handshake,
+    title: "Scambio Veloce",
+    description: "Incontra il venditore direttamente in università"
   }, {
     icon: Shield,
-    title: "Garanzia Qualità",
-    description: "Prodotti verificati"
+    title: "Community Sicura",
+    description: "Accesso riservato agli studenti universitari"
   }, {
     icon: Gift,
-    title: "Sconti Studenti",
-    description: "Prezzi speciali per la community"
+    title: "Zero Comissioni",
+    description: "Scambia o vendi gratuitamente"
   }];
   return <section id="marketplace" className="py-20 bg-background">
       <div className="container mx-auto px-4">
