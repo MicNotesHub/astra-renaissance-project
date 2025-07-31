@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingBag, Star, Truck, Shield, ArrowRight, Gift } from "lucide-react";
+import { ShoppingBag, Star, Truck, Shield, ArrowRight, Gift, Handshake } from "lucide-react";
 export const MarketplaceSection = () => {
   const products = [{
     name: "Pink Stanley bottle",
