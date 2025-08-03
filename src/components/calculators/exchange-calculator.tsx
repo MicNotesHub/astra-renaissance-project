@@ -281,9 +281,9 @@ const ExchangeCalculator = () => {
       return acc;
     }, {} as Record<string, any[]>);
 
-    // Sort destinations within each continent by delta ascending (smallest delta first)
+    // Sort destinations within each continent by delta descending (highest delta first)
     Object.keys(grouped).forEach(continent => {
-      grouped[continent].sort((a, b) => a.delta - b.delta);
+      grouped[continent].sort((a, b) => b.delta - a.delta);
     });
 
     return grouped;
