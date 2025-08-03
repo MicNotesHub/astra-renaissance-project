@@ -164,8 +164,8 @@ const ExchangeCalculatorUG = () => {
       return;
     }
 
-    // Calculate total CFU for passed exams (grade > 0)
-    const passedExams = inputs.exams.filter(exam => exam.grade > 0);
+    // Calculate total CFU for passed exams (grade > 0) and completed seminars
+    const passedExams = inputs.exams.filter(exam => exam.grade > 0 || exam.isSeminar);
     const calculatedTotalCFU = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
     setTotalCFU(calculatedTotalCFU);
 
