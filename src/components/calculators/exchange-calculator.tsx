@@ -194,13 +194,13 @@ const ExchangeCalculator = () => {
     }
 
     try {
-      // Calculate student's WA (Weighted Average) - only for exams with grade > 0
-      const passedExams = inputs.exams.filter(exam => exam.grade > 0);
+      // Calculate student's WA (Weighted Average) - only for exams with grade >= 18
+      const passedExams = inputs.exams.filter(exam => exam.grade >= 18);
       const totalCredits = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
       const weightedSum = passedExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
       const studentWA = totalCredits > 0 ? weightedSum / totalCredits : 0;
 
-      // Calculate NC Achieved (sum of CFU with grade > 0)
+      // Calculate NC Achieved (sum of CFU with grade >= 18)
       const ncAchieved = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
 
       // Get Max NC for the course
@@ -401,7 +401,7 @@ const ExchangeCalculator = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Voti degli Esami</CardTitle>
-                <p className="text-sm text-muted-foreground">Inserisci 0 per gli esami non ancora sostenuti</p>
+                <p className="text-sm text-muted-foreground">Inserisci i voti da 18 a 31 per gli esami superati</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4">
@@ -416,7 +416,7 @@ const ExchangeCalculator = () => {
                         <Input
                           id={`grade-${index}`}
                           type="number"
-                          min="0"
+                          min="18"
                           max="31"
                           value={exam.grade}
                           onChange={(e) => updateExamGrade(index, parseInt(e.target.value) || 0)}
@@ -425,8 +425,10 @@ const ExchangeCalculator = () => {
                       <div className="text-center">
                         {exam.grade === 0 ? (
                           <Badge variant="outline">Non sostenuto</Badge>
+                        ) : exam.grade < 18 ? (
+                          <Badge variant="destructive">Non superato</Badge>
                         ) : (
-                          <Badge variant={exam.grade >= 27 ? "default" : exam.grade >= 24 ? "secondary" : "destructive"}>
+                          <Badge variant={exam.grade >= 27 ? "default" : exam.grade >= 24 ? "secondary" : "outline"}>
                             {exam.grade >= 27 ? "Ottimo" : exam.grade >= 24 ? "Buono" : "Sufficiente"}
                           </Badge>
                         )}

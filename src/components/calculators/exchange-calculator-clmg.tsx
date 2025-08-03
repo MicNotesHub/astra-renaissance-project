@@ -133,7 +133,7 @@ export default function ExchangeCalculatorCLMG() {
   };
 
   const calculateExchangeScore = () => {
-    const validGrades = examGrades.filter(exam => exam.grade > 0);
+    const validGrades = examGrades.filter(exam => exam.grade >= 18);
     
     if (validGrades.length === 0) {
       setExchangeScore(0);
@@ -229,7 +229,7 @@ export default function ExchangeCalculatorCLMG() {
             <CardHeader>
               <CardTitle>Inserisci i tuoi voti</CardTitle>
               <CardDescription>
-                Inserisci i voti degli esami sostenuti. I CFU sono già precompilati.
+                Inserisci i voti da 18 a 31 degli esami sostenuti. I CFU sono già precompilati.
               </CardDescription>
             </CardHeader>
             <CardContent>

@@ -165,13 +165,13 @@ const ExchangeCalculatorUG = () => {
       return;
     }
 
-    // Calculate total CFU for passed exams (grade > 0) and completed seminars
-    const passedExams = inputs.exams.filter(exam => exam.grade > 0 || exam.isSeminar);
+    // Calculate total CFU for passed exams (grade >= 18) and completed seminars
+    const passedExams = inputs.exams.filter(exam => exam.grade >= 18 || exam.isSeminar);
     const calculatedTotalCFU = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
     setTotalCFU(calculatedTotalCFU);
 
-    // Calculate GPA (weighted average) - exclude seminars from GPA calculation
-    const nonSeminarExams = passedExams.filter(exam => !exam.isSeminar);
+    // Calculate GPA (weighted average) - exclude seminars and only include grades >= 18
+    const nonSeminarExams = passedExams.filter(exam => !exam.isSeminar && exam.grade >= 18);
     let calculatedGPA = 0;
     
     if (nonSeminarExams.length > 0) {
@@ -333,7 +333,7 @@ const ExchangeCalculatorUG = () => {
               <CardHeader>
                 <CardTitle>Voti degli Esami</CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  Inserisci i voti su 31. Lascia 0 per gli esami non ancora sostenuti.
+                  Inserisci i voti da 18 a 31 per gli esami superati. Per i seminari, attiva semplicemente il flag anche senza voto.
                 </p>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -350,7 +350,7 @@ const ExchangeCalculatorUG = () => {
                         <Input
                           id={`grade-${index}`}
                           type="number"
-                          min="0"
+                          min="18"
                           max="31"
                           value={exam.grade}
                           onChange={(e) => updateExamGrade(index, parseInt(e.target.value) || 0)}
@@ -367,17 +367,19 @@ const ExchangeCalculatorUG = () => {
                         <Label htmlFor={`seminar-${index}`} className="text-sm">Seminario</Label>
                       </div>
 
-                      <div className="text-center">
-                        {exam.grade === 0 ? (
-                          <Badge variant="outline">Non sostenuto</Badge>
-                        ) : exam.isSeminar ? (
-                          <Badge variant="secondary">Seminario</Badge>
-                        ) : (
-                          <Badge variant={exam.grade >= 27 ? "default" : exam.grade >= 24 ? "secondary" : "destructive"}>
-                            {exam.grade >= 27 ? "Ottimo" : exam.grade >= 24 ? "Buono" : "Sufficiente"}
-                          </Badge>
-                        )}
-                      </div>
+                       <div className="text-center">
+                         {exam.isSeminar ? (
+                           <Badge variant="secondary">Seminario Completato</Badge>
+                         ) : exam.grade === 0 ? (
+                           <Badge variant="outline">Non sostenuto</Badge>
+                         ) : exam.grade < 18 ? (
+                           <Badge variant="destructive">Non superato</Badge>
+                         ) : (
+                           <Badge variant={exam.grade >= 27 ? "default" : exam.grade >= 24 ? "secondary" : "outline"}>
+                             {exam.grade >= 27 ? "Ottimo" : exam.grade >= 24 ? "Buono" : "Sufficiente"}
+                           </Badge>
+                         )}
+                       </div>
                     </div>
                   ))}
                 </div>
