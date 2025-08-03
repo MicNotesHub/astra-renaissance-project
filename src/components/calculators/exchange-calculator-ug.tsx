@@ -64,7 +64,7 @@ const ExchangeCalculatorUG = () => {
   const [selectedContinent, setSelectedContinent] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
-  const minimumCFURequired = 120; // CFU minimi richiesti per UG
+  const minimumCFURequired = 35.400; // CFU minimi richiesti per UG
 
   useEffect(() => {
     fetchInitialData();
