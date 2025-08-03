@@ -242,7 +242,7 @@ const ExchangeCalculatorUG = () => {
 
   const destinationsByContinent = getDestinationsByContinent();
   const continents = Object.keys(destinationsByContinent);
-  const filteredDestinations = selectedContinent 
+  const filteredDestinations = selectedContinent && selectedContinent !== "all"
     ? { [selectedContinent]: destinationsByContinent[selectedContinent] }
     : destinationsByContinent;
 
@@ -427,7 +427,7 @@ const ExchangeCalculatorUG = () => {
                         <SelectValue placeholder="Tutti i continenti" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Tutti i continenti</SelectItem>
+                        <SelectItem value="all">Tutti i continenti</SelectItem>
                         {continents.map(continent => (
                           <SelectItem key={continent} value={continent}>{continent}</SelectItem>
                         ))}
