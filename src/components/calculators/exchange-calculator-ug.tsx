@@ -24,6 +24,7 @@ interface MultiplierUG {
   id: number;
   course: string;
   multiplier: number;
+  cfu_min: number;
 }
 
 interface DestinationUG {
@@ -64,7 +65,6 @@ const ExchangeCalculatorUG = () => {
   const [selectedContinent, setSelectedContinent] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
-  const minimumCFURequired = 35.400; // CFU minimi richiesti per UG
 
   useEffect(() => {
     fetchInitialData();
@@ -181,6 +181,7 @@ const ExchangeCalculatorUG = () => {
       if (inputs.course) {
         const courseMultiplier = multipliers.find(m => m.course === inputs.course);
         const multiplier = courseMultiplier?.multiplier || 1;
+        const minimumCFURequired = courseMultiplier?.cfu_min || 35.4;
         
         // Exchange Score = GPA * Multiplier + (Total CFU – Minimum CFU Required)
         const score = (calculatedGPA * multiplier) + (calculatedTotalCFU - minimumCFURequired);
@@ -283,7 +284,9 @@ const ExchangeCalculatorUG = () => {
                 <div className="space-y-2">
                   <p className="text-sm text-muted-foreground">CFU Totali</p>
                   <p className="text-2xl font-bold">{totalCFU}</p>
-                  <p className="text-xs text-muted-foreground">/ {minimumCFURequired} richiesti</p>
+                  <p className="text-xs text-muted-foreground">
+                    / {multipliers.find(m => m.course === inputs.course)?.cfu_min || 35.4} richiesti
+                  </p>
                 </div>
                 <div className="space-y-2">
                   <p className="text-sm text-muted-foreground">GPA</p>
