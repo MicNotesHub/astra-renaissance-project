@@ -169,10 +169,11 @@ const ExchangeCalculatorUG = () => {
     const calculatedTotalCFU = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
     setTotalCFU(calculatedTotalCFU);
 
-    // Calculate GPA (weighted average)
-    if (passedExams.length > 0) {
-      const totalCredits = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
-      const weightedSum = passedExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
+    // Calculate GPA (weighted average) - exclude seminars from GPA calculation
+    const nonSeminarExams = passedExams.filter(exam => !exam.isSeminar);
+    if (nonSeminarExams.length > 0) {
+      const totalCredits = nonSeminarExams.reduce((sum, exam) => sum + exam.cfu, 0);
+      const weightedSum = nonSeminarExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
       const calculatedGPA = totalCredits > 0 ? weightedSum / totalCredits : 0;
       setGPA(calculatedGPA);
 
