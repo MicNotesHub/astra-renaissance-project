@@ -191,10 +191,7 @@ export const ExchangeDestinationCard: React.FC<ExchangeDestinationCardProps> = (
             variant={isEligible ? "default" : "destructive"}
             className="text-xs"
           >
-            {isEligible 
-              ? variant === 'ug' ? 'Requisiti soddisfatti' : 'Probabilmente accettabile'
-              : variant === 'ug' ? 'Requisiti non soddisfatti' : 'Sotto soglia minima'
-            }
+            {isEligible ? "Requisiti soddisfatti" : "Requisiti non soddisfatti"}
           </Badge>
         </div>
       </CardContent>
