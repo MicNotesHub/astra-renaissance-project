@@ -133,16 +133,24 @@ export const ExchangeDestinationCard: React.FC<ExchangeDestinationCardProps> = (
           <div className="flex-1 space-y-2">
             <div className="flex items-start justify-between">
               <h4 className="font-semibold text-lg leading-tight">{getUniversityName()}</h4>
-              {onToggleFavorite && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => onToggleFavorite(destination.id)}
-                  className="p-1 h-8 w-8"
+              <div className="flex items-center gap-2 ml-4">
+                <Badge 
+                  variant={isEligible ? "default" : "destructive"}
+                  className="text-xs whitespace-nowrap"
                 >
-                  <Heart className={`h-4 w-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
-                </Button>
-              )}
+                  {isEligible ? "Requisiti soddisfatti" : "Requisiti non soddisfatti"}
+                </Badge>
+                {onToggleFavorite && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => onToggleFavorite(destination.id)}
+                    className="p-1 h-8 w-8"
+                  >
+                    <Heart className={`h-4 w-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
+                  </Button>
+                )}
+              </div>
             </div>
             
             <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -184,15 +192,6 @@ export const ExchangeDestinationCard: React.FC<ExchangeDestinationCardProps> = (
               </div>
             )}
           </div>
-        </div>
-
-        <div className="mt-3 pt-3 border-t border-border/50">
-          <Badge 
-            variant={isEligible ? "default" : "destructive"}
-            className="text-xs"
-          >
-            {isEligible ? "Requisiti soddisfatti" : "Requisiti non soddisfatti"}
-          </Badge>
         </div>
       </CardContent>
     </Card>
