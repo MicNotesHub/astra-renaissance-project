@@ -222,13 +222,9 @@ const ExchangeCalculatorUG = () => {
       return acc;
     }, {} as Record<string, any[]>);
 
-    // Sort destinations within each continent by eligibility first, then by delta
+    // Sort destinations within each continent by delta (ascending)
     Object.keys(grouped).forEach(continent => {
-      grouped[continent].sort((a, b) => {
-        if (a.isEligible && !b.isEligible) return -1;
-        if (!a.isEligible && b.isEligible) return 1;
-        return b.delta - a.delta; // Higher delta first for eligible destinations
-      });
+      grouped[continent].sort((a, b) => a.delta - b.delta); // Lower delta first (ascending)
     });
 
     return grouped;
