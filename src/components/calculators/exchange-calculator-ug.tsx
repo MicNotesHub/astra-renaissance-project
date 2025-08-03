@@ -84,9 +84,9 @@ const ExchangeCalculatorUG = () => {
     try {
       setLoading(true);
       
-      // Fetch unique courses
+      // Fetch unique courses from course-multiplier_UG table
       const { data: coursesData, error: coursesError } = await supabase
-        .from('course_subjects_UG' as any)
+        .from('course-multiplier_UG' as any)
         .select('course')
         .order('course');
       
