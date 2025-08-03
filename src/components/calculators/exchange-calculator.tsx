@@ -9,9 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
-import { Calculator, MapPin, Trophy, Heart, AlertCircle } from "lucide-react";
+import { Calculator, MapPin, Trophy, Heart, AlertCircle, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
+import { ExchangeDestinationCard } from "@/components/ui/exchange-destination-card";
 
 interface Course {
   id: number;
@@ -485,68 +486,25 @@ const ExchangeCalculator = () => {
                     </Select>
                   </div>
 
-                  {selectedContinent && destinationsByContinent[selectedContinent] && (
-                    <div className="grid gap-4">
-                      {destinationsByContinent[selectedContinent].map((dest: any) => (
-                        <div key={dest.ID} className="border rounded-lg p-4 space-y-3">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <h3 className="font-semibold">{dest.University}</h3>
-                              <p className="text-sm text-muted-foreground">{dest.Continent}</p>
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => toggleFavorite(dest.ID)}
-                            >
-                              <Heart className={`h-4 w-4 ${favoriteDestinations.includes(dest.ID) ? 'fill-current text-red-500' : ''}`} />
-                            </Button>
-                          </div>
-
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                            <div>
-                              <p className="font-medium text-muted-foreground">Posti Disponibili</p>
-                              <p className="font-semibold">{dest['SLOTS 2024/25'] || 'N/A'}</p>
-                            </div>
-                            <div>
-                              <p className="font-medium text-muted-foreground">Punteggio Min/Max</p>
-                              <p className="font-semibold">{dest.minScore}</p>
-                              <p className="text-xs text-muted-foreground">Max: {dest.maxScore}</p>
-                            </div>
-                            <div>
-                              <p className="font-medium text-muted-foreground">Delta</p>
-                              <p className={`font-bold text-lg ${dest.delta >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                {dest.delta > 0 ? '+' : ''}{Math.round(dest.delta)}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="font-medium text-muted-foreground">Accessibilità</p>
-                              <Badge variant={dest.delta >= 0 ? "default" : dest.delta >= -50 ? "secondary" : "destructive"}>
-                                {dest.delta >= 0 ? "Accessibile" : dest.delta >= -50 ? "Difficile" : "Molto Difficile"}
-                              </Badge>
-                            </div>
-                          </div>
-
-                          {(dest['ADDITIONAL ACADEMIC REQUIREMENTS'] || dest['ADDITIONAL LANGUAGE REQUIREMENT'] || dest.NOTES) && (
-                            <div className="pt-2 border-t">
-                              <p className="font-medium text-sm mb-1">Requisiti:</p>
-                              <div className="text-xs text-muted-foreground space-y-1">
-                                {dest['ADDITIONAL ACADEMIC REQUIREMENTS'] && (
-                                  <p>• Accademici: {dest['ADDITIONAL ACADEMIC REQUIREMENTS']}</p>
-                                )}
-                                {dest['ADDITIONAL LANGUAGE REQUIREMENT'] && (
-                                  <p>• Linguistici: {dest['ADDITIONAL LANGUAGE REQUIREMENT']}</p>
-                                )}
-                                {dest.NOTES && (
-                                  <p>• Note: {dest.NOTES}</p>
-                                )}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                   {Object.entries(destinationsByContinent).map(([continent, dests]) => (
+                     <div key={continent} className="space-y-3 mb-6">
+                       <h3 className="text-lg font-semibold flex items-center gap-2">
+                         <Users className="h-4 w-4" />
+                         {continent}
+                       </h3>
+                       <div className="grid gap-3">
+                         {dests.map((dest: any) => (
+                           <ExchangeDestinationCard
+                             key={dest.ID}
+                             destination={dest}
+                             isFavorite={favoriteDestinations.includes(dest.ID)}
+                             onToggleFavorite={toggleFavorite}
+                             variant="msc"
+                           />
+                         ))}
+                       </div>
+                     </div>
+                   ))}
                 </CardContent>
               </Card>
             </>

@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { Calculator, MapPin, Trophy, Heart, GraduationCap, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
+import { ExchangeDestinationCard } from "@/components/ui/exchange-destination-card";
 
 interface CourseUG {
   id: number;
@@ -446,49 +447,16 @@ const ExchangeCalculatorUG = () => {
                           <Users className="h-4 w-4" />
                           {continent}
                         </h3>
-                        <div className="grid gap-3">
-                          {dests.map((dest: any) => (
-                            <Card key={dest.id} className={`relative ${dest.isEligible ? 'border-green-200 bg-green-50/50' : 'border-red-200 bg-red-50/50'}`}>
-                              <CardContent className="p-4">
-                                <div className="flex items-start justify-between">
-                                  <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-2">
-                                      <h4 className="font-semibold">{dest.uni_name}</h4>
-                                      <Badge variant={dest.isEligible ? "default" : "destructive"}>
-                                        {dest.isEligible ? "Eligible" : "Non Eligible"}
-                                      </Badge>
-                                    </div>
-                                    
-                                    <div className="text-sm text-muted-foreground space-y-1">
-                                      <p><strong>Punteggio richiesto:</strong> {dest.min_score || 'N/A'} - {dest.max_score || 'N/A'}</p>
-                                      {dest.sel_details && (
-                                        <p><strong>Dettagli:</strong> {dest.sel_details}</p>
-                                      )}
-                                      {dest.isEligible && (
-                                        <p className="text-green-600">
-                                          <strong>Surplus:</strong> +{dest.delta.toFixed(2)} punti
-                                        </p>
-                                      )}
-                                      {!dest.isEligible && dest.delta < 0 && (
-                                        <p className="text-red-600">
-                                          <strong>Mancano:</strong> {Math.abs(dest.delta).toFixed(2)} punti
-                                        </p>
-                                      )}
-                                    </div>
-                                  </div>
-                                  
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => toggleFavorite(dest.id)}
-                                    className="ml-4"
-                                  >
-                                    <Heart className={`h-4 w-4 ${favoriteDestinations.includes(dest.id) ? 'fill-red-500 text-red-500' : ''}`} />
-                                  </Button>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          ))}
+                         <div className="grid gap-3">
+                           {dests.map((dest: any) => (
+                             <ExchangeDestinationCard
+                               key={dest.id}
+                               destination={dest}
+                               isFavorite={favoriteDestinations.includes(dest.id)}
+                               onToggleFavorite={toggleFavorite}
+                               variant="ug"
+                             />
+                           ))}
                         </div>
                       </div>
                     ))}

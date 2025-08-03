@@ -10,7 +10,8 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Calculator, MapPin, TrendingUp } from "lucide-react";
+import { Calculator, MapPin, TrendingUp, Users } from "lucide-react";
+import { ExchangeDestinationCard } from "@/components/ui/exchange-destination-card";
 
 interface StudyPlanCourse {
   id: number;
@@ -303,7 +304,8 @@ export default function ExchangeCalculatorCLMG() {
               {selectedContinent && (
                 <div className="space-y-4">
                   <Separator />
-                  <h3 className="font-semibold text-lg">
+                  <h3 className="font-semibold text-lg flex items-center gap-2">
+                    <Users className="h-4 w-4" />
                     Destinazioni in {selectedContinent}
                   </h3>
                   
@@ -314,30 +316,11 @@ export default function ExchangeCalculatorCLMG() {
                   ) : (
                     <div className="grid gap-4">
                       {getDestinationsByContinent().map((destination) => (
-                        <Card key={destination.id} className="p-4">
-                          <div className="flex justify-between items-start">
-                            <div className="space-y-1">
-                              <h4 className="font-semibold">{destination.uni}</h4>
-                              <p className="text-sm text-muted-foreground">
-                                {destination.state}, {destination.country}
-                              </p>
-                              <div className="flex items-center gap-2 text-sm">
-                                <span>Punteggio richiesto: {destination.lowest} - {destination.highest}</span>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <Badge 
-                                variant={destination.delta >= 0 ? "default" : "destructive"}
-                                className="mb-2"
-                              >
-                                Delta: {destination.delta.toFixed(2)}
-                              </Badge>
-                              <p className="text-xs text-muted-foreground">
-                                {destination.delta >= 0 ? "Probabilmente accettabile" : "Sotto soglia minima"}
-                              </p>
-                            </div>
-                          </div>
-                        </Card>
+                        <ExchangeDestinationCard
+                          key={destination.id}
+                          destination={destination}
+                          variant="clmg"
+                        />
                       ))}
                     </div>
                   )}
