@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { GraduationGradeCalculator } from "./graduation-grade-calculator";
 import ExchangeCalculator from "./exchange-calculator";
 import ExchangeCalculatorCLMG from "./exchange-calculator-clmg";
+import ExchangeCalculatorUG from "./exchange-calculator-ug";
 import { X } from "lucide-react";
 
 interface CalculatorModalProps {
@@ -20,6 +21,8 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
         return <ExchangeCalculator />;
       case 'exchange-calculator-clmg':
         return <ExchangeCalculatorCLMG />;
+      case 'exchange-calculator-ug':
+        return <ExchangeCalculatorUG />;
       default:
         return (
           <div className="text-center py-12">
@@ -40,6 +43,8 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
         return 'Exchange Calculator MSc';
       case 'exchange-calculator-clmg':
         return 'Exchange Calculator CLMG';
+      case 'exchange-calculator-ug':
+        return 'Exchange Calculator UG';
       default:
         return 'Calcolatore';
     }

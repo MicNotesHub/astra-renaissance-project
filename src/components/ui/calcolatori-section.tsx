@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp, GraduationCap } from "lucide-react";
+import { Calculator, TrendingUp, GraduationCap, Users } from "lucide-react";
 import { CalculatorModal } from "../calculators/calculator-modal";
 export const CalcolatoriSection = () => {
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
@@ -30,6 +30,14 @@ export const CalcolatoriSection = () => {
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
     features: ["Media pesata", "Destinazioni per continente", "Bonus 4° anno"]
+  }, {
+    id: "exchange-calculator-ug",
+    title: "Exchange Calculator UG",
+    description: "Calcola il tuo Exchange Score per l'Undergraduate",
+    icon: Users,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    features: ["CFU e GPA in tempo reale", "Filtro per continente", "Destinazioni con like"]
   }];
   return <section id="calcolatori" className="py-20 bg-background">
       <div className="container mx-auto px-4">
