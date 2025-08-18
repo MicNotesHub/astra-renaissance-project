@@ -151,11 +151,14 @@ export function AstraGPTSection() {
                 size="lg" 
                 className="group"
                 onClick={() => {
-                  // Scroll to bottom right to highlight the chat button
-                  const chatButton = document.querySelector('[data-chat-trigger]');
-                  if (chatButton) {
-                    (chatButton as HTMLElement).style.animation = 'pulse 1s ease-in-out 3';
-                  }
+                  // Scroll to bottom and highlight the chat button
+                  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                  setTimeout(() => {
+                    const chatButton = document.querySelector('button[aria-label*="Astra"]');
+                    if (chatButton) {
+                      (chatButton as HTMLElement).style.animation = 'pulse 1s ease-in-out 3';
+                    }
+                  }, 500);
                 }}
               >
                 <MessageCircle className="mr-2 h-5 w-5 group-hover:animate-bounce" />

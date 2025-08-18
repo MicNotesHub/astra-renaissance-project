@@ -9,7 +9,7 @@ import { MarketplaceSection } from "@/components/ui/marketplace-section";
 import { EventiSection } from "@/components/ui/eventi-section";
 import { TeamSection } from "@/components/ui/team-section";
 import { AstraGPTSection } from "@/components/ui/astra-gpt-section";
-import { AstraGPTChatbot } from "@/components/ui/astra-gpt-chatbot";
+import { AstraChatButton } from "@/components/ui/astra-chat-button";
 import { Footer } from "@/components/ui/footer";
 
 const Index = () => {
@@ -28,8 +28,8 @@ const Index = () => {
       <TeamSection />
       <Footer />
       
-      {/* Astra GPT Chatbot - Fixed in bottom right corner */}
-      <AstraGPTChatbot />
+      {/* Astra GPT Chat Button - Fixed in bottom right corner */}
+      <AstraChatButton />
     </div>
   );
 };
