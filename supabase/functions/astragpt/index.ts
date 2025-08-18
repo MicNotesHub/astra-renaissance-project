@@ -1,5 +1,6 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.52.0';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -42,11 +43,17 @@ serve(async (req) => {
 
   try {
     const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
-    const SYSTEM_PROMPT = Deno.env.get('ASTRAGPT_SYSTEM_PROMPT') || `Sei AstraGPT 2.0, l’assistente di ASTRA (associazione studenti Bocconi).
+    const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
+    const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY');
+    
+    // Initialize Supabase client
+    const supabase = createClient(SUPABASE_URL!, SUPABASE_ANON_KEY!);
+    
+    const SYSTEM_PROMPT = Deno.env.get('ASTRAGPT_SYSTEM_PROMPT') || `Sei AstraGPT 2.0, l'assistente di ASTRA (associazione studenti Bocconi).
 
 Regole chiave:
 - Parla come un pari: informale, diretto, amichevole. Niente burocrazia.
-- Usa solo il “ASTRA Knowledge Pack”. Se un dato non c’è, rispondi: "Non lo so ancora" e instrada correttamente.
+- Usa solo il "ASTRA Knowledge Pack". Se un dato non c'è, rispondi: "Non lo so ancora" e instrada correttamente.
 - Non inventare nomi, ruoli o contatti. Usa solo i rappresentanti ufficiali qui sotto.
 - Tema linguistico: ITA default; rispondi in EN su richiesta.
 - Ambito: vita studentesca Bocconi + prassi interne ASTRA. Fuso orario: Europe/Rome.
@@ -102,6 +109,17 @@ Risposte:
 
     console.log(`Processing message for session ${sessionId}: ${message.substring(0, 100)}...`);
 
+    // Search for relevant content in the database
+    const searchResults = await searchContent(supabase, message);
+    const contextualInfo = searchResults.length > 0 ? 
+      `\n\nINFORMAZIONI DAL DATABASE ASTRA:\n${searchResults.map(r => `- ${r.type}: ${r.title} - ${r.content}`).join('\n')}` 
+      : '';
+
+    // Enhanced system prompt with contextual information
+    const enhancedPrompt = SYSTEM_PROMPT + contextualInfo + `
+    
+IMPORTANTE: Se nella domanda dell'utente ci sono riferimenti a dispense, guide, eventi o contenuti specifici, cerca sempre di utilizzare le informazioni dal database ASTRA qui sopra per fornire risposte accurate e aggiornate.`;
+
     // Call OpenAI API
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -112,7 +130,7 @@ Risposte:
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'system', content: enhancedPrompt },
           { role: 'user', content: message }
         ],
         max_tokens: 1200,
@@ -199,10 +217,22 @@ Risposte:
       // We keep responseType as 'answer' and rely on text, without adding any names.
     }
 
-    // Documents detection stays based on AI response text
-    if (lowerResponse.includes('guida') || lowerResponse.includes('documento') || lowerResponse.includes('scarica')) {
+    // Enhanced documents detection with database search results
+    if (lowerResponse.includes('guida') || lowerResponse.includes('documento') || lowerResponse.includes('scarica') || searchResults.length > 0) {
       responseType = responseType === 'representative' ? 'representative' : 'documents';
 
+      // Add documents from search results
+      searchResults.forEach(result => {
+        if (result.type === 'handout' && result.url) {
+          documents.push({
+            title: result.title,
+            url: result.url,
+            tag: 'PDF'
+          });
+        }
+      });
+
+      // Add default documents based on keywords
       if (lowerResponse.includes('tasse') || lowerResponse.includes('agevolazioni')) {
         documents.push({ title: 'Guida Tasse e Agevolazioni', url: '/guide', tag: 'PDF' });
       }
@@ -239,3 +269,129 @@ Risposte:
     });
   }
 });
+
+// Function to search for relevant content in the database
+async function searchContent(supabase: any, query: string): Promise<Array<{type: string, title: string, content: string, url?: string}>> {
+  const results: Array<{type: string, title: string, content: string, url?: string}> = [];
+  const lowerQuery = query.toLowerCase();
+  
+  try {
+    // Search in handouts/dispense
+    const { data: handouts } = await supabase
+      .from('handouts')
+      .select('*')
+      .or(`filename.ilike.%${query}%,subject.ilike.%${query}%,year.ilike.%${query}%`)
+      .limit(5);
+    
+    if (handouts) {
+      handouts.forEach((handout: any) => {
+        results.push({
+          type: 'handout',
+          title: handout.filename,
+          content: `Dispensa per ${handout.subject} - ${handout.year}`,
+          url: handout.file_url
+        });
+      });
+    }
+
+    // Search in events
+    const { data: events } = await supabase
+      .from('events')
+      .select('*')
+      .or(`title.ilike.%${query}%,description.ilike.%${query}%,event_type.ilike.%${query}%`)
+      .gte('start_date', new Date().toISOString())
+      .limit(3);
+    
+    if (events) {
+      events.forEach((event: any) => {
+        results.push({
+          type: 'event',
+          title: event.title,
+          content: `${event.description} - ${new Date(event.start_date).toLocaleDateString('it-IT')} - ${event.location || 'Online'}`
+        });
+      });
+    }
+
+    // Search in media content
+    const { data: media } = await supabase
+      .from('astra_polare_media_content')
+      .select('*')
+      .or(`title.ilike.%${query}%,description.ilike.%${query}%`)
+      .limit(3);
+    
+    if (media) {
+      media.forEach((item: any) => {
+        results.push({
+          type: 'media',
+          title: item.title,
+          content: `${item.description} - ${item.platform} - ${item.views} visualizzazioni`
+        });
+      });
+    }
+
+    // Additional keyword-based searches
+    if (lowerQuery.includes('primo anno') || lowerQuery.includes('first year')) {
+      const { data: firstYear } = await supabase
+        .from('handouts')
+        .select('*')
+        .eq('year', 'First Year')
+        .limit(3);
+      
+      if (firstYear) {
+        firstYear.forEach((handout: any) => {
+          results.push({
+            type: 'handout',
+            title: handout.filename,
+            content: `Dispensa ${handout.subject} - Primo Anno`,
+            url: handout.file_url
+          });
+        });
+      }
+    }
+
+    if (lowerQuery.includes('secondo anno') || lowerQuery.includes('second year')) {
+      const { data: secondYear } = await supabase
+        .from('handouts')
+        .select('*')
+        .eq('year', 'Second Year')
+        .limit(3);
+      
+      if (secondYear) {
+        secondYear.forEach((handout: any) => {
+          results.push({
+            type: 'handout',
+            title: handout.filename,
+            content: `Dispensa ${handout.subject} - Secondo Anno`,
+            url: handout.file_url
+          });
+        });
+      }
+    }
+
+    if (lowerQuery.includes('terzo anno') || lowerQuery.includes('third year')) {
+      const { data: thirdYear } = await supabase
+        .from('handouts')
+        .select('*')
+        .eq('year', 'Third Year')
+        .limit(3);
+      
+      if (thirdYear) {
+        thirdYear.forEach((handout: any) => {
+          results.push({
+            type: 'handout',
+            title: handout.filename,
+            content: `Dispensa ${handout.subject} - Terzo Anno`,
+            url: handout.file_url
+          });
+        });
+      }
+    }
+
+    console.log(`Found ${results.length} relevant results for query: ${query}`);
+    return results;
+    
+  } catch (error) {
+    console.error('Error searching content:', error);
+    return [];
+  }
+}
