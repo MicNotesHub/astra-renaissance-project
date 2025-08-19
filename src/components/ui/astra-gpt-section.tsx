@@ -1,25 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Bot, MessageCircle, Zap, Brain, Users } from "lucide-react";
+import { Bot, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 export function AstraGPTSection() {
-  const features = [{
-    icon: MessageCircle,
-    title: "Chat Intelligente",
-    description: "Risposte immediate alle tue domande su procedure, scadenze e servizi universitari"
-  }, {
-    icon: Brain,
-    title: "Conoscenza Integrata",
-    description: "Accesso istantaneo a dispense, guide e informazioni sui rappresentanti"
-  }, {
-    icon: Users,
-    title: "Connessione Diretta",
-    description: "Ti mette in contatto con il rappresentante giusto per ogni esigenza specifica"
-  }, {
-    icon: Zap,
-    title: "Sempre Disponibile",
-    description: "24/7 a tua disposizione, anche quando gli uffici sono chiusi"
-  }];
   return <section id="astra-gpt" className="py-32 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-30">
@@ -46,28 +29,12 @@ export function AstraGPTSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          {/* Left side - Features */}
-          <div className="space-y-8">
-            {features.map((feature, index) => {})}
-          </div>
-
-          {/* Right side - Demo Card */}
-          <motion.div initial={{
-          opacity: 0,
-          scale: 0.9
-        }} whileInView={{
-          opacity: 1,
-          scale: 1
-        }} transition={{
-          duration: 0.6
-        }} viewport={{
-          once: true
-        }}>
-            <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-500 overflow-hidden">
-              
-            </Card>
-          </motion.div>
+        {/* Minimal content */}
+        <div className="text-center mb-12">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Scopri il nuovo AstraGPT 2.0 - potenziato con l'intelligenza artificiale più avanzata 
+            per supportarti nella tua vita universitaria Bocconi.
+          </p>
         </div>
 
         {/* CTA Section */}
@@ -75,24 +42,14 @@ export function AstraGPTSection() {
           <Card className="glass-card premium-shadow max-w-4xl mx-auto">
             <CardContent className="p-8 md:p-12">
               <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-                Prova Astra GPT ora!
+                Prova Astra GPT 2.0!
               </h3>
               
               <Button size="lg" className="group" onClick={() => {
-              // Scroll to bottom and highlight the chat button
-              window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-              });
-              setTimeout(() => {
-                const chatButton = document.querySelector('button[aria-label*="Astra"]');
-                if (chatButton) {
-                  (chatButton as HTMLElement).style.animation = 'pulse 1s ease-in-out 3';
-                }
-              }, 500);
-            }}>
+                window.open('https://chatgpt.com/g/g-68a3286941e081a4973c7111bad27752-astragpt-2-0', '_blank');
+              }}>
                 <MessageCircle className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                Inizia a chattare
+                Apri AstraGPT 2.0
               </Button>
             </CardContent>
           </Card>
