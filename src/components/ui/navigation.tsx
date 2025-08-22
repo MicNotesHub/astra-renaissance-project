@@ -89,9 +89,9 @@ export function Navigation() {
     damping: 30
   }} className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/10 shadow-sm" : "bg-transparent")}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div className="flex items-center" whileHover={{
+        <div className="flex items-center justify-center h-16 relative">
+          {/* Logo - positioned absolutely on the left */}
+          <motion.div className="absolute left-0 flex items-center" whileHover={{
           scale: 1.05
         }} whileTap={{
           scale: 0.95
@@ -105,7 +105,7 @@ export function Navigation() {
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - centered */}
           <div className="hidden lg:block">
             <div className="flex items-center space-x-1">
               {navItems.map((item, index) => <motion.div key={item.name} initial={{
@@ -128,38 +128,41 @@ export function Navigation() {
                       {item.name}
                     </a>}
                 </motion.div>)}
-              
-              <motion.div initial={{
-              opacity: 0,
-              scale: 0.8
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} transition={{
-              delay: 0.6
-            }}>
-                <LanguageToggle />
-              </motion.div>
-              
-              <motion.div initial={{
-              opacity: 0,
-              scale: 0.8
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} transition={{
-              delay: 0.7
-            }}>
-                <Button size="sm" onClick={handleContactClick} className="ml-4 bg-primary hover:bg-primary/90 text-white font-medium px-4 py-2 rounded-full text-sm transition-all duration-200 hover:scale-105 hover:shadow-lg">
-                  <Mail className="h-4 w-4 mr-2" />
-                  {t('hero.contact')}
-                </Button>
-              </motion.div>
             </div>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
+          {/* Language Toggle and Contact Button - positioned absolutely on the right */}
+          <div className="absolute right-0 hidden lg:flex items-center space-x-2">
+            <motion.div initial={{
+            opacity: 0,
+            scale: 0.8
+          }} animate={{
+            opacity: 1,
+            scale: 1
+          }} transition={{
+            delay: 0.6
+          }}>
+              <LanguageToggle />
+            </motion.div>
+            
+            <motion.div initial={{
+            opacity: 0,
+            scale: 0.8
+          }} animate={{
+            opacity: 1,
+            scale: 1
+          }} transition={{
+            delay: 0.7
+          }}>
+              <Button size="sm" onClick={handleContactClick} className="bg-primary hover:bg-primary/90 text-white font-medium px-4 py-2 rounded-full text-sm transition-all duration-200 hover:scale-105 hover:shadow-lg">
+                <Mail className="h-4 w-4 mr-2" />
+                {t('hero.contact')}
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Mobile menu button - positioned absolutely on the right */}
+          <div className="absolute right-0 lg:hidden">
             <Button variant="ghost" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn("relative p-2 rounded-lg transition-all duration-200", (isOnWhitePage || isOverWhiteSection) ? "text-primary hover:bg-primary/10" : "text-white hover:bg-white/10")} aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}>
               <motion.div animate={{
               rotate: isMobileMenuOpen ? 180 : 0
