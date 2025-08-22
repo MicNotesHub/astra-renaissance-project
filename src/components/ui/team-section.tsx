@@ -1,123 +1,55 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, MessageCircle } from "lucide-react";
 
 export const TeamSection = () => {
-  const teamMembers = [{
-    name: "Marco Andreoli",
-    role: "Presidente",
-    organo: "Presidenza",
-    year: "3° Anno",
-    course: "BIEM",
-    bio: "Coordina le attività della rappresentanza e mantiene i rapporti istituzionali con l'università",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-    contacts: {
-      email: "marco.andreoli@studenti.unibocconi.it",
-      linkedin: "marcoandreolix",
-      unilink: "@marcoandreolix"
+  const rappresentantiSections = [
+    {
+      name: "CDD",
+      description: "Commissione di Disciplina Didattica - Gestione delle questioni disciplinari e didattiche",
+      icon: "⚖️"
     },
-    expertise: ["Leadership", "Relazioni Istituzionali", "Strategia"]
-  }, {
-    name: "Sofia Chen",
-    role: "Vice Presidente",
-    organo: "Presidenza",
-    year: "2° Anno",
-    course: "BESS",
-    bio: "Supporta il presidente nelle attività di coordinamento e gestisce i progetti strategici",
-    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-    contacts: {
-      email: "sofia.chen@studenti.unibocconi.it",
-      linkedin: "sofiachen",
-      unilink: "@sofiachen"
+    {
+      name: "DIPARTIMENTI",
+      description: "Rappresentanza nei diversi dipartimenti accademici dell'università",
+      icon: "🏛️"
     },
-    expertise: ["Coordinamento", "Progetti Strategici", "Management"]
-  }, {
-    name: "Alessandro Martini",
-    role: "Responsabile Didattica",
-    organo: "Senato Accademico",
-    year: "3° Anno",
-    course: "BAFIN",
-    bio: "Si occupa di questioni didattiche, orari e rapporti con i docenti",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-    contacts: {
-      email: "alessandro.martini@studenti.unibocconi.it",
-      linkedin: "alessandromartini",
-      unilink: "@alemartini"
+    {
+      name: "ISU",
+      description: "Istituto per il Sostegno Universitario - Servizi per il diritto allo studio",
+      icon: "🎓"
     },
-    expertise: ["Didattica", "Policy Accademica", "Docenza"]
-  }, {
-    name: "Giulia Romano",
-    role: "Responsabile Eventi",
-    organo: "Eventi",
-    year: "2° Anno",
-    course: "WBB",
-    bio: "Organizza conferenze, workshop e attività di networking per la community studentesca",
-    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-    contacts: {
-      email: "giulia.romano@studenti.unibocconi.it",
-      linkedin: "giuliaromano",
-      unilink: "@giuliaromano"
+    {
+      name: "QUALITÀ",
+      description: "Commissione per la Qualità - Monitoraggio e miglioramento della qualità didattica",
+      icon: "⭐"
     },
-    expertise: ["Event Planning", "Networking", "Community Building"]
-  }, {
-    name: "Matteo Ferrari",
-    role: "Responsabile IT & Innovazione",
-    organo: "Innovazione",
-    year: "3° Anno",
-    course: "BEMACS",
-    bio: "Gestisce i sistemi digitali, il sito web e sviluppa soluzioni tecnologiche per gli studenti",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-    contacts: {
-      email: "matteo.ferrari@studenti.unibocconi.it",
-      linkedin: "matteoferrari",
-      unilink: "@matteoferrari"
+    {
+      name: "SCUOLA DI GIURISPRUDENZA",
+      description: "Rappresentanza nella Scuola di Giurisprudenza",
+      icon: "⚖️"
     },
-    expertise: ["Sviluppo Web", "AI", "Digital Innovation"]
-  }, {
-    name: "Elena Rossi",
-    role: "Responsabile Comunicazione",
-    organo: "Comunicazione",
-    year: "2° Anno",
-    course: "CLES",
-    bio: "Gestisce i social media, la comunicazione istituzionale e le relazioni con i media",
-    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-    contacts: {
-      email: "elena.rossi@studenti.unibocconi.it",
-      linkedin: "elenarossi",
-      unilink: "@elenarossi"
+    {
+      name: "SCUOLA MAGISTRALE",
+      description: "Rappresentanza nelle scuole magistrali e corsi di laurea magistrale",
+      icon: "🎯"
     },
-    expertise: ["Social Media", "Comunicazione", "PR"]
-  }, {
-    name: "Luca Bianchi",
-    role: "Responsabile Exchange",
-    organo: "Exchange",
-    year: "3° Anno",
-    course: "BIG",
-    bio: "Supporta gli studenti nei programmi di scambio internazionale e nelle partnership estere",
-    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-    contacts: {
-      email: "luca.bianchi@studenti.unibocconi.it",
-      linkedin: "lucabianchi",
-      unilink: "@lucabianchi"
+    {
+      name: "SCUOLA TRIENNALE",
+      description: "Rappresentanza nelle scuole triennali e corsi di laurea triennale",
+      icon: "📚"
     },
-    expertise: ["Exchange Programs", "International Relations", "Mobility"]
-  }, {
-    name: "Chiara Conti",
-    role: "Responsabile Welfare",
-    organo: "Welfare",
-    year: "2° Anno",
-    course: "BIEF",
-    bio: "Si occupa del benessere studentesco, servizi di supporto e iniziative per la qualità della vita",
-    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-    contacts: {
-      email: "chiara.conti@studenti.unibocconi.it",
-      linkedin: "chiaraconti",
-      unilink: "@chiaraconti"
+    {
+      name: "SPORT",
+      description: "Rappresentanza nelle attività sportive e ricreative universitarie",
+      icon: "⚽"
     },
-    expertise: ["Student Welfare", "Support Services", "Mental Health"]
-  }];
+    {
+      name: "VALUTAZIONE",
+      description: "Commissione di Valutazione - Valutazione delle performance accademiche",
+      icon: "📊"
+    }
+  ];
 
   return <section id="team" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -133,16 +65,16 @@ export const TeamSection = () => {
         duration: 0.8
       }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            🧑‍💻 Il Nostro Team
+            🏛️ I Nostri Rappresentanti
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Conosci i rappresentanti che lavorano per migliorare la tua esperienza universitaria. Un team diversificato con competenze complementari.
+            Scopri le diverse aree di rappresentanza studentesca. I nostri rappresentanti lavorano in vari organi e commissioni per tutelare i tuoi diritti e migliorare la vita universitaria.
           </p>
         </motion.div>
 
-        {/* Team Grid */}
+        {/* Sections Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {teamMembers.map((member, index) => <motion.div key={index} initial={{
+          {rappresentantiSections.map((section, index) => <motion.div key={index} initial={{
           opacity: 0,
           y: 30
         }} whileInView={{
@@ -154,44 +86,23 @@ export const TeamSection = () => {
           duration: 0.6,
           delay: index * 0.1
         }}>
-              <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
+              <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full cursor-pointer">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    
+                    <div className="text-4xl mb-3">{section.icon}</div>
                     <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
-                      {member.name}
+                      {section.name}
                     </h3>
-                    <p className="text-primary font-medium">{member.role}</p>
-                    <div className="flex items-center justify-center gap-2 mt-2">
-                      <Badge variant="outline" className="text-xs">
-                        {member.course}
-                      </Badge>
-                      <Badge variant="secondary" className="text-xs">
-                        {member.year}
-                      </Badge>
-                    </div>
                   </div>
 
                   <div className="space-y-4">
                     <p className="text-sm text-muted-foreground text-center">
-                      {member.bio}
+                      {section.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-1 justify-center">
-                      {member.expertise.map(skill => <Badge key={skill} variant="outline" className="text-xs">
-                          {skill}
-                        </Badge>)}
-                    </div>
-
-                    <div className="flex justify-center gap-2 pt-2">
-                      <Button size="sm" variant="outline" className="p-2">
-                        <Mail className="h-4 w-4" />
-                      </Button>
-                      <Button size="sm" variant="outline" className="p-2">
-                        <Linkedin className="h-4 w-4" />
-                      </Button>
-                      <Button size="sm" variant="outline" className="p-2">
-                        <MessageCircle className="h-4 w-4" />
+                    <div className="flex justify-center pt-2">
+                      <Button size="sm" variant="outline" className="w-full">
+                        Scopri di più
                       </Button>
                     </div>
                   </div>
