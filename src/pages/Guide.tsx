@@ -69,7 +69,7 @@ const Guide = () => {
       'stage': Briefcase,
       'freemover': Plane,
       'residenze': Home,
-      'exchange_magistrale': Plane,
+      'exchange_magistrale': Globe,
       'exchange_triennale': Plane,
       'university': Building,
       'milan': MapPin,
@@ -167,10 +167,10 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20">
                     <CardContent className="p-6 text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <IconComponent className="w-8 h-8 text-primary" />
+                      <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center group-hover:from-primary/15 group-hover:to-primary/10 transition-all duration-300 group-hover:scale-110">
+                        <IconComponent className="w-10 h-10 text-primary group-hover:text-primary/90 transition-colors" />
                       </div>
                       <h3 className="text-lg font-semibold mb-3">
                         {categoryTitles[category] || category}
