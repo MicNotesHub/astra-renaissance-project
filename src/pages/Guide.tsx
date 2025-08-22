@@ -167,23 +167,19 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20 h-48 flex flex-col">
-                    <CardContent className="p-6 text-center flex flex-col justify-between h-full">
+                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20 h-52 flex flex-col">
+                    <CardContent className="p-6 text-center flex flex-col h-full">
                       <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center group-hover:from-primary/15 group-hover:to-primary/10 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
                         <IconComponent className="w-10 h-10 text-primary group-hover:text-primary/90 transition-colors" />
                       </div>
-                      <div className="flex-1 flex flex-col justify-center mb-4">
-                        <h3 className="text-lg font-semibold mb-3 line-clamp-2 min-h-[3.5rem]">
-                          {categoryTitles[category] || category}
-                        </h3>
-                      </div>
-                      <div className="mt-auto">
-                        <Link to={`/guide/${category}`}>
-                          <Button className="w-full">
-                            Esplora Guide
-                          </Button>
-                        </Link>
-                      </div>
+                      <h3 className="text-base font-semibold mb-4 line-clamp-2 flex-1 flex items-center justify-center">
+                        {categoryTitles[category] || category}
+                      </h3>
+                      <Link to={`/guide/${category}`} className="mt-auto">
+                        <Button className="w-full">
+                          Esplora Guide
+                        </Button>
+                      </Link>
                     </CardContent>
                   </Card>
                 </motion.div>
