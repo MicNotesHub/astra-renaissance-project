@@ -66,9 +66,8 @@ export const TeamSection = () => {
       const { data, error } = await supabase
         .from('representatives')
         .select('*')
-        .eq('is_active', true)
         .order('section', { ascending: true })
-        .order('order_index', { ascending: true });
+        .order('name', { ascending: true });
 
       if (error) {
         console.error('Error fetching representatives:', error);
@@ -182,9 +181,9 @@ export const TeamSection = () => {
                             >
                               {sectionReps.map((rep, repIndex) => (
                                 <div key={rep.id} className="flex items-center space-x-3 p-3 bg-muted/50 rounded-lg">
-                                  {rep.image_url && (
+                                  {rep.url && (
                                     <img 
-                                      src={rep.image_url} 
+                                      src={rep.url} 
                                       alt={rep.name}
                                       className="w-12 h-12 rounded-full object-cover"
                                       onError={(e) => {
@@ -194,12 +193,6 @@ export const TeamSection = () => {
                                   )}
                                   <div className="flex-1 min-w-0">
                                     <p className="font-medium text-sm truncate">{rep.name}</p>
-                                    {rep.role && (
-                                      <p className="text-xs text-muted-foreground truncate">{rep.role}</p>
-                                    )}
-                                    {rep.bio && (
-                                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{rep.bio}</p>
-                                    )}
                                   </div>
                                 </div>
                               ))}

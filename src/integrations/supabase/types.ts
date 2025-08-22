@@ -581,40 +581,22 @@ export type Database = {
       }
       representatives: {
         Row: {
-          bio: string | null
-          created_at: string
           id: string
-          image_url: string | null
-          is_active: boolean | null
           name: string
-          order_index: number | null
-          role: string | null
           section: string
-          updated_at: string
+          url: string | null
         }
         Insert: {
-          bio?: string | null
-          created_at?: string
           id?: string
-          image_url?: string | null
-          is_active?: boolean | null
           name: string
-          order_index?: number | null
-          role?: string | null
           section: string
-          updated_at?: string
+          url?: string | null
         }
         Update: {
-          bio?: string | null
-          created_at?: string
           id?: string
-          image_url?: string | null
-          is_active?: boolean | null
           name?: string
-          order_index?: number | null
-          role?: string | null
           section?: string
-          updated_at?: string
+          url?: string | null
         }
         Relationships: []
       }
