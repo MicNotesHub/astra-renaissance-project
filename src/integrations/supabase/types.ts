@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -62,6 +62,54 @@ export type Database = {
         }
         Relationships: []
       }
+      CLMG_destinations_exchange: {
+        Row: {
+          codice: number
+          country: string | null
+          highest: number | null
+          id: number
+          lowest: number | null
+          state: string | null
+          uni: string | null
+        }
+        Insert: {
+          codice: number
+          country?: string | null
+          highest?: number | null
+          id?: number
+          lowest?: number | null
+          state?: string | null
+          uni?: string | null
+        }
+        Update: {
+          codice?: number
+          country?: string | null
+          highest?: number | null
+          id?: number
+          lowest?: number | null
+          state?: string | null
+          uni?: string | null
+        }
+        Relationships: []
+      }
+      CLMG_studyplan: {
+        Row: {
+          cfu: number | null
+          course: string
+          id: number
+        }
+        Insert: {
+          cfu?: number | null
+          course: string
+          id?: number
+        }
+        Update: {
+          cfu?: number | null
+          course?: string
+          id?: number
+        }
+        Relationships: []
+      }
       "cours-subject_MS_exchange": {
         Row: {
           cfu: number | null
@@ -83,6 +131,27 @@ export type Database = {
         }
         Relationships: []
       }
+      "course multipliers estimation": {
+        Row: {
+          course: string
+          "GPA mult.": number | null
+          id: number
+          "NC mult": number | null
+        }
+        Insert: {
+          course: string
+          "GPA mult."?: number | null
+          id?: number
+          "NC mult"?: number | null
+        }
+        Update: {
+          course?: string
+          "GPA mult."?: number | null
+          id?: number
+          "NC mult"?: number | null
+        }
+        Relationships: []
+      }
       course_subjects: {
         Row: {
           cfu: number | null
@@ -101,6 +170,93 @@ export type Database = {
           course?: string
           id?: number
           subject?: string | null
+        }
+        Relationships: []
+      }
+      course_subjects_UG: {
+        Row: {
+          cfu: number | null
+          course: string
+          id: number
+          subject: string | null
+        }
+        Insert: {
+          cfu?: number | null
+          course: string
+          id?: number
+          subject?: string | null
+        }
+        Update: {
+          cfu?: number | null
+          course?: string
+          id?: number
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      "course-multiplier_UG": {
+        Row: {
+          cfu_min: number | null
+          course: string
+          id: number
+          multiplier: number | null
+        }
+        Insert: {
+          cfu_min?: number | null
+          course: string
+          id?: number
+          multiplier?: number | null
+        }
+        Update: {
+          cfu_min?: number | null
+          course?: string
+          id?: number
+          multiplier?: number | null
+        }
+        Relationships: []
+      }
+      dest_exc_msc: {
+        Row: {
+          "ADDITIONAL ACADEMIC REQUIREMENTS": string | null
+          "ADDITIONAL LANGUAGE REQUIREMENT": string | null
+          Continent: string | null
+          "Highest Score": string | null
+          ID: number
+          "Lowest Score": string | null
+          NOTES: string | null
+          "OF WHICH": string | null
+          Rankings: string | null
+          "RESERVED/NOT AVAILABLE": string | null
+          "SLOTS 2024/25": number | null
+          University: string | null
+        }
+        Insert: {
+          "ADDITIONAL ACADEMIC REQUIREMENTS"?: string | null
+          "ADDITIONAL LANGUAGE REQUIREMENT"?: string | null
+          Continent?: string | null
+          "Highest Score"?: string | null
+          ID?: number
+          "Lowest Score"?: string | null
+          NOTES?: string | null
+          "OF WHICH"?: string | null
+          Rankings?: string | null
+          "RESERVED/NOT AVAILABLE"?: string | null
+          "SLOTS 2024/25"?: number | null
+          University?: string | null
+        }
+        Update: {
+          "ADDITIONAL ACADEMIC REQUIREMENTS"?: string | null
+          "ADDITIONAL LANGUAGE REQUIREMENT"?: string | null
+          Continent?: string | null
+          "Highest Score"?: string | null
+          ID?: number
+          "Lowest Score"?: string | null
+          NOTES?: string | null
+          "OF WHICH"?: string | null
+          Rankings?: string | null
+          "RESERVED/NOT AVAILABLE"?: string | null
+          "SLOTS 2024/25"?: number | null
+          University?: string | null
         }
         Relationships: []
       }
@@ -200,6 +356,7 @@ export type Database = {
           organizer_contact: string | null
           organizer_name: string | null
           registration_deadline: string | null
+          registration_link: string | null
           registration_required: boolean | null
           start_date: string
           status: string
@@ -222,6 +379,7 @@ export type Database = {
           organizer_contact?: string | null
           organizer_name?: string | null
           registration_deadline?: string | null
+          registration_link?: string | null
           registration_required?: boolean | null
           start_date: string
           status?: string
@@ -244,6 +402,7 @@ export type Database = {
           organizer_contact?: string | null
           organizer_name?: string | null
           registration_deadline?: string | null
+          registration_link?: string | null
           registration_required?: boolean | null
           start_date?: string
           status?: string
@@ -384,6 +543,81 @@ export type Database = {
         }
         Relationships: []
       }
+      "minimum CFU required": {
+        Row: {
+          cfu_min: number | null
+          course: string
+          id: number
+        }
+        Insert: {
+          cfu_min?: number | null
+          course: string
+          id?: number
+        }
+        Update: {
+          cfu_min?: number | null
+          course?: string
+          id?: number
+        }
+        Relationships: []
+      }
+      NC_max: {
+        Row: {
+          course: string
+          id: number
+          NC_MAX: number | null
+        }
+        Insert: {
+          course: string
+          id?: number
+          NC_MAX?: number | null
+        }
+        Update: {
+          course?: string
+          id?: number
+          NC_MAX?: number | null
+        }
+        Relationships: []
+      }
+      representatives: {
+        Row: {
+          bio: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          name: string
+          order_index: number | null
+          role: string | null
+          section: string
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name: string
+          order_index?: number | null
+          role?: string | null
+          section: string
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string
+          order_index?: number | null
+          role?: string | null
+          section?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       resources: {
         Row: {
           academic_year: string
@@ -441,6 +675,33 @@ export type Database = {
           updated_at?: string
           upload_date?: string
           uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      UG_exchange_destinations: {
+        Row: {
+          continent: string
+          id: number
+          max_score: number | null
+          min_score: number | null
+          sel_details: string | null
+          uni_name: string | null
+        }
+        Insert: {
+          continent: string
+          id?: number
+          max_score?: number | null
+          min_score?: number | null
+          sel_details?: string | null
+          uni_name?: string | null
+        }
+        Update: {
+          continent?: string
+          id?: number
+          max_score?: number | null
+          min_score?: number | null
+          sel_details?: string | null
+          uni_name?: string | null
         }
         Relationships: []
       }
