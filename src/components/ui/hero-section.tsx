@@ -68,24 +68,6 @@ export function HeroSection() {
             {t('hero.subtitle')}
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="bg-teal-500 hover:bg-teal-600 text-white font-medium px-8 py-3 text-base rounded-md transition-smooth shadow-lg"
-              onClick={() => {
-                document.getElementById('about')?.scrollIntoView({ 
-                  behavior: 'smooth' 
-                });
-              }}
-            >
-              {t('hero.aboutUs')}
-            </Button>
-            
-            <Button variant="outline" size="lg" className="border-white hover:bg-white transition-smooth font-medium px-8 py-3 text-base rounded-md text-indigo-950">
-              {t('hero.contact')}
-            </Button>
-          </div>
         </motion.div>
 
         {/* Scroll indicator */}

@@ -14,6 +14,8 @@ export function Navigation() {
   const location = useLocation();
   const { t } = useLanguage();
 
+  const { language } = useLanguage();
+  
   const navItems = [{
     name: t('nav.representatives'),
     href: "#team",
@@ -22,11 +24,11 @@ export function Navigation() {
     name: t('nav.handouts'),
     href: "/dispense",
     isExternal: false
-  }, {
+  }, ...(language === 'it' ? [{
     name: t('nav.exchange'),
     href: "#astra-polare",
     isExternal: false
-  }, {
+  }] : []), {
     name: t('nav.directory'),
     href: "#marketplace",
     isExternal: false

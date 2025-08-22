@@ -3,7 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Star, Truck, Shield, ArrowRight, Gift, Handshake } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 export const MarketplaceSection = () => {
+  const { t } = useLanguage();
   const products = [{
     name: "Pink Stanley bottle",
     price: "19€",
@@ -34,16 +36,16 @@ export const MarketplaceSection = () => {
   }];
   const features = [{
     icon: Handshake,
-    title: "Scambio Veloce",
-    description: "Incontra il venditore direttamente in università"
+    title: t('marketplace.features.exchange'),
+    description: t('marketplace.features.exchange.description')
   }, {
     icon: Shield,
-    title: "Community Sicura",
-    description: "Accesso riservato agli studenti universitari"
+    title: t('marketplace.features.community'),
+    description: t('marketplace.features.community.description')
   }, {
     icon: Gift,
-    title: "Zero Comissioni",
-    description: "Scambia o vendi gratuitamente"
+    title: t('marketplace.features.commission'),
+    description: t('marketplace.features.commission.description')
   }];
   return <section id="marketplace" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -59,12 +61,12 @@ export const MarketplaceSection = () => {
         duration: 0.8
       }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text relative inline-block">
-  🛍️ ASTRA x UniMarket
+  🛍️ {t('marketplace.title')}
   <sup className="absolute -top-1 -right-3 text-sm" style={{ color: "#082cb4" }}>©</sup>
 </h2>
 
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Il marketplace ufficiale per studenti Bocconi. Merchandising esclusivo e prodotti essenziali per la vita universitaria.
+            {t('marketplace.subtitle')}
           </p>
         </motion.div>
 
@@ -122,7 +124,7 @@ export const MarketplaceSection = () => {
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <Button size="sm" className="rounded-full" onClick={(e) => { e.stopPropagation(); window.open(product.url, '_blank'); }}>
                         <ShoppingBag className="h-4 w-4 mr-2" />
-                        Aggiungi
+                        {t('marketplace.add')}
                       </Button>
                     </div>
                   </div>
@@ -169,16 +171,16 @@ export const MarketplaceSection = () => {
             <div className="bg-gradient-hero p-8 md:p-12 text-white text-center">
               <div className="max-w-3xl mx-auto">
                 <h3 className="text-3xl md:text-4xl font-bold mb-6">
-                  Scopri il Marketplace Completo
+                  {t('marketplace.cta.title')}
                 </h3>
                 
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 mb-8 mx-auto px-[32px] py-[23px] text-center text-2xl rounded-3xl" onClick={() => window.open('https://uni-market.it', '_blank')}>
-                  Visita UniMarket
+                  {t('marketplace.cta.button')}
                   <ArrowRight className="h-6 w-6" />
                 </Button>
                 
                 <p className="text-lg opacity-90 mb-6">
-                  Oltre 200 prodotti esclusivi per studenti. Libri usati, merchandising ufficiale, gadget tech e molto altro.
+                  {t('marketplace.cta.description')}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

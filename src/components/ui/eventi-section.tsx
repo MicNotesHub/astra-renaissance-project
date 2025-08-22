@@ -5,10 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock, ArrowRight, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
+
 export const EventiSection = () => {
   const [activeView, setActiveView] = useState("prossimi");
   const [eventi, setEventi] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
+
   useEffect(() => {
     const fetchEventi = async () => {
       try {
@@ -31,6 +35,7 @@ export const EventiSection = () => {
     };
     fetchEventi();
   }, []);
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('it-IT', {
       day: 'numeric',
@@ -38,22 +43,26 @@ export const EventiSection = () => {
       year: 'numeric'
     });
   };
+
   const formatTime = (dateString: string) => {
     return new Date(dateString).toLocaleTimeString('it-IT', {
       hour: '2-digit',
       minute: '2-digit'
     });
   };
+
   const eventiProssimi = eventi.filter(evento => {
     const eventDate = new Date(evento.start_date);
     const today = new Date();
     return eventDate >= today && evento.status === 'upcoming';
   });
+
   const eventiPassati = eventi.filter(evento => {
     const eventDate = new Date(evento.start_date);
     const today = new Date();
     return eventDate < today || evento.status === 'completed';
   });
+
   return <section id="eventi" className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-4">
         <motion.div initial={{
@@ -68,10 +77,10 @@ export const EventiSection = () => {
         duration: 0.8
       }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            📅 Eventi e Conferenze
+            📅 {t('events.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Partecipa agli eventi ASTRA. Workshop, conferenze e networking per arricchire la tua esperienza universitaria.
+            {t('events.subtitle')}
           </p>
         </motion.div>
 
@@ -90,10 +99,10 @@ export const EventiSection = () => {
       }} className="flex justify-center mb-12">
           <div className="glass-card p-1 rounded-lg inline-flex">
             <Button variant={activeView === "prossimi" ? "default" : "ghost"} onClick={() => setActiveView("prossimi")} className="rounded-md">
-              Prossimi Eventi
+              {t('events.upcoming')}
             </Button>
             <Button variant={activeView === "passati" ? "default" : "ghost"} onClick={() => setActiveView("passati")} className="rounded-md">
-              Eventi Passati
+              {t('events.past')}
             </Button>
           </div>
         </motion.div>
@@ -101,9 +110,9 @@ export const EventiSection = () => {
         {/* Eventi Prossimi */}
         {activeView === "prossimi" && <div className="space-y-6 mb-12">
             {loading ? <div className="text-center py-8">
-                <p className="text-muted-foreground">Caricamento eventi...</p>
+                <p className="text-muted-foreground">{t('events.loading')}</p>
               </div> : eventiProssimi.length === 0 ? <div className="text-center py-8">
-                <p className="text-muted-foreground">Nessun evento prossimo disponibile</p>
+                <p className="text-muted-foreground">{t('events.no-upcoming')}</p>
               </div> : eventiProssimi.map((evento, index) => <motion.div key={evento.id} initial={{
           opacity: 0,
           y: 30
@@ -154,12 +163,12 @@ export const EventiSection = () => {
                         <div className="flex flex-col justify-between">
                           <div className="space-y-3">
                             {evento.registration_link ? <Button className="w-full group-hover:bg-primary-light transition-colors" onClick={() => window.open(evento.registration_link, '_blank')}>
-                                Registrati all'Evento
+                                {t('events.register')}
                               </Button> : <Button className="w-full group-hover:bg-primary-light transition-colors" disabled>
-                                Registrazione non disponibile
+                                {t('events.registration-unavailable')}
                               </Button>}
                             <Button variant="outline" className="w-full">
-                              Aggiungi al Calendario
+                              {t('events.add-calendar')}
                             </Button>
                           </div>
                         </div>
@@ -172,9 +181,9 @@ export const EventiSection = () => {
         {/* Eventi Passati */}
         {activeView === "passati" && <div className="grid md:grid-cols-2 gap-6 mb-12">
             {loading ? <div className="text-center py-8">
-                <p className="text-muted-foreground">Caricamento eventi...</p>
+                <p className="text-muted-foreground">{t('events.loading')}</p>
               </div> : eventiPassati.length === 0 ? <div className="text-center py-8">
-                <p className="text-muted-foreground">Nessun evento passato disponibile</p>
+                <p className="text-muted-foreground">{t('events.no-past')}</p>
               </div> : eventiPassati.map((evento, index) => <motion.div key={evento.id} initial={{
           opacity: 0,
           y: 30

@@ -4,36 +4,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Calculator, TrendingUp, GraduationCap, Users } from "lucide-react";
 import { CalculatorModal } from "../calculators/calculator-modal";
+import { useLanguage } from "@/contexts/LanguageContext";
 export const CalcolatoriSection = () => {
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
+  const { t } = useLanguage();
+  
   const calcolatori = [{
     id: "graduation",
-    title: "GPA & Graduation Score",
-    description: "Calcola il tuo voto di laurea previsto basato sui tuoi esami",
+    title: t('calculators.gpa.title'),
+    description: t('calculators.gpa.description'),
     icon: GraduationCap,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
     features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"]
   }, {
     id: "exchange-calculator",
-    title: "Exchange Calculator MSc",
-    description: "Calcola il tuo Exchange Score e scopri le destinazioni disponibili",
+    title: t('calculators.exchange-msc.title'),
+    description: t('calculators.exchange-msc.description'),
     icon: Calculator,
     color: "text-purple-500",
     bgColor: "bg-purple-50 dark:bg-purple-950/30",
     features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
   }, {
     id: "exchange-calculator-clmg",
-    title: "Exchange Calculator CLMG",
-    description: "Calcola il tuo punteggio per l'exchange in Giurisprudenza",
+    title: t('calculators.exchange-clmg.title'),
+    description: t('calculators.exchange-clmg.description'),
     icon: TrendingUp,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
     features: ["Media pesata", "Destinazioni per continente", "Bonus 4° anno"]
   }, {
     id: "exchange-calculator-ug",
-    title: "Exchange Calculator UG",
-    description: "Calcola il tuo Exchange Score per l'Undergraduate",
+    title: t('calculators.exchange-ug.title'),
+    description: t('calculators.exchange-ug.description'),
     icon: Users,
     color: "text-emerald-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
@@ -54,10 +57,10 @@ export const CalcolatoriSection = () => {
       }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text flex items-center justify-center gap-3">
             <Calculator className="h-12 w-12 text-primary" />
-            Calcolatori Smart
+            {t('calculators.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Tool intelligenti per ottimizzare il tuo percorso universitario. Pianifica, calcola e raggiungi i tuoi obiettivi accademici.
+            {t('calculators.subtitle')}
           </p>
         </motion.div>
 
@@ -90,7 +93,7 @@ export const CalcolatoriSection = () => {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-muted-foreground">Funzionalità:</p>
+                      <p className="text-sm font-medium text-muted-foreground">{t('calculators.features')}</p>
                       <ul className="space-y-1">
                         {calc.features.map((feature, fIndex) => <li key={fIndex} className="text-sm flex items-center gap-2">
                             <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
@@ -100,7 +103,7 @@ export const CalcolatoriSection = () => {
                     </div>
                     
                     <Button className="w-full group-hover:bg-primary-light transition-colors" onClick={() => setSelectedCalculator(calc.id)}>
-                      Usa Calcolatore
+                      {t('calculators.use')}
                     </Button>
                   </CardContent>
                 </Card>
