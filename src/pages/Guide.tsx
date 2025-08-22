@@ -86,7 +86,7 @@ const Guide = () => {
       'stage': Briefcase,
       'freemover': Plane,
       'residenze': Home,
-      'exchange_magistrale': Globe,
+      'exchange_magistrale': Plane,
       'exchange_triennale': Plane,
       'university': Building,
       'milan': MapPin,
