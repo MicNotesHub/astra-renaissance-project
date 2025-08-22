@@ -82,6 +82,15 @@ export const TeamSection = () => {
     }
   };
 
+  // Helper function to get image URL from filename
+  const getImageUrl = (filename: string) => {
+    if (!filename) return null;
+    const { data } = supabase.storage
+      .from('representatives')
+      .getPublicUrl(filename);
+    return data.publicUrl;
+  };
+
   // Group representatives by section
   const representativesBySection = representatives.reduce((acc, rep) => {
     if (!acc[rep.section]) {
@@ -181,16 +190,16 @@ export const TeamSection = () => {
                             >
                               {sectionReps.map((rep, repIndex) => (
                                 <div key={rep.id} className="flex items-center space-x-3 p-3 bg-muted/50 rounded-lg">
-                                  {rep.url && (
-                                    <img 
-                                      src={rep.url} 
-                                      alt={rep.name}
-                                      className="w-12 h-12 rounded-full object-cover"
-                                      onError={(e) => {
-                                        e.currentTarget.src = '/placeholder.svg';
-                                      }}
-                                    />
-                                  )}
+                                   {rep.image_filename && (
+                                     <img 
+                                       src={getImageUrl(rep.image_filename) || '/placeholder.svg'} 
+                                       alt={rep.name}
+                                       className="w-12 h-12 rounded-full object-cover"
+                                       onError={(e) => {
+                                         e.currentTarget.src = '/placeholder.svg';
+                                       }}
+                                     />
+                                   )}
                                   <div className="flex-1 min-w-0">
                                     <p className="font-medium text-sm truncate">{rep.name}</p>
                                   </div>

@@ -582,21 +582,21 @@ export type Database = {
       representatives: {
         Row: {
           id: string
+          image_filename: string | null
           name: string
           section: string
-          url: string | null
         }
         Insert: {
           id?: string
+          image_filename?: string | null
           name: string
           section: string
-          url?: string | null
         }
         Update: {
           id?: string
+          image_filename?: string | null
           name?: string
           section?: string
-          url?: string | null
         }
         Relationships: []
       }
