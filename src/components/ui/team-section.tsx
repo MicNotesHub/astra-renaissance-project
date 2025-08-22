@@ -1,13 +1,10 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, Mail, Linkedin, MessageCircle, Users } from "lucide-react";
-import { useState } from "react";
+import { Mail, Linkedin, MessageCircle } from "lucide-react";
+
 export const TeamSection = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOrgano, setSelectedOrgano] = useState("tutti");
   const teamMembers = [{
     name: "Marco Andreoli",
     role: "Presidente",
@@ -121,12 +118,7 @@ export const TeamSection = () => {
     },
     expertise: ["Student Welfare", "Support Services", "Mental Health"]
   }];
-  const organi = ["tutti", "Presidenza", "Senato Accademico", "Eventi", "Innovazione", "Comunicazione", "Exchange", "Welfare"];
-  const filteredMembers = teamMembers.filter(member => {
-    const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) || member.role.toLowerCase().includes(searchTerm.toLowerCase()) || member.course.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesOrgano = selectedOrgano === "tutti" || member.organo === selectedOrgano;
-    return matchesSearch && matchesOrgano;
-  });
+
   return <section id="team" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div initial={{
@@ -148,35 +140,9 @@ export const TeamSection = () => {
           </p>
         </motion.div>
 
-        {/* Search and Filters */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.6,
-        delay: 0.2
-      }} className="mb-12 flex flex-col md:flex-row gap-4 items-center justify-between">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Cerca per nome, ruolo o corso..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10" />
-          </div>
-          
-          <div className="flex gap-2 items-center">
-            <Filter className="h-4 w-4 text-muted-foreground" />
-            {organi.map(organo => <Button key={organo} variant={selectedOrgano === organo ? "default" : "outline"} size="sm" onClick={() => setSelectedOrgano(organo)} className="capitalize">
-                {organo}
-              </Button>)}
-          </div>
-        </motion.div>
-
         {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredMembers.map((member, index) => <motion.div key={index} initial={{
+          {teamMembers.map((member, index) => <motion.div key={index} initial={{
           opacity: 0,
           y: 30
         }} whileInView={{
@@ -233,16 +199,6 @@ export const TeamSection = () => {
               </Card>
             </motion.div>)}
         </div>
-
-        {filteredMembers.length === 0 && <motion.div initial={{
-        opacity: 0
-      }} whileInView={{
-        opacity: 1
-      }} viewport={{
-        once: true
-      }} className="text-center py-12">
-            <p className="text-muted-foreground">Nessun membro trovato con i filtri attuali.</p>
-          </motion.div>}
 
       </div>
     </section>;
