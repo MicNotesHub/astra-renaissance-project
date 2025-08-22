@@ -180,19 +180,20 @@ export const TeamSection = () => {
                               exit={{ opacity: 0, height: 0 }}
                               className="mt-4 space-y-4"
                             >
-                              <div className="grid grid-cols-2 gap-4">
+                              <div className="grid grid-cols-2 gap-6">
                                 {sectionReps.map((rep, repIndex) => (
-                                  <div key={rep.id} className="flex flex-col items-center">
+                                  <div key={rep.id} className="flex flex-col items-center space-y-2">
                                     {rep.url && (
                                       <img 
                                         src={rep.url || '/placeholder.svg'} 
                                         alt={rep.name}
-                                        className="w-20 h-20 rounded-full object-cover shadow-md hover:shadow-lg transition-shadow"
+                                        className="w-28 h-28 rounded-full object-cover shadow-md hover:shadow-lg transition-shadow"
                                         onError={(e) => {
                                           e.currentTarget.src = '/placeholder.svg';
                                         }}
                                       />
                                     )}
+                                    <p className="text-sm font-medium text-center">{rep.name}</p>
                                   </div>
                                 ))}
                               </div>
