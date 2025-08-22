@@ -167,15 +167,15 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20 h-52 flex flex-col">
-                    <CardContent className="p-6 text-center flex flex-col h-full">
-                      <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center group-hover:from-primary/15 group-hover:to-primary/10 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20 h-56 flex flex-col">
+                    <CardContent className="p-6 text-center flex flex-col h-full gap-4">
+                      <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center group-hover:from-primary/15 group-hover:to-primary/10 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
                         <IconComponent className="w-10 h-10 text-primary group-hover:text-primary/90 transition-colors" />
                       </div>
-                      <h3 className="text-base font-semibold mb-4 line-clamp-2 flex-1 flex items-center justify-center">
+                      <h3 className="text-sm font-semibold line-clamp-3 flex-1 min-h-0">
                         {categoryTitles[category] || category}
                       </h3>
-                      <Link to={`/guide/${category}`} className="mt-auto">
+                      <Link to={`/guide/${category}`} className="flex-shrink-0">
                         <Button className="w-full">
                           Esplora Guide
                         </Button>
