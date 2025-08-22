@@ -1,17 +1,20 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Lightbulb, MessageCircle, Heart } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function ValuesSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="valori" className="py-32 bg-background relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20 animate-fade-in">
           <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            I Nostri Valori
+            {t('values.title')}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            I principi che guidano ogni nostra azione e decisione
+            {t('values.subtitle')}
           </p>
         </div>
 
@@ -19,22 +22,22 @@ export function ValuesSection() {
           {[
             {
               icon: Lightbulb,
-              title: "Ambizione",
-              description: "Non è arrivismo, ma volontà di spingersi oltre. Guardare avanti, cercare soluzioni migliori e non fermarsi mai.",
+              title: t('values.ambition.title'),
+              description: t('values.ambition.description'),
               gradient: "from-yellow-400 to-orange-500",
               delay: "0s"
             },
             {
               icon: MessageCircle,
-              title: "Comunicazione", 
-              description: "Le idee valgono solo se vengono ascoltate. Il dialogo tra studenti e Università è la chiave per costruire un vero cambiamento.",
+              title: t('values.communication.title'), 
+              description: t('values.communication.description'),
               gradient: "from-blue-400 to-purple-500",
               delay: "0.3s"
             },
             {
               icon: Heart,
-              title: "Dedizione",
-              description: "Nulla si ottiene senza costanza e impegno. Solo chi si mette in gioco ogni giorno può lasciare il segno.",
+              title: t('values.dedication.title'),
+              description: t('values.dedication.description'),
               gradient: "from-pink-400 to-red-500",
               delay: "0.6s"
             }

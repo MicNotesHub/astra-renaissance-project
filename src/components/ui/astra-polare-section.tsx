@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import astraLogo from "@/assets/astra-logo.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface MediaContent {
   id: string;
@@ -24,7 +25,8 @@ interface MediaContent {
 }
 
 export const AstraPolareSection = () => {
-  const [activeTab, setActiveTab] = useState("recenti");
+  const { t } = useLanguage();
+  const [activeTab, setActiveTab] = useState(t('astrapolare.recent'));
   const [mediaContent, setMediaContent] = useState<MediaContent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -37,9 +39,9 @@ export const AstraPolareSection = () => {
   ];
 
   const tabs = [
-    { id: "recenti", label: "Più Recenti" },
-    { id: "popolari", label: "Più Visti" },
-    { id: "trending", label: "Trending" }
+    { id: "recenti", label: t('astrapolare.recent') },
+    { id: "popolari", label: t('astrapolare.popular') },
+    { id: "trending", label: t('astrapolare.trending') }
   ];
 
   // Fetch media content from Supabase
@@ -60,8 +62,8 @@ export const AstraPolareSection = () => {
       setMediaContent((data || []) as MediaContent[]);
     } catch (err) {
       console.error('Error fetching media content:', err);
-      setError('Errore nel caricamento dei contenuti');
-      toast.error('Errore nel caricamento dei contenuti');
+      setError(t('astrapolare.error'));
+      toast.error(t('astrapolare.error'));
     } finally {
       setLoading(false);
     }
@@ -147,10 +149,10 @@ export const AstraPolareSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            📰 Astra Polare
+            📰 {t('astrapolare.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Il nostro magazine digitale. Contenuti, storie e media che raccontano la vita universitaria dal punto di vista degli studenti.
+            {t('astrapolare.subtitle')}
           </p>
         </motion.div>
 
@@ -180,7 +182,7 @@ export const AstraPolareSection = () => {
         {loading && (
           <div className="flex justify-center items-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <span className="ml-2 text-muted-foreground">Caricamento contenuti...</span>
+            <span className="ml-2 text-muted-foreground">{t('astrapolare.loading')}</span>
           </div>
         )}
 
@@ -189,7 +191,7 @@ export const AstraPolareSection = () => {
           <div className="text-center py-12">
             <p className="text-red-500 mb-4">{error}</p>
             <Button onClick={fetchMediaContent} variant="outline">
-              Riprova
+              {t('astrapolare.retry')}
             </Button>
           </div>
         )}
@@ -222,7 +224,7 @@ export const AstraPolareSection = () => {
                         {item.content_type === "video" ? (
                           <Badge className="text-xs">{item.duration}</Badge>
                         ) : (
-                          <Badge className="text-xs">{item.slides} slides</Badge>
+                          <Badge className="text-xs">{item.slides} {t('astrapolare.slides')}</Badge>
                         )}
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -252,7 +254,7 @@ export const AstraPolareSection = () => {
                           {item.likes}
                         </div>
                         <div className="flex items-center gap-1">
-                          <span>{item.views} views</span>
+                          <span>{item.views} {t('astrapolare.views')}</span>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -274,7 +276,7 @@ export const AstraPolareSection = () => {
         {/* Empty State */}
         {!loading && !error && activeTab !== "trending" && mediaContent.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Nessun contenuto disponibile al momento.</p>
+            <p className="text-muted-foreground">{t('astrapolare.noContent')}</p>
           </div>
         )}
 
@@ -294,7 +296,7 @@ export const AstraPolareSection = () => {
                     <div className="text-2xl font-bold text-primary">#{index + 1}</div>
                     <div>
                       <h3 className="font-semibold">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.views} visualizzazioni</p>
+                      <p className="text-sm text-muted-foreground">{item.views} {t('astrapolare.visualizations')}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 text-green-600">
@@ -317,23 +319,23 @@ export const AstraPolareSection = () => {
         >
           <Card className="glass-card premium-shadow max-w-2xl mx-auto">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-4">Seguici sui Social</h3>
+              <h3 className="text-2xl font-bold mb-4">{t('astrapolare.followSocial')}</h3>
               <p className="text-muted-foreground mb-6">
-                Non perdere i nostri contenuti! Seguici su TikTok e Instagram per restare aggiornato.
+                {t('astrapolare.followDescription')}
               </p>
               <div className="flex justify-center gap-4">
                 <Button 
                   className="flex items-center gap-2"
                   onClick={() => window.open('https://www.tiktok.com/@astrabocconi?_t=ZN-8yM6RRp0ryg&_r=1', '_blank', 'noopener,noreferrer')}
                 >
-                  📱 TikTok
+                  {t('astrapolare.tiktok')}
                 </Button>
                 <Button 
                   variant="outline" 
                   className="flex items-center gap-2"
                   onClick={() => window.open('https://www.instagram.com/astrabocconi?igsh=YmU0anJ6MXNqNHk2', '_blank', 'noopener,noreferrer')}
                 >
-                  📸 Instagram
+                  {t('astrapolare.instagram')}
                 </Button>
               </div>
             </CardContent>

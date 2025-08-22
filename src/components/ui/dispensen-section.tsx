@@ -7,6 +7,7 @@ import { FileText, Download, GraduationCap, ArrowRight, Search } from "lucide-re
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Handout {
   id: number;
@@ -18,6 +19,7 @@ interface Handout {
 }
 
 export const DispensenSection = () => {
+  const { t } = useLanguage();
   const [selectedYear, setSelectedYear] = useState("First Year");
   const [handouts, setHandouts] = useState<Handout[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,9 +27,9 @@ export const DispensenSection = () => {
   const [loading, setLoading] = useState(true);
 
   const yearOptions = [
-    { key: "First Year", display: "1° Anno", route: "/dispense/primo-anno" },
-    { key: "Second Year", display: "2° Anno", route: "/dispense/secondo-anno" },
-    { key: "Third Year", display: "3° Anno", route: "/dispense/terzo-anno" }
+    { key: "First Year", display: t('handouts.firstYear'), route: "/dispense/primo-anno" },
+    { key: "Second Year", display: t('handouts.secondYear'), route: "/dispense/secondo-anno" },
+    { key: "Third Year", display: t('handouts.thirdYear'), route: "/dispense/terzo-anno" }
   ];
 
   useEffect(() => {
@@ -104,10 +106,10 @@ export const DispensenSection = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text flex items-center justify-center gap-3">
             <GraduationCap className="h-12 w-12 text-primary" />
-            Dispense e Guide
+            {t('handouts.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Accedi alle risorse di studio condivise dalla community. Trova dispense, riassunti e guide per ogni corso.
+            {t('handouts.subtitle')}
           </p>
         </motion.div>
 
@@ -122,7 +124,7 @@ export const DispensenSection = () => {
           <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Cerca per materia o nome file..."
+              placeholder={t('handouts.search')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -158,7 +160,7 @@ export const DispensenSection = () => {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Caricamento dispense...</p>
+            <p className="text-muted-foreground">{t('handouts.loading')}</p>
           </div>
         ) : (
           <>
@@ -191,7 +193,7 @@ export const DispensenSection = () => {
                     <CardContent>
                       <div className="space-y-4">
                         <div className="flex items-center justify-between text-sm text-muted-foreground">
-                          <span>Caricato: {formatDate(handout.uploaded_at)}</span>
+                          <span>{t('handouts.uploaded')} {formatDate(handout.uploaded_at)}</span>
                         </div>
                         
                         <Button 
@@ -199,7 +201,7 @@ export const DispensenSection = () => {
                           onClick={() => window.open(handout.file_url, '_blank')}
                         >
                           <Download className="h-4 w-4" />
-                          Scarica PDF
+                          {t('handouts.download')}
                         </Button>
                       </div>
                     </CardContent>
@@ -219,7 +221,7 @@ export const DispensenSection = () => {
               >
                 <Link to={selectedYearOption?.route || "/dispense"}>
                   <Button size="lg" className="flex items-center gap-2">
-                    Vedi tutte le dispense del {selectedYearOption?.display}
+                    {t('handouts.seeAll')} {selectedYearOption?.display}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
@@ -236,11 +238,11 @@ export const DispensenSection = () => {
                 className="text-center"
               >
                 <p className="text-muted-foreground mb-4">
-                  {handouts.length} risultat{handouts.length === 1 ? 'o' : 'i'} trovato per "{searchTerm}"
+                  {handouts.length} {t('handouts.results')}{handouts.length === 1 ? 'o' : 'i'} {t('handouts.resultsFound')} "{searchTerm}"
                 </p>
                 <Link to="/dispense">
                   <Button size="lg" className="flex items-center gap-2">
-                    Vedi tutte le dispense
+                    {t('handouts.seeAllGeneral')}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
@@ -257,8 +259,8 @@ export const DispensenSection = () => {
                 <FileText className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
                 <p className="text-muted-foreground">
                   {isSearching 
-                    ? `Nessuna dispensa trovata per "${searchTerm}".`
-                    : `Nessuna dispensa disponibile per ${selectedYearOption?.display}.`
+                    ? `${t('handouts.noResults')} ${t('handouts.noResultsSearch')} "${searchTerm}".`
+                    : `${t('handouts.noResults')} ${t('handouts.noResultsYear')} ${selectedYearOption?.display}.`
                   }
                 </p>
               </motion.div>

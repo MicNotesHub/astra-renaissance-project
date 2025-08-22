@@ -5,10 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Mail, Linkedin, MessageCircle, Users } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const TeamSection = () => {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOrgano, setSelectedOrgano] = useState("tutti");
+  const [selectedOrgano, setSelectedOrgano] = useState(t('team.all'));
 
   const teamMembers = [
     {
@@ -133,13 +135,13 @@ export const TeamSection = () => {
     }
   ];
 
-  const organi = ["tutti", "Presidenza", "Senato Accademico", "Eventi", "Innovazione", "Comunicazione", "Exchange", "Welfare"];
+  const organi = [t('team.all'), t('team.presidency'), t('team.senate'), t('team.events'), t('team.innovation'), t('team.communication'), t('team.exchange'), t('team.welfare')];
 
   const filteredMembers = teamMembers.filter(member => {
     const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          member.course.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesOrgano = selectedOrgano === "tutti" || member.organo === selectedOrgano;
+    const matchesOrgano = selectedOrgano === t('team.all') || member.organo === selectedOrgano;
     return matchesSearch && matchesOrgano;
   });
 
@@ -154,10 +156,10 @@ export const TeamSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            🧑‍💻 Il Nostro Team
+            🧑‍💻 {t('team.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Conosci i rappresentanti che lavorano per migliorare la tua esperienza universitaria. Un team diversificato con competenze complementari.
+            {t('team.subtitle')}
           </p>
         </motion.div>
 
@@ -172,7 +174,7 @@ export const TeamSection = () => {
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Cerca per nome, ruolo o corso..."
+              placeholder={t('team.search')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -265,7 +267,7 @@ export const TeamSection = () => {
             viewport={{ once: true }}
             className="text-center py-12"
           >
-            <p className="text-muted-foreground">Nessun membro trovato con i filtri attuali.</p>
+            <p className="text-muted-foreground">{t('team.no-results')}</p>
           </motion.div>
         )}
 
@@ -282,19 +284,19 @@ export const TeamSection = () => {
               <div className="grid md:grid-cols-4 gap-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">12</div>
-                  <div className="text-sm text-muted-foreground">Rappresentanti Attivi</div>
+                  <div className="text-sm text-muted-foreground">{t('team.stats.representatives')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">4</div>
-                  <div className="text-sm text-muted-foreground">Organi Rappresentati</div>
+                  <div className="text-sm text-muted-foreground">{t('team.stats.bodies')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">8</div>
-                  <div className="text-sm text-muted-foreground">Corsi di Laurea</div>
+                  <div className="text-sm text-muted-foreground">{t('team.stats.courses')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">2000+</div>
-                  <div className="text-sm text-muted-foreground">Studenti Rappresentati</div>
+                  <div className="text-sm text-muted-foreground">{t('team.stats.students')}</div>
                 </div>
               </div>
             </CardContent>
