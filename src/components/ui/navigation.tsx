@@ -15,10 +15,6 @@ export function Navigation() {
   const { t } = useLanguage();
 
   const navItems = [{
-    name: t('nav.elections'),
-    href: "#elezioni",
-    isExternal: false
-  }, {
     name: t('nav.representatives'),
     href: "#team",
     isExternal: false
