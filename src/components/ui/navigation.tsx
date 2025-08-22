@@ -4,41 +4,45 @@ import { Menu, X, ExternalLink, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-const navItems = [{
-  name: "Elezioni 2025",
-  href: "#elezioni",
-  isExternal: false
-}, {
-  name: "Rappresentanti",
-  href: "#team",
-  isExternal: false
-}, {
-  name: "Dispense",
-  href: "/dispense",
-  isExternal: false
-}, {
-  name: "Exchange",
-  href: "#astra-polare",
-  isExternal: false
-}, {
-  name: "Rubrica",
-  href: "#marketplace",
-  isExternal: false
-}, {
-  name: "Guide",
-  href: "/guide",
-  isExternal: false
-}, {
-  name: "About",
-  href: "#about",
-  isExternal: false
-}];
+import { LanguageToggle } from "@/components/ui/language-toggle";
+import { useLanguage } from "@/contexts/LanguageContext";
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isOverWhiteSection, setIsOverWhiteSection] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navItems = [{
+    name: "Elezioni 2025",
+    href: "#elezioni",
+    isExternal: false
+  }, {
+    name: t('nav.about'),
+    href: "#team",
+    isExternal: false
+  }, {
+    name: t('nav.handouts'),
+    href: "/dispense",
+    isExternal: false
+  }, {
+    name: "Exchange",
+    href: "#astra-polare",
+    isExternal: false
+  }, {
+    name: "Rubrica",
+    href: "#marketplace",
+    isExternal: false
+  }, {
+    name: t('nav.guides'),
+    href: "/guide",
+    isExternal: false
+  }, {
+    name: t('nav.about'),
+    href: "#about",
+    isExternal: false
+  }];
 
   // Always check if on pages with white backgrounds
   const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide');
@@ -134,11 +138,23 @@ export function Navigation() {
               opacity: 1,
               scale: 1
             }} transition={{
+              delay: 0.6
+            }}>
+                <LanguageToggle />
+              </motion.div>
+              
+              <motion.div initial={{
+              opacity: 0,
+              scale: 0.8
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
               delay: 0.7
             }}>
                 <Button size="sm" onClick={handleContactClick} className="ml-4 bg-primary hover:bg-primary/90 text-white font-medium px-4 py-2 rounded-full text-sm transition-all duration-200 hover:scale-105 hover:shadow-lg">
                   <Mail className="h-4 w-4 mr-2" />
-                  Contattaci
+                  {t('hero.contact')}
                 </Button>
               </motion.div>
             </div>
@@ -205,10 +221,13 @@ export function Navigation() {
               y: 0
             }} transition={{
               delay: navItems.length * 0.05
-            }} className="pt-2 mt-2 border-t border-border/20">
+            }} className="pt-2 mt-2 border-t border-border/20 space-y-2">
+                  <div className="flex justify-center">
+                    <LanguageToggle />
+                  </div>
                   <Button onClick={handleContactClick} className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg text-sm transition-all duration-200">
                     <Mail className="h-4 w-4 mr-2" />
-                    Contattaci
+                    {t('hero.contact')}
                   </Button>
                 </motion.div>
               </motion.div>

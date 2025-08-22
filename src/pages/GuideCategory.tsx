@@ -6,6 +6,7 @@ import { ArrowLeft, FileText, Users, GraduationCap, Briefcase, Plane, Home, Buil
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Guide {
   id: string;
@@ -22,6 +23,11 @@ const GuideCategory: React.FC = () => {
   const [guides, setGuides] = useState<Guide[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { t } = useLanguage();
+
+  const getCategoryTitle = (category: string) => {
+    return t(`category.${category}.title`) || category;
+  };
 
   const categoryTitles: Record<string, string> = {
     'associations': 'Associations 101: scopri le associazioni Bocconi!',
@@ -94,7 +100,7 @@ const GuideCategory: React.FC = () => {
       if (error) {
         console.error('Error fetching guides:', error);
         toast({
-          title: "Errore",
+          title: t('common.error'),
           description: "Impossibile caricare le guide",
           variant: "destructive",
         });
@@ -105,8 +111,8 @@ const GuideCategory: React.FC = () => {
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Errore",
-        description: "Si è verificato un errore imprevisto",
+        title: t('common.error'),
+        description: t('common.unexpectedError'),
         variant: "destructive",
       });
     } finally {
@@ -125,7 +131,7 @@ const GuideCategory: React.FC = () => {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Caricamento...</p>
+            <p className="text-muted-foreground">{t('common.loading')}</p>
           </div>
         </div>
       </div>

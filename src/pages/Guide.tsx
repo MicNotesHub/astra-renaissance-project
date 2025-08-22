@@ -6,6 +6,7 @@ import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPi
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Guide {
   id: string;
@@ -20,6 +21,15 @@ interface Guide {
 const Guide = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
+
+  const getCategoryTitle = (category: string) => {
+    return t(`category.${category}.title`) || category;
+  };
+
+  const getCategoryDescription = (category: string) => {
+    return t(`category.${category}.description`) || "";
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -142,7 +152,7 @@ const Guide = () => {
       <div className="min-h-screen bg-background">
         <Navigation />
         <div className="container mx-auto px-4 pt-24 pb-12">
-          <div className="text-center">Loading...</div>
+          <div className="text-center">{t('common.loading')}</div>
         </div>
       </div>
     );
@@ -160,15 +170,15 @@ const Guide = () => {
               <Link to="/" className="mr-6">
                 <Button variant="outline" size="sm">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Torna alla Home
+                  {t('guide.backToHome')}
                 </Button>
               </Link>
             </div>
             <h1 className="text-4xl font-bold text-foreground mb-4">
-              Guide Universitarie
+              {t('guide.title')}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Le nostre guide, dagli studenti per gli studenti. Seleziona una categoria per esplorare le guide disponibili.
+              {t('guide.subtitle')}
             </p>
           </div>
 
@@ -191,15 +201,15 @@ const Guide = () => {
                       </div>
                       <div className="flex-1 flex flex-col justify-center min-h-0">
                         <h3 className="text-lg font-semibold mb-2">
-                          {categoryTitles[category] || category}
+                          {getCategoryTitle(category)}
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          {categoryDescriptions[category] || ''}
+                          {getCategoryDescription(category)}
                         </p>
                       </div>
                       <Link to={`/guide/${category}`} className="flex-shrink-0">
                         <Button className="w-full">
-                          Esplora Guide
+                          {t('guide.explore')}
                         </Button>
                       </Link>
                     </CardContent>
@@ -213,9 +223,9 @@ const Guide = () => {
           {orderedCategories.length === 0 && (
             <div className="text-center py-12">
               <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Nessuna categoria trovata</h3>
+              <h3 className="text-xl font-semibold mb-2">{t('guide.noCategories')}</h3>
               <p className="text-muted-foreground">
-                Non sono ancora disponibili guide.
+                {t('guide.noCategoriesDescription')}
               </p>
             </div>
           )}
