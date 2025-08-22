@@ -9,7 +9,6 @@ const socialLinks = [
 
 const quickLinks = [
   { name: "Chi Siamo", href: "#about" },
-  { name: "Programma Elettorale", href: "#programma" },
   { name: "Rappresentanti", href: "#rappresentanti" },
   { name: "Dispense", href: "#dispense" },
   { name: "Exchange", href: "#exchange" },
