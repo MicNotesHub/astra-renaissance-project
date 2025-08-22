@@ -244,39 +244,6 @@ export const TeamSection = () => {
             <p className="text-muted-foreground">Nessun membro trovato con i filtri attuali.</p>
           </motion.div>}
 
-        {/* Stats */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.8,
-        delay: 0.4
-      }} className="text-center">
-          <Card className="glass-card premium-shadow max-w-4xl mx-auto">
-            <CardContent className="p-8">
-              <div className="grid md:grid-cols-4 gap-6">
-                
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">4</div>
-                  <div className="text-sm text-muted-foreground">Organi Rappresentati</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">8</div>
-                  <div className="text-sm text-muted-foreground">Corsi di Laurea</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">2000+</div>
-                  <div className="text-sm text-muted-foreground">Studenti Rappresentati</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
       </div>
     </section>;
 };
