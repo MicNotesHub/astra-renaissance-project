@@ -45,20 +45,37 @@ const Guide = () => {
   };
 
   const categoryTitles: Record<string, string> = {
-    'associations': 'Associations 101: scopri le associazioni Bocconi!',
-    'opzionali': 'Opzionali 101: le nostre guide per la scelta dei tuoi opzionali!',
-    'graduate': 'Graduate 101: le nostre guide per la tua magistrale!',
-    'stage': 'Stage 101: le nostre guide per il tuo stage!',
-    'freemover': 'Freemover 101: le nostre guide per il freemover!',
-    'residenze': 'Residenze 101: le nostre guide per le residenze degli studenti!',
-    'exchange_magistrale': 'Exchange 101: le nostre guide per il tuo exchange magistrale!',
-    'exchange_triennale': 'Exchange 101: le nostre guide per il tuo exchange triennale!',
-    'university': 'University 101: le nostre guide al primo anno di Università!',
-    'milan': 'Milan 101: scopri Milano prima di trasferirti!',
-    'burocrazia': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
+    'associations': 'Associations 101',
+    'opzionali': 'Opzionali 101',
+    'graduate': 'Graduate 101',
+    'stage': 'Stage 101',
+    'freemover': 'Freemover 101',
+    'residenze': 'Residenze 101',
+    'exchange_magistrale': 'Exchange 101 Magistrale',
+    'exchange_triennale': 'Exchange 101 Triennale',
+    'university': 'University 101',
+    'milan': 'Milan 101',
+    'burocrazia': 'Burocrazia 101',
     'master_admissions': 'Master Admissions',
-    'tesi': 'Tesi 101: guida per la tesi triennale',
-    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere'
+    'tesi': 'Tesi 101',
+    'ecdl': 'ECDL 101'
+  };
+
+  const categoryDescriptions: Record<string, string> = {
+    'associations': 'Scopri le associazioni Bocconi!',
+    'opzionali': 'Guide per la scelta dei tuoi opzionali',
+    'graduate': 'Le nostre guide per la tua magistrale',
+    'stage': 'Le nostre guide per il tuo stage',
+    'freemover': 'Le nostre guide per il freemover',
+    'residenze': 'Guide per le residenze degli studenti',
+    'exchange_magistrale': 'Guide per il tuo exchange magistrale',
+    'exchange_triennale': 'Guide per il tuo exchange triennale',
+    'university': 'Guide al primo anno di Università',
+    'milan': 'Scopri Milano prima di trasferirti',
+    'burocrazia': 'Come districarsi nella burocrazia italiana',
+    'master_admissions': 'Guide per le ammissioni magistrali',
+    'tesi': 'Guida per la tesi triennale',
+    'ecdl': 'Tutto quello che devi sapere'
   };
 
   const getCategoryIcon = (category: string) => {
@@ -167,14 +184,19 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20 h-56 flex flex-col">
-                    <CardContent className="p-6 text-center flex flex-col h-full gap-4">
+                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20 h-64 flex flex-col">
+                    <CardContent className="p-6 text-center flex flex-col h-full gap-3">
                       <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center group-hover:from-primary/15 group-hover:to-primary/10 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
                         <IconComponent className="w-10 h-10 text-primary group-hover:text-primary/90 transition-colors" />
                       </div>
-                      <h3 className="text-sm font-semibold line-clamp-3 flex-1 min-h-0">
-                        {categoryTitles[category] || category}
-                      </h3>
+                      <div className="flex-1 flex flex-col justify-center min-h-0">
+                        <h3 className="text-lg font-semibold mb-2 line-clamp-1">
+                          {categoryTitles[category] || category}
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {categoryDescriptions[category] || ''}
+                        </p>
+                      </div>
                       <Link to={`/guide/${category}`} className="flex-shrink-0">
                         <Button className="w-full">
                           Esplora Guide
