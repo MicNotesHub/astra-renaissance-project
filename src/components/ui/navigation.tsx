@@ -36,18 +36,33 @@ const navItems = [{
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOverWhiteSection, setIsOverWhiteSection] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check if we're on a page with white background for text color
+  // Always check if on pages with white backgrounds
   const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide');
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // On home page, detect if navigation is over white sections
+      if (location.pathname === '/') {
+        const scrollY = window.scrollY;
+        // Detect when navigation overlaps with white sections (approximate values)
+        // You may need to adjust these values based on your actual section heights
+        const isOverWhite = scrollY > 600; // Adjust this threshold as needed
+        setIsOverWhiteSection(isOverWhite);
+      } else {
+        setIsOverWhiteSection(false);
+      }
     };
+    
     window.addEventListener("scroll", handleScroll);
+    // Call once to set initial state
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -82,7 +97,7 @@ export function Navigation() {
             <Link to="/" className="flex items-center gap-3 group">
               <img src="/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png" alt="ASTRA Bocconi" className="h-8 w-auto transition-all duration-200 group-hover:brightness-110" />
               <div className="hidden sm:block">
-                <span className={cn("font-bold text-lg transition-colors duration-200", isOnWhitePage ? "text-primary" : "text-white")}></span>
+                <span className={cn("font-bold text-lg transition-colors duration-200", isOnWhitePage || isOverWhiteSection ? "text-primary" : "text-white")}></span>
                 
               </div>
             </Link>
@@ -100,14 +115,14 @@ export function Navigation() {
             }} transition={{
               delay: index * 0.1
             }}>
-                  {item.href.startsWith('/') ? <Link to={item.href} className={cn("relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 group", isActive(item.href) ? isOnWhitePage ? "text-primary bg-primary/10" : "text-white bg-white/20" : isOnWhitePage ? "text-primary/80 hover:text-primary hover:bg-primary/10" : "text-white/80 hover:text-white hover:bg-white/10")}>
+                  {item.href.startsWith('/') ? <Link to={item.href} className={cn("relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 group", isActive(item.href) ? (isOnWhitePage || isOverWhiteSection) ? "text-primary bg-primary/10" : "text-white bg-white/20" : (isOnWhitePage || isOverWhiteSection) ? "text-primary/80 hover:text-primary hover:bg-primary/10" : "text-white/80 hover:text-white hover:bg-white/10")}>
                       {item.name}
                       {isActive(item.href) && <motion.div layoutId="activeTab" className="absolute inset-0 bg-primary/10 rounded-lg" initial={false} transition={{
                   type: "spring",
                   bounce: 0.2,
                   duration: 0.6
                 }} />}
-                    </Link> : <a href={item.href} className={cn("px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200", isOnWhitePage ? "text-primary/80 hover:text-primary hover:bg-primary/10" : "text-white/80 hover:text-white hover:bg-white/10")}>
+                    </Link> : <a href={item.href} className={cn("px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200", (isOnWhitePage || isOverWhiteSection) ? "text-primary/80 hover:text-primary hover:bg-primary/10" : "text-white/80 hover:text-white hover:bg-white/10")}>
                       {item.name}
                     </a>}
                 </motion.div>)}
@@ -131,7 +146,7 @@ export function Navigation() {
 
           {/* Mobile menu button */}
           <div className="lg:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn("relative p-2 rounded-lg transition-all duration-200", isOnWhitePage ? "text-primary hover:bg-primary/10" : "text-white hover:bg-white/10")} aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}>
+            <Button variant="ghost" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn("relative p-2 rounded-lg transition-all duration-200", (isOnWhitePage || isOverWhiteSection) ? "text-primary hover:bg-primary/10" : "text-white hover:bg-white/10")} aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}>
               <motion.div animate={{
               rotate: isMobileMenuOpen ? 180 : 0
             }} transition={{
