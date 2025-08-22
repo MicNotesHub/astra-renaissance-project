@@ -5,216 +5,193 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Mail, Linkedin, MessageCircle, Users } from "lucide-react";
 import { useState } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
-
 export const TeamSection = () => {
-  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOrgano, setSelectedOrgano] = useState(t('team.all'));
-
-  const teamMembers = [
-    {
-      name: "Marco Andreoli",
-      role: "Presidente",
-      organo: "Presidenza",
-      year: "3° Anno",
-      course: "BIEM",
-      bio: "Coordina le attività della rappresentanza e mantiene i rapporti istituzionali con l'università",
-      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      contacts: {
-        email: "marco.andreoli@studenti.unibocconi.it",
-        linkedin: "marcoandreolix",
-        unilink: "@marcoandreolix"
-      },
-      expertise: ["Leadership", "Relazioni Istituzionali", "Strategia"]
+  const [selectedOrgano, setSelectedOrgano] = useState("tutti");
+  const teamMembers = [{
+    name: "Marco Andreoli",
+    role: "Presidente",
+    organo: "Presidenza",
+    year: "3° Anno",
+    course: "BIEM",
+    bio: "Coordina le attività della rappresentanza e mantiene i rapporti istituzionali con l'università",
+    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    contacts: {
+      email: "marco.andreoli@studenti.unibocconi.it",
+      linkedin: "marcoandreolix",
+      unilink: "@marcoandreolix"
     },
-    {
-      name: "Sofia Chen",
-      role: "Vice Presidente",
-      organo: "Presidenza",
-      year: "2° Anno",
-      course: "BESS",
-      bio: "Supporta il presidente nelle attività di coordinamento e gestisce i progetti strategici",
-      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-      contacts: {
-        email: "sofia.chen@studenti.unibocconi.it",
-        linkedin: "sofiachen",
-        unilink: "@sofiachen"
-      },
-      expertise: ["Coordinamento", "Progetti Strategici", "Management"]
+    expertise: ["Leadership", "Relazioni Istituzionali", "Strategia"]
+  }, {
+    name: "Sofia Chen",
+    role: "Vice Presidente",
+    organo: "Presidenza",
+    year: "2° Anno",
+    course: "BESS",
+    bio: "Supporta il presidente nelle attività di coordinamento e gestisce i progetti strategici",
+    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+    contacts: {
+      email: "sofia.chen@studenti.unibocconi.it",
+      linkedin: "sofiachen",
+      unilink: "@sofiachen"
     },
-    {
-      name: "Alessandro Martini",
-      role: "Responsabile Didattica",
-      organo: "Senato Accademico",
-      year: "3° Anno",
-      course: "BAFIN",
-      bio: "Si occupa di questioni didattiche, orari e rapporti con i docenti",
-      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      contacts: {
-        email: "alessandro.martini@studenti.unibocconi.it",
-        linkedin: "alessandromartini",
-        unilink: "@alemartini"
-      },
-      expertise: ["Didattica", "Policy Accademica", "Docenza"]
+    expertise: ["Coordinamento", "Progetti Strategici", "Management"]
+  }, {
+    name: "Alessandro Martini",
+    role: "Responsabile Didattica",
+    organo: "Senato Accademico",
+    year: "3° Anno",
+    course: "BAFIN",
+    bio: "Si occupa di questioni didattiche, orari e rapporti con i docenti",
+    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    contacts: {
+      email: "alessandro.martini@studenti.unibocconi.it",
+      linkedin: "alessandromartini",
+      unilink: "@alemartini"
     },
-    {
-      name: "Giulia Romano",
-      role: "Responsabile Eventi",
-      organo: "Eventi",
-      year: "2° Anno",
-      course: "WBB",
-      bio: "Organizza conferenze, workshop e attività di networking per la community studentesca",
-      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-      contacts: {
-        email: "giulia.romano@studenti.unibocconi.it",
-        linkedin: "giuliaromano",
-        unilink: "@giuliaromano"
-      },
-      expertise: ["Event Planning", "Networking", "Community Building"]
+    expertise: ["Didattica", "Policy Accademica", "Docenza"]
+  }, {
+    name: "Giulia Romano",
+    role: "Responsabile Eventi",
+    organo: "Eventi",
+    year: "2° Anno",
+    course: "WBB",
+    bio: "Organizza conferenze, workshop e attività di networking per la community studentesca",
+    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+    contacts: {
+      email: "giulia.romano@studenti.unibocconi.it",
+      linkedin: "giuliaromano",
+      unilink: "@giuliaromano"
     },
-    {
-      name: "Matteo Ferrari",
-      role: "Responsabile IT & Innovazione",
-      organo: "Innovazione",
-      year: "3° Anno",
-      course: "BEMACS",
-      bio: "Gestisce i sistemi digitali, il sito web e sviluppa soluzioni tecnologiche per gli studenti",
-      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      contacts: {
-        email: "matteo.ferrari@studenti.unibocconi.it",
-        linkedin: "matteoferrari",
-        unilink: "@matteoferrari"
-      },
-      expertise: ["Sviluppo Web", "AI", "Digital Innovation"]
+    expertise: ["Event Planning", "Networking", "Community Building"]
+  }, {
+    name: "Matteo Ferrari",
+    role: "Responsabile IT & Innovazione",
+    organo: "Innovazione",
+    year: "3° Anno",
+    course: "BEMACS",
+    bio: "Gestisce i sistemi digitali, il sito web e sviluppa soluzioni tecnologiche per gli studenti",
+    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    contacts: {
+      email: "matteo.ferrari@studenti.unibocconi.it",
+      linkedin: "matteoferrari",
+      unilink: "@matteoferrari"
     },
-    {
-      name: "Elena Rossi",
-      role: "Responsabile Comunicazione",
-      organo: "Comunicazione",
-      year: "2° Anno",
-      course: "CLES",
-      bio: "Gestisce i social media, la comunicazione istituzionale e le relazioni con i media",
-      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-      contacts: {
-        email: "elena.rossi@studenti.unibocconi.it",
-        linkedin: "elenarossi",
-        unilink: "@elenarossi"
-      },
-      expertise: ["Social Media", "Comunicazione", "PR"]
+    expertise: ["Sviluppo Web", "AI", "Digital Innovation"]
+  }, {
+    name: "Elena Rossi",
+    role: "Responsabile Comunicazione",
+    organo: "Comunicazione",
+    year: "2° Anno",
+    course: "CLES",
+    bio: "Gestisce i social media, la comunicazione istituzionale e le relazioni con i media",
+    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+    contacts: {
+      email: "elena.rossi@studenti.unibocconi.it",
+      linkedin: "elenarossi",
+      unilink: "@elenarossi"
     },
-    {
-      name: "Luca Bianchi",
-      role: "Responsabile Exchange",
-      organo: "Exchange",
-      year: "3° Anno",
-      course: "BIG",
-      bio: "Supporta gli studenti nei programmi di scambio internazionale e nelle partnership estere",
-      image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
-      contacts: {
-        email: "luca.bianchi@studenti.unibocconi.it",
-        linkedin: "lucabianchi",
-        unilink: "@lucabianchi"
-      },
-      expertise: ["Exchange Programs", "International Relations", "Mobility"]
+    expertise: ["Social Media", "Comunicazione", "PR"]
+  }, {
+    name: "Luca Bianchi",
+    role: "Responsabile Exchange",
+    organo: "Exchange",
+    year: "3° Anno",
+    course: "BIG",
+    bio: "Supporta gli studenti nei programmi di scambio internazionale e nelle partnership estere",
+    image: "/lovable-uploads/79a8e832-7749-4713-905f-e6adaa18938c.png",
+    contacts: {
+      email: "luca.bianchi@studenti.unibocconi.it",
+      linkedin: "lucabianchi",
+      unilink: "@lucabianchi"
     },
-    {
-      name: "Chiara Conti",
-      role: "Responsabile Welfare",
-      organo: "Welfare",
-      year: "2° Anno",
-      course: "BIEF",
-      bio: "Si occupa del benessere studentesco, servizi di supporto e iniziative per la qualità della vita",
-      image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
-      contacts: {
-        email: "chiara.conti@studenti.unibocconi.it",
-        linkedin: "chiaraconti",
-        unilink: "@chiaraconti"
-      },
-      expertise: ["Student Welfare", "Support Services", "Mental Health"]
-    }
-  ];
-
-  const organi = [t('team.all'), t('team.presidency'), t('team.senate'), t('team.events'), t('team.innovation'), t('team.communication'), t('team.exchange'), t('team.welfare')];
-
+    expertise: ["Exchange Programs", "International Relations", "Mobility"]
+  }, {
+    name: "Chiara Conti",
+    role: "Responsabile Welfare",
+    organo: "Welfare",
+    year: "2° Anno",
+    course: "BIEF",
+    bio: "Si occupa del benessere studentesco, servizi di supporto e iniziative per la qualità della vita",
+    image: "/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png",
+    contacts: {
+      email: "chiara.conti@studenti.unibocconi.it",
+      linkedin: "chiaraconti",
+      unilink: "@chiaraconti"
+    },
+    expertise: ["Student Welfare", "Support Services", "Mental Health"]
+  }];
+  const organi = ["tutti", "Presidenza", "Senato Accademico", "Eventi", "Innovazione", "Comunicazione", "Exchange", "Welfare"];
   const filteredMembers = teamMembers.filter(member => {
-    const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         member.course.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesOrgano = selectedOrgano === t('team.all') || member.organo === selectedOrgano;
+    const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) || member.role.toLowerCase().includes(searchTerm.toLowerCase()) || member.course.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesOrgano = selectedOrgano === "tutti" || member.organo === selectedOrgano;
     return matchesSearch && matchesOrgano;
   });
-
-  return (
-    <section id="team" className="py-20 bg-background">
+  return <section id="team" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.8
+      }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            🧑‍💻 {t('team.title')}
+            🧑‍💻 Il Nostro Team
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t('team.subtitle')}
+            Conosci i rappresentanti che lavorano per migliorare la tua esperienza universitaria. Un team diversificato con competenze complementari.
           </p>
         </motion.div>
 
         {/* Search and Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-12 flex flex-col md:flex-row gap-4 items-center justify-between"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.6,
+        delay: 0.2
+      }} className="mb-12 flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder={t('team.search')}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
+            <Input placeholder="Cerca per nome, ruolo o corso..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10" />
           </div>
           
           <div className="flex gap-2 items-center">
             <Filter className="h-4 w-4 text-muted-foreground" />
-            {organi.map((organo) => (
-              <Button
-                key={organo}
-                variant={selectedOrgano === organo ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSelectedOrgano(organo)}
-                className="capitalize"
-              >
+            {organi.map(organo => <Button key={organo} variant={selectedOrgano === organo ? "default" : "outline"} size="sm" onClick={() => setSelectedOrgano(organo)} className="capitalize">
                 {organo}
-              </Button>
-            ))}
+              </Button>)}
           </div>
         </motion.div>
 
         {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredMembers.map((member, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
+          {filteredMembers.map((member, index) => <motion.div key={index} initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6,
+          delay: index * 0.1
+        }}>
               <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    <img 
-                      src={member.image} 
-                      alt={member.name}
-                      className="w-20 h-20 rounded-full mx-auto mb-4 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                    <img src={member.image} alt={member.name} className="w-20 h-20 rounded-full mx-auto mb-4 object-cover group-hover:scale-105 transition-transform duration-300" />
                     <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
                       {member.name}
                     </h3>
@@ -235,11 +212,9 @@ export const TeamSection = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-1 justify-center">
-                      {member.expertise.map((skill) => (
-                        <Badge key={skill} variant="outline" className="text-xs">
+                      {member.expertise.map(skill => <Badge key={skill} variant="outline" className="text-xs">
                           {skill}
-                        </Badge>
-                      ))}
+                        </Badge>)}
                     </div>
 
                     <div className="flex justify-center gap-2 pt-2">
@@ -256,53 +231,52 @@ export const TeamSection = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
 
-        {filteredMembers.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center py-12"
-          >
-            <p className="text-muted-foreground">{t('team.no-results')}</p>
-          </motion.div>
-        )}
+        {filteredMembers.length === 0 && <motion.div initial={{
+        opacity: 0
+      }} whileInView={{
+        opacity: 1
+      }} viewport={{
+        once: true
+      }} className="text-center py-12">
+            <p className="text-muted-foreground">Nessun membro trovato con i filtri attuali.</p>
+          </motion.div>}
 
         {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.8,
+        delay: 0.4
+      }} className="text-center">
           <Card className="glass-card premium-shadow max-w-4xl mx-auto">
             <CardContent className="p-8">
               <div className="grid md:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">12</div>
-                  <div className="text-sm text-muted-foreground">{t('team.stats.representatives')}</div>
-                </div>
+                
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">4</div>
-                  <div className="text-sm text-muted-foreground">{t('team.stats.bodies')}</div>
+                  <div className="text-sm text-muted-foreground">Organi Rappresentati</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">8</div>
-                  <div className="text-sm text-muted-foreground">{t('team.stats.courses')}</div>
+                  <div className="text-sm text-muted-foreground">Corsi di Laurea</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">2000+</div>
-                  <div className="text-sm text-muted-foreground">{t('team.stats.students')}</div>
+                  <div className="text-sm text-muted-foreground">Studenti Rappresentati</div>
                 </div>
               </div>
             </CardContent>
           </Card>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
