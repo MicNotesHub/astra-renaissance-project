@@ -15,11 +15,11 @@ export function Navigation() {
   const { t } = useLanguage();
 
   const navItems = [{
-    name: "Elezioni 2025",
+    name: t('nav.elections'),
     href: "#elezioni",
     isExternal: false
   }, {
-    name: t('nav.about'),
+    name: t('nav.representatives'),
     href: "#team",
     isExternal: false
   }, {
@@ -27,11 +27,11 @@ export function Navigation() {
     href: "/dispense",
     isExternal: false
   }, {
-    name: "Exchange",
+    name: t('nav.exchange'),
     href: "#astra-polare",
     isExternal: false
   }, {
-    name: "Rubrica",
+    name: t('nav.directory'),
     href: "#marketplace",
     isExternal: false
   }, {

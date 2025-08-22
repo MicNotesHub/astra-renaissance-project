@@ -1,21 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Mail, Instagram, Linkedin, MapPin } from "lucide-react";
-
-const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:info@astrabocconi.com", label: "Email" }
-];
-
-const quickLinks = [
-  { name: "Chi Siamo", href: "#about" },
-  { name: "Rappresentanti", href: "#rappresentanti" },
-  { name: "Dispense", href: "#dispense" },
-  { name: "Exchange", href: "#exchange" },
-  { name: "Guide", href: "#guide" }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
+  const { t } = useLanguage();
+
+  const socialLinks = [
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:info@astrabocconi.com", label: "Email" }
+  ];
+
+  const quickLinks = [
+    { name: t('nav.about'), href: "#about" },
+    { name: t('nav.representatives'), href: "#rappresentanti" },
+    { name: t('nav.handouts'), href: "#dispense" },
+    { name: t('nav.exchange'), href: "#exchange" },
+    { name: t('nav.guides'), href: "#guide" }
+  ];
   return (
     <footer className="bg-primary text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -32,13 +34,12 @@ export function Footer() {
             </div>
             
             <p className="text-white/80 text-lg leading-relaxed mb-6 max-w-md">
-              Per Aspera, ad Astra. La nostra visione della rappresentanza 
-              si sviluppa attraverso tre aspetti fondamentali dell'esperienza universitaria.
+              {t('footer.brand.description')}
             </p>
             
             <div className="flex items-center text-white/80 mb-4">
               <MapPin className="h-5 w-5 mr-2" />
-              <span>Università Bocconi, Milano</span>
+              <span>{t('footer.location')}</span>
             </div>
             
             <div className="flex space-x-4">
@@ -60,7 +61,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Link Rapidi</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('footer.quickLinks')}</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -77,10 +78,10 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contattaci</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('footer.contact')}</h3>
             <div className="space-y-4">
               <div>
-                <p className="text-white/80 mb-2">Email</p>
+                <p className="text-white/80 mb-2">{t('footer.email')}</p>
                 <a 
                   href="mailto:info@astrabocconi.com"
                   className="text-white hover:text-white/80 transition-smooth"
@@ -90,8 +91,8 @@ export function Footer() {
               </div>
               
               <div>
-                <p className="text-white/80 mb-2">Emergenze</p>
-                <p className="text-white">Sempre disponibili per te</p>
+                <p className="text-white/80 mb-2">{t('footer.emergencies')}</p>
+                <p className="text-white">{t('footer.emergencyText')}</p>
               </div>
             </div>
           </div>
@@ -100,13 +101,13 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm mb-4 md:mb-0">
-            © 2025 ASTRA Bocconi. Tutti i diritti riservati.
+            {t('footer.rights')}
           </p>
           
           <div className="flex space-x-6 text-sm text-white/60">
-            <a href="#" className="hover:text-white transition-smooth">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-smooth">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-smooth">Cookie Policy</a>
+            <a href="#" className="hover:text-white transition-smooth">{t('footer.privacy')}</a>
+            <a href="#" className="hover:text-white transition-smooth">{t('footer.terms')}</a>
+            <a href="#" className="hover:text-white transition-smooth">{t('footer.cookies')}</a>
           </div>
         </div>
       </div>

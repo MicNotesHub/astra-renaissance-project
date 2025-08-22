@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 const heroImage = "/lovable-uploads/4d017d22-3cc7-43d7-b5ea-9a4e70e08369.png";
+
 export function HeroSection() {
-  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  const { t } = useLanguage();
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(${heroImage})`
@@ -60,7 +65,7 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed font-thin md:text-base">
-            La rappresentanza studentesca che mette al centro l'innovazione, la community e il futuro degli studenti Bocconi.
+            {t('hero.subtitle')}
           </p>
 
           {/* CTA Buttons */}
@@ -74,11 +79,11 @@ export function HeroSection() {
                 });
               }}
             >
-              Chi Siamo
+              {t('hero.aboutUs')}
             </Button>
             
             <Button variant="outline" size="lg" className="border-white hover:bg-white transition-smooth font-medium px-8 py-3 text-base rounded-md text-indigo-950">
-              Contattaci
+              {t('hero.contact')}
             </Button>
           </div>
         </motion.div>
@@ -93,5 +98,6 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }

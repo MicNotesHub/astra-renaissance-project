@@ -26,10 +26,14 @@ const translations = {
   it: {
     // Navigation
     'nav.home': 'Home',
-    'nav.about': 'Chi Siamo',
-    'nav.guides': 'Guide',
+    'nav.elections': 'Elezioni 2025',
+    'nav.representatives': 'Rappresentanti',
     'nav.handouts': 'Dispense',
-    'nav.calculators': 'Calcolatori',
+    'nav.exchange': 'Exchange',
+    'nav.directory': 'Rubrica',
+    'nav.guides': 'Guide',
+    'nav.about': 'Chi Siamo',
+    'nav.contact': 'Contattaci',
     
     // Hero Section
     'hero.subtitle': 'La rappresentanza studentesca che mette al centro l\'innovazione, la community e il futuro degli studenti Bocconi.',
@@ -39,6 +43,29 @@ const translations = {
     // About Section
     'about.title': 'Chi Siamo',
     'about.subtitle': 'La nostra visione della rappresentanza si sviluppa attraverso tre aspetti fondamentali dell\'esperienza universitaria',
+    'about.innovation.title': 'Innovazione',
+    'about.innovation.description': 'Soluzioni digitali all\'avanguardia per migliorare l\'esperienza studentesca',
+    'about.community.title': 'Community',
+    'about.community.description': 'Costruiamo ponti tra studenti, creando una rete di supporto e collaborazione',
+    'about.future.title': 'Futuro',
+    'about.future.description': 'Prepariamo gli studenti alle sfide del domani con visione e determinazione',
+    
+    // Sections
+    'dispense.title': 'Dispense Universitarie',
+    'dispense.subtitle': 'Accedi a tutte le dispense organizzate per anno e materia',
+    'dispense.explore': 'Esplora Dispense',
+    'calculators.title': 'Calcolatori Accademici',
+    'calculators.subtitle': 'Strumenti utili per pianificare il tuo percorso universitario',
+    'astra.polare.title': 'ASTRA Polare',
+    'astra.polare.subtitle': 'La nostra piattaforma per gli exchange internazionali',
+    'marketplace.title': 'Marketplace Studentesco',
+    'marketplace.subtitle': 'Compra, vendi e scambia con altri studenti Bocconi',
+    'events.title': 'Eventi e Iniziative',
+    'events.subtitle': 'Scopri tutti gli eventi organizzati da ASTRA',
+    'team.title': 'Il Nostro Team',
+    'team.subtitle': 'Conosci i rappresentanti che lavorano per te',
+    'astra.gpt.title': 'ASTRA GPT',
+    'astra.gpt.subtitle': 'L\'assistente AI per tutte le tue domande universitarie',
     
     // Guide Categories
     'guide.title': 'Guide Universitarie',
@@ -83,6 +110,8 @@ const translations = {
     'category.ecdl.description': 'Tutto quello che devi sapere',
     
     // Footer
+    'footer.brand.description': 'Per Aspera, ad Astra. La nostra visione della rappresentanza si sviluppa attraverso tre aspetti fondamentali dell\'esperienza universitaria.',
+    'footer.location': 'Università Bocconi, Milano',
     'footer.quickLinks': 'Link Rapidi',
     'footer.contact': 'Contattaci',
     'footer.email': 'Email',
@@ -98,14 +127,20 @@ const translations = {
     'common.error': 'Errore',
     'common.unexpectedError': 'Si è verificato un errore imprevisto',
     'common.categoryNotFound': 'Categoria non trovata',
+    'common.readMore': 'Leggi di più',
+    'common.learnMore': 'Scopri di più',
   },
   en: {
     // Navigation
     'nav.home': 'Home',
-    'nav.about': 'About Us',
-    'nav.guides': 'Guides',
+    'nav.elections': 'Elections 2025',
+    'nav.representatives': 'Representatives',
     'nav.handouts': 'Handouts',
-    'nav.calculators': 'Calculators',
+    'nav.exchange': 'Exchange',
+    'nav.directory': 'Directory',
+    'nav.guides': 'Guides',
+    'nav.about': 'About Us',
+    'nav.contact': 'Contact Us',
     
     // Hero Section
     'hero.subtitle': 'The student representation that puts innovation, community and the future of Bocconi students at the center.',
@@ -115,6 +150,29 @@ const translations = {
     // About Section
     'about.title': 'About Us',
     'about.subtitle': 'Our vision of representation develops through three fundamental aspects of the university experience',
+    'about.innovation.title': 'Innovation',
+    'about.innovation.description': 'Cutting-edge digital solutions to enhance the student experience',
+    'about.community.title': 'Community',
+    'about.community.description': 'We build bridges between students, creating a network of support and collaboration',
+    'about.future.title': 'Future',
+    'about.future.description': 'We prepare students for tomorrow\'s challenges with vision and determination',
+    
+    // Sections
+    'dispense.title': 'University Handouts',
+    'dispense.subtitle': 'Access all handouts organized by year and subject',
+    'dispense.explore': 'Explore Handouts',
+    'calculators.title': 'Academic Calculators',
+    'calculators.subtitle': 'Useful tools to plan your university journey',
+    'astra.polare.title': 'ASTRA Polare',
+    'astra.polare.subtitle': 'Our platform for international exchanges',
+    'marketplace.title': 'Student Marketplace',
+    'marketplace.subtitle': 'Buy, sell and exchange with other Bocconi students',
+    'events.title': 'Events and Initiatives',
+    'events.subtitle': 'Discover all events organized by ASTRA',
+    'team.title': 'Our Team',
+    'team.subtitle': 'Meet the representatives working for you',
+    'astra.gpt.title': 'ASTRA GPT',
+    'astra.gpt.subtitle': 'The AI assistant for all your university questions',
     
     // Guide Categories
     'guide.title': 'University Guides',
@@ -159,6 +217,8 @@ const translations = {
     'category.ecdl.description': 'Everything you need to know',
     
     // Footer
+    'footer.brand.description': 'Per Aspera, ad Astra. Our vision of representation develops through three fundamental aspects of the university experience.',
+    'footer.location': 'Bocconi University, Milan',
     'footer.quickLinks': 'Quick Links',
     'footer.contact': 'Contact Us',
     'footer.email': 'Email',
@@ -174,6 +234,8 @@ const translations = {
     'common.error': 'Error',
     'common.unexpectedError': 'An unexpected error occurred',
     'common.categoryNotFound': 'Category not found',
+    'common.readMore': 'Read more',
+    'common.learnMore': 'Learn more',
   }
 };
 

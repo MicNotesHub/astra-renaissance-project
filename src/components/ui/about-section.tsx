@@ -1,8 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Target, Users } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function AboutSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="about" className="py-32 bg-gradient-subtle relative overflow-hidden">
       {/* Background animated elements */}
@@ -14,12 +17,11 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20 animate-fade-in">
           <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            Chi Siamo
+            {t('about.title')}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            La nostra visione della rappresentanza si sviluppa attraverso tre aspetti fondamentali 
-            dell'esperienza universitaria
+            {t('about.subtitle')}
           </p>
         </div>
 
@@ -27,20 +29,20 @@ export function AboutSection() {
           {[
             {
               icon: Users,
-              title: "Impegno studentesco",
-              description: "Astra rappresenta gli studenti portando la vostra voce dove conta, costruendo un ponte tra le esigenze studentesche e l'università.",
+              title: t('about.innovation.title'),
+              description: t('about.innovation.description'),
               delay: "0s"
             },
             {
               icon: Star,
-              title: "Eventi",
-              description: "Organizziamo conferenze, incontri e aperitivi per creare una community attiva e vivere un'esperienza universitaria più coinvolgente.",
+              title: t('about.community.title'),
+              description: t('about.community.description'),
               delay: "0.2s"
             },
             {
               icon: Target,
-              title: "Servizi agli studenti",
-              description: "Ti offriamo risorse chiare, sostegno concreto e strumenti per crescere, semplificando la tua vita universitaria.",
+              title: t('about.future.title'),
+              description: t('about.future.description'),
               delay: "0.4s"
             }
           ].map((item, index) => (
