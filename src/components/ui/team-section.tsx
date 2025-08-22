@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, MessageCircle } from "lucide-react";
+
 export const TeamSection = () => {
   const teamMembers = [{
     name: "Marco Andreoli",
@@ -117,19 +118,17 @@ export const TeamSection = () => {
     },
     expertise: ["Student Welfare", "Support Services", "Mental Health"]
   }];
-  return <section id="rappresentanti" className="py-20 bg-background">
+
+  return (
+    <section id="rappresentanti" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.8
-      }} className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          transition={{ duration: 0.8 }} 
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
             🧑‍💻 I Nostri Rappresentanti
           </h2>
@@ -140,22 +139,22 @@ export const TeamSection = () => {
 
         {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {teamMembers.map((member, index) => <motion.div key={index} initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.6,
-          delay: index * 0.1
-        }}>
+          {teamMembers.map((member, index) => (
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
               <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    <img src={member.image} alt={member.name} className="w-20 h-20 rounded-full mx-auto mb-4 object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-20 h-20 rounded-full mx-auto mb-4 object-cover group-hover:scale-105 transition-transform duration-300" 
+                    />
                     <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
                       {member.name}
                     </h3>
@@ -176,9 +175,11 @@ export const TeamSection = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-1 justify-center">
-                      {member.expertise.map(skill => <Badge key={skill} variant="outline" className="text-xs">
+                      {member.expertise.map(skill => (
+                        <Badge key={skill} variant="outline" className="text-xs">
                           {skill}
-                        </Badge>)}
+                        </Badge>
+                      ))}
                     </div>
 
                     <div className="flex justify-center gap-2 pt-2">
@@ -195,29 +196,24 @@ export const TeamSection = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>)}
+            </motion.div>
+          ))}
         </div>
 
         {/* Stats */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.8,
-        delay: 0.4
-      }} className="text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          transition={{ duration: 0.8, delay: 0.4 }} 
+          className="text-center"
+        >
           <Card className="glass-card premium-shadow max-w-4xl mx-auto">
             <CardContent className="p-8">
-              <div className="grid md:grid-cols-4 gap-6">
-                
+              <div className="grid md:grid-cols-3 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">4</div>
-                  <div className="text-sm text-muted-foreground">Organi Rappresentati</div>
+                  <div className="text-3xl font-bold text-primary mb-2">8</div>
+                  <div className="text-sm text-muted-foreground">Rappresentanti</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">8</div>
@@ -232,5 +228,6 @@ export const TeamSection = () => {
           </Card>
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
