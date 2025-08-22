@@ -190,10 +190,10 @@ const Guide = () => {
                         <IconComponent className="w-10 h-10 text-primary group-hover:text-primary/90 transition-colors" />
                       </div>
                       <div className="flex-1 flex flex-col justify-center min-h-0">
-                        <h3 className="text-lg font-semibold mb-2 line-clamp-1">
+                        <h3 className="text-lg font-semibold mb-2">
                           {categoryTitles[category] || category}
                         </h3>
-                        <p className="text-sm text-muted-foreground line-clamp-2">
+                        <p className="text-sm text-muted-foreground">
                           {categoryDescriptions[category] || ''}
                         </p>
                       </div>
