@@ -24,11 +24,7 @@ export function Navigation() {
     name: t('nav.handouts'),
     href: "/dispense",
     isExternal: false
-  }, ...(language === 'it' ? [{
-    name: t('nav.exchange'),
-    href: "#astra-polare",
-    isExternal: false
-  }] : []), {
+  }, {
     name: t('nav.directory'),
     href: "#marketplace",
     isExternal: false
