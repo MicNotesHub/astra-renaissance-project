@@ -65,7 +65,15 @@ export function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="bg-teal-500 hover:bg-teal-600 text-white font-medium px-8 py-3 text-base rounded-md transition-smooth shadow-lg">
+            <Button 
+              size="lg" 
+              className="bg-teal-500 hover:bg-teal-600 text-white font-medium px-8 py-3 text-base rounded-md transition-smooth shadow-lg"
+              onClick={() => {
+                document.getElementById('about')?.scrollIntoView({ 
+                  behavior: 'smooth' 
+                });
+              }}
+            >
               Chi Siamo
             </Button>
             
