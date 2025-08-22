@@ -11,6 +11,7 @@ import { SecondoAnno } from "./pages/SecondoAnno";
 import { TerzoAnno } from "./pages/TerzoAnno";
 import CourseHandouts from "./pages/CourseHandouts";
 import Guide from "./pages/Guide";
+import GuideCategory from "./pages/GuideCategory";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/dispense/terzo-anno" element={<TerzoAnno />} />
           <Route path="/dispense/terzo-anno/:courseName" element={<CourseHandouts />} />
           <Route path="/guide" element={<Guide />} />
+          <Route path="/guide/:category" element={<GuideCategory />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

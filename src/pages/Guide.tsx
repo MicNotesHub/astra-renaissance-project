@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, Calculator, CreditCard } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface Guide {
   id: string;
@@ -17,38 +18,31 @@ interface Guide {
 }
 
 const Guide = () => {
-  const [guides, setGuides] = useState<Guide[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchGuides();
+    fetchCategories();
   }, []);
 
-  const fetchGuides = async () => {
+  const fetchCategories = async () => {
     try {
       const { data, error } = await supabase
         .from('guides')
-        .select('*')
-        .eq('is_active', true)
-        .order('category')
-        .order('order_index');
+        .select('category')
+        .eq('is_active', true);
 
       if (error) throw error;
-      setGuides(data || []);
+      
+      // Get unique categories
+      const uniqueCategories = [...new Set(data?.map(guide => guide.category) || [])];
+      setCategories(uniqueCategories);
     } catch (error) {
-      console.error('Error fetching guides:', error);
+      console.error('Error fetching categories:', error);
     } finally {
       setLoading(false);
     }
   };
-
-  const groupedGuides = guides.reduce((acc, guide) => {
-    if (!acc[guide.category]) {
-      acc[guide.category] = [];
-    }
-    acc[guide.category].push(guide);
-    return acc;
-  }, {} as Record<string, Guide[]>);
 
   const categoryTitles: Record<string, string> = {
     'associations': 'Associations 101: scopri le associazioni Bocconi!',
@@ -124,7 +118,7 @@ const Guide = () => {
     'ecdl'
   ];
 
-  const orderedCategories = categoryOrder.filter(category => groupedGuides[category]);
+  const orderedCategories = categoryOrder.filter(category => categories.includes(category));
 
   if (loading) {
     return (
@@ -138,90 +132,72 @@ const Guide = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
       <Navigation />
       
-      <div className="container mx-auto px-4 pt-24 pb-12">
-        {/* Hero Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 max-w-4xl mx-auto"
-        >
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-            Guide
-          </h1>
-          <h2 className="text-2xl md:text-4xl font-semibold text-primary mb-6">
-            Ti serve aiuto? Nessun problema!
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Le nostre guide, dagli studenti per gli studenti
-          </p>
-        </motion.div>
-
-        {/* Guides Grid */}
-        <div className="space-y-12">
-          {orderedCategories.map((category, index) => {
-            const categoryGuides = groupedGuides[category];
-            return (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="space-y-6"
-              >
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-                    {categoryTitles[category] || category}
-                  </h3>
-                </div>
-                
-                <div className="w-full text-center">
-                  <div className="inline-block">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center">
-                      {categoryGuides.map((guide) => {
-                        const IconComponent = getCategoryIcon(category);
-                        const colorClasses = getCategoryColor(category);
-                        
-                        return (
-                          <motion.div
-                            key={guide.id}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="flex flex-col items-center space-y-3"
-                          >
-                            <a
-                              href={guide.file_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`p-6 rounded-2xl border-2 border-transparent transition-all duration-300 cursor-pointer flex items-center justify-center ${colorClasses}`}
-                            >
-                              <IconComponent size={48} />
-                            </a>
-                            <p className="text-sm font-medium text-center text-foreground leading-tight">
-                              {guide.title}
-                            </p>
-                          </motion.div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Empty State */}
-        {Object.keys(groupedGuides).length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-lg text-muted-foreground">
-              Nessuna guida disponibile al momento.
+      <div className="pt-24 pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <Link to="/" className="mr-6">
+                <Button variant="outline" size="sm">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Torna alla Home
+                </Button>
+              </Link>
+            </div>
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              Guide Universitarie
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Le nostre guide, dagli studenti per gli studenti. Seleziona una categoria per esplorare le guide disponibili.
             </p>
           </div>
-        )}
+
+          {/* Category Selection Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {orderedCategories.map((category, index) => {
+              const IconComponent = getCategoryIcon(category);
+              
+              return (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
+                    <CardContent className="p-6 text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <IconComponent className="w-8 h-8 text-primary" />
+                      </div>
+                      <h3 className="text-lg font-semibold mb-3">
+                        {categoryTitles[category] || category}
+                      </h3>
+                      <Link to={`/guide/${category}`}>
+                        <Button className="w-full">
+                          Esplora Guide
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Empty State */}
+          {orderedCategories.length === 0 && (
+            <div className="text-center py-12">
+              <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Nessuna categoria trovata</h3>
+              <p className="text-muted-foreground">
+                Non sono ancora disponibili guide.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
