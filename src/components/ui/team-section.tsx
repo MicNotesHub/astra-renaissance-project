@@ -3,56 +3,58 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const TeamSection = () => {
   const [representatives, setRepresentatives] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   const rappresentantiSections = [
     {
       name: "CDD",
-      description: "Commissione di Disciplina Didattica - Gestione delle questioni disciplinari e didattiche",
+      description: t('representatives.cdd.description'),
       icon: "⚖️"
     },
     {
       name: "DIPARTIMENTI",
-      description: "Rappresentanza nei diversi dipartimenti accademici dell'università",
+      description: t('representatives.dipartimenti.description'),
       icon: "🏛️"
     },
     {
       name: "ISU",
-      description: "Istituto per il Sostegno Universitario - Servizi per il diritto allo studio",
+      description: t('representatives.isu.description'),
       icon: "🎓"
     },
     {
       name: "QUALITÀ",
-      description: "Commissione per la Qualità - Monitoraggio e miglioramento della qualità didattica",
+      description: t('representatives.qualita.description'),
       icon: "⭐"
     },
     {
       name: "SCUOLA DI GIURISPRUDENZA",
-      description: "Rappresentanza nella Scuola di Giurisprudenza",
+      description: t('representatives.giurisprudenza.description'),
       icon: "⚖️"
     },
     {
       name: "SCUOLA MAGISTRALE",
-      description: "Rappresentanza nelle scuole magistrali e corsi di laurea magistrale",
+      description: t('representatives.magistrale.description'),
       icon: "🎯"
     },
     {
       name: "SCUOLA TRIENNALE",
-      description: "Rappresentanza nelle scuole triennali e corsi di laurea triennale",
+      description: t('representatives.triennale.description'),
       icon: "📚"
     },
     {
       name: "SPORT",
-      description: "Rappresentanza nelle attività sportive e ricreative universitarie",
+      description: t('representatives.sport.description'),
       icon: "⚽"
     },
     {
       name: "VALUTAZIONE",
-      description: "Commissione di Valutazione - Valutazione delle performance accademiche",
+      description: t('representatives.valutazione.description'),
       icon: "📊"
     }
   ];
@@ -110,16 +112,16 @@ export const TeamSection = () => {
         duration: 0.8
       }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            🏛️ I Nostri Rappresentanti
+            {t('representatives.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Scopri le diverse aree di rappresentanza studentesca. I nostri rappresentanti lavorano in vari organi e commissioni per tutelare i tuoi diritti e migliorare la vita universitaria.
+            {t('representatives.subtitle')}
           </p>
         </motion.div>
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Caricamento rappresentanti...</p>
+            <p className="text-muted-foreground">{t('representatives.loading')}</p>
           </div>
         ) : (
           <>
@@ -149,11 +151,11 @@ export const TeamSection = () => {
                           <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
                             {section.name}
                           </h3>
-                          {sectionReps.length > 0 && (
-                            <p className="text-xs text-muted-foreground mt-1">
-                              {sectionReps.length} rappresentant{sectionReps.length === 1 ? 'e' : 'i'}
-                            </p>
-                          )}
+                           {sectionReps.length > 0 && (
+                             <p className="text-xs text-muted-foreground mt-1">
+                               {sectionReps.length} {t('representatives.count')}{sectionReps.length === 1 ? t('representatives.countSingle') : t('representatives.countPlural')}
+                             </p>
+                           )}
                         </div>
 
                         <div className="space-y-4">
@@ -167,9 +169,9 @@ export const TeamSection = () => {
                               variant="outline" 
                               className="w-full"
                               onClick={() => handleSectionClick(section.name)}
-                            >
-                              {isExpanded ? 'Nascondi' : sectionReps.length > 0 ? 'Vedi Rappresentanti' : 'Scopri di più'}
-                            </Button>
+                             >
+                               {isExpanded ? t('representatives.hide') : sectionReps.length > 0 ? t('representatives.viewReps') : t('representatives.learnMore')}
+                             </Button>
                           </div>
 
                           {/* Representatives for this section */}
@@ -206,10 +208,10 @@ export const TeamSection = () => {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: 'auto' }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="mt-4 p-3 text-center text-sm text-muted-foreground bg-muted/50 rounded-lg"
-                            >
-                              Nessun rappresentante attualmente disponibile per questa sezione.
-                            </motion.div>
+                               className="mt-4 p-3 text-center text-sm text-muted-foreground bg-muted/50 rounded-lg"
+                             >
+                               {t('representatives.noReps')}
+                             </motion.div>
                           )}
                         </div>
                       </CardContent>
