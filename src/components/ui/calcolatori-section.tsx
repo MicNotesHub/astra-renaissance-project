@@ -24,7 +24,7 @@ export const CalcolatoriSection = () => {
     icon: Calculator,
     color: "text-purple-500",
     bgColor: "bg-purple-50 dark:bg-purple-950/30",
-    features: ["Media ponderata automatica", "Filtro per continente", "Soglie di ammissione"]
+    features: ["Tracciamento CFU/GPA ", "Desctinazioni per continente", "Acceptance rate"]
   }, {
     id: "exchange-calculator-clmg",
     title: t('calculators.exchange-clmg.title'),
@@ -32,7 +32,7 @@ export const CalcolatoriSection = () => {
     icon: TrendingUp,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Media pesata per CFU", "Bonus 4° anno", "Destinazioni per continente"]
+    features: ["Tracciamento CFU/GPA  ", "Destinazioni per continente","Acceptance rate" ]
   }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
@@ -40,7 +40,7 @@ export const CalcolatoriSection = () => {
     icon: Users,
     color: "text-emerald-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
-    features: ["Tracciamento CFU/GPA", "Gestione seminari", "Destinazioni preferite"]
+    features: ["Tracciamento CFU/GPA", "Destinazioni per continente","Acceptance rate"]
   }];
   return <section id="calcolatori" className="py-20 bg-background">
       <div className="container mx-auto px-4">
