@@ -12,35 +12,35 @@ export const CalcolatoriSection = () => {
   const calcolatori = [{
     id: "graduation",
     title: t('calculators.gpa.title'),
-    description: "Calcola il voto di laurea finale basato sui tuoi esami",
+    description: t('calculators.gpa.description'),
     icon: GraduationCap,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Voto di laurea su 110", "Punti bonus configurabili", "Statistiche dettagliate"]
+    features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"]
   }, {
     id: "exchange-calculator",
     title: t('calculators.exchange-msc.title'),
-    description: "Calcola l'Exchange Score per destinazioni MSc",
+    description: t('calculators.exchange-msc.description'),
     icon: Calculator,
     color: "text-purple-500",
     bgColor: "bg-purple-50 dark:bg-purple-950/30",
-    features: ["Tracciamento CFU/GPA ", "Desctinazioni per continente", "Acceptance rate"]
+    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
   }, {
     id: "exchange-calculator-clmg",
     title: t('calculators.exchange-clmg.title'),
-    description: "Calcola l'Exchange Score per il corso CLMG",
+    description: t('calculators.exchange-clmg.description'),
     icon: TrendingUp,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Tracciamento CFU/GPA  ", "Destinazioni per continente","Acceptance rate" ]
+    features: ["Media pesata", "Destinazioni per continente", "Bonus 4° anno"]
   }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
-    description: "Calcola l'Exchange Score per corsi triennali",
+    description: t('calculators.exchange-ug.description'),
     icon: Users,
     color: "text-emerald-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
-    features: ["Tracciamento CFU/GPA", "Destinazioni per continente","Acceptance rate"]
+    features: ["CFU e GPA in tempo reale", "Filtro per continente", "Destinazioni con like"]
   }];
   return <section id="calcolatori" className="py-20 bg-background">
       <div className="container mx-auto px-4">
