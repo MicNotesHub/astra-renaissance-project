@@ -51,11 +51,11 @@ export function ValuesSection() {
               
               <CardContent className="p-8 relative z-10">
                 <div className="mb-6 relative">
-                  <div className={`w-20 h-20 mx-auto bg-gradient-to-br ${value.gradient} rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
-                    <value.icon className="h-10 w-10 text-white" />
+                  <div className={`w-16 h-16 mx-auto bg-gradient-to-br ${value.gradient} rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
+                    <value.icon className="h-8 w-8 text-white" />
                   </div>
-                  <div className="absolute inset-0 w-20 h-20 mx-auto animate-ping opacity-20">
-                    <div className={`w-full h-full bg-gradient-to-br ${value.gradient} rounded-3xl`}></div>
+                  <div className="absolute inset-0 w-16 h-16 mx-auto animate-ping opacity-20">
+                    <div className={`w-full h-full bg-gradient-to-br ${value.gradient} rounded-2xl`}></div>
                   </div>
                 </div>
                 
