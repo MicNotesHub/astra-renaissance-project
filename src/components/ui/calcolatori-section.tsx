@@ -64,22 +64,22 @@ export const CalcolatoriSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
           {calcolatori.map((calc, index) => {
           const IconComponent = calc.icon;
-          return <motion.div key={index} initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6,
-            delay: index * 0.1
-          }}>
-                <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
+           return <motion.div key={index} initial={{
+             opacity: 0,
+             y: 30
+           }} whileInView={{
+             opacity: 1,
+             y: 0
+           }} viewport={{
+             once: true
+           }} transition={{
+             duration: 0.6,
+             delay: index * 0.1
+           }} className="flex-shrink-0 w-80">
+                 <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
                   <CardHeader>
                     <div className={`w-12 h-12 rounded-lg ${calc.bgColor} flex items-center justify-center mb-4`}>
                       <IconComponent className={`h-6 w-6 ${calc.color}`} />

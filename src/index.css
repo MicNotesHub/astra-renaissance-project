@@ -171,4 +171,13 @@ All colors MUST be HSL.
   .transition-spring {
     transition: var(--transition-spring);
   }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
