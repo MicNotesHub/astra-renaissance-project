@@ -32,7 +32,7 @@ export const CalcolatoriSection = () => {
     icon: TrendingUp,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Media pesata", "Destinazioni per continente", "Bonus 4° anno"]
+    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
   }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
@@ -40,7 +40,7 @@ export const CalcolatoriSection = () => {
     icon: Users,
     color: "text-emerald-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
-    features: ["CFU e GPA in tempo reale", "Filtro per continente", "Destinazioni con like"]
+    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
   }];
   return <section id="calcolatori" className="py-20 bg-background">
       <div className="container mx-auto px-4">
