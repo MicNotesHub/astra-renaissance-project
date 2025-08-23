@@ -12,35 +12,35 @@ export const CalcolatoriSection = () => {
   const calcolatori = [{
     id: "graduation",
     title: t('calculators.gpa.title'),
-    description: t('calculators.gpa.description'),
+    description: "Calcola il voto di laurea finale basato sui tuoi esami",
     icon: GraduationCap,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"]
+    features: ["Voto di laurea su 110", "Punti bonus configurabili", "Statistiche dettagliate"]
   }, {
     id: "exchange-calculator",
     title: t('calculators.exchange-msc.title'),
-    description: t('calculators.exchange-msc.description'),
+    description: "Calcola l'Exchange Score per destinazioni MSc",
     icon: Calculator,
     color: "text-purple-500",
     bgColor: "bg-purple-50 dark:bg-purple-950/30",
-    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
+    features: ["Media ponderata automatica", "Filtro per continente", "Soglie di ammissione"]
   }, {
     id: "exchange-calculator-clmg",
     title: t('calculators.exchange-clmg.title'),
-    description: t('calculators.exchange-clmg.description'),
+    description: "Calcola l'Exchange Score per il corso CLMG",
     icon: TrendingUp,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Media pesata", "Destinazioni per continente", "Bonus 4° anno"]
+    features: ["Media pesata per CFU", "Bonus 4° anno", "Destinazioni per continente"]
   }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
-    description: t('calculators.exchange-ug.description'),
+    description: "Calcola l'Exchange Score per corsi triennali",
     icon: Users,
     color: "text-emerald-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
-    features: ["CFU e GPA in tempo reale", "Filtro per continente", "Destinazioni con like"]
+    features: ["Tracciamento CFU/GPA", "Gestione seminari", "Destinazioni preferite"]
   }];
   return <section id="calcolatori" className="py-20 bg-background">
       <div className="container mx-auto px-4">
