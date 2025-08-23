@@ -25,7 +25,7 @@ export function AboutSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 md:grid-rows-1">
           {[
             {
               icon: Users,
@@ -48,10 +48,10 @@ export function AboutSection() {
           ].map((item, index) => (
             <Card 
               key={index} 
-              className="glass-card premium-shadow hover:shadow-glow transition-all duration-500 group animate-fade-in-up hover:-translate-y-2 h-full flex"
+              className="glass-card premium-shadow hover:shadow-glow transition-all duration-500 group animate-fade-in-up hover:-translate-y-2 flex min-h-[300px]"
               style={{ animationDelay: item.delay }}
             >
-              <CardContent className="p-8 text-center flex flex-col justify-center items-center flex-1">
+              <CardContent className="p-8 text-center flex flex-col justify-center items-center w-full">
                 <div className="mb-6 relative">
                   <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="h-8 w-8 text-white" />
