@@ -48,10 +48,10 @@ export function AboutSection() {
           ].map((item, index) => (
             <Card 
               key={index} 
-              className="glass-card premium-shadow hover:shadow-glow transition-all duration-500 group animate-fade-in-up hover:-translate-y-2 min-h-[300px] flex flex-col"
+              className="glass-card premium-shadow hover:shadow-glow transition-all duration-500 group animate-fade-in-up hover:-translate-y-2 h-[300px]"
               style={{ animationDelay: item.delay }}
             >
-              <CardContent className="flex-1 p-8 text-center flex flex-col items-center justify-center">
+              <CardContent className="h-full p-8 text-center flex flex-col items-center justify-center">
                 <div className="mb-6 relative">
                   <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="h-8 w-8 text-white" />
