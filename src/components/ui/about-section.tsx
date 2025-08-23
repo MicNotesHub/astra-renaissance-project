@@ -51,7 +51,7 @@ export function AboutSection() {
               className="glass-card premium-shadow hover:shadow-glow transition-all duration-500 group animate-fade-in-up hover:-translate-y-2"
               style={{ animationDelay: item.delay }}
             >
-              <CardContent className="p-8 text-center">
+              <CardContent className="p-8 text-center flex flex-col justify-center h-full">
                 <div className="mb-6 relative">
                   <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="h-8 w-8 text-white" />
