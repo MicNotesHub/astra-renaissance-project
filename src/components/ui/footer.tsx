@@ -8,11 +8,10 @@ export function Footer() {
   const socialLinks = [
     { icon: Instagram, href: "#", label: "Instagram" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:info@astrabocconi.com", label: "Email" }
+    { icon: Mail, href: "mailto:as.astra@gmail.com", label: "Email" }
   ];
 
   const quickLinks = [
-    { name: t('nav.about'), href: "#about" },
     { name: t('nav.representatives'), href: "#rappresentanti" },
     { name: t('nav.handouts'), href: "#dispense" },
     { name: t('nav.exchange'), href: "#exchange" },
@@ -83,10 +82,10 @@ export function Footer() {
               <div>
                 <p className="text-white/80 mb-2">{t('footer.email')}</p>
                 <a 
-                  href="mailto:info@astrabocconi.com"
+                  href="mailto:as.astra@gmail.com"
                   className="text-white hover:text-white/80 transition-smooth"
                 >
-                  info@astrabocconi.com
+                  as.astra@gmail.com
                 </a>
               </div>
               
