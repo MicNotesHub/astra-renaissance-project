@@ -59,7 +59,7 @@ export function Navigation() {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
   const handleContactClick = () => {
-    window.location.href = "mailto:info@astrabocconi.it";
+    window.location.href = "mailto:as.astra@gmail.com";
   };
   const isActive = (href: string) => {
     if (href.startsWith('/')) {
