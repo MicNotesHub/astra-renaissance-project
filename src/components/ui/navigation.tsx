@@ -25,16 +25,8 @@ export function Navigation() {
     href: "/dispense",
     isExternal: false
   }, {
-    name: t('nav.directory'),
-    href: "#marketplace",
-    isExternal: false
-  }, {
     name: t('nav.guides'),
     href: "/guide",
-    isExternal: false
-  }, {
-    name: t('nav.about'),
-    href: "#about",
     isExternal: false
   }];
 
