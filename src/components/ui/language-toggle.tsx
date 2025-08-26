@@ -14,7 +14,7 @@ export const LanguageToggle = () => {
       variant="ghost"
       size="sm"
       onClick={toggleLanguage}
-      className="flex items-center gap-2 text-current hover:bg-current/10"
+      className="flex items-center gap-2 bg-white text-primary hover:bg-primary hover:text-white transition-all duration-200 border border-white/20"
     >
       <Globe className="h-4 w-4" />
       <span className="font-medium">{language.toUpperCase()}</span>
