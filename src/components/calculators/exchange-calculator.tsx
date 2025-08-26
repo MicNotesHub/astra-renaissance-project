@@ -50,6 +50,7 @@ interface ExamGrade {
   subject: string;
   grade: number;
   cfu: number;
+  isSeminar: boolean;
 }
 
 interface CalculatorInputs {
@@ -158,7 +159,8 @@ const ExchangeCalculator = () => {
       const initialExams = (data || []).map(subject => ({
         subject: subject.subject,
         grade: 0, // Start with 0 to calculate NC Achieved correctly
-        cfu: subject.cfu
+        cfu: subject.cfu,
+        isSeminar: false
       }));
       
       setInputs(prev => ({ ...prev, exams: initialExams }));
@@ -194,13 +196,16 @@ const ExchangeCalculator = () => {
     }
 
     try {
-      // Calculate student's WA (Weighted Average) - only for exams with grade >= 18
-      const passedExams = inputs.exams.filter(exam => exam.grade >= 18);
-      const totalCredits = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
-      const weightedSum = passedExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
+      // Include seminars and regular passed exams  
+      const passedExams = inputs.exams.filter(exam => exam.isSeminar || exam.grade >= 18);
+      
+      // Calculate student's WA (Weighted Average) - only for non-seminar exams with grade >= 18
+      const nonSeminarExams = passedExams.filter(exam => !exam.isSeminar && exam.grade >= 18);
+      const totalCredits = nonSeminarExams.reduce((sum, exam) => sum + exam.cfu, 0);
+      const weightedSum = nonSeminarExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
       const studentWA = totalCredits > 0 ? weightedSum / totalCredits : 0;
 
-      // Calculate NC Achieved (sum of CFU with grade >= 18)
+      // Calculate NC Achieved (sum of CFU with grade >= 18 OR seminars)
       const ncAchieved = passedExams.reduce((sum, exam) => sum + exam.cfu, 0);
 
       // Get Max NC for the course
@@ -254,9 +259,9 @@ const ExchangeCalculator = () => {
     }
   };
 
-  const updateExamGrade = (index: number, grade: number) => {
+  const updateExamGrade = (index: number, field: keyof ExamGrade, value: any) => {
     const updatedExams = [...inputs.exams];
-    updatedExams[index].grade = grade;
+    updatedExams[index] = { ...updatedExams[index], [field]: value };
     setInputs(prev => ({ ...prev, exams: updatedExams }));
   };
 
@@ -406,24 +411,51 @@ const ExchangeCalculator = () => {
               <CardContent className="space-y-4">
                 <div className="grid gap-4">
                   {inputs.exams.map((exam, index) => (
-                    <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center p-3 border rounded-lg">
-                      <div>
-                        <p className="font-medium text-sm">{exam.subject}</p>
-                        <p className="text-xs text-muted-foreground">{exam.cfu} CFU</p>
+                    <div key={index} className="space-y-3 p-4 border rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium text-sm">{exam.subject}</p>
+                          <p className="text-xs text-muted-foreground">{exam.cfu} CFU</p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Switch
+                            checked={exam.isSeminar}
+                            onCheckedChange={(checked) => {
+                              updateExamGrade(index, 'isSeminar', checked);
+                              if (checked) {
+                                updateExamGrade(index, 'grade', 0);
+                              }
+                            }}
+                          />
+                          <Label className="text-sm text-muted-foreground">Seminario</Label>
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor={`grade-${index}`}>Voto</Label>
-                        <Input
-                          id={`grade-${index}`}
-                          type="number"
-                          min="18"
-                          max="31"
-                          value={exam.grade}
-                          onChange={(e) => updateExamGrade(index, parseInt(e.target.value) || 0)}
-                        />
-                      </div>
+                      
+                      {!exam.isSeminar && (
+                        <div className="space-y-2">
+                          <Label htmlFor={`grade-${index}`}>Voto</Label>
+                          <Select
+                            value={exam.grade > 0 ? exam.grade.toString() : ""}
+                            onValueChange={(value) => updateExamGrade(index, 'grade', parseInt(value) || 0)}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Seleziona voto" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                <SelectItem key={grade} value={grade.toString()}>
+                                  {grade === 31 ? "30L" : grade.toString()}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+                      
                       <div className="text-center">
-                        {exam.grade === 0 ? (
+                        {exam.isSeminar ? (
+                          <Badge variant="secondary">Seminario completato</Badge>
+                        ) : exam.grade === 0 ? (
                           <Badge variant="outline">Non sostenuto</Badge>
                         ) : exam.grade < 18 ? (
                           <Badge variant="destructive">Non superato</Badge>

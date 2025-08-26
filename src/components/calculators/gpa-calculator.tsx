@@ -6,17 +6,20 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, TrendingUp, Target } from "lucide-react";
 import { motion } from "framer-motion";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 
 interface Exam {
   id: string;
   name: string;
   grade: number | '';
   credits: number | '';
+  isSeminar: boolean;
 }
 
 export function GPACalculator() {
   const [exams, setExams] = useState<Exam[]>([
-    { id: '1', name: 'Matematica Generale', grade: '', credits: '' }
+    { id: '1', name: 'Matematica Generale', grade: '', credits: '', isSeminar: false }
   ]);
 
   const addExam = () => {
@@ -24,7 +27,8 @@ export function GPACalculator() {
       id: Date.now().toString(), 
       name: '', 
       grade: '', 
-      credits: '' 
+      credits: '',
+      isSeminar: false
     }]);
   };
 
@@ -32,28 +36,36 @@ export function GPACalculator() {
     setExams(exams.filter(exam => exam.id !== id));
   };
 
-  const updateExam = (id: string, field: keyof Exam, value: string | number) => {
+  const updateExam = (id: string, field: keyof Exam, value: string | number | boolean) => {
     setExams(exams.map(exam => 
       exam.id === id ? { ...exam, [field]: value } : exam
     ));
   };
 
   const calculateGPA = () => {
+    // Include seminars (count credits) and regular exams with grades
     const validExams = exams.filter(exam => 
-      exam.grade !== '' && exam.credits !== '' && 
-      exam.grade > 0 && exam.credits > 0
+      exam.credits !== '' && exam.credits > 0 && 
+      (exam.isSeminar || (exam.grade !== '' && exam.grade > 0))
     );
 
     if (validExams.length === 0) return { gpa: 0, totalCredits: 0, weightedSum: 0 };
 
     const totalCredits = validExams.reduce((sum, exam) => sum + Number(exam.credits), 0);
-    const weightedSum = validExams.reduce((sum, exam) => 
-      sum + (Number(exam.grade) * Number(exam.credits)), 0
-    );
     
-    const gpa = weightedSum / totalCredits;
+    // Calculate GPA only from non-seminar exams
+    const nonSeminarExams = validExams.filter(exam => !exam.isSeminar);
+    let gpa = 0;
     
-    return { gpa, totalCredits, weightedSum };
+    if (nonSeminarExams.length > 0) {
+      const gradedCredits = nonSeminarExams.reduce((sum, exam) => sum + Number(exam.credits), 0);
+      const weightedSum = nonSeminarExams.reduce((sum, exam) => 
+        sum + (Number(exam.grade) * Number(exam.credits)), 0
+      );
+      gpa = gradedCredits > 0 ? weightedSum / gradedCredits : 0;
+    }
+    
+    return { gpa, totalCredits, weightedSum: 0 };
   };
 
   const { gpa, totalCredits } = calculateGPA();
@@ -100,48 +112,75 @@ export function GPACalculator() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="grid grid-cols-12 gap-3 items-center p-3 border rounded-lg"
+                  className="space-y-3 p-4 border rounded-lg"
                 >
-                  <div className="col-span-5">
-                    <Label className="sr-only">Nome esame</Label>
-                    <Input
-                      placeholder="Nome esame"
-                      value={exam.name}
-                      onChange={(e) => updateExam(exam.id, 'name', e.target.value)}
-                    />
-                  </div>
-                  <div className="col-span-3">
-                    <Label className="sr-only">Voto</Label>
-                    <Input
-                      type="number"
-                      placeholder="Voto"
-                      min="18"
-                      max="30"
-                      value={exam.grade}
-                      onChange={(e) => updateExam(exam.id, 'grade', e.target.value ? Number(e.target.value) : '')}
-                    />
-                  </div>
-                  <div className="col-span-3">
-                    <Label className="sr-only">Crediti</Label>
-                    <Input
-                      type="number"
-                      placeholder="Crediti"
-                      min="1"
-                      max="15"
-                      value={exam.credits}
-                      onChange={(e) => updateExam(exam.id, 'credits', e.target.value ? Number(e.target.value) : '')}
-                    />
-                  </div>
-                  <div className="col-span-1">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <Input
+                        placeholder="Nome esame"
+                        value={exam.name}
+                        onChange={(e) => updateExam(exam.id, 'name', e.target.value)}
+                      />
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => removeExam(exam.id)}
                       disabled={exams.length === 1}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-red-500 hover:text-red-700 ml-2"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-3 items-center">
+                    <div>
+                      <Label className="text-xs text-muted-foreground">Voto</Label>
+                      <Select
+                        value={exam.grade?.toString() || ""}
+                        onValueChange={(value) => updateExam(exam.id, 'grade', value ? Number(value) : '')}
+                        disabled={exam.isSeminar}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder={exam.isSeminar ? "Seminario" : "Voto"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                            <SelectItem key={grade} value={grade.toString()}>
+                              {grade === 31 ? "30L" : grade.toString()}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <Label className="text-xs text-muted-foreground">Crediti</Label>
+                      <Input
+                        type="number"
+                        placeholder="CFU"
+                        min="1"
+                        max="15"
+                        value={exam.credits}
+                        onChange={(e) => updateExam(exam.id, 'credits', e.target.value ? Number(e.target.value) : '')}
+                      />
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <Label className="text-xs text-muted-foreground">Seminario</Label>
+                      <div className="flex items-center space-x-2">
+                        <Switch
+                          checked={exam.isSeminar}
+                          onCheckedChange={(checked) => {
+                            updateExam(exam.id, 'isSeminar', checked);
+                            if (checked) {
+                              updateExam(exam.id, 'grade', '');
+                            }
+                          }}
+                        />
+                        <span className="text-xs">{exam.isSeminar ? "Sì" : "No"}</span>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -177,9 +216,9 @@ export function GPACalculator() {
                     <span className="font-medium">{totalCredits}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Esami inseriti:</span>
+                    <span>Esami completati:</span>
                     <span className="font-medium">
-                      {exams.filter(e => e.grade !== '' && e.credits !== '').length}
+                      {exams.filter(e => (e.isSeminar || e.grade !== '') && e.credits !== '').length}
                     </span>
                   </div>
                 </div>

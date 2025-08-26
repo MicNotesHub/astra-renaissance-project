@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Calculator, Target, ChevronDown } from "lucide-react";
@@ -23,6 +24,7 @@ interface ExamGrade {
   cfu: number;
   grade: number | '';
   completed: boolean;
+  isSeminar: boolean;
 }
 
 export function GraduationGradeCalculator() {
@@ -90,7 +92,8 @@ export function GraduationGradeCalculator() {
           subject: subject.subject,
           cfu: subject.cfu,
           grade: '',
-          completed: false
+          completed: false,
+          isSeminar: false
         }));
         
         setExamGrades(initialGrades);
@@ -116,7 +119,10 @@ export function GraduationGradeCalculator() {
   };
 
   const calculateResults = () => {
-    const completedExams = examGrades.filter(exam => exam.completed && exam.grade !== '');
+    // Include seminars and regular exams with grades
+    const completedExams = examGrades.filter(exam => 
+      exam.completed && (exam.isSeminar || exam.grade !== '')
+    );
     
     if (completedExams.length === 0) {
       return {
@@ -128,14 +134,21 @@ export function GraduationGradeCalculator() {
       };
     }
 
-    const totalWeightedGrades = completedExams.reduce((sum, exam) => {
-      return sum + (Number(exam.grade) * exam.cfu);
-    }, 0);
+    // Calculate GPA only from non-seminar exams
+    const nonSeminarExams = completedExams.filter(exam => !exam.isSeminar);
+    
+    let gpa = 0;
+    if (nonSeminarExams.length > 0) {
+      const totalWeightedGrades = nonSeminarExams.reduce((sum, exam) => {
+        return sum + (Number(exam.grade) * exam.cfu);
+      }, 0);
+      const gradedCfu = nonSeminarExams.reduce((sum, exam) => sum + exam.cfu, 0);
+      gpa = totalWeightedGrades / gradedCfu;
+    }
 
     const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
     const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
     
-    const gpa = totalWeightedGrades / completedCfu;
     const graduationGrade = (gpa * 110) / 30;
     const graduationGradeWithBonus = Math.min(110, graduationGrade + bonus);
 
@@ -334,31 +347,61 @@ export function GraduationGradeCalculator() {
                   className="border rounded-lg p-4 bg-card hover:shadow-md transition-shadow"
                 >
                   <div className="space-y-3">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="font-medium text-sm leading-tight">{exam.subject}</div>
-                        <Badge variant="secondary" className="mt-1">{exam.cfu} CFU</Badge>
+                    <div className="space-y-3">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="font-medium text-sm leading-tight">{exam.subject}</div>
+                          <Badge variant="secondary" className="mt-1">{exam.cfu} CFU</Badge>
+                        </div>
+                        <Checkbox
+                          checked={exam.completed}
+                          onCheckedChange={(checked) => {
+                            updateExamGrade(exam.id, 'completed', checked);
+                            if (!checked) {
+                              updateExamGrade(exam.id, 'isSeminar', false);
+                              updateExamGrade(exam.id, 'grade', '');
+                            }
+                          }}
+                        />
                       </div>
-                      <Checkbox
-                        checked={exam.completed}
-                        onCheckedChange={(checked) => 
-                          updateExamGrade(exam.id, 'completed', checked)
-                        }
-                      />
-                    </div>
-                    
-                    <div>
-                      <Label className="text-xs text-muted-foreground">Voto</Label>
-                      <Input
-                        type="number"
-                        min="18"
-                        max="31"
-                        value={exam.grade}
-                        onChange={(e) => updateExamGrade(exam.id, 'grade', e.target.value)}
-                        disabled={!exam.completed}
-                        placeholder="18-31"
-                        className="text-center mt-1"
-                      />
+                      
+                      {exam.completed && (
+                        <>
+                          <div className="flex items-center space-x-2">
+                            <Switch
+                              checked={exam.isSeminar}
+                              onCheckedChange={(checked) => {
+                                updateExamGrade(exam.id, 'isSeminar', checked);
+                                if (checked) {
+                                  updateExamGrade(exam.id, 'grade', '');
+                                }
+                              }}
+                            />
+                            <Label className="text-xs text-muted-foreground">Seminario</Label>
+                          </div>
+                          
+                          {!exam.isSeminar && (
+                            <div>
+                              <Label className="text-xs text-muted-foreground">Voto</Label>
+                              <Select
+                                value={exam.grade?.toString() || ""}
+                                onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
+                              >
+                                <SelectTrigger className="mt-1">
+                                  <SelectValue placeholder="Seleziona voto" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                    <SelectItem key={grade} value={grade.toString()}>
+                                      {grade === 31 ? "30L" : grade.toString()}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          )}
+                        </>
+                      )}
                     </div>
                   </div>
                 </motion.div>

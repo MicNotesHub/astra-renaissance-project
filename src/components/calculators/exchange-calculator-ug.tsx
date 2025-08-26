@@ -345,18 +345,26 @@ const ExchangeCalculatorUG = () => {
                         <p className="text-xs text-muted-foreground">{exam.cfu} CFU</p>
                       </div>
                       
-                      <div className="space-y-2">
-                        <Label htmlFor={`grade-${index}`}>Voto</Label>
-                        <Input
-                          id={`grade-${index}`}
-                          type="number"
-                          min="18"
-                          max="31"
-                          value={exam.grade}
-                          onChange={(e) => updateExamGrade(index, parseInt(e.target.value) || 0)}
-                          className="text-center"
-                        />
-                      </div>
+                        {!exam.isSeminar && (
+                          <div className="space-y-2">
+                            <Label htmlFor={`grade-${index}`}>Voto</Label>
+                            <Select
+                              value={exam.grade > 0 ? exam.grade.toString() : ""}
+                              onValueChange={(value) => updateExamGrade(index, parseInt(value) || 0)}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Seleziona voto" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                  <SelectItem key={grade} value={grade.toString()}>
+                                    {grade === 31 ? "30L" : grade.toString()}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        )}
 
                       <div className="flex items-center space-x-2">
                         <Switch

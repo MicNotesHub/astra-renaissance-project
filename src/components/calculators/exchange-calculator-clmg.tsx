@@ -33,6 +33,7 @@ interface ExamGrade {
   course: string;
   cfu: number;
   grade: number;
+  isSeminar: boolean;
 }
 
 export default function ExchangeCalculatorCLMG() {
@@ -108,7 +109,8 @@ export default function ExchangeCalculatorCLMG() {
       const initialGrades = (studyPlan || []).map(course => ({
         course: course.course,
         cfu: course.cfu,
-        grade: 0
+        grade: 0,
+        isSeminar: false
       }));
       setExamGrades(initialGrades);
 
@@ -124,26 +126,32 @@ export default function ExchangeCalculatorCLMG() {
     }
   };
 
-  const updateExamGrade = (course: string, grade: number) => {
+  const updateExamGrade = (course: string, field: keyof ExamGrade, value: any) => {
     setExamGrades(prev => 
       prev.map(exam => 
-        exam.course === course ? { ...exam, grade } : exam
+        exam.course === course ? { ...exam, [field]: value } : exam
       )
     );
   };
 
   const calculateExchangeScore = () => {
-    const validGrades = examGrades.filter(exam => exam.grade >= 18);
+    // Include seminars and regular exams
+    const validGrades = examGrades.filter(exam => exam.isSeminar || exam.grade >= 18);
     
     if (validGrades.length === 0) {
       setExchangeScore(0);
       return;
     }
 
-    const totalWeightedGrades = validGrades.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
-    const totalCFU = validGrades.reduce((sum, exam) => sum + exam.cfu, 0);
+    // Calculate weighted average only for non-seminar exams
+    const nonSeminarExams = validGrades.filter(exam => !exam.isSeminar && exam.grade >= 18);
     
-    let weightedAverage = totalWeightedGrades / totalCFU;
+    let weightedAverage = 0;
+    if (nonSeminarExams.length > 0) {
+      const totalWeightedGrades = nonSeminarExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
+      const totalCFU = nonSeminarExams.reduce((sum, exam) => sum + exam.cfu, 0);
+      weightedAverage = totalWeightedGrades / totalCFU;
+    }
     
     // Add 0.1 if fourth year student
     if (isFourthYear) {
@@ -233,23 +241,53 @@ export default function ExchangeCalculatorCLMG() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4">
+                <div className="grid gap-4">
                 {examGrades.map((exam, index) => (
-                  <div key={index} className="flex items-center gap-4 p-4 border rounded-lg">
-                    <div className="flex-1">
-                      <Label className="font-medium">{exam.course}</Label>
-                      <p className="text-sm text-muted-foreground">{exam.cfu} CFU</p>
+                  <div key={index} className="space-y-3 p-4 border rounded-lg">
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <Label className="font-medium">{exam.course}</Label>
+                        <p className="text-sm text-muted-foreground">{exam.cfu} CFU</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Switch
+                          checked={exam.isSeminar}
+                          onCheckedChange={(checked) => {
+                            updateExamGrade(exam.course, 'isSeminar', checked);
+                            if (checked) {
+                              updateExamGrade(exam.course, 'grade', 0);
+                            }
+                          }}
+                        />
+                        <Label className="text-sm text-muted-foreground">Seminario</Label>
+                      </div>
                     </div>
-                    <div className="w-24">
-                      <Input
-                        type="number"
-                        min="18"
-                        max="30"
-                        placeholder="Voto"
-                        value={exam.grade || ""}
-                        onChange={(e) => updateExamGrade(exam.course, parseInt(e.target.value) || 0)}
-                      />
-                    </div>
+                    
+                    {!exam.isSeminar && (
+                      <div>
+                        <Label className="text-xs text-muted-foreground">Voto</Label>
+                        <Select
+                          value={exam.grade > 0 ? exam.grade.toString() : ""}
+                          onValueChange={(value) => updateExamGrade(exam.course, 'grade', parseInt(value) || 0)}
+                        >
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Seleziona voto" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {Array.from({ length: 13 }, (_, i) => i + 18).map((grade) => (
+                              <SelectItem key={grade} value={grade.toString()}>
+                                {grade === 30 ? "30" : grade.toString()}
+                              </SelectItem>
+                            ))}
+                            <SelectItem value="31">30L</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+                    
+                    {exam.isSeminar && (
+                      <Badge variant="secondary" className="w-fit">Seminario completato</Badge>
+                    )}
                   </div>
                 ))}
               </div>
