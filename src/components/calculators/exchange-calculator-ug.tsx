@@ -188,10 +188,10 @@ const ExchangeCalculatorUG = () => {
       const multiplier = courseMultiplier?.multiplier || 1;
       const minimumCFURequired = courseMultiplier?.cfu_min || 35.4;
       
-      // Exchange Score = GPA * Multiplier + (CFU Totali – CFU Minimi Richiesti)
+      // Exchange Score = GPA + (Multiplier × (CFU Totali – CFU Minimi Richiesti))
       // CFU Totali include tutti gli esami superati (inclusi seminari)
       // GPA è calcolato solo sui voti degli esami non-seminariali
-      const score = (calculatedGPA * multiplier) + (calculatedTotalCFU - minimumCFURequired);
+      const score = calculatedGPA + (multiplier * (calculatedTotalCFU - minimumCFURequired));
       setExchangeScore(Math.max(0, Math.round(score * 100) / 100)); // Round to 2 decimal places
     } else {
       setExchangeScore(null);
