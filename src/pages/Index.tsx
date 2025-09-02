@@ -1,9 +1,5 @@
 import { Navigation } from "@/components/ui/navigation";
 import { HeroSection } from "@/components/ui/hero-section";
-
-import { AboutSection } from "@/components/ui/about-section";
-import { ValuesSection } from "@/components/ui/values-section";
-import { WhatWeDoSection } from "@/components/ui/what-we-do-section";
 import { DispensenSection } from "@/components/ui/dispensen-section";
 import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
 import { AstraPolareSection } from "@/components/ui/astra-polare-section";
@@ -20,9 +16,6 @@ const Index = () => {
       <Navigation />
       <HeroSection />
       
-      <AboutSection />
-      <ValuesSection />
-      <WhatWeDoSection />
       <DispensenSection />
       <CalcolatoriSection />
       <AstraPolareSection />

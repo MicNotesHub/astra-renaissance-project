@@ -17,6 +17,10 @@ export function Navigation() {
   const { language } = useLanguage();
   
   const navItems = [{
+    name: t('nav.about'),
+    href: "/chi-siamo",
+    isExternal: false
+  }, {
     name: t('nav.representatives'),
     href: "#team",
     isExternal: false
