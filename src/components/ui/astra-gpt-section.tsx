@@ -9,9 +9,9 @@ export function AstraGPTSection() {
 
   return <section id="astra-gpt" className="py-32 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full animate-float blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/20 rounded-full animate-float blur-2xl" style={{
+      <div className="absolute inset-0 opacity-30 text-blue-600">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full animate-float blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-400/20 rounded-full animate-float blur-2xl" style={{
         animationDelay: "2s"
       }}></div>
       </div>
