@@ -2,7 +2,6 @@ import { Navigation } from "@/components/ui/navigation";
 import { HeroSection } from "@/components/ui/hero-section";
 import { DispensenSection } from "@/components/ui/dispensen-section";
 import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
-import { AstraPolareSection } from "@/components/ui/astra-polare-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
 import { EventiSection } from "@/components/ui/eventi-section";
 import { TeamSection } from "@/components/ui/team-section";
@@ -18,7 +17,6 @@ const Index = () => {
       
       <CalcolatoriSection />
       <DispensenSection />
-      <AstraPolareSection />
       <MarketplaceSection />
       <EventiSection />
       <AstraGPTSection />
