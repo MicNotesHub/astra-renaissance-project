@@ -35,7 +35,7 @@ export function Navigation() {
   }];
 
   // Always check if on pages with white backgrounds
-  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide');
+  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide') || location.pathname.includes('/chi-siamo');
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
