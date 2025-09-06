@@ -22,7 +22,7 @@ export function Navigation() {
     isExternal: false
   }, {
     name: t('nav.representatives'),
-    href: "#team",
+    href: "/rappresentanti",
     isExternal: false
   }, {
     name: t('nav.handouts'),
@@ -35,7 +35,7 @@ export function Navigation() {
   }];
 
   // Always check if on pages with white backgrounds
-  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide') || location.pathname.includes('/chi-siamo');
+  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide') || location.pathname.includes('/chi-siamo') || location.pathname.includes('/rappresentanti');
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);

@@ -4,7 +4,6 @@ import { DispensenSection } from "@/components/ui/dispensen-section";
 import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
 import { EventiSection } from "@/components/ui/eventi-section";
-import { TeamSection } from "@/components/ui/team-section";
 import { AstraGPTSection } from "@/components/ui/astra-gpt-section";
 import { AstraChatButton } from "@/components/ui/astra-chat-button";
 import { Footer } from "@/components/ui/footer";
@@ -20,7 +19,6 @@ const Index = () => {
       <MarketplaceSection />
       <EventiSection />
       <AstraGPTSection />
-      <TeamSection />
       <Footer />
       
       {/* Astra GPT Chat Button - Fixed in bottom right corner */}
