@@ -23,7 +23,7 @@ export function AstraGPTSection() {
             <span className="text-primary font-semibold">{t('astragpt.powered')}</span>
           </div>
           
-          <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold hero-text mb-6">
             {t('astragpt.title')}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
@@ -43,7 +43,7 @@ export function AstraGPTSection() {
         <div className="text-center">
           <Card className="glass-card premium-shadow max-w-4xl mx-auto">
             <CardContent className="p-8 md:p-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+              <h3 className="text-2xl md:text-3xl font-bold hero-text mb-6">
                 {t('astragpt.try')}
               </h3>
               
