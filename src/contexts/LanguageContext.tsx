@@ -168,7 +168,7 @@ const translations = {
     'calculators.exchange-clmg.title': 'Exchange Calculator CLMG',
     'calculators.exchange-clmg.description': 'Calcola il tuo punteggio per l\'exchange in Giurisprudenza',
     'calculators.exchange-ug.title': 'Exchange Calculator UG',
-    'calculators.exchange-ug.description': 'Calcola il tuo Exchange Score per l\'Undergraduate',
+    'calculators.exchange-ug.description': 'Calcola il tuo Exchange Score per l\'Undergraduate e scopri le destinazioni disponibili',
     'calculators.features': 'Funzionalità:',
     'calculators.use': 'Usa Calcolatore',
     
