@@ -91,8 +91,8 @@ export const CalcolatoriSection = () => {
                       {calc.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="flex flex-col h-full">
-                    <div className="flex-grow space-y-2 mb-4">
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
                       <p className="text-sm font-medium text-muted-foreground">{t('calculators.features')}</p>
                       <ul className="space-y-1">
                         {calc.features.map((feature, fIndex) => <li key={fIndex} className="text-sm flex items-center gap-2">
@@ -102,7 +102,7 @@ export const CalcolatoriSection = () => {
                       </ul>
                     </div>
                     
-                    <Button className="w-full group-hover:bg-primary-light transition-colors mt-auto" onClick={() => setSelectedCalculator(calc.id)}>
+                    <Button className="w-full group-hover:bg-primary-light transition-colors" onClick={() => setSelectedCalculator(calc.id)}>
                       {t('calculators.use')}
                     </Button>
                   </CardContent>
