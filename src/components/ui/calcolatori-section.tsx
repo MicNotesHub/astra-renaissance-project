@@ -78,7 +78,7 @@ export const CalcolatoriSection = () => {
            }} transition={{
              duration: 0.6,
              delay: index * 0.1
-           }} className="flex-shrink-0 w-80">
+           }} className="flex-shrink-0 w-96">
                  <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
                   <CardHeader>
                     <div className={`w-12 h-12 rounded-lg ${calc.bgColor} flex items-center justify-center mb-4`}>
