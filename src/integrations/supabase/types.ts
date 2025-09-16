@@ -543,6 +543,24 @@ export type Database = {
         }
         Relationships: []
       }
+      images: {
+        Row: {
+          id: number
+          "image-name": string | null
+          url: string | null
+        }
+        Insert: {
+          id?: number
+          "image-name"?: string | null
+          url?: string | null
+        }
+        Update: {
+          id?: number
+          "image-name"?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
       "minimum CFU required": {
         Row: {
           cfu_min: number | null
@@ -576,6 +594,21 @@ export type Database = {
           course?: string
           id?: number
           NC_MAX?: number | null
+        }
+        Relationships: []
+      }
+      pdf_files: {
+        Row: {
+          name: string
+          url: string
+        }
+        Insert: {
+          name: string
+          url: string
+        }
+        Update: {
+          name?: string
+          url?: string
         }
         Relationships: []
       }
