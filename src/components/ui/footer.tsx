@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Mail, Instagram, Linkedin, MapPin, Music } from "lucide-react";
+import { Mail, Instagram, Linkedin, MapPin, Video } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PrivacyPolicyDialog } from "@/components/ui/privacy-policy-dialog";
 
@@ -9,7 +9,7 @@ export function Footer() {
   const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/astrabocconi/", label: "Instagram" },
     { icon: Linkedin, href: "https://www.linkedin.com/company/astra-bocconi/posts/?feedView=all", label: "LinkedIn" },
-    { icon: Music, href: "https://www.tiktok.com/@astrabocconi?_t=ZN-8zVJzQLRlME&_r=1", label: "TikTok" }
+    { icon: Video, href: "https://www.tiktok.com/@astrabocconi?_t=ZN-8zVJzQLRlME&_r=1", label: "TikTok" }
   ];
 
   return (
