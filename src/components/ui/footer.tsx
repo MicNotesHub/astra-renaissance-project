@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Mail, Instagram, Linkedin, MapPin, Music } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PrivacyPolicyDialog } from "@/components/ui/privacy-policy-dialog";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -45,13 +46,15 @@ export function Footer() {
           {/* Legal - Right */}
           <div className="md:text-right">
             <h3 className="text-xl font-semibold mb-6 text-yellow-400">Legal</h3>
-            <Button
-              variant="outline"
-              size="sm"
-              className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white"
-            >
-              Privacy Policy
-            </Button>
+            <PrivacyPolicyDialog>
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white"
+              >
+                Privacy Policy
+              </Button>
+            </PrivacyPolicyDialog>
           </div>
         </div>
 
