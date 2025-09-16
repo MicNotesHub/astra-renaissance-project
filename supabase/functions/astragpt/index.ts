@@ -329,6 +329,24 @@ async function searchContent(supabase: any, query: string): Promise<Array<{type:
       });
     }
 
+    // Search in PDF files
+    const { data: pdfFiles } = await supabase
+      .from('pdf_files')
+      .select('*')
+      .or(`name.ilike.%${query}%`)
+      .limit(5);
+    
+    if (pdfFiles) {
+      pdfFiles.forEach((pdf: any) => {
+        results.push({
+          type: 'pdf',
+          title: pdf.name,
+          content: `PDF Document: ${pdf.name}`,
+          url: pdf.url
+        });
+      });
+    }
+
     // Additional keyword-based searches
     if (lowerQuery.includes('primo anno') || lowerQuery.includes('first year')) {
       const { data: firstYear } = await supabase
