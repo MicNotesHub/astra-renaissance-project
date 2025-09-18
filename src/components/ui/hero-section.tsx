@@ -2,56 +2,40 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
-import { useState, useEffect } from "react";
 
 export function HeroSection() {
   const { t } = useLanguage();
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchBackgroundVideo = async () => {
-      console.log('Fetching background video...');
-      const { data, error } = await supabase
-        .from('images')
-        .select('url')
-        .eq('image-name', 'hero-background-video')
-        .maybeSingle();
-      
-      console.log('Video data:', data);
-      console.log('Video error:', error);
-      
-      if (data) {
-        console.log('Setting video URL:', data.url);
-        setVideoUrl(data.url);
-      }
-    };
-    
-    fetchBackgroundVideo();
-  }, []);
+  // Direct video URL instead of fetching from Supabase
+  const videoUrl = "https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/images/guide/university%20101/videoplayback.mp4";
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background video */}
-      {videoUrl && (
-        <video 
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          onLoadStart={() => console.log('Video loading started')}
-          onCanPlay={() => console.log('Video can play')}
-          onError={(e) => console.error('Video error:', e)}
-        >
-          <source src={videoUrl} type="video/mp4" />
-        </video>
-      )}
-      {!videoUrl && (
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      <video 
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        preload="auto"
+        onError={(e) => {
+          console.error('Video failed to load:', e);
+          // Hide video on error and show fallback
+          e.currentTarget.style.display = 'none';
+        }}
+      >
+        <source src={videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      
+      {/* Fallback background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+        style={{
           backgroundImage: `url(/lovable-uploads/4d017d22-3cc7-43d7-b5ea-9a4e70e08369.png)`
-        }}></div>
-      )}
+        }}
+      ></div>
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
       
