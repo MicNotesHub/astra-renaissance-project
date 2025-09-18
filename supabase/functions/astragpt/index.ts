@@ -329,19 +329,40 @@ async function searchContent(supabase: any, query: string): Promise<Array<{type:
       });
     }
 
-    // Search in PDF files
+    // Search in PDF files - search both name and content
     const { data: pdfFiles } = await supabase
       .from('pdf_files')
       .select('*')
-      .or(`name.ilike.%${query}%`)
+      .or(`name.ilike.%${query}%,content.ilike.%${query}%`)
       .limit(5);
     
     if (pdfFiles) {
       pdfFiles.forEach((pdf: any) => {
+        // Extract relevant snippet from content if available
+        let contentPreview = `PDF Document: ${pdf.name}`;
+        if (pdf.content && pdf.content.length > 0) {
+          const lowerContent = pdf.content.toLowerCase();
+          const lowerQuery = query.toLowerCase();
+          const index = lowerContent.indexOf(lowerQuery);
+          
+          if (index !== -1) {
+            // Extract context around the found term
+            const start = Math.max(0, index - 100);
+            const end = Math.min(pdf.content.length, index + 200);
+            let snippet = pdf.content.substring(start, end);
+            
+            // Clean up the snippet
+            if (start > 0) snippet = '...' + snippet;
+            if (end < pdf.content.length) snippet = snippet + '...';
+            
+            contentPreview = `${pdf.name}: ${snippet}`;
+          }
+        }
+        
         results.push({
           type: 'pdf',
           title: pdf.name,
-          content: `PDF Document: ${pdf.name}`,
+          content: contentPreview,
           url: pdf.url
         });
       });

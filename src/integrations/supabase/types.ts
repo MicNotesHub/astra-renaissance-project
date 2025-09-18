@@ -599,14 +599,17 @@ export type Database = {
       }
       pdf_files: {
         Row: {
+          content: string | null
           name: string
           url: string
         }
         Insert: {
+          content?: string | null
           name: string
           url: string
         }
         Update: {
+          content?: string | null
           name?: string
           url?: string
         }
