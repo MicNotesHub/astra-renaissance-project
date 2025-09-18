@@ -7,7 +7,7 @@ export function Footer() {
   const { t } = useLanguage();
 
   const socialLinks = [
-    { icon: Instagram, href: "https://www.instagram.com/astrabocconi/", label: "Instagram" },
+    { icon: Instagram, href: "https://www.instagram.com/astrabocconi?utm_source=ig_web_button_share_sheet&igsh=NW10bGZtbXA5cHN0", label: "Instagram" },
     { icon: Linkedin, href: "https://www.linkedin.com/company/astra-bocconi/posts/?feedView=all", label: "LinkedIn" },
     { icon: Video, href: "https://www.tiktok.com/@astrabocconi?_t=ZN-8zVJzQLRlME&_r=1", label: "TikTok" }
   ];
