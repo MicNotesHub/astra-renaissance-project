@@ -2,17 +2,43 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-const heroImage = "/lovable-uploads/4d017d22-3cc7-43d7-b5ea-9a4e70e08369.png";
+import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
 
 export function HeroSection() {
   const { t } = useLanguage();
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBackgroundVideo = async () => {
+      const { data } = await supabase
+        .from('images')
+        .select('url')
+        .eq('image-name', 'hero-background-video')
+        .single();
+      
+      if (data) {
+        setVideoUrl(data.url);
+      }
+    };
+    
+    fetchBackgroundVideo();
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `url(${heroImage})`
-    }}></div>
+      {/* Background video */}
+      {videoUrl && (
+        <video 
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+      )}
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
       
