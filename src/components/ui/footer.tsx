@@ -59,19 +59,8 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center mb-4 md:mb-0">
-            <img 
-              src="/astra-logo-blue.png" 
-              alt="ASTRA Bocconi Logo" 
-              className="h-8 w-8 mr-3"
-            />
-            <p className="text-white/60 text-sm">
-              Copyright © 2025 Astra Bocconi
-            </p>
-          </div>
-          
-          <div className="flex space-x-4 justify-center">
+        <div className="border-t border-white/20 pt-8 flex flex-col items-center">
+          <div className="flex space-x-4 justify-center mb-4">
             {socialLinks.map((social) => (
               <Button
                 key={social.label}
@@ -85,6 +74,17 @@ export function Footer() {
                 </a>
               </Button>
             ))}
+          </div>
+          
+          <div className="flex items-center">
+            <img 
+              src="/astra-logo-blue.png" 
+              alt="ASTRA Bocconi Logo" 
+              className="h-8 w-8 mr-3"
+            />
+            <p className="text-white/60 text-sm">
+              Copyright © 2025 Astra Bocconi
+            </p>
           </div>
         </div>
       </div>
