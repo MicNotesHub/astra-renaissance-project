@@ -11,13 +11,18 @@ export function HeroSection() {
 
   useEffect(() => {
     const fetchBackgroundVideo = async () => {
-      const { data } = await supabase
+      console.log('Fetching background video...');
+      const { data, error } = await supabase
         .from('images')
         .select('url')
         .eq('image-name', 'hero-background-video')
-        .single();
+        .maybeSingle();
+      
+      console.log('Video data:', data);
+      console.log('Video error:', error);
       
       if (data) {
+        console.log('Setting video URL:', data.url);
         setVideoUrl(data.url);
       }
     };
@@ -35,9 +40,17 @@ export function HeroSection() {
           loop 
           muted 
           playsInline
+          onLoadStart={() => console.log('Video loading started')}
+          onCanPlay={() => console.log('Video can play')}
+          onError={(e) => console.error('Video error:', e)}
         >
           <source src={videoUrl} type="video/mp4" />
         </video>
+      )}
+      {!videoUrl && (
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+          backgroundImage: `url(/lovable-uploads/4d017d22-3cc7-43d7-b5ea-9a4e70e08369.png)`
+        }}></div>
       )}
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
