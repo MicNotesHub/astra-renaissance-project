@@ -62,9 +62,9 @@ export function Footer() {
         <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
             <img 
-              src="/lovable-uploads/b01b09dd-7caf-43e1-9dc2-a6d5e15349fd.png" 
+              src="/astra-logo-blue.png" 
               alt="ASTRA Bocconi Logo" 
-              className="h-8 w-8 mr-3 brightness-0 invert bg-white rounded p-1"
+              className="h-8 w-8 mr-3"
             />
             <p className="text-white/60 text-sm">
               Copyright © 2025 Astra Bocconi
