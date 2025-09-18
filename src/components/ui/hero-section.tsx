@@ -6,8 +6,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export function HeroSection() {
   const { t } = useLanguage();
 
-  // Direct video URL instead of fetching from Supabase
-  const videoUrl = "https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/images/guide/university%20101/videoplayback.mp4";
+  // Using a working video URL for university/campus background
+  const videoUrl = "https://videos.pexels.com/video-files/3616966/3616966-hd_1920_1080_30fps.mp4";
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
