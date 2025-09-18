@@ -71,7 +71,7 @@ export function Footer() {
             </p>
           </div>
           
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 justify-center">
             {socialLinks.map((social) => (
               <Button
                 key={social.label}
