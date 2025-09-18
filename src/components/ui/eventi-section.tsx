@@ -76,8 +76,9 @@ export const EventiSection = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">
-            📅 {t('events.title')}
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text flex items-center justify-center gap-4">
+            <Calendar className="h-12 w-12 text-primary" />
+            {t('events.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             {t('events.subtitle')}
