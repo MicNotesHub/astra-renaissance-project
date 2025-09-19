@@ -15,6 +15,11 @@ const Rappresentanti = () => {
 
   const rappresentantiSections = [
     {
+      name: "CNSU",
+      description: "Consiglio Nazionale Studenti Universitari - Organo del Ministero dell'Università e della Ricerca a Roma",
+      icon: "🏛️"
+    },
+    {
       name: "CDD",
       description: t('representatives.cdd.description'),
       icon: "⚖️"
