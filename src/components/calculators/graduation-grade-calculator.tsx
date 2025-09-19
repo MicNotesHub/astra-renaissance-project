@@ -78,7 +78,10 @@ export function GraduationGradeCalculator() {
 
         if (error) throw error;
 
-        const fetchedSubjects: Subject[] = data?.map(item => ({
+        // Filter out thesis from subjects (automatically counted)
+        const fetchedSubjects: Subject[] = data?.filter(item => 
+          !item.subject?.toLowerCase().includes('tesi')
+        ).map(item => ({
           id: item.id,
           subject: item.subject || '',
           cfu: item.cfu || 0
@@ -152,7 +155,7 @@ export function GraduationGradeCalculator() {
     }
 
     const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
-    const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
+    const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0) + 3; // Add 3 CFU for thesis
     
     // Convert to 110 scale as per official formula: "convertita in centodecimi"
     const graduationGrade = gpa > 0 ? (gpa * 110) / 30 : 0;
@@ -328,7 +331,7 @@ export function GraduationGradeCalculator() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0">Nessun bonus</SelectItem>
-                  <SelectItem value="1">+1 punto (tirocinio/exchange)</SelectItem>
+                  <SelectItem value="1">+1 punto (tesi sufficiente o tirocinio/exchange)</SelectItem>
                   <SelectItem value="2">+2 punti (tesi buona)</SelectItem>
                   <SelectItem value="3">+3 punti (tesi buona + tirocinio/exchange)</SelectItem>
                   <SelectItem value="4">+4 punti (tesi ottima)</SelectItem>
@@ -336,8 +339,9 @@ export function GraduationGradeCalculator() {
                 </SelectContent>
               </Select>
               <div className="text-xs text-muted-foreground mt-2">
-                <p><strong>Tesi:</strong> 0-4 punti (sufficiente: 0-1, buona: 2-3, ottima: 4)</p>
+                <p><strong>Tesi:</strong> 1-4 punti (sufficiente: 1, buona: 2, ottima: 4)</p>
                 <p><strong>Tirocinio/Exchange:</strong> +1 punto aggiuntivo (non cumulabili tra loro)</p>
+                <p><strong>Nota:</strong> La tesi (3 CFU) è inclusa automaticamente nel calcolo</p>
               </div>
             </div>
           </CardContent>
