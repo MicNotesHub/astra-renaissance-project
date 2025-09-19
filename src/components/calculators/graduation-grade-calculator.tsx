@@ -132,12 +132,13 @@ export function GraduationGradeCalculator() {
     );
     
     if (completedExams.length === 0) {
+      const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0) + 3; // Add 3 CFU for thesis
       return {
         gpa: 0,
         graduationGrade: 0,
         graduationGradeWithBonus: 0,
-        totalCfu: 0,
-        completedCfu: 0
+        totalCfu,
+        completedCfu: 3 // Thesis is always considered completed (3 CFU)
       };
     }
 
@@ -158,7 +159,7 @@ export function GraduationGradeCalculator() {
       gpa = gradedCfu > 0 ? totalWeightedGrades / gradedCfu : 0;
     }
 
-    const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
+    const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0) + 3; // Add 3 CFU for thesis
     const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0) + 3; // Add 3 CFU for thesis
     
     // Convert to 110 scale as per official formula: "convertita in centodecimi"
