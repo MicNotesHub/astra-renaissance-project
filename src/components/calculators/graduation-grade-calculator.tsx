@@ -79,9 +79,13 @@ export function GraduationGradeCalculator() {
         if (error) throw error;
 
         // Filter out thesis from subjects (automatically counted)
-        const fetchedSubjects: Subject[] = data?.filter(item => 
-          !item.subject?.toLowerCase().includes('tesi')
-        ).map(item => ({
+        const fetchedSubjects: Subject[] = data?.filter(item => {
+          const subjectName = item.subject?.toLowerCase() || '';
+          return !subjectName.includes('tesi') && 
+                 !subjectName.includes('final paper') && 
+                 !subjectName.includes('thesis') &&
+                 !subjectName.includes('elaborato finale');
+        }).map(item => ({
           id: item.id,
           subject: item.subject || '',
           cfu: item.cfu || 0
