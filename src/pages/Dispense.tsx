@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Dispense = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
       <Navigation />
@@ -17,15 +20,15 @@ const Dispense = () => {
               <Link to="/" className="mr-6">
                 <Button variant="outline" size="sm">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Torna alla Home
+                  {t('common.backToHome')}
                 </Button>
               </Link>
             </div>
             <h1 className="text-4xl font-bold text-foreground mb-4">
-              Dispense Universitarie
+              {t('dispense.title')}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Accedi alle dispense organizzate per anno accademico. Materiali di studio condivisi dalla comunità studentesca.
+              {t('dispense.subtitle')}
             </p>
           </div>
 
@@ -37,13 +40,13 @@ const Dispense = () => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <FileText className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Primo Anno</h3>
+                <h3 className="text-xl font-semibold mb-4">{t('dispense.firstYear')}</h3>
                 <p className="text-muted-foreground mb-6">
-                  Materiali per i corsi del primo anno
+                  {t('dispense.firstYearDesc')}
                 </p>
                 <Link to="/dispense/primo-anno">
                   <Button className="w-full">
-                    Accedi alle Dispense
+                    {t('dispense.accessHandouts')}
                   </Button>
                 </Link>
               </CardContent>
@@ -55,13 +58,13 @@ const Dispense = () => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <FileText className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Secondo Anno</h3>
+                <h3 className="text-xl font-semibold mb-4">{t('dispense.secondYear')}</h3>
                 <p className="text-muted-foreground mb-6">
-                  Materiali per i corsi del secondo anno
+                  {t('dispense.secondYearDesc')}
                 </p>
                 <Link to="/dispense/secondo-anno">
                   <Button className="w-full">
-                    Accedi alle Dispense
+                    {t('dispense.accessHandouts')}
                   </Button>
                 </Link>
               </CardContent>
@@ -73,13 +76,13 @@ const Dispense = () => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <FileText className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Terzo Anno</h3>
+                <h3 className="text-xl font-semibold mb-4">{t('dispense.thirdYear')}</h3>
                 <p className="text-muted-foreground mb-6">
-                  Materiali per i corsi del terzo anno
+                  {t('dispense.thirdYearDesc')}
                 </p>
                 <Link to="/dispense/terzo-anno">
                   <Button className="w-full">
-                    Accedi alle Dispense
+                    {t('dispense.accessHandouts')}
                   </Button>
                 </Link>
               </CardContent>
@@ -91,13 +94,13 @@ const Dispense = () => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors">
                   <FileText className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">CLMG</h3>
+                <h3 className="text-xl font-semibold mb-4">{t('dispense.clmg')}</h3>
                 <p className="text-muted-foreground mb-6">
-                  Materiali per il corso di Giurisprudenza (5 anni)
+                  {t('dispense.clmgDesc')}
                 </p>
                 <Link to="/dispense/clmg">
                   <Button className="w-full" variant="outline">
-                    Accedi alle Dispense
+                    {t('dispense.accessHandouts')}
                   </Button>
                 </Link>
               </CardContent>

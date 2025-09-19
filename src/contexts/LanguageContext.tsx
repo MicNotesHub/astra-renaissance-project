@@ -252,6 +252,19 @@ const translations = {
     'category.ecdl.title': 'ECDL 101',
     'category.ecdl.description': 'Tutto quello che devi sapere',
     
+    // Dispense Section
+    'dispense.title': 'Dispense Universitarie',
+    'dispense.subtitle': 'Accedi alle dispense organizzate per anno accademico. Materiali di studio condivisi dalla comunità studentesca.',
+    'dispense.firstYear': 'Primo Anno',
+    'dispense.firstYearDesc': 'Materiali per i corsi del primo anno',
+    'dispense.secondYear': 'Secondo Anno',
+    'dispense.secondYearDesc': 'Materiali per i corsi del secondo anno',
+    'dispense.thirdYear': 'Terzo Anno',
+    'dispense.thirdYearDesc': 'Materiali per i corsi del terzo anno',
+    'dispense.clmg': 'CLMG',
+    'dispense.clmgDesc': 'Materiali per il corso di Giurisprudenza (5 anni)',
+    'dispense.accessHandouts': 'Accedi alle Dispense',
+
     // CLMG Section
     'clmg.title': 'CLMG - Giurisprudenza',
     'clmg.subtitle': 'Dispense e materiali per il corso di laurea magistrale in Giurisprudenza. Seleziona l\'anno di interesse.',
@@ -286,6 +299,7 @@ const translations = {
     'common.readMore': 'Leggi di più',
     'common.learnMore': 'Scopri di più',
     'common.backToDispense': 'Torna alle Dispense',
+    'common.backToHome': 'Torna alla Home',
   },
   en: {
     // Navigation
@@ -516,6 +530,19 @@ const translations = {
     'category.ecdl.title': 'ECDL 101',
     'category.ecdl.description': 'Everything you need to know',
     
+    // Dispense Section
+    'dispense.title': 'University Handouts',
+    'dispense.subtitle': 'Access handouts organized by academic year. Study materials shared by the student community.',
+    'dispense.firstYear': 'First Year',
+    'dispense.firstYearDesc': 'Materials for first year courses',
+    'dispense.secondYear': 'Second Year', 
+    'dispense.secondYearDesc': 'Materials for second year courses',
+    'dispense.thirdYear': 'Third Year',
+    'dispense.thirdYearDesc': 'Materials for third year courses',
+    'dispense.clmg': 'CLMG',
+    'dispense.clmgDesc': 'Materials for the Law degree program (5 years)',
+    'dispense.accessHandouts': 'Access Handouts',
+    
     // CLMG Section
     'clmg.title': 'CLMG - Law',
     'clmg.subtitle': 'Handouts and materials for the Law Master\'s degree program. Select the year of interest.',
@@ -550,6 +577,7 @@ const translations = {
     'common.readMore': 'Read more',
     'common.learnMore': 'Learn more',
     'common.backToDispense': 'Back to Handouts',
+    'common.backToHome': 'Back to Home',
   }
 };
 
