@@ -43,25 +43,29 @@ export function GPACalculator() {
   };
 
   const calculateGPA = () => {
-    // Include seminars (count credits) and regular exams with grades
+    // Include seminars (count credits) and regular exams with valid grades (≥18)
     const validExams = exams.filter(exam => 
       exam.credits !== '' && exam.credits > 0 && 
-      (exam.isSeminar || (exam.grade !== '' && exam.grade > 0))
+      (exam.isSeminar || (exam.grade !== '' && exam.grade >= 18))
     );
 
     if (validExams.length === 0) return { gpa: 0, totalCredits: 0, weightedSum: 0 };
 
     const totalCredits = validExams.reduce((sum, exam) => sum + Number(exam.credits), 0);
     
-    // Calculate GPA only from non-seminar exams
-    const nonSeminarExams = validExams.filter(exam => !exam.isSeminar);
-    let gpa = 0;
+    // Calculate GPA only from non-seminar exams with grades ≥18
+    const gradedExams = validExams.filter(exam => 
+      !exam.isSeminar && exam.grade !== '' && exam.grade >= 18
+    );
     
-    if (nonSeminarExams.length > 0) {
-      const gradedCredits = nonSeminarExams.reduce((sum, exam) => sum + Number(exam.credits), 0);
-      const weightedSum = nonSeminarExams.reduce((sum, exam) => 
-        sum + (Number(exam.grade) * Number(exam.credits)), 0
-      );
+    let gpa = 0;
+    if (gradedExams.length > 0) {
+      const gradedCredits = gradedExams.reduce((sum, exam) => sum + Number(exam.credits), 0);
+      const weightedSum = gradedExams.reduce((sum, exam) => {
+        // Convert 30L to 31 for calculation
+        const gradeValue = Number(exam.grade) === 31 ? 31 : Number(exam.grade);
+        return sum + (gradeValue * Number(exam.credits));
+      }, 0);
       gpa = gradedCredits > 0 ? weightedSum / gradedCredits : 0;
     }
     

@@ -119,9 +119,9 @@ export function GraduationGradeCalculator() {
   };
 
   const calculateResults = () => {
-    // Include seminars and regular exams with grades
+    // Include only completed exams (seminars with no grade OR exams with grades)
     const completedExams = examGrades.filter(exam => 
-      exam.completed && (exam.isSeminar || exam.grade !== '')
+      exam.completed && (exam.isSeminar || (exam.grade !== '' && Number(exam.grade) >= 18))
     );
     
     if (completedExams.length === 0) {
@@ -134,22 +134,28 @@ export function GraduationGradeCalculator() {
       };
     }
 
-    // Calculate GPA only from non-seminar exams
-    const nonSeminarExams = completedExams.filter(exam => !exam.isSeminar);
+    // Calculate GPA only from non-seminar exams with valid grades (≥18)
+    // Following official Bocconi rules: "media aritmetica ponderata rispetto ai crediti"
+    const gradedExams = completedExams.filter(exam => 
+      !exam.isSeminar && exam.grade !== '' && Number(exam.grade) >= 18
+    );
     
     let gpa = 0;
-    if (nonSeminarExams.length > 0) {
-      const totalWeightedGrades = nonSeminarExams.reduce((sum, exam) => {
-        return sum + (Number(exam.grade) * exam.cfu);
+    if (gradedExams.length > 0) {
+      const totalWeightedGrades = gradedExams.reduce((sum, exam) => {
+        // Convert 30L to 31 for calculation as per official rules
+        const gradeValue = Number(exam.grade) === 31 ? 31 : Number(exam.grade);
+        return sum + (gradeValue * exam.cfu);
       }, 0);
-      const gradedCfu = nonSeminarExams.reduce((sum, exam) => sum + exam.cfu, 0);
-      gpa = totalWeightedGrades / gradedCfu;
+      const gradedCfu = gradedExams.reduce((sum, exam) => sum + exam.cfu, 0);
+      gpa = gradedCfu > 0 ? totalWeightedGrades / gradedCfu : 0;
     }
 
     const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
     const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
     
-    const graduationGrade = (gpa * 110) / 30;
+    // Convert to 110 scale as per official formula: "convertita in centodecimi"
+    const graduationGrade = gpa > 0 ? (gpa * 110) / 30 : 0;
     const graduationGradeWithBonus = Math.min(110, graduationGrade + bonus);
 
     return {
@@ -322,10 +328,17 @@ export function GraduationGradeCalculator() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0">Nessun bonus</SelectItem>
-                  <SelectItem value="1">+1 punto (tirocinio/internazionale)</SelectItem>
-                  <SelectItem value="3">+3 punti (tesi eccellente/merito)</SelectItem>
+                  <SelectItem value="1">+1 punto (tirocinio/exchange)</SelectItem>
+                  <SelectItem value="2">+2 punti (tesi buona)</SelectItem>
+                  <SelectItem value="3">+3 punti (tesi buona + tirocinio/exchange)</SelectItem>
+                  <SelectItem value="4">+4 punti (tesi ottima)</SelectItem>
+                  <SelectItem value="5">+5 punti (tesi ottima + tirocinio/exchange)</SelectItem>
                 </SelectContent>
               </Select>
+              <div className="text-xs text-muted-foreground mt-2">
+                <p><strong>Tesi:</strong> 0-4 punti (sufficiente: 0-1, buona: 2-3, ottima: 4)</p>
+                <p><strong>Tirocinio/Exchange:</strong> +1 punto aggiuntivo (non cumulabili tra loro)</p>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -398,6 +411,12 @@ export function GraduationGradeCalculator() {
                                   ))}
                                 </SelectContent>
                               </Select>
+                            </div>
+                          )}
+                          
+                          {exam.isSeminar && (
+                            <div className="text-center p-2 bg-muted rounded-md">
+                              <span className="text-xs text-muted-foreground">Seminario - Nessun voto richiesto</span>
                             </div>
                           )}
                         </>

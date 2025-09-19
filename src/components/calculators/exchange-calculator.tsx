@@ -197,12 +197,21 @@ const ExchangeCalculator = () => {
 
     try {
       // Include seminars and regular passed exams  
-      const passedExams = inputs.exams.filter(exam => exam.isSeminar || exam.grade >= 18);
+      // Include seminars and regular exams with grades ≥18
+      const passedExams = inputs.exams.filter(exam => 
+        exam.isSeminar || exam.grade >= 18
+      );
       
-      // Calculate student's WA (Weighted Average) - only for non-seminar exams with grade >= 18
-      const nonSeminarExams = passedExams.filter(exam => !exam.isSeminar && exam.grade >= 18);
+      // Calculate student's WA (Weighted Average) - only for non-seminar exams with grade ≥18
+      const nonSeminarExams = passedExams.filter(exam => 
+        !exam.isSeminar && exam.grade >= 18
+      );
       const totalCredits = nonSeminarExams.reduce((sum, exam) => sum + exam.cfu, 0);
-      const weightedSum = nonSeminarExams.reduce((sum, exam) => sum + (exam.grade * exam.cfu), 0);
+      const weightedSum = nonSeminarExams.reduce((sum, exam) => {
+        // Convert 30L to 31 for calculation
+        const gradeValue = exam.grade === 31 ? 31 : exam.grade;
+        return sum + (gradeValue * exam.cfu);
+      }, 0);
       const studentWA = totalCredits > 0 ? weightedSum / totalCredits : 0;
 
       // Calculate NC Achieved (sum of CFU with grade >= 18 OR seminars)
