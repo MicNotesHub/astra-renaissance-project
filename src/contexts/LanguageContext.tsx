@@ -252,6 +252,32 @@ const translations = {
     'category.ecdl.title': 'ECDL 101',
     'category.ecdl.description': 'Tutto quello che devi sapere',
     
+    // CLMG Section
+    'clmg.title': 'CLMG - Giurisprudenza',
+    'clmg.subtitle': 'Dispense e materiali per il corso di laurea magistrale in Giurisprudenza. Seleziona l\'anno di interesse.',
+    'clmg.firstYear': 'Primo Anno',
+    'clmg.secondYear': 'Secondo Anno',
+    'clmg.thirdYear': 'Terzo Anno',
+    'clmg.fourthYear': 'Quarto Anno',
+    'clmg.fifthYear': 'Quinto Anno',
+    'clmg.materialsForYear': 'Materiali di studio',
+    'clmg.accessHandouts': 'Accedi alle Dispense',
+    'clmg.backToCLMG': 'Torna a CLMG',
+    'clmg.handoutsForText': 'Dispense per',
+    'clmg.searchPlaceholder': 'Cerca per nome file...',
+    'clmg.loading': 'Caricamento dispense...',
+    'clmg.noHandouts': 'Nessuna dispensa disponibile',
+    'clmg.noHandoutsText': 'Non sono ancora disponibili dispense per',
+    'clmg.noSearchResults': 'Nessun risultato trovato',
+    'clmg.noSearchResultsText': 'Nessuna dispensa trovata per',
+    'clmg.uploadedOn': 'Caricato il',
+    'clmg.download': 'Scarica',
+    'clmg.downloadStarted': 'Download avviato',
+    'clmg.errorFetching': 'Errore nel caricamento delle dispense',
+    'clmg.yearNotFound': 'Anno non trovato',
+    'clmg.oneResult': '1 dispensa trovata',
+    'clmg.multipleResultsText': 'dispense trovate',
+
     // Common
     'common.loading': 'Caricamento...',
     'common.error': 'Errore',
@@ -259,6 +285,7 @@ const translations = {
     'common.categoryNotFound': 'Categoria non trovata',
     'common.readMore': 'Leggi di più',
     'common.learnMore': 'Scopri di più',
+    'common.backToDispense': 'Torna alle Dispense',
   },
   en: {
     // Navigation
@@ -489,6 +516,32 @@ const translations = {
     'category.ecdl.title': 'ECDL 101',
     'category.ecdl.description': 'Everything you need to know',
     
+    // CLMG Section
+    'clmg.title': 'CLMG - Law',
+    'clmg.subtitle': 'Handouts and materials for the Law Master\'s degree program. Select the year of interest.',
+    'clmg.firstYear': 'First Year',
+    'clmg.secondYear': 'Second Year',
+    'clmg.thirdYear': 'Third Year',
+    'clmg.fourthYear': 'Fourth Year',
+    'clmg.fifthYear': 'Fifth Year',
+    'clmg.materialsForYear': 'Study materials',
+    'clmg.accessHandouts': 'Access Handouts',
+    'clmg.backToCLMG': 'Back to CLMG',
+    'clmg.handoutsForText': 'Handouts for',
+    'clmg.searchPlaceholder': 'Search by filename...',
+    'clmg.loading': 'Loading handouts...',
+    'clmg.noHandouts': 'No handouts available',
+    'clmg.noHandoutsText': 'No handouts available yet for',
+    'clmg.noSearchResults': 'No results found',
+    'clmg.noSearchResultsText': 'No handouts found for',
+    'clmg.uploadedOn': 'Uploaded on',
+    'clmg.download': 'Download',
+    'clmg.downloadStarted': 'Download started',
+    'clmg.errorFetching': 'Error loading handouts',
+    'clmg.yearNotFound': 'Year not found',
+    'clmg.oneResult': '1 handout found',
+    'clmg.multipleResultsText': 'handouts found',
+    
     // Common
     'common.loading': 'Loading...',
     'common.error': 'Error',
@@ -496,6 +549,7 @@ const translations = {
     'common.categoryNotFound': 'Category not found',
     'common.readMore': 'Read more',
     'common.learnMore': 'Learn more',
+    'common.backToDispense': 'Back to Handouts',
   }
 };
 

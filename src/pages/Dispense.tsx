@@ -29,8 +29,8 @@ const Dispense = () => {
             </p>
           </div>
 
-          {/* Year Selection Cards */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {/* Year Selection Cards and CLMG */}
+          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {/* First Year Card */}
             <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
               <CardContent className="p-8 text-center">
@@ -79,6 +79,24 @@ const Dispense = () => {
                 </p>
                 <Link to="/dispense/terzo-anno">
                   <Button className="w-full">
+                    Accedi alle Dispense
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            {/* CLMG Card */}
+            <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-br from-primary/5 to-primary/10">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-6 bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                  <FileText className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">CLMG</h3>
+                <p className="text-muted-foreground mb-6">
+                  Materiali per il corso di Giurisprudenza (5 anni)
+                </p>
+                <Link to="/dispense/clmg">
+                  <Button className="w-full" variant="outline">
                     Accedi alle Dispense
                   </Button>
                 </Link>

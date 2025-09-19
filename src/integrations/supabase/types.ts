@@ -92,6 +92,33 @@ export type Database = {
         }
         Relationships: []
       }
+      clmg_handouts: {
+        Row: {
+          course_year: string
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          course_year: string
+          created_at?: string
+          id?: string
+          name: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          course_year?: string
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       CLMG_studyplan: {
         Row: {
           cfu: number | null
