@@ -94,7 +94,7 @@ export type Database = {
       }
       clmg_handouts: {
         Row: {
-          course_year: string
+          course_year: number
           created_at: string
           id: string
           name: string
@@ -102,7 +102,7 @@ export type Database = {
           url: string
         }
         Insert: {
-          course_year: string
+          course_year: number
           created_at?: string
           id?: string
           name: string
@@ -110,7 +110,7 @@ export type Database = {
           url: string
         }
         Update: {
-          course_year?: string
+          course_year?: number
           created_at?: string
           id?: string
           name?: string
