@@ -12,7 +12,7 @@ import { toast } from "sonner";
 interface CLMGHandout {
   id: string;
   name: string;
-  course_year: string;
+  course_year: number;
   url: string;
   created_at: string;
 }
@@ -33,12 +33,12 @@ const CLMGYearHandouts = () => {
     'quinto-anno': t('clmg.fifthYear'),
   };
 
-  const yearKeys: { [key: string]: string } = {
-    'primo-anno': 'primo_anno',
-    'secondo-anno': 'secondo_anno',
-    'terzo-anno': 'terzo_anno',
-    'quarto-anno': 'quarto_anno',
-    'quinto-anno': 'quinto_anno',
+  const yearKeys: { [key: string]: number } = {
+    'primo-anno': 1,
+    'secondo-anno': 2,
+    'terzo-anno': 3,
+    'quarto-anno': 4,
+    'quinto-anno': 5,
   };
 
   useEffect(() => {
