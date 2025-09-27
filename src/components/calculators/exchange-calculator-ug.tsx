@@ -358,6 +358,7 @@ const ExchangeCalculatorUG = () => {
                                 <SelectValue placeholder="Seleziona voto" />
                               </SelectTrigger>
                               <SelectContent>
+                                <SelectItem value="0">Nessun voto</SelectItem>
                                 {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
                                   <SelectItem key={grade} value={grade.toString()}>
                                     {grade === 31 ? "30L" : grade.toString()}
