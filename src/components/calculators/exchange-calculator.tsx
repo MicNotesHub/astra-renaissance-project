@@ -420,7 +420,7 @@ const ExchangeCalculator = () => {
               <CardContent className="space-y-4">
                 <div className="grid gap-4">
                   {inputs.exams.map((exam, index) => (
-                    <div key={index} className="space-y-3 p-4 border rounded-lg">
+                    <div key={`exam-${index}-${exam.subject}`} className="space-y-3 p-4 border rounded-lg">
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium text-sm">{exam.subject}</p>
@@ -428,15 +428,19 @@ const ExchangeCalculator = () => {
                         </div>
                         <div className="flex items-center space-x-2">
                           <Switch
+                            id={`seminar-${index}`}
                             checked={exam.isSeminar}
                             onCheckedChange={(checked) => {
-                              updateExamGrade(index, 'isSeminar', checked);
-                              if (checked) {
-                                updateExamGrade(index, 'grade', 0);
-                              }
+                              const updatedExams = [...inputs.exams];
+                              updatedExams[index] = { 
+                                ...updatedExams[index], 
+                                isSeminar: checked,
+                                grade: checked ? 0 : updatedExams[index].grade
+                              };
+                              setInputs(prev => ({ ...prev, exams: updatedExams }));
                             }}
                           />
-                          <Label className="text-sm text-muted-foreground">Seminario</Label>
+                          <Label htmlFor={`seminar-${index}`} className="text-sm text-muted-foreground cursor-pointer">Seminario</Label>
                         </div>
                       </div>
                       
