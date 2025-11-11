@@ -23,37 +23,6 @@ const Guide = () => {
   const [loading, setLoading] = useState(true);
   const { t } = useLanguage();
 
-  const getCategoryTitle = (category: string) => {
-    return t(`category.${category}.title`) || category;
-  };
-
-  const getCategoryDescription = (category: string) => {
-    return t(`category.${category}.description`) || "";
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('guides')
-        .select('category')
-        .eq('is_active', true);
-
-      if (error) throw error;
-      
-      // Get unique categories
-      const uniqueCategories = [...new Set(data?.map(guide => guide.category) || [])];
-      setCategories(uniqueCategories);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const categoryTitles: Record<string, string> = {
     'associations': 'Associations 101',
     'opzionali': 'Opzionali 101',
@@ -89,6 +58,30 @@ const Guide = () => {
     'ecdl': 'Tutto quello che devi sapere',
     'spring weeks': 'Scopri le spring weeks disponibili'
   };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('guides')
+        .select('category')
+        .eq('is_active', true);
+
+      if (error) throw error;
+      
+      // Get unique categories
+      const uniqueCategories = [...new Set(data?.map(guide => guide.category) || [])];
+      setCategories(uniqueCategories);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const getCategoryIcon = (category: string) => {
     const iconMap: Record<string, any> = {
@@ -206,10 +199,10 @@ const Guide = () => {
                       </div>
                       <div className="flex-1 flex flex-col justify-center min-h-0">
                         <h3 className="text-lg font-semibold mb-2">
-                          {getCategoryTitle(category)}
+                          {categoryTitles[category] || category}
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          {getCategoryDescription(category)}
+                          {categoryDescriptions[category] || ''}
                         </p>
                       </div>
                       <Link to={`/guide/${category}`} className="flex-shrink-0">
