@@ -68,7 +68,8 @@ const Guide = () => {
     'burocrazia': 'Burocrazia 101',
     'master_admissions': 'Master Admissions',
     'tesi': 'Tesi 101',
-    'ecdl': 'ECDL 101'
+    'ecdl': 'ECDL 101',
+    'spring_weeks': 'Spring Weeks'
   };
 
   const categoryDescriptions: Record<string, string> = {
@@ -85,7 +86,8 @@ const Guide = () => {
     'burocrazia': 'Come districarsi nella burocrazia italiana',
     'master_admissions': 'Guide per le ammissioni magistrali',
     'tesi': 'Guida per la tesi triennale',
-    'ecdl': 'Tutto quello che devi sapere'
+    'ecdl': 'Tutto quello che devi sapere',
+    'spring_weeks': 'Scopri le spring weeks disponibili'
   };
 
   const getCategoryIcon = (category: string) => {
@@ -103,7 +105,8 @@ const Guide = () => {
       'burocrazia': FileText,
       'master_admissions': Trophy,
       'tesi': FileText,
-      'ecdl': Monitor
+      'ecdl': Monitor,
+      'spring_weeks': Briefcase
     };
     return iconMap[category] || Globe;
   };
@@ -123,7 +126,8 @@ const Guide = () => {
       'burocrazia': 'text-amber-500 bg-amber-50 hover:bg-amber-100',
       'master_admissions': 'text-yellow-500 bg-yellow-50 hover:bg-yellow-100',
       'tesi': 'text-teal-500 bg-teal-50 hover:bg-teal-100',
-      'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100'
+      'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100',
+      'spring_weeks': 'text-violet-500 bg-violet-50 hover:bg-violet-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
@@ -133,6 +137,7 @@ const Guide = () => {
     'opzionali', 
     'graduate',
     'stage',
+    'spring_weeks',
     'freemover',
     'residenze',
     'exchange_magistrale',
