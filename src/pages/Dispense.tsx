@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileText, ArrowLeft } from "lucide-react";
+import { FileText, ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -105,6 +105,20 @@ const Dispense = () => {
                 </Link>
               </CardContent>
             </Card>
+          </div>
+
+          {/* ICDL Button */}
+          <div className="flex justify-center mt-8">
+            <a 
+              href="https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ICDL.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline" size="lg" className="gap-2">
+                <ExternalLink className="w-4 h-4" />
+                ICDL
+              </Button>
+            </a>
           </div>
         </div>
       </div>
