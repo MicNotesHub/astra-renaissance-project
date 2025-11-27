@@ -116,7 +116,7 @@ const Dispense = () => {
             >
               <Button size="lg" className="gap-3 px-10 py-6 text-lg font-semibold">
                 <FileText className="w-6 h-6" />
-                ICDL
+                ICDL (IT)
                 <ExternalLink className="w-5 h-5" />
               </Button>
             </a>
