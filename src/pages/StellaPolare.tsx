@@ -41,11 +41,11 @@ export default function StellaPolare() {
       <Navigation />
       
       {/* Hero Section with Image as Background/Title */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-16">
         <img 
           src={stellaPolareHero} 
           alt="Stella Polare" 
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background"></div>
       </section>
