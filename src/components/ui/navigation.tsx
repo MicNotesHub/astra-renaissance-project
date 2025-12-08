@@ -32,10 +32,14 @@ export function Navigation() {
     name: t('nav.guides'),
     href: "/guide",
     isExternal: false
+  }, {
+    name: "Stella Polare",
+    href: "/stella-polare",
+    isExternal: false
   }];
 
   // Always check if on pages with white backgrounds
-  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide') || location.pathname.includes('/chi-siamo') || location.pathname.includes('/rappresentanti');
+  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide') || location.pathname.includes('/chi-siamo') || location.pathname.includes('/rappresentanti') || location.pathname.includes('/stella-polare');
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);

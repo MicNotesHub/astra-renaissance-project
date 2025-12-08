@@ -726,6 +726,27 @@ export type Database = {
         }
         Relationships: []
       }
+      Stella_Polare: {
+        Row: {
+          created_at: string
+          id: number
+          Title: string | null
+          URL: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          Title?: string | null
+          URL?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          Title?: string | null
+          URL?: string | null
+        }
+        Relationships: []
+      }
       UG_exchange_destinations: {
         Row: {
           continent: string

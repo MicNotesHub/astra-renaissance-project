@@ -19,6 +19,7 @@ import Guide from "./pages/Guide";
 import GuideCategory from "./pages/GuideCategory";
 import CLMGDispense from "./pages/CLMGDispense";
 import CLMGYearHandouts from "./pages/CLMGYearHandouts";
+import StellaPolare from "./pages/StellaPolare";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => {
               <Route path="/dispense/clmg/:year" element={<CLMGYearHandouts />} />
               <Route path="/guide" element={<Guide />} />
               <Route path="/guide/:category" element={<GuideCategory />} />
+              <Route path="/stella-polare" element={<StellaPolare />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
