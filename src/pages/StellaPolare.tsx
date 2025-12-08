@@ -53,7 +53,7 @@ export default function StellaPolare() {
           y: 0
         }} transition={{
           delay: 0.2
-        }} className="text-center text-lg text-muted-foreground mb-12">Tutti le rubriche mensili redatti dai nostri ragazzi della divisione Press!</motion.p>
+        }} className="text-center text-lg text-muted-foreground mb-12">Tutte le rubriche mensili redatti dai nostri ragazzi della divisione Press!</motion.p>
 
           {/* Articles Grid */}
           {loading ? <div className="flex justify-center py-12">
