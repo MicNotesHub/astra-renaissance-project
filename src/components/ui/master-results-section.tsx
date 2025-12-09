@@ -5,7 +5,7 @@ import { FileSpreadsheet, Download, ArrowRight } from "lucide-react";
 export const MasterResultsSection = () => {
   const handleDownload = () => {
     window.open(
-      "https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/Masters%20Admission%202026.xlsx",
+      "https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/Masters%20Admission%202026%20(1).xlsx",
       "_blank"
     );
   };
