@@ -110,7 +110,12 @@ export const CalcolatoriSection = () => {
                       className="w-full group-hover:bg-primary-light transition-colors" 
                       onClick={() => {
                         if (calc.externalLink) {
-                          window.open(calc.externalLink, '_blank');
+                          const link = document.createElement('a');
+                          link.href = calc.externalLink;
+                          link.download = 'EXCHANGE_CALCULATOR_UNDERGRAD.xlsm';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
                         } else {
                           setSelectedCalculator(calc.id);
                         }
