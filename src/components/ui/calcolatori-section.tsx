@@ -16,23 +16,8 @@ export const CalcolatoriSection = () => {
     icon: GraduationCap,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"]
-  }, {
-    id: "exchange-calculator",
-    title: t('calculators.exchange-msc.title'),
-    description: t('calculators.exchange-msc.description'),
-    icon: Calculator,
-    color: "text-purple-500",
-    bgColor: "bg-purple-50 dark:bg-purple-950/30",
-    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
-  }, {
-    id: "exchange-calculator-clmg",
-    title: t('calculators.exchange-clmg.title'),
-    description: t('calculators.exchange-clmg.description'),
-    icon: TrendingUp,
-    color: "text-indigo-500",
-    bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
+    features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"],
+    externalLink: null
   }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
@@ -40,7 +25,26 @@ export const CalcolatoriSection = () => {
     icon: Users,
     color: "text-emerald-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
-    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"]
+    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"],
+    externalLink: "/files/EXCHANGE_CALCULATOR_UNDERGRAD.xlsm"
+  }, {
+    id: "exchange-calculator",
+    title: t('calculators.exchange-msc.title'),
+    description: t('calculators.exchange-msc.description'),
+    icon: Calculator,
+    color: "text-purple-500",
+    bgColor: "bg-purple-50 dark:bg-purple-950/30",
+    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"],
+    externalLink: null
+  }, {
+    id: "exchange-calculator-clmg",
+    title: t('calculators.exchange-clmg.title'),
+    description: t('calculators.exchange-clmg.description'),
+    icon: TrendingUp,
+    color: "text-indigo-500",
+    bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"],
+    externalLink: null
   }];
   return <section id="calcolatori" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -102,7 +106,16 @@ export const CalcolatoriSection = () => {
                       </ul>
                     </div>
                     
-                    <Button className="w-full group-hover:bg-primary-light transition-colors" onClick={() => setSelectedCalculator(calc.id)}>
+                    <Button 
+                      className="w-full group-hover:bg-primary-light transition-colors" 
+                      onClick={() => {
+                        if (calc.externalLink) {
+                          window.open(calc.externalLink, '_blank');
+                        } else {
+                          setSelectedCalculator(calc.id);
+                        }
+                      }}
+                    >
                       {t('calculators.use')}
                     </Button>
                   </CardContent>
