@@ -19,23 +19,33 @@ export function Navigation() {
   const navItems = [{
     name: t('nav.about'),
     href: "/chi-siamo",
-    isExternal: false
+    isExternal: false,
+    highlight: false
   }, {
     name: t('nav.representatives'),
     href: "/rappresentanti",
-    isExternal: false
+    isExternal: false,
+    highlight: false
   }, {
     name: t('nav.handouts'),
     href: "/dispense",
-    isExternal: false
+    isExternal: false,
+    highlight: false
   }, {
     name: t('nav.guides'),
     href: "/guide",
-    isExternal: false
+    isExternal: false,
+    highlight: false
+  }, {
+    name: "Calcolatori",
+    href: "/calcolatori",
+    isExternal: false,
+    highlight: true
   }, {
     name: "Stella Polare",
     href: "/stella-polare",
-    isExternal: false
+    isExternal: false,
+    highlight: false
   }];
 
   // Always check if on pages with white backgrounds
@@ -113,9 +123,16 @@ export function Navigation() {
             }} transition={{
               delay: index * 0.1
             }}>
-                  {item.href.startsWith('/') ? <Link to={item.href} className={cn("relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 group", isActive(item.href) ? (isOnWhitePage || isOverWhiteSection) ? "text-primary bg-primary/10" : "text-white bg-white/20" : (isOnWhitePage || isOverWhiteSection) ? "text-primary/80 hover:text-primary hover:bg-primary/10" : "text-white/80 hover:text-white hover:bg-white/10")}>
+                  {item.href.startsWith('/') ? <Link to={item.href} className={cn(
+                      "relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 group",
+                      item.highlight 
+                        ? "bg-primary text-white hover:bg-primary/90 shadow-md hover:shadow-lg"
+                        : isActive(item.href) 
+                          ? (isOnWhitePage || isOverWhiteSection) ? "text-primary bg-primary/10" : "text-white bg-white/20" 
+                          : (isOnWhitePage || isOverWhiteSection) ? "text-primary/80 hover:text-primary hover:bg-primary/10" : "text-white/80 hover:text-white hover:bg-white/10"
+                    )}>
                       {item.name}
-                      {isActive(item.href) && <motion.div layoutId="activeTab" className="absolute inset-0 bg-primary/10 rounded-lg" initial={false} transition={{
+                      {isActive(item.href) && !item.highlight && <motion.div layoutId="activeTab" className="absolute inset-0 bg-primary/10 rounded-lg" initial={false} transition={{
                   type: "spring",
                   bounce: 0.2,
                   duration: 0.6
@@ -198,7 +215,14 @@ export function Navigation() {
             }} transition={{
               delay: index * 0.05
             }}>
-                    {item.href.startsWith('/') ? <Link to={item.href} className={cn("flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200", isActive(item.href) ? "text-primary bg-primary/10 border-l-2 border-primary" : "text-foreground/80 hover:text-foreground hover:bg-muted/50")} onClick={() => setIsMobileMenuOpen(false)}>
+                    {item.href.startsWith('/') ? <Link to={item.href} className={cn(
+                        "flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+                        item.highlight 
+                          ? "bg-primary text-white hover:bg-primary/90"
+                          : isActive(item.href) 
+                            ? "text-primary bg-primary/10 border-l-2 border-primary" 
+                            : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
+                      )} onClick={() => setIsMobileMenuOpen(false)}>
                         {item.name}
                         {item.isExternal && <ExternalLink className="h-3 w-3 ml-1" />}
                       </Link> : <a href={item.href} className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted/50 transition-all duration-200" onClick={() => setIsMobileMenuOpen(false)}>
