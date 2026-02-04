@@ -76,15 +76,25 @@ export function Footer() {
             ))}
           </div>
           
-          <div className="flex items-center">
-            <img 
-              src="/astra-logo-blue.png" 
-              alt="ASTRA Bocconi Logo" 
-              className="h-8 w-8 mr-3"
-            />
-            <p className="text-white/60 text-sm">
-              Copyright © 2025 Astra Bocconi
-            </p>
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center">
+              <img 
+                src="/astra-logo-blue.png" 
+                alt="ASTRA Bocconi Logo" 
+                className="h-8 w-8 mr-3"
+              />
+              <p className="text-white/60 text-sm">
+                Copyright © 2026 Astra Bocconi
+              </p>
+            </div>
+            <a 
+              href="https://michelematozza.com" 
+              target="_blank" 
+              rel="noopener"
+              className="text-white/20 text-[10px] hover:text-white/30 transition-colors"
+            >
+              developed by Michele F. Matozza
+            </a>
           </div>
         </div>
       </div>
