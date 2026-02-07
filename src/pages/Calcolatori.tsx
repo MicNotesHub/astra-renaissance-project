@@ -112,15 +112,15 @@ const Calcolatori = () => {
                       <Button 
                         className="w-full group-hover:bg-primary-light transition-colors" 
                         onClick={() => {
-                          if (calc.externalLink) {
+                          if (calc.id === 'exchange-calculator' || calc.id === 'exchange-calculator-ug' || calc.id === 'exchange-calculator-clmg') {
+                            navigate('/exchange');
+                          } else if (calc.externalLink) {
                             const link = document.createElement('a');
                             link.href = calc.externalLink;
-                            link.download = 'EXCHANGE_CALCULATOR_UNDERGRAD.xlsm';
+                            link.download = calc.externalLink.split('/').pop() || '';
                             document.body.appendChild(link);
                             link.click();
                             document.body.removeChild(link);
-                          } else if (calc.id === 'exchange-calculator' || calc.id === 'exchange-calculator-ug' || calc.id === 'exchange-calculator-clmg') {
-                            navigate('/exchange');
                           } else {
                             setSelectedCalculator(calc.id);
                           }
