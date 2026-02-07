@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/ui/navigation";
 import { Footer } from "@/components/ui/footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +13,7 @@ import { AstraChatButton } from "@/components/ui/astra-chat-button";
 const Calcolatori = () => {
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
   const { t } = useLanguage();
+  const navigate = useNavigate();
   
   const calcolatori = [{
     id: "graduation",
@@ -117,6 +119,8 @@ const Calcolatori = () => {
                             document.body.appendChild(link);
                             link.click();
                             document.body.removeChild(link);
+                          } else if (calc.id === 'exchange-calculator' || calc.id === 'exchange-calculator-ug' || calc.id === 'exchange-calculator-clmg') {
+                            navigate('/exchange');
                           } else {
                             setSelectedCalculator(calc.id);
                           }
