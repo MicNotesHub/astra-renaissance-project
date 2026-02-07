@@ -108,25 +108,36 @@ export const CalcolatoriSection = () => {
                       </ul>
                     </div>
                     
-                    <Button 
-                      className="w-full group-hover:bg-primary-light transition-colors" 
-                      onClick={() => {
-                        if (calc.id === 'exchange-calculator' || calc.id === 'exchange-calculator-ug' || calc.id === 'exchange-calculator-clmg') {
-                          navigate('/exchange');
-                        } else if (calc.externalLink) {
-                          const link = document.createElement('a');
-                          link.href = calc.externalLink;
-                          link.download = calc.externalLink.split('/').pop() || '';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                        } else {
-                          setSelectedCalculator(calc.id);
-                        }
-                      }}
-                    >
-                      {t('calculators.use')}
-                    </Button>
+                    <div className="flex gap-2">
+                      {calc.externalLink && (
+                        <Button 
+                          variant="outline"
+                          className="flex-1 transition-colors" 
+                          onClick={() => {
+                            const link = document.createElement('a');
+                            link.href = calc.externalLink!;
+                            link.download = calc.externalLink!.split('/').pop() || '';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }}
+                        >
+                          Excel Calculator
+                        </Button>
+                      )}
+                      <Button 
+                        className={`${calc.externalLink ? 'flex-1' : 'w-full'} group-hover:bg-primary-light transition-colors`}
+                        onClick={() => {
+                          if (calc.id === 'exchange-calculator' || calc.id === 'exchange-calculator-ug' || calc.id === 'exchange-calculator-clmg') {
+                            navigate('/exchange');
+                          } else {
+                            setSelectedCalculator(calc.id);
+                          }
+                        }}
+                      >
+                        {t('calculators.use')}
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>;
