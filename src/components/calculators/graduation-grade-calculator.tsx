@@ -164,7 +164,8 @@ export function GraduationGradeCalculator() {
     
     // Convert to 110 scale as per official formula: "convertita in centodecimi"
     const graduationGrade = gpa > 0 ? (gpa * 110) / 30 : 0;
-    const graduationGradeWithBonus = Math.min(110, graduationGrade + bonus);
+    const rawGraduationGradeWithBonus = graduationGrade + bonus;
+    const graduationGradeWithBonus = rawGraduationGradeWithBonus >= 110.5 ? 111 : Math.min(110, rawGraduationGradeWithBonus);
 
     return {
       gpa: Number(gpa.toFixed(2)),
@@ -268,7 +269,7 @@ export function GraduationGradeCalculator() {
                   </div>
                   <div className="space-y-1">
                     <div className={`text-3xl font-bold ${getGradeColor(results.graduationGradeWithBonus)}`}>
-                      {results.completedCfu > 0 ? results.graduationGradeWithBonus : '--'}
+                      {results.completedCfu > 0 ? (results.graduationGradeWithBonus >= 111 ? '110L' : results.graduationGradeWithBonus) : '--'}
                     </div>
                     <div className="text-sm text-muted-foreground">su 110</div>
                   </div>
