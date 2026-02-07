@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calculator, TrendingUp, GraduationCap, Users } from "lucide-react";
@@ -8,6 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export const CalcolatoriSection = () => {
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
   const { t } = useLanguage();
+  const navigate = useNavigate();
   
   const calcolatori = [{
     id: "graduation",
@@ -116,6 +118,8 @@ export const CalcolatoriSection = () => {
                           document.body.appendChild(link);
                           link.click();
                           document.body.removeChild(link);
+                        } else if (calc.id === 'exchange-calculator' || calc.id === 'exchange-calculator-ug' || calc.id === 'exchange-calculator-clmg') {
+                          navigate('/exchange');
                         } else {
                           setSelectedCalculator(calc.id);
                         }

@@ -21,6 +21,7 @@ import CLMGDispense from "./pages/CLMGDispense";
 import CLMGYearHandouts from "./pages/CLMGYearHandouts";
 import StellaPolare from "./pages/StellaPolare";
 import Calcolatori from "./pages/Calcolatori";
+import ExchangeEmbed from "./pages/ExchangeEmbed";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => {
               <Route path="/chi-siamo" element={<ChiSiamo />} />
               <Route path="/rappresentanti" element={<Rappresentanti />} />
               <Route path="/calcolatori" element={<Calcolatori />} />
+              <Route path="/exchange" element={<ExchangeEmbed />} />
               <Route path="/dispense" element={<Dispense />} />
               <Route path="/dispense/primo-anno" element={<PrimoAnno />} />
               <Route path="/dispense/primo-anno/:courseName" element={<CourseHandouts />} />
