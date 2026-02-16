@@ -114,7 +114,9 @@ export const MarketplaceSection = () => {
         }}>
               <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden cursor-pointer" onClick={() => window.open(product.url, '_blank')}>
                 <div className="relative">
-                  <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <a href={product.url} target="_blank" rel="noopener noreferrer">
+                    <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                  </a>
                   <div className="absolute top-3 left-3">
                     <Badge className="text-xs">
                       {product.badge}
