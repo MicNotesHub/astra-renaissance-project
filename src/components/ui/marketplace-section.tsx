@@ -7,32 +7,32 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export const MarketplaceSection = () => {
   const { t } = useLanguage();
   const products = [{
-    name: "Pink Stanley bottle",
-    price: "19€",
-    originalPrice: "45€",
-    image: "/lovable-uploads/1d2a1e96-a672-4efa-90cf-13c8ba41b345.png",
+    name: "LGTV Smart 1080P",
+    price: "120€",
+    originalPrice: "150€",
+    image: "/lovable-uploads/lgtv-smart-1080p.jpg",
     rating: 4.8,
     reviews: 24,
-    badge: "Bestseller",
-    url: "https://www.uni-market.it/prodotto/auto-draft-4/"
+    badge: "Offerta",
+    url: "https://uni-market.it"
   }, {
-    name: "Casio scientific calculator",
+    name: "Inox casserole",
     price: "10€",
-    originalPrice: "15€",
-    image: "/lovable-uploads/7083fcc8-a051-4958-a1a7-f3a7cad5b1e7.png",
+    originalPrice: "45€",
+    image: "/lovable-uploads/inox-casserole.jpeg",
     rating: 4.6,
     reviews: 18,
     badge: "Nuovo",
-    url: "https://www.uni-market.it/prodotto/auto-draft-11/"
+    url: "https://uni-market.it"
   }, {
     name: "Adidas football",
     price: "30€",
-    originalPrice: "120€",
-    image: "/lovable-uploads/1dd53f35-970c-41f0-a409-7f8312c968ac.png",
+    originalPrice: "50€",
+    image: "/lovable-uploads/adidas-football.jpg",
     rating: 4.9,
     reviews: 31,
     badge: "Offerta",
-    url: "https://www.uni-market.it/prodotto/auto-draft-9/"
+    url: "https://uni-market.it"
   }];
   const features = [{
     icon: Handshake,
