@@ -49,6 +49,12 @@ interface CalculatorInputsUG {
   exams: ExamGradeUG[];
 }
 
+// First-year official credits per program (used to compute MIN_NC_REQUIRED = 0.60 × value)
+const FIRST_YEAR_OFFICIAL_CREDITS: Record<string, number> = {
+  // Default for all UG programs; add per-program overrides as needed
+};
+const DEFAULT_FIRST_YEAR_CREDITS = 62;
+
 const ExchangeCalculatorUG = () => {
   const { toast } = useToast();
   const [courses, setCourses] = useState<string[]>([]);
@@ -188,12 +194,14 @@ const ExchangeCalculatorUG = () => {
     if (inputs.course) {
       const courseMultiplier = multipliers.find(m => m.course === inputs.course);
       const multiplier = courseMultiplier?.multiplier || 1;
-      const minimumCFURequired = courseMultiplier?.cfu_min || 35.4;
+      const firstYearCredits = FIRST_YEAR_OFFICIAL_CREDITS[inputs.course] || DEFAULT_FIRST_YEAR_CREDITS;
+      const minimumCFURequired = 0.60 * firstYearCredits; // e.g. 0.60 × 62 = 37.2 (keep full precision)
       
-      // Exchange Score = GPA + (Multiplier × (CFU Totali – CFU Minimi Richiesti))
-      // CFU Totali include tutti gli esami superati (inclusi seminari)
-      // GPA è calcolato solo sui voti degli esami non-seminariali
-      const score = calculatedGPA + (multiplier * (calculatedTotalCFU - minimumCFURequired));
+      // Extra Credits = NC - MIN_NC_REQUIRED, clamped to 0
+      const extraCredits = Math.max(0, calculatedTotalCFU - minimumCFURequired);
+      
+      // Exchange Score = GPA + (Multiplier × ExtraCredits)
+      const score = calculatedGPA + (multiplier * extraCredits);
       setExchangeScore(Math.max(0, Math.round(score * 100) / 100)); // Round to 2 decimal places
     } else {
       setExchangeScore(null);
@@ -291,8 +299,8 @@ const ExchangeCalculatorUG = () => {
                 <div className="space-y-2">
                   <p className="text-sm text-muted-foreground">CFU Totali</p>
                   <p className="text-2xl font-bold">{totalCFU}</p>
-                  <p className="text-xs text-muted-foreground">
-                    / {multipliers.find(m => m.course === inputs.course)?.cfu_min || 35.4} richiesti
+                    <p className="text-xs text-muted-foreground">
+                    / {(0.60 * (FIRST_YEAR_OFFICIAL_CREDITS[inputs.course] || DEFAULT_FIRST_YEAR_CREDITS)).toFixed(1)} richiesti
                   </p>
                 </div>
                 <div className="space-y-2">
