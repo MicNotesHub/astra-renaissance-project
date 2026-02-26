@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { FileText, ArrowRight } from "lucide-react";
+import { FileText, FileSpreadsheet, ArrowRight } from "lucide-react";
 
 export const MasterResultsSection = () => {
   const handleDownload = () => {
@@ -33,21 +33,24 @@ export const MasterResultsSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex justify-center"
+          className="flex flex-col sm:flex-row justify-center gap-4"
         >
           <Button
             onClick={handleDownload}
             size="lg"
             className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            <motion.span
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: "100%" }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            />
             <FileText className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
             <span>Undergrad Brochure</span>
+            <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+          </Button>
+          <Button
+            onClick={() => window.open("https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/Masters%20Admission%202026.xlsx", "_blank")}
+            size="lg"
+            className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            <FileSpreadsheet className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+            <span>Exchange Results</span>
             <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
           </Button>
         </motion.div>
