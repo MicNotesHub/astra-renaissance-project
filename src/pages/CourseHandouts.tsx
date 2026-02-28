@@ -1,7 +1,8 @@
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Download, ArrowLeft } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { FileText, Download, ArrowLeft, Search } from "lucide-react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -20,7 +21,12 @@ const CourseHandouts = () => {
   const { courseName } = useParams<{ courseName: string }>();
   const location = useLocation();
   const [files, setFiles] = useState<HandoutFile[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const filteredFiles = files.filter(f =>
+    f.filename.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   const { toast } = useToast();
 
   const decodedCourseName = courseName ? decodeURIComponent(courseName) : '';
@@ -167,13 +173,24 @@ const CourseHandouts = () => {
             </p>
           </div>
 
+          {/* Search Bar */}
+          <div className="relative mb-6 max-w-md">
+            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Cerca dispense..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+
           {/* Handouts List */}
-          {files.length === 0 ? (
+          {filteredFiles.length === 0 ? (
             <div className="text-center py-12">
               <FileText className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
               <h3 className="text-xl font-semibold mb-2">Nessuna dispensa trovata</h3>
               <p className="text-muted-foreground">
-                Le dispense per questo corso non sono ancora disponibili.
+                {searchTerm ? `Nessun risultato per "${searchTerm}".` : 'Le dispense per questo corso non sono ancora disponibili.'}
               </p>
             </div>
           ) : (
@@ -183,13 +200,13 @@ const CourseHandouts = () => {
                   <FileText className="w-6 h-6 text-primary" />
                   Dispense del Corso
                   <span className="text-sm font-normal text-muted-foreground">
-                    ({files.length} file{files.length !== 1 ? 's' : ''})
+                    ({filteredFiles.length} file{filteredFiles.length !== 1 ? 's' : ''})
                   </span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="grid gap-3">
-                  {files.map((file) => (
+                  {filteredFiles.map((file) => (
                     <div
                       key={file.id}
                       onClick={() => handleFileClick(file.file_url)}
