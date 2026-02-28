@@ -1,0 +1,1 @@
+ALTER TABLE public.handouts ADD COLUMN semester integer;
