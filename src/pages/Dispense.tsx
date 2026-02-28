@@ -107,20 +107,6 @@ const Dispense = () => {
             </Card>
           </div>
 
-          {/* ICDL Button */}
-          <div className="flex justify-center mt-12">
-            <a 
-              href="https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ICDL.pdf" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Button size="lg" className="gap-3 px-10 py-6 text-lg font-semibold">
-                <FileText className="w-6 h-6" />
-                ICDL (IT)
-                <ExternalLink className="w-5 h-5" />
-              </Button>
-            </a>
-          </div>
         </div>
       </div>
     </div>
