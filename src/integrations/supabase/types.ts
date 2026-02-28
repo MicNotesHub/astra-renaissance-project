@@ -551,6 +551,7 @@ export type Database = {
           file_url: string
           filename: string
           id: number
+          semester: number | null
           subject: string
           uploaded_at: string | null
           year: string
@@ -559,6 +560,7 @@ export type Database = {
           file_url: string
           filename: string
           id?: number
+          semester?: number | null
           subject: string
           uploaded_at?: string | null
           year: string
@@ -567,6 +569,7 @@ export type Database = {
           file_url?: string
           filename?: string
           id?: number
+          semester?: number | null
           subject?: string
           uploaded_at?: string | null
           year?: string

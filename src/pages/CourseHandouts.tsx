@@ -15,6 +15,7 @@ interface HandoutFile {
   year: string;
   file_url: string;
   uploaded_at: string;
+  semester: number | null;
 }
 
 const CourseHandouts = () => {
@@ -22,11 +23,14 @@ const CourseHandouts = () => {
   const location = useLocation();
   const [files, setFiles] = useState<HandoutFile[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [semesterFilter, setSemesterFilter] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const filteredFiles = files.filter(f =>
-    f.filename.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredFiles = files.filter(f => {
+    const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSemester = semesterFilter === null || (f as any).semester === semesterFilter;
+    return matchesSearch && matchesSemester;
+  });
   const { toast } = useToast();
 
   const decodedCourseName = courseName ? decodeURIComponent(courseName) : '';
@@ -184,7 +188,23 @@ const CourseHandouts = () => {
             />
           </div>
 
-          {/* Handouts List */}
+          {/* Semester Filter */}
+          <div className="flex gap-2 mb-6">
+            {[
+              { label: "All", value: null },
+              { label: "Semester 1", value: 1 },
+              { label: "Semester 2", value: 2 },
+            ].map((opt) => (
+              <Button
+                key={opt.label}
+                variant={semesterFilter === opt.value ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSemesterFilter(opt.value)}
+              >
+                {opt.label}
+              </Button>
+            ))}
+          </div>
           {filteredFiles.length === 0 ? (
             <div className="text-center py-12">
               <FileText className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
