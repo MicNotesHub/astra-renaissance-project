@@ -29,15 +29,26 @@ export const MasterResultsSection = () => {
             viewport={{ once: true }}
             className="flex justify-center"
           >
-            <Button
-              onClick={() => window.open("https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/exchange%20triennale/University_Brochure%20.pdf", "_blank")}
-              size="lg"
-              className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <FileText className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-              <span>Undergrad Brochure</span>
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                onClick={() => window.open("https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/exchange%20triennale/University_Brochure%20.pdf", "_blank")}
+                size="lg"
+                className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <FileText className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                <span>Undergrad Brochure</span>
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+              <Button
+                onClick={() => window.open("https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/exchange%20triennale/ASTRA-Exchange-Guide-UG-ENG-26-27.pdf", "_blank")}
+                size="lg"
+                className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <FileText className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                <span>Undergrad Guide</span>
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
