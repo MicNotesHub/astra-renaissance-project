@@ -188,23 +188,26 @@ const CourseHandouts = () => {
             />
           </div>
 
-          {/* Semester Filter */}
-          <div className="flex gap-2 mb-6">
-            {[
-              { label: "All", value: null },
-              { label: "Semester 1", value: 1 },
-              { label: "Semester 2", value: 2 },
-            ].map((opt) => (
-              <Button
-                key={opt.label}
-                variant={semesterFilter === opt.value ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSemesterFilter(opt.value)}
-              >
-                {opt.label}
-              </Button>
-            ))}
-          </div>
+          {/* Semester Filter - hidden for BIEF third year and ELECTIVES */}
+          {!(isThirdYear && decodedCourseName.toUpperCase().includes('BIEF')) && 
+           !decodedCourseName.toUpperCase().includes('ELECTIVE') && (
+            <div className="flex gap-2 mb-6">
+              {[
+                { label: "All", value: null },
+                { label: "Semester 1", value: 1 },
+                { label: "Semester 2", value: 2 },
+              ].map((opt) => (
+                <Button
+                  key={opt.label}
+                  variant={semesterFilter === opt.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSemesterFilter(opt.value)}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+            </div>
+          )}
           {filteredFiles.length === 0 ? (
             <div className="text-center py-12">
               <FileText className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
