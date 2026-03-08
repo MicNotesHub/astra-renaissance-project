@@ -64,7 +64,7 @@ export function WomensDaySection() {
           <p className="text-lg leading-relaxed max-w-2xl mx-auto" style={{ color: "hsl(30 20% 35%)" }}>
             Leggi l'articolo completo per scoprire riflessioni, storie e prospettive sul contributo fondamentale delle donne nel mondo di oggi.
           </p>
-          <a href="/files/IL_RUOLO_DELLA_DONNA_2.docx" target="_blank" rel="noopener noreferrer">
+          <a href="/files/Astra_women_s_day.pdf" target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
               className="gap-3 mt-4 border-0 text-white"
