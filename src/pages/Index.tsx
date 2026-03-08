@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/ui/navigation";
 import { HeroSection } from "@/components/ui/hero-section";
+import { WomensDaySection } from "@/components/ui/womens-day-section";
 import { DispensenSection } from "@/components/ui/dispensen-section";
 import { MasterResultsSection } from "@/components/ui/master-results-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
@@ -13,6 +14,7 @@ const Index = () => {
     <div className="min-h-screen relative">
       <Navigation />
       <HeroSection />
+      <WomensDaySection />
       
       <MasterResultsSection />
       <DispensenSection />
