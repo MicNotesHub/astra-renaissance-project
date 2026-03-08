@@ -291,6 +291,12 @@ const translations = {
     'clmg.oneResult': '1 dispensa trovata',
     'clmg.multipleResultsText': 'dispense trovate',
 
+    // Women's Day Section
+    'womensDay.badge': '🌼 8 Marzo 2026 — Giornata Internazionale della Donna 🌼',
+    'womensDay.title': 'Il Ruolo della Donna',
+    'womensDay.description': 'Leggi l\'articolo completo per scoprire riflessioni, storie e prospettive sul contributo fondamentale delle donne nel mondo di oggi.',
+    'womensDay.cta': 'Leggi l\'Articolo',
+
     // Common
     'common.loading': 'Caricamento...',
     'common.error': 'Errore',
@@ -569,6 +575,12 @@ const translations = {
     'clmg.oneResult': '1 handout found',
     'clmg.multipleResultsText': 'handouts found',
     
+    // Women's Day Section
+    'womensDay.badge': '🌼 March 8, 2026 — International Women\'s Day 🌼',
+    'womensDay.title': 'The Role of Women',
+    'womensDay.description': 'Read the full article to discover reflections, stories, and perspectives on the fundamental contribution of women in today\'s world.',
+    'womensDay.cta': 'Read the Article',
+
     // Common
     'common.loading': 'Loading...',
     'common.error': 'Error',
