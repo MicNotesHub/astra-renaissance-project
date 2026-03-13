@@ -4,6 +4,7 @@ import { WomensDaySection } from "@/components/ui/womens-day-section";
 import { DispensenSection } from "@/components/ui/dispensen-section";
 import { MasterResultsSection } from "@/components/ui/master-results-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
+import { FreeAtBSection } from "@/components/ui/freeatb-section";
 import { EventiSection } from "@/components/ui/eventi-section";
 import { AstraGPTSection } from "@/components/ui/astra-gpt-section";
 import { AstraChatButton } from "@/components/ui/astra-chat-button";
