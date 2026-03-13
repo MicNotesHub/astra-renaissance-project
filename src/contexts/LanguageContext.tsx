@@ -481,6 +481,18 @@ const translations = {
     'marketplace.cta.title': 'Discover the Complete Marketplace',
     'marketplace.cta.button': 'Visit UniMarket',
     'marketplace.cta.description': 'Over 200 exclusive products for students. Used books, official merchandise, tech gadgets and much more.',
+
+    // Free@B Section
+    'freeatb.subtitle': 'A tool that lets you find available classrooms in real time at Bocconi.',
+    'freeatb.feature1.title': 'Choose building, day and time',
+    'freeatb.feature1.description': 'Select your criteria to find the perfect room for you.',
+    'freeatb.feature2.title': 'Find all free rooms instantly',
+    'freeatb.feature2.description': 'View all available classrooms in just one click.',
+    'freeatb.feature3.title': 'Fast access and live updates',
+    'freeatb.feature3.description': 'Always up-to-date real-time data so you never miss a spot.',
+    'freeatb.cta.title': 'Find your free classroom now',
+    'freeatb.cta.description': 'Perfect for studying between classes, meeting your group, or just finding a quiet spot on campus.',
+    'freeatb.cta.button': 'Go to Free@B',
     
     // Events Section
     'events.title': 'Events and Conferences',
