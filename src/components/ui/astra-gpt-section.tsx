@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export function AstraGPTSection() {
   const { t } = useLanguage();
 
-  return <section id="astra-gpt" className="py-32 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
+  return <section id="astra-gpt" className="py-16 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-30 text-blue-600">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full animate-float blur-3xl"></div>

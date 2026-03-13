@@ -95,7 +95,7 @@ export const DispensenSection = () => {
   const selectedYearOption = yearOptions.find(option => option.key === selectedYear);
 
   return (
-    <section id="dispensen" className="py-20 bg-gradient-subtle">
+    <section id="dispensen" className="py-12 bg-gradient-subtle">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 30 }} 
