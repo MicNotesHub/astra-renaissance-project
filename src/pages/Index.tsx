@@ -20,6 +20,7 @@ const Index = () => {
       <MasterResultsSection />
       <DispensenSection />
       <MarketplaceSection />
+      <FreeAtBSection />
       <EventiSection />
       <AstraGPTSection />
       <Footer />
