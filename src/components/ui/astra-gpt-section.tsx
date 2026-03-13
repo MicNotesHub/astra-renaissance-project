@@ -17,7 +17,7 @@ export function AstraGPTSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20 animate-fade-in">
+        <div className="text-center mb-12 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
             <Bot className="h-5 w-5 text-primary" />
             <span className="text-primary font-semibold">{t('astragpt.powered')}</span>
