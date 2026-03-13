@@ -32,6 +32,7 @@ export const FreeAtBSection = () => {
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-muted/40 to-transparent pointer-events-none" />
       {/* Bottom fade effect */}
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-muted/40 to-transparent pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
