@@ -297,6 +297,18 @@ const translations = {
     'womensDay.description': 'Leggi l\'articolo completo per scoprire riflessioni, storie e prospettive sul contributo fondamentale delle donne nel mondo di oggi.',
     'womensDay.cta': 'Leggi l\'Articolo',
 
+    // Free@B Section
+    'freeatb.subtitle': 'Uno strumento che ti permette di trovare aule libere in tempo reale alla Bocconi.',
+    'freeatb.feature1.title': 'Scegli edificio, giorno e ora',
+    'freeatb.feature1.description': 'Seleziona i tuoi criteri per trovare l\'aula perfetta per te.',
+    'freeatb.feature2.title': 'Trova aule libere istantaneamente',
+    'freeatb.feature2.description': 'Visualizza tutte le aule disponibili in un solo click.',
+    'freeatb.feature3.title': 'Accesso rapido e aggiornamenti live',
+    'freeatb.feature3.description': 'Dati sempre aggiornati in tempo reale per non perdere nessuno spazio.',
+    'freeatb.cta.title': 'Trova la tua aula libera ora',
+    'freeatb.cta.description': 'Perfetto per studiare tra una lezione e l\'altra, incontrare il tuo gruppo, o semplicemente trovare un posto tranquillo in campus.',
+    'freeatb.cta.button': 'Vai a Free@B',
+
     // Common
     'common.loading': 'Caricamento...',
     'common.error': 'Errore',
