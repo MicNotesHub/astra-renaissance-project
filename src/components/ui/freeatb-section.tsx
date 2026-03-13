@@ -36,11 +36,8 @@ export const FreeAtBSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <img src={freeatbLogo} alt="Free@B" className="h-14 w-auto" />
-            <h2 className="text-4xl md:text-5xl font-bold hero-text">
-              Free@B
-            </h2>
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <img src={freeatbLogo} alt="Free@B" className="h-16 w-auto object-contain" />
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             {t('freeatb.subtitle')}
