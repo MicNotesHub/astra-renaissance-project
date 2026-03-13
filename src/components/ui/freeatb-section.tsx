@@ -76,18 +76,18 @@ export const FreeAtBSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <Card className="overflow-hidden border-none">
-            <div className="p-8 md:p-12 text-primary-foreground text-center bg-gradient-hero">
+          <Card className="overflow-hidden border-2 border-primary/20 rounded-2xl">
+            <div className="p-8 md:p-12 text-center bg-secondary">
               <div className="max-w-3xl mx-auto">
-                <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
                   {t('freeatb.cta.title')}
                 </h3>
-                <p className="text-lg opacity-90 mb-8">
+                <p className="text-lg text-muted-foreground mb-8">
                   {t('freeatb.cta.description')}
                 </p>
                 <Button
                   size="lg"
-                  className="bg-background text-primary hover:bg-background/90 flex items-center gap-2 mx-auto px-8 py-6 text-xl rounded-3xl"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-2 mx-auto px-8 py-6 text-xl rounded-3xl"
                   onClick={() => window.open('https://freeatb.it', '_blank')}
                 >
                   {t('freeatb.cta.button')}
