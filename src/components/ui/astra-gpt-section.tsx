@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export function AstraGPTSection() {
   const { t } = useLanguage();
 
-  return <section id="astra-gpt" className="py-32 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
+  return <section id="astra-gpt" className="py-16 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-30 text-blue-600">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full animate-float blur-3xl"></div>
@@ -17,7 +17,7 @@ export function AstraGPTSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20 animate-fade-in">
+        <div className="text-center mb-12 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
             <Bot className="h-5 w-5 text-primary" />
             <span className="text-primary font-semibold">{t('astragpt.powered')}</span>

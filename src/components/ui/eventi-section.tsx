@@ -63,7 +63,7 @@ export const EventiSection = () => {
     return eventDate < today || evento.status === 'completed';
   });
 
-  return <section id="eventi" className="py-20 bg-gradient-subtle">
+  return <section id="eventi" className="py-12 bg-gradient-subtle">
       <div className="container mx-auto px-4">
         <motion.div initial={{
         opacity: 0,

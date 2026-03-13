@@ -6,7 +6,7 @@ export const MasterResultsSection = () => {
   return (
     <>
       {/* Exchange Section */}
-      <section className="py-16 bg-gradient-to-b from-background to-secondary/20">
+      <section className="py-10 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -54,7 +54,7 @@ export const MasterResultsSection = () => {
       </section>
 
       {/* Master Admission Results Section */}
-      <section className="py-16 bg-gradient-to-b from-secondary/20 to-background">
+      <section className="py-10 bg-gradient-to-b from-secondary/20 to-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
