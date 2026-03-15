@@ -591,6 +591,8 @@ const translations = {
     'category.tesi.description': 'Guide for your Bachelor\'s thesis',
     'category.ecdl.title': 'ECDL 101',
     'category.ecdl.description': 'Everything you need to know',
+    'category.spring weeks.title': 'Spring Weeks',
+    'category.spring weeks.description': 'Discover available spring weeks',
     
     // Dispense Section
     'dispense.title': 'University Handouts',
