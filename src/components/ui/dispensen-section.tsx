@@ -192,9 +192,6 @@ export const DispensenSection = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        <div className="flex items-center justify-between text-sm text-muted-foreground">
-                          <span>{t('handouts.uploaded')} {formatDate(handout.uploaded_at)}</span>
-                        </div>
                         
                         <Button 
                           className="w-full flex items-center gap-2 group-hover:bg-primary-light transition-colors"

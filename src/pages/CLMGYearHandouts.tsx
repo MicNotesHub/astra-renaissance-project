@@ -177,10 +177,7 @@ const CLMGYearHandouts = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center justify-between">
-                      <div className="text-sm text-muted-foreground">
-                        {t('clmg.uploadedOn')}: {new Date(handout.created_at).toLocaleDateString()}
-                      </div>
+                    <div className="flex items-center justify-end">
                       <Button
                         size="sm"
                         onClick={() => handleDownload(handout.url, handout.name)}

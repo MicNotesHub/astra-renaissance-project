@@ -242,7 +242,7 @@ const CourseHandouts = () => {
                             {file.filename}
                           </h4>
                           <p className="text-sm text-muted-foreground">
-                            PDF • Anno: {file.year} • Caricato: {formatDate(file.uploaded_at)}
+                            PDF • Anno: {file.year}
                           </p>
                         </div>
                       </div>
