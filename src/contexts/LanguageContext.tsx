@@ -309,6 +309,36 @@ const translations = {
     'freeatb.cta.description': 'Perfetto per studiare tra una lezione e l\'altra, incontrare il tuo gruppo, o semplicemente trovare un posto tranquillo in campus.',
     'freeatb.cta.button': 'Vai a Free@B',
 
+    // CourseHandouts
+    'courseHandouts.backFirstYear': 'Torna al Primo Anno',
+    'courseHandouts.backSecondYear': 'Torna al Secondo Anno',
+    'courseHandouts.backThirdYear': 'Torna al Terzo Anno',
+    'courseHandouts.availableHandouts': 'Dispense disponibili per questo corso',
+    'courseHandouts.searchPlaceholder': 'Cerca dispense...',
+    'courseHandouts.loading': 'Caricamento dispense...',
+    'courseHandouts.noResults': 'Nessuna dispensa trovata',
+    'courseHandouts.noResultsSearch': 'Nessun risultato per',
+    'courseHandouts.noResultsEmpty': 'Le dispense per questo corso non sono ancora disponibili.',
+    'courseHandouts.courseHandouts': 'Dispense del Corso',
+    'courseHandouts.errorLoading': 'Impossibile caricare le dispense',
+    'courseHandouts.errorGeneric': 'Errore nel caricamento delle dispense',
+    'courseHandouts.fileUnavailable': 'URL del file non disponibile',
+    'courseHandouts.all': 'Tutti',
+    'courseHandouts.semester1': 'Semestre 1',
+    'courseHandouts.semester2': 'Semestre 2',
+    'courseHandouts.year': 'Anno',
+
+    // Year Pages
+    'yearPage.firstYear': 'Primo Anno',
+    'yearPage.secondYear': 'Secondo Anno',
+    'yearPage.thirdYear': 'Terzo Anno',
+    'yearPage.backToHandouts': 'Torna alle Dispense',
+    'yearPage.accessHandouts': 'Accedi alle dispense e materiali didattici per i corsi del',
+    'yearPage.noCourses': 'Nessun corso trovato',
+    'yearPage.noHandoutsAvailable': 'Non sono ancora disponibili dispense per il',
+    'yearPage.viewHandouts': 'Visualizza le dispense disponibili per questo corso',
+    'yearPage.files': 'file',
+
     // Common
     'common.loading': 'Caricamento...',
     'common.error': 'Errore',
