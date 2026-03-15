@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen } from 'lucide-react';
 import { Navigation } from '@/components/ui/navigation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HandoutFile {
   id: number;
@@ -22,6 +23,7 @@ export const TerzoAnno: React.FC = () => {
   const [files, setFiles] = useState<SubjectFiles>({});
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const fetchHandouts = async () => {
     try {
@@ -35,14 +37,13 @@ export const TerzoAnno: React.FC = () => {
       if (error) {
         console.error('Error fetching handouts:', error);
         toast({
-          title: "Errore",
-          description: "Impossibile caricare le dispense",
+          title: t('common.error'),
+          description: t('courseHandouts.errorLoading'),
           variant: "destructive",
         });
         return;
       }
 
-      // Group files by subject
       const groupedFiles: SubjectFiles = {};
       data?.forEach((file) => {
         if (!groupedFiles[file.subject]) {
@@ -55,8 +56,8 @@ export const TerzoAnno: React.FC = () => {
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Errore",
-        description: "Si è verificato un errore imprevisto",
+        title: t('common.error'),
+        description: t('common.unexpectedError'),
         variant: "destructive",
       });
     } finally {
@@ -75,7 +76,7 @@ export const TerzoAnno: React.FC = () => {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Caricamento...</p>
+            <p className="text-muted-foreground">{t('common.loading')}</p>
           </div>
         </div>
       </div>
@@ -93,28 +94,25 @@ export const TerzoAnno: React.FC = () => {
           <Link
             to="/dispense"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-            onClick={() => {
-              console.log('Back button clicked - navigating to /dispense');
-            }}
           >
             <ArrowLeft className="h-4 w-4" />
-            Torna alle Dispense
+            {t('yearPage.backToHandouts')}
           </Link>
         </div>
 
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Terzo Anno</h1>
+          <h1 className="text-4xl font-bold mb-4">{t('yearPage.thirdYear')}</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Accedi alle dispense e materiali didattici per i corsi del terzo anno
+            {t('yearPage.accessHandouts')} {t('yearPage.thirdYear').toLowerCase()}
           </p>
         </div>
 
         {subjects.length === 0 ? (
           <div className="text-center py-12">
             <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nessun corso trovato</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('yearPage.noCourses')}</h3>
             <p className="text-muted-foreground">
-              Non sono ancora disponibili dispense per il terzo anno.
+              {t('yearPage.noHandoutsAvailable')} {t('yearPage.thirdYear').toLowerCase()}.
             </p>
           </div>
         ) : (
@@ -131,7 +129,7 @@ export const TerzoAnno: React.FC = () => {
                       <BookOpen className="h-6 w-6 text-primary" />
                     </div>
                     <span className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded">
-                      {files[subject].length} file{files[subject].length !== 1 ? 's' : ''}
+                      {files[subject].length} {t('yearPage.files')}{files[subject].length !== 1 ? 's' : ''}
                     </span>
                   </div>
                   
@@ -140,7 +138,7 @@ export const TerzoAnno: React.FC = () => {
                   </h3>
                   
                   <p className="text-sm text-muted-foreground">
-                    Visualizza le dispense disponibili per questo corso
+                    {t('yearPage.viewHandouts')}
                   </p>
                 </div>
               </Link>

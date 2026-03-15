@@ -250,7 +250,9 @@ const translations = {
     'category.tesi.title': 'Tesi 101',
     'category.tesi.description': 'Guida per la tesi triennale',
     'category.ecdl.title': 'ECDL 101',
-    'category.ecdl.description': 'Tutto quello che devi sapere',
+     'category.ecdl.description': 'Tutto quello che devi sapere',
+    'category.spring weeks.title': 'Spring Weeks',
+    'category.spring weeks.description': 'Scopri le spring weeks disponibili',
     
     // Dispense Section
     'dispense.title': 'Dispense Universitarie',
@@ -308,6 +310,36 @@ const translations = {
     'freeatb.cta.title': 'Trova la tua aula libera ora',
     'freeatb.cta.description': 'Perfetto per studiare tra una lezione e l\'altra, incontrare il tuo gruppo, o semplicemente trovare un posto tranquillo in campus.',
     'freeatb.cta.button': 'Vai a Free@B',
+
+    // CourseHandouts
+    'courseHandouts.backFirstYear': 'Torna al Primo Anno',
+    'courseHandouts.backSecondYear': 'Torna al Secondo Anno',
+    'courseHandouts.backThirdYear': 'Torna al Terzo Anno',
+    'courseHandouts.availableHandouts': 'Dispense disponibili per questo corso',
+    'courseHandouts.searchPlaceholder': 'Cerca dispense...',
+    'courseHandouts.loading': 'Caricamento dispense...',
+    'courseHandouts.noResults': 'Nessuna dispensa trovata',
+    'courseHandouts.noResultsSearch': 'Nessun risultato per',
+    'courseHandouts.noResultsEmpty': 'Le dispense per questo corso non sono ancora disponibili.',
+    'courseHandouts.courseHandouts': 'Dispense del Corso',
+    'courseHandouts.errorLoading': 'Impossibile caricare le dispense',
+    'courseHandouts.errorGeneric': 'Errore nel caricamento delle dispense',
+    'courseHandouts.fileUnavailable': 'URL del file non disponibile',
+    'courseHandouts.all': 'Tutti',
+    'courseHandouts.semester1': 'Semestre 1',
+    'courseHandouts.semester2': 'Semestre 2',
+    'courseHandouts.year': 'Anno',
+
+    // Year Pages
+    'yearPage.firstYear': 'Primo Anno',
+    'yearPage.secondYear': 'Secondo Anno',
+    'yearPage.thirdYear': 'Terzo Anno',
+    'yearPage.backToHandouts': 'Torna alle Dispense',
+    'yearPage.accessHandouts': 'Accedi alle dispense e materiali didattici per i corsi del',
+    'yearPage.noCourses': 'Nessun corso trovato',
+    'yearPage.noHandoutsAvailable': 'Non sono ancora disponibili dispense per il',
+    'yearPage.viewHandouts': 'Visualizza le dispense disponibili per questo corso',
+    'yearPage.files': 'file',
 
     // Common
     'common.loading': 'Caricamento...',
@@ -559,6 +591,8 @@ const translations = {
     'category.tesi.description': 'Guide for your Bachelor\'s thesis',
     'category.ecdl.title': 'ECDL 101',
     'category.ecdl.description': 'Everything you need to know',
+    'category.spring weeks.title': 'Spring Weeks',
+    'category.spring weeks.description': 'Discover available spring weeks',
     
     // Dispense Section
     'dispense.title': 'University Handouts',
@@ -604,6 +638,36 @@ const translations = {
     'womensDay.title': 'The Role of Women',
     'womensDay.description': 'Read the full article to discover reflections, stories, and perspectives on the fundamental contribution of women in today\'s world.',
     'womensDay.cta': 'Read the Article',
+
+    // CourseHandouts
+    'courseHandouts.backFirstYear': 'Back to First Year',
+    'courseHandouts.backSecondYear': 'Back to Second Year',
+    'courseHandouts.backThirdYear': 'Back to Third Year',
+    'courseHandouts.availableHandouts': 'Available handouts for this course',
+    'courseHandouts.searchPlaceholder': 'Search handouts...',
+    'courseHandouts.loading': 'Loading handouts...',
+    'courseHandouts.noResults': 'No handouts found',
+    'courseHandouts.noResultsSearch': 'No results for',
+    'courseHandouts.noResultsEmpty': 'Handouts for this course are not yet available.',
+    'courseHandouts.courseHandouts': 'Course Handouts',
+    'courseHandouts.errorLoading': 'Unable to load handouts',
+    'courseHandouts.errorGeneric': 'Error loading handouts',
+    'courseHandouts.fileUnavailable': 'File URL not available',
+    'courseHandouts.all': 'All',
+    'courseHandouts.semester1': 'Semester 1',
+    'courseHandouts.semester2': 'Semester 2',
+    'courseHandouts.year': 'Year',
+
+    // Year Pages
+    'yearPage.firstYear': 'First Year',
+    'yearPage.secondYear': 'Second Year',
+    'yearPage.thirdYear': 'Third Year',
+    'yearPage.backToHandouts': 'Back to Handouts',
+    'yearPage.accessHandouts': 'Access handouts and study materials for',
+    'yearPage.noCourses': 'No courses found',
+    'yearPage.noHandoutsAvailable': 'No handouts available yet for',
+    'yearPage.viewHandouts': 'View available handouts for this course',
+    'yearPage.files': 'file',
 
     // Common
     'common.loading': 'Loading...',

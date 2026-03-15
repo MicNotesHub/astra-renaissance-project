@@ -7,6 +7,7 @@ import { Link, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface HandoutFile {
   id: number;
@@ -25,6 +26,7 @@ const CourseHandouts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [semesterFilter, setSemesterFilter] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
 
   const filteredFiles = files.filter(f => {
     const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
@@ -35,22 +37,21 @@ const CourseHandouts = () => {
 
   const decodedCourseName = courseName ? decodeURIComponent(courseName) : '';
   
-  // Determine the year and back link based on the current path
   const isSecondYear = location.pathname.includes('/secondo-anno');
   const isThirdYear = location.pathname.includes('/terzo-anno');
   
   let yearFilter = 'First Year';
   let backLink = '/dispense/primo-anno';
-  let backText = 'Torna al Primo Anno';
+  let backTextKey = 'courseHandouts.backFirstYear';
   
   if (isSecondYear) {
     yearFilter = 'Second Year';
     backLink = '/dispense/secondo-anno';
-    backText = 'Torna al Secondo Anno';
+    backTextKey = 'courseHandouts.backSecondYear';
   } else if (isThirdYear) {
     yearFilter = 'Third Year';
     backLink = '/dispense/terzo-anno';
-    backText = 'Torna al Terzo Anno';
+    backTextKey = 'courseHandouts.backThirdYear';
   }
 
   useEffect(() => {
@@ -71,8 +72,8 @@ const CourseHandouts = () => {
       if (error) {
         console.error('Error fetching handouts:', error);
         toast({
-          title: "Errore",
-          description: "Impossibile caricare le dispense",
+          title: t('common.error'),
+          description: t('courseHandouts.errorLoading'),
           variant: "destructive"
         });
         return;
@@ -82,8 +83,8 @@ const CourseHandouts = () => {
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Errore",
-        description: "Errore nel caricamento delle dispense",
+        title: t('common.error'),
+        description: t('courseHandouts.errorGeneric'),
         variant: "destructive"
       });
     } finally {
@@ -94,24 +95,22 @@ const CourseHandouts = () => {
   const handleFileClick = async (fileUrl: string | null) => {
     if (!fileUrl) {
       toast({
-        title: "Errore",
-        description: "URL del file non disponibile",
+        title: t('common.error'),
+        description: t('courseHandouts.fileUnavailable'),
         variant: "destructive"
       });
       return;
     }
 
     try {
-      // Check if it's a storage bucket URL
       if (fileUrl.includes('handouts-bucket')) {
         const fileName = fileUrl.split('/').pop() || '';
         const { data, error } = await supabase.storage
           .from('handouts-bucket')
-          .createSignedUrl(fileName, 315360000); // 10 years in seconds
+          .createSignedUrl(fileName, 315360000);
 
         if (error) {
           console.error('Error creating signed URL:', error);
-          // Fallback to direct URL if signed URL fails
           window.open(fileUrl, '_blank');
           return;
         }
@@ -119,23 +118,15 @@ const CourseHandouts = () => {
         if (data?.signedUrl) {
           window.open(data.signedUrl, '_blank');
         } else {
-          // Fallback to direct URL
           window.open(fileUrl, '_blank');
         }
       } else {
-        // Direct URL
         window.open(fileUrl, '_blank');
       }
     } catch (error) {
       console.error('Error:', error);
-      // Final fallback to direct URL
       window.open(fileUrl, '_blank');
     }
-  };
-
-  const formatDate = (dateString: string) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('it-IT');
   };
 
   if (loading) {
@@ -145,7 +136,7 @@ const CourseHandouts = () => {
         <div className="pt-24 pb-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <p className="text-lg">Caricamento dispense...</p>
+              <p className="text-lg">{t('courseHandouts.loading')}</p>
             </div>
           </div>
         </div>
@@ -165,7 +156,7 @@ const CourseHandouts = () => {
               <Link to={backLink} className="mr-6">
                 <Button variant="outline" size="sm">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  {backText}
+                  {t(backTextKey)}
                 </Button>
               </Link>
             </div>
@@ -173,7 +164,7 @@ const CourseHandouts = () => {
               {decodedCourseName}
             </h1>
             <p className="text-lg text-muted-foreground">
-              Dispense disponibili per questo corso
+              {t('courseHandouts.availableHandouts')}
             </p>
           </div>
 
@@ -181,21 +172,21 @@ const CourseHandouts = () => {
           <div className="relative mb-6 max-w-md">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Cerca dispense..."
+              placeholder={t('courseHandouts.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
             />
           </div>
 
-          {/* Semester Filter - hidden for BIEF third year and ELECTIVES */}
+          {/* Semester Filter */}
           {!(isThirdYear && decodedCourseName.toUpperCase().includes('BIEF')) && 
            !decodedCourseName.toUpperCase().includes('ELECTIVE') && (
             <div className="flex gap-2 mb-6">
               {[
-                { label: "All", value: null },
-                { label: "Semester 1", value: 1 },
-                { label: "Semester 2", value: 2 },
+                { label: t('courseHandouts.all'), value: null },
+                { label: t('courseHandouts.semester1'), value: 1 },
+                { label: t('courseHandouts.semester2'), value: 2 },
               ].map((opt) => (
                 <Button
                   key={opt.label}
@@ -211,9 +202,9 @@ const CourseHandouts = () => {
           {filteredFiles.length === 0 ? (
             <div className="text-center py-12">
               <FileText className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-xl font-semibold mb-2">Nessuna dispensa trovata</h3>
+              <h3 className="text-xl font-semibold mb-2">{t('courseHandouts.noResults')}</h3>
               <p className="text-muted-foreground">
-                {searchTerm ? `Nessun risultato per "${searchTerm}".` : 'Le dispense per questo corso non sono ancora disponibili.'}
+                {searchTerm ? `${t('courseHandouts.noResultsSearch')} "${searchTerm}".` : t('courseHandouts.noResultsEmpty')}
               </p>
             </div>
           ) : (
@@ -221,9 +212,9 @@ const CourseHandouts = () => {
               <CardHeader className="bg-primary/5">
                 <CardTitle className="flex items-center gap-3">
                   <FileText className="w-6 h-6 text-primary" />
-                  Dispense del Corso
+                  {t('courseHandouts.courseHandouts')}
                   <span className="text-sm font-normal text-muted-foreground">
-                    ({filteredFiles.length} file{filteredFiles.length !== 1 ? 's' : ''})
+                    ({filteredFiles.length} {t('yearPage.files')}{filteredFiles.length !== 1 ? 's' : ''})
                   </span>
                 </CardTitle>
               </CardHeader>
@@ -242,7 +233,7 @@ const CourseHandouts = () => {
                             {file.filename}
                           </h4>
                           <p className="text-sm text-muted-foreground">
-                            PDF • Anno: {file.year}
+                            PDF • {t('courseHandouts.year')}: {file.year}
                           </p>
                         </div>
                       </div>
