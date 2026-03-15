@@ -23,40 +23,16 @@ const Guide = () => {
   const [loading, setLoading] = useState(true);
   const { t } = useLanguage();
 
-  const categoryTitles: Record<string, string> = {
-    'associations': 'Associations 101',
-    'opzionali': 'Opzionali 101',
-    'graduate': 'Graduate 101',
-    'stage': 'Stage 101',
-    'freemover': 'Freemover 101',
-    'residenze': 'Residenze 101',
-    'exchange_magistrale': 'Exchange 101 Magistrale',
-    'exchange_triennale': 'Exchange 101 Triennale',
-    'university': 'University 101',
-    'milan': 'Milan 101',
-    'burocrazia': 'Burocrazia 101',
-    'master_admissions': 'Master Admissions',
-    'tesi': 'Tesi 101',
-    'ecdl': 'ECDL 101',
-    'spring weeks': 'Spring Weeks'
+  const getCategoryTitle = (category: string) => {
+    const key = `category.${category}.title`;
+    const translated = t(key);
+    return translated !== key ? translated : category;
   };
 
-  const categoryDescriptions: Record<string, string> = {
-    'associations': 'Scopri le associazioni Bocconi!',
-    'opzionali': 'Guide per la scelta dei tuoi opzionali',
-    'graduate': 'Le nostre guide per la tua magistrale',
-    'stage': 'Le nostre guide per il tuo stage',
-    'freemover': 'Le nostre guide per il freemover',
-    'residenze': 'Guide per le residenze degli studenti',
-    'exchange_magistrale': 'Guide per il tuo exchange magistrale',
-    'exchange_triennale': 'Guide per il tuo exchange triennale',
-    'university': 'Guide al primo anno di Università',
-    'milan': 'Scopri Milano prima di trasferirti',
-    'burocrazia': 'Come districarsi nella burocrazia italiana',
-    'master_admissions': 'Guide per le ammissioni magistrali',
-    'tesi': 'Guida per la tesi triennale',
-    'ecdl': 'Tutto quello che devi sapere',
-    'spring weeks': 'Scopri le spring weeks disponibili'
+  const getCategoryDescription = (category: string) => {
+    const key = `category.${category}.description`;
+    const translated = t(key);
+    return translated !== key ? translated : '';
   };
 
   useEffect(() => {
