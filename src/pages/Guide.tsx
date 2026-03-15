@@ -175,10 +175,10 @@ const Guide = () => {
                       </div>
                       <div className="flex-1 flex flex-col justify-center min-h-0">
                         <h3 className="text-lg font-semibold mb-2">
-                          {categoryTitles[category] || category}
+                          {getCategoryTitle(category)}
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          {categoryDescriptions[category] || ''}
+                          {getCategoryDescription(category)}
                         </p>
                       </div>
                       <Link to={`/guide/${category}`} className="flex-shrink-0">
