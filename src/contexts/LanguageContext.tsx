@@ -635,6 +635,36 @@ const translations = {
     'womensDay.description': 'Read the full article to discover reflections, stories, and perspectives on the fundamental contribution of women in today\'s world.',
     'womensDay.cta': 'Read the Article',
 
+    // CourseHandouts
+    'courseHandouts.backFirstYear': 'Back to First Year',
+    'courseHandouts.backSecondYear': 'Back to Second Year',
+    'courseHandouts.backThirdYear': 'Back to Third Year',
+    'courseHandouts.availableHandouts': 'Available handouts for this course',
+    'courseHandouts.searchPlaceholder': 'Search handouts...',
+    'courseHandouts.loading': 'Loading handouts...',
+    'courseHandouts.noResults': 'No handouts found',
+    'courseHandouts.noResultsSearch': 'No results for',
+    'courseHandouts.noResultsEmpty': 'Handouts for this course are not yet available.',
+    'courseHandouts.courseHandouts': 'Course Handouts',
+    'courseHandouts.errorLoading': 'Unable to load handouts',
+    'courseHandouts.errorGeneric': 'Error loading handouts',
+    'courseHandouts.fileUnavailable': 'File URL not available',
+    'courseHandouts.all': 'All',
+    'courseHandouts.semester1': 'Semester 1',
+    'courseHandouts.semester2': 'Semester 2',
+    'courseHandouts.year': 'Year',
+
+    // Year Pages
+    'yearPage.firstYear': 'First Year',
+    'yearPage.secondYear': 'Second Year',
+    'yearPage.thirdYear': 'Third Year',
+    'yearPage.backToHandouts': 'Back to Handouts',
+    'yearPage.accessHandouts': 'Access handouts and study materials for',
+    'yearPage.noCourses': 'No courses found',
+    'yearPage.noHandoutsAvailable': 'No handouts available yet for',
+    'yearPage.viewHandouts': 'View available handouts for this course',
+    'yearPage.files': 'file',
+
     // Common
     'common.loading': 'Loading...',
     'common.error': 'Error',
