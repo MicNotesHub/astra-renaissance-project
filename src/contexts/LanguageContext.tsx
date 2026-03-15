@@ -250,7 +250,9 @@ const translations = {
     'category.tesi.title': 'Tesi 101',
     'category.tesi.description': 'Guida per la tesi triennale',
     'category.ecdl.title': 'ECDL 101',
-    'category.ecdl.description': 'Tutto quello che devi sapere',
+     'category.ecdl.description': 'Tutto quello che devi sapere',
+    'category.spring weeks.title': 'Spring Weeks',
+    'category.spring weeks.description': 'Scopri le spring weeks disponibili',
     
     // Dispense Section
     'dispense.title': 'Dispense Universitarie',
