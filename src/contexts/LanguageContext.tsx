@@ -161,8 +161,10 @@ const translations = {
     // Calculators Section
     'calculators.title': 'Calcolatori Smart',
     'calculators.subtitle': 'Tool intelligenti per ottimizzare il tuo percorso universitario. Pianifica, calcola e raggiungi i tuoi obiettivi accademici.',
-    'calculators.gpa.title': 'GPA & Graduation Score',
+    'calculators.gpa.title': 'GPA & Graduation Score (Triennale)',
     'calculators.gpa.description': 'Calcola il tuo voto di laurea previsto basato sui tuoi esami',
+    'calculators.gpa-msc.title': 'GPA & Graduation Score (Magistrale)',
+    'calculators.gpa-msc.description': 'Calcola il voto di laurea magistrale con tesi e bonus',
     'calculators.exchange-msc.title': 'Exchange Calculator MSc',
     'calculators.exchange-msc.description': 'Calcola il tuo Exchange Score e scopri le destinazioni disponibili',
     'calculators.exchange-clmg.title': 'Exchange Calculator CLMG',
@@ -489,8 +491,10 @@ const translations = {
     // Calculators Section
     'calculators.title': 'Smart Calculators',
     'calculators.subtitle': 'Intelligent tools to optimize your university journey. Plan, calculate and achieve your academic goals.',
-    'calculators.gpa.title': 'GPA & Graduation Score',
+    'calculators.gpa.title': 'GPA & Graduation Score (Undergraduate)',
     'calculators.gpa.description': 'Calculate your expected graduation grade based on your exams',
+    'calculators.gpa-msc.title': 'GPA & Graduation Score (MSc)',
+    'calculators.gpa-msc.description': 'Calculate your MSc graduation grade with thesis and bonus points',
     'calculators.exchange-msc.title': 'Exchange Calculator MSc',
     'calculators.exchange-msc.description': 'Calculate your Exchange Score and discover available destinations',
     'calculators.exchange-clmg.title': 'Exchange Calculator CLMG',
