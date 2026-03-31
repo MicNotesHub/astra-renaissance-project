@@ -75,7 +75,8 @@ const Guide = () => {
       'master_admissions': Trophy,
       'tesi': FileText,
       'ecdl': Monitor,
-      'spring weeks': Briefcase
+      'spring weeks': Briefcase,
+      'funding': Trophy
     };
     return iconMap[category] || Globe;
   };
