@@ -44,7 +44,8 @@ const GuideCategory: React.FC = () => {
     'burocrazia': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
     'master_admissions': 'Master Admissions',
     'tesi': 'Tesi 101: guida per la tesi triennale',
-    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere'
+    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere',
+    'funding': 'Funding: scopri le opportunità di finanziamento disponibili!'
   };
 
   const getCategoryIcon = (category: string) => {
@@ -63,7 +64,8 @@ const GuideCategory: React.FC = () => {
       'burocrazia': FileText,
       'master_admissions': Trophy,
       'tesi': FileText,
-      'ecdl': Monitor
+      'ecdl': Monitor,
+      'funding': Trophy
     };
     return iconMap[category] || Globe;
   };
@@ -84,7 +86,8 @@ const GuideCategory: React.FC = () => {
       'burocrazia': 'text-amber-500 bg-amber-50 hover:bg-amber-100 border-amber-200',
       'master_admissions': 'text-yellow-500 bg-yellow-50 hover:bg-yellow-100 border-yellow-200',
       'tesi': 'text-teal-500 bg-teal-50 hover:bg-teal-100 border-teal-200',
-      'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100 border-slate-200'
+      'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100 border-slate-200',
+      'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100 border-lime-200'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20 border-primary/20';
   };

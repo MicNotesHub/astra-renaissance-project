@@ -255,6 +255,8 @@ const translations = {
      'category.ecdl.description': 'Tutto quello che devi sapere',
     'category.spring weeks.title': 'Spring Weeks',
     'category.spring weeks.description': 'Scopri le spring weeks disponibili',
+    'category.funding.title': 'Funding',
+    'category.funding.description': 'Opportunità di finanziamento disponibili',
     
     // Dispense Section
     'dispense.title': 'Dispense Universitarie',
@@ -597,6 +599,8 @@ const translations = {
     'category.ecdl.description': 'Everything you need to know',
     'category.spring weeks.title': 'Spring Weeks',
     'category.spring weeks.description': 'Discover available spring weeks',
+    'category.funding.title': 'Funding',
+    'category.funding.description': 'Available funding opportunities',
     
     // Dispense Section
     'dispense.title': 'University Handouts',
