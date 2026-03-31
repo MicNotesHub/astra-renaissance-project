@@ -118,7 +118,8 @@ const Guide = () => {
     'burocrazia',
     'master_admissions',
     'tesi',
-    'ecdl'
+    'ecdl',
+    'funding'
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
