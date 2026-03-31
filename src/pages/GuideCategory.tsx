@@ -63,7 +63,8 @@ const GuideCategory: React.FC = () => {
       'burocrazia': FileText,
       'master_admissions': Trophy,
       'tesi': FileText,
-      'ecdl': Monitor
+      'ecdl': Monitor,
+      'funding': Trophy
     };
     return iconMap[category] || Globe;
   };
