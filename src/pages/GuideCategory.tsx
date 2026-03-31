@@ -44,7 +44,8 @@ const GuideCategory: React.FC = () => {
     'burocrazia': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
     'master_admissions': 'Master Admissions',
     'tesi': 'Tesi 101: guida per la tesi triennale',
-    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere'
+    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere',
+    'funding': 'Funding: scopri le opportunità di finanziamento disponibili!'
   };
 
   const getCategoryIcon = (category: string) => {
