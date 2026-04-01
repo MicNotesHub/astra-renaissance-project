@@ -21,15 +21,6 @@ export const CalcolatoriSection = () => {
     features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"],
     externalLink: null
   }, {
-    id: "graduation-msc",
-    title: t('calculators.gpa-msc.title'),
-    description: t('calculators.gpa-msc.description'),
-    icon: GraduationCap,
-    color: "text-blue-500",
-    bgColor: "bg-blue-50 dark:bg-blue-950/30",
-    features: ["Voto di laurea su 110", "Punti tesi (0-7)", "Bonus exchange/tirocinio"],
-    externalLink: null
-  }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
     description: t('calculators.exchange-ug.description'),
