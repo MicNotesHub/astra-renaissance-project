@@ -37,7 +37,7 @@ export function Navigation() {
     isExternal: false,
     highlight: false
   }, {
-    name: "Calcolatori",
+    name: t('nav.calculators'),
     href: "/calcolatori",
     isExternal: false,
     highlight: true
