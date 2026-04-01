@@ -49,7 +49,7 @@ export function Navigation() {
   }];
 
   // Always check if on pages with white backgrounds
-  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide') || location.pathname.includes('/chi-siamo') || location.pathname.includes('/rappresentanti') || location.pathname.includes('/stella-polare');
+  const isOnWhitePage = location.pathname.includes('/dispense') || location.pathname.includes('/guide') || location.pathname.includes('/chi-siamo') || location.pathname.includes('/rappresentanti') || location.pathname.includes('/stella-polare') || location.pathname.includes('/calcolatori');
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
