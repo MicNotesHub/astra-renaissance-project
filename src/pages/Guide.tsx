@@ -104,6 +104,7 @@ const Guide = () => {
   };
   
   const categoryOrder = [
+    'funding',
     'associations',
     'opzionali', 
     'graduate',
