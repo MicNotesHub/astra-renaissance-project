@@ -76,7 +76,7 @@ const Guide = () => {
       'tesi': FileText,
       'ecdl': Monitor,
       'spring weeks': Briefcase,
-      'funding': Trophy
+      'funding': DollarSign
     };
     return iconMap[category] || Globe;
   };
@@ -104,6 +104,7 @@ const Guide = () => {
   };
   
   const categoryOrder = [
+    'funding',
     'associations',
     'opzionali', 
     'graduate',
@@ -118,8 +119,7 @@ const Guide = () => {
     'burocrazia',
     'master_admissions',
     'tesi',
-    'ecdl',
-    'funding'
+    'ecdl'
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
