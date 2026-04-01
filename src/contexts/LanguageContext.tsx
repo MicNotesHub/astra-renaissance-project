@@ -364,6 +364,7 @@ const translations = {
     'nav.directory': 'Directory',
     'nav.guides': 'Guides',
     'nav.about': 'About Us',
+    'nav.calculators': 'Calculators',
     
     // Hero Section
     'hero.subtitle': 'Your reference student association at Bocconi. Discover all the services and opportunities we provide to make your university experience unforgettable.',
