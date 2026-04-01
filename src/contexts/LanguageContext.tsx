@@ -31,6 +31,7 @@ const translations = {
     'nav.directory': 'Directory',
     'nav.guides': 'Guide',
     'nav.about': 'Chi Siamo',
+    'nav.calculators': 'Calcolatori',
     
     // Hero Section
     'hero.subtitle': 'La tua associazione studentesca di riferimento in Bocconi. Scopri tutti i servizi e le opportunità che mettiamo a disposizione per rendere la tua esperienza universitaria indimenticabile.',
@@ -363,6 +364,7 @@ const translations = {
     'nav.directory': 'Directory',
     'nav.guides': 'Guides',
     'nav.about': 'About Us',
+    'nav.calculators': 'Calculators',
     
     // Hero Section
     'hero.subtitle': 'Your reference student association at Bocconi. Discover all the services and opportunities we provide to make your university experience unforgettable.',
