@@ -1,0 +1,22 @@
+
+INSERT INTO "cours-subject_MS_exchange" (id, course, subject, cfu) VALUES
+(95, 'CRSG', 'Emerging Topics in Cybersecurity (Bocconi)', 2),
+(96, 'CRSG', 'Software Methodologies and Architectures for Security, Module I', 6),
+(97, 'CRSG', 'Software Methodologies and Architectures for Security, Module II', 6),
+(98, 'CRSG', 'Cyber Security Technologies, Procedures and Policies', 6),
+(99, 'CRSG', 'Artificial Intelligence for Security', 6),
+(100, 'CRSG', 'Technology Risk Governance', 5),
+(101, 'CRSG', 'Emerging Topics in Cybersecurity (Politecnico)', 2),
+(102, 'CRSG', 'Strategy and Governance for Cyber Risk', 8),
+(103, 'CRSG', 'Cyber Risk and Data Protection Law', 6),
+(104, 'CRSG', 'Methods and Data Analytics for Risk Assessment', 7),
+(105, 'CRSG', 'Institutional Scenarios of Cyber Risk', 8),
+(106, 'CRSG', 'Elective 1', 6),
+(107, 'CRSG', 'Elective 2', 6),
+(108, 'CRSG', 'Elective 3', 6),
+(109, 'CRSG', 'Elective 4', 6),
+(110, 'CRSG', 'EU Language', 4),
+(111, 'CRSG', 'Ethics Seminar', 2),
+(112, 'CRSG', 'Behavioural Skills Seminar', 2),
+(113, 'CRSG', 'Internship', 8),
+(114, 'CRSG', 'Thesis', 18);
