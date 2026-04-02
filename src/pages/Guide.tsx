@@ -107,6 +107,7 @@ const Guide = () => {
   
   const categoryOrder = [
     'funding',
+    'linkedin',
     'associations',
     'opzionali', 
     'graduate',
@@ -122,7 +123,6 @@ const Guide = () => {
     'master_admissions',
     'tesi',
     'ecdl',
-    'linkedin'
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
