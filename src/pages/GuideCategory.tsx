@@ -180,7 +180,7 @@ const GuideCategory: React.FC = () => {
               {getCategoryPageTitle(category)}
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Esplora tutte le guide disponibili per questa categoria
+              {t('guideCategory.subtitle')}
             </p>
           </motion.div>
         </div>
