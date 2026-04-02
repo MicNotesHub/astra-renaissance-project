@@ -89,7 +89,8 @@ const GuideCategory: React.FC = () => {
       'master_admissions': 'text-yellow-500 bg-yellow-50 hover:bg-yellow-100 border-yellow-200',
       'tesi': 'text-teal-500 bg-teal-50 hover:bg-teal-100 border-teal-200',
       'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100 border-slate-200',
-      'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100 border-lime-200'
+      'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100 border-lime-200',
+      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100 border-blue-200'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20 border-primary/20';
   };
