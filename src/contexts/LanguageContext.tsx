@@ -260,7 +260,30 @@ const translations = {
     'category.funding.description': 'Opportunità di finanziamento disponibili',
     'category.linkedin.title': 'LinkedIn',
     'category.linkedin.description': 'Consigli e guide per il tuo profilo LinkedIn',
-    
+
+    // Guide Category Page
+    'guideCategory.backToGuides': 'Torna alle Guide',
+    'guideCategory.subtitle': 'Esplora tutte le guide disponibili per questa categoria',
+    'guideCategory.noGuides': 'Nessuna guida trovata',
+    'guideCategory.noGuidesDescription': 'Non sono ancora disponibili guide per questa categoria.',
+    'category.associations.pageTitle': 'Associations 101: scopri le associazioni Bocconi!',
+    'category.opzionali.pageTitle': 'Opzionali 101: le nostre guide per la scelta dei tuoi opzionali!',
+    'category.graduate.pageTitle': 'Graduate 101: le nostre guide per la tua magistrale!',
+    'category.stage.pageTitle': 'Stage 101: le nostre guide per il tuo stage!',
+    'category.spring weeks.pageTitle': 'Spring Weeks: scopri le spring weeks disponibili!',
+    'category.freemover.pageTitle': 'Freemover 101: le nostre guide per il freemover!',
+    'category.residenze.pageTitle': 'Residenze 101: le nostre guide per le residenze!',
+    'category.exchange_magistrale.pageTitle': 'Exchange 101: guide per il tuo exchange magistrale!',
+    'category.exchange_triennale.pageTitle': 'Exchange 101: guide per il tuo exchange triennale!',
+    'category.university.pageTitle': 'University 101: guide al primo anno di Università!',
+    'category.milan.pageTitle': 'Milan 101: scopri Milano prima di trasferirti!',
+    'category.burocrazia.pageTitle': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
+    'category.master_admissions.pageTitle': 'Master Admissions',
+    'category.tesi.pageTitle': 'Tesi 101: guida per la tesi triennale',
+    'category.ecdl.pageTitle': 'ECDL 101: tutto quello che devi sapere',
+    'category.funding.pageTitle': 'Funding: scopri le opportunità di finanziamento!',
+    'category.linkedin.pageTitle': 'LinkedIn: le nostre guide per il tuo profilo LinkedIn!',
+
     // Dispense Section
     'dispense.title': 'Dispense Universitarie',
     'dispense.subtitle': 'Accedi alle dispense organizzate per anno accademico. Materiali di studio condivisi dalla comunità studentesca.',
