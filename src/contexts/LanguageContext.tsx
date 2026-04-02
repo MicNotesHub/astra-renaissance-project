@@ -258,6 +258,8 @@ const translations = {
     'category.spring weeks.description': 'Scopri le spring weeks disponibili',
     'category.funding.title': 'Funding',
     'category.funding.description': 'Opportunità di finanziamento disponibili',
+    'category.linkedin.title': 'LinkedIn',
+    'category.linkedin.description': 'Consigli e guide per il tuo profilo LinkedIn',
     
     // Dispense Section
     'dispense.title': 'Dispense Universitarie',
@@ -603,6 +605,8 @@ const translations = {
     'category.spring weeks.description': 'Discover available spring weeks',
     'category.funding.title': 'Funding',
     'category.funding.description': 'Available funding opportunities',
+    'category.linkedin.title': 'LinkedIn',
+    'category.linkedin.description': 'Tips and guides for your LinkedIn profile',
     
     // Dispense Section
     'dispense.title': 'University Handouts',

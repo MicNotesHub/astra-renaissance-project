@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -76,7 +76,8 @@ const Guide = () => {
       'tesi': FileText,
       'ecdl': Monitor,
       'spring weeks': Briefcase,
-      'funding': DollarSign
+      'funding': DollarSign,
+      'linkedin': Linkedin
     };
     return iconMap[category] || Globe;
   };
@@ -98,7 +99,8 @@ const Guide = () => {
       'tesi': 'text-teal-500 bg-teal-50 hover:bg-teal-100',
       'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100',
       'spring weeks': 'text-violet-500 bg-violet-50 hover:bg-violet-100',
-      'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100'
+      'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100',
+      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
@@ -119,7 +121,8 @@ const Guide = () => {
     'burocrazia',
     'master_admissions',
     'tesi',
-    'ecdl'
+    'ecdl',
+    'linkedin'
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
