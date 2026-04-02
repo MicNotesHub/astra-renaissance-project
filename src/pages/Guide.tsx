@@ -76,7 +76,8 @@ const Guide = () => {
       'tesi': FileText,
       'ecdl': Monitor,
       'spring weeks': Briefcase,
-      'funding': DollarSign
+      'funding': DollarSign,
+      'linkedin': Users
     };
     return iconMap[category] || Globe;
   };
