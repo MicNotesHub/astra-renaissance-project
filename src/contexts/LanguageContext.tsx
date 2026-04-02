@@ -605,6 +605,8 @@ const translations = {
     'category.spring weeks.description': 'Discover available spring weeks',
     'category.funding.title': 'Funding',
     'category.funding.description': 'Available funding opportunities',
+    'category.linkedin.title': 'LinkedIn',
+    'category.linkedin.description': 'Tips and guides for your LinkedIn profile',
     
     // Dispense Section
     'dispense.title': 'University Handouts',
