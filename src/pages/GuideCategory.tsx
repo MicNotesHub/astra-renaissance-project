@@ -29,24 +29,10 @@ const GuideCategory: React.FC = () => {
     return t(`category.${category}.title`) || category;
   };
 
-  const categoryTitles: Record<string, string> = {
-    'associations': 'Associations 101: scopri le associazioni Bocconi!',
-    'opzionali': 'Opzionali 101: le nostre guide per la scelta dei tuoi opzionali!',
-    'graduate': 'Graduate 101: le nostre guide per la tua magistrale!',
-    'stage': 'Stage 101: le nostre guide per il tuo stage!',
-    'spring weeks': 'Spring Weeks: scopri le spring weeks disponibili!',
-    'freemover': 'Freemover 101: le nostre guide per il freemover!',
-    'residenze': 'Residenze 101: le nostre guide per le residenze degli studenti!',
-    'exchange_magistrale': 'Exchange 101: le nostre guide per il tuo exchange magistrale!',
-    'exchange_triennale': 'Exchange 101: le nostre guide per il tuo exchange triennale!',
-    'university': 'University 101: le nostre guide al primo anno di Università!',
-    'milan': 'Milan 101: scopri Milano prima di trasferirti!',
-    'burocrazia': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
-    'master_admissions': 'Master Admissions',
-    'tesi': 'Tesi 101: guida per la tesi triennale',
-    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere',
-    'funding': 'Funding: scopri le opportunità di finanziamento disponibili!',
-    'linkedin': 'LinkedIn: le nostre guide per il tuo profilo LinkedIn!'
+  const getCategoryPageTitle = (category: string) => {
+    const key = `category.${category}.pageTitle`;
+    const translated = t(key);
+    return translated !== key ? translated : getCategoryTitle(category);
   };
 
   const getCategoryIcon = (category: string) => {
