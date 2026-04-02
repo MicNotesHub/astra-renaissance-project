@@ -77,7 +77,7 @@ const Guide = () => {
       'ecdl': Monitor,
       'spring weeks': Briefcase,
       'funding': DollarSign,
-      'linkedin': Users
+      'linkedin': Linkedin
     };
     return iconMap[category] || Globe;
   };
