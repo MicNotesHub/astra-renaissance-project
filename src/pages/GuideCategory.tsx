@@ -45,7 +45,8 @@ const GuideCategory: React.FC = () => {
     'master_admissions': 'Master Admissions',
     'tesi': 'Tesi 101: guida per la tesi triennale',
     'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere',
-    'funding': 'Funding: scopri le opportunità di finanziamento disponibili!'
+    'funding': 'Funding: scopri le opportunità di finanziamento disponibili!',
+    'linkedin': 'LinkedIn: le nostre guide per il tuo profilo LinkedIn!'
   };
 
   const getCategoryIcon = (category: string) => {
