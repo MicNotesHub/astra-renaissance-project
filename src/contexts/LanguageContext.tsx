@@ -260,7 +260,30 @@ const translations = {
     'category.funding.description': 'Opportunità di finanziamento disponibili',
     'category.linkedin.title': 'LinkedIn',
     'category.linkedin.description': 'Consigli e guide per il tuo profilo LinkedIn',
-    
+
+    // Guide Category Page
+    'guideCategory.backToGuides': 'Torna alle Guide',
+    'guideCategory.subtitle': 'Esplora tutte le guide disponibili per questa categoria',
+    'guideCategory.noGuides': 'Nessuna guida trovata',
+    'guideCategory.noGuidesDescription': 'Non sono ancora disponibili guide per questa categoria.',
+    'category.associations.pageTitle': 'Associations 101: scopri le associazioni Bocconi!',
+    'category.opzionali.pageTitle': 'Opzionali 101: le nostre guide per la scelta dei tuoi opzionali!',
+    'category.graduate.pageTitle': 'Graduate 101: le nostre guide per la tua magistrale!',
+    'category.stage.pageTitle': 'Stage 101: le nostre guide per il tuo stage!',
+    'category.spring weeks.pageTitle': 'Spring Weeks: scopri le spring weeks disponibili!',
+    'category.freemover.pageTitle': 'Freemover 101: le nostre guide per il freemover!',
+    'category.residenze.pageTitle': 'Residenze 101: le nostre guide per le residenze!',
+    'category.exchange_magistrale.pageTitle': 'Exchange 101: guide per il tuo exchange magistrale!',
+    'category.exchange_triennale.pageTitle': 'Exchange 101: guide per il tuo exchange triennale!',
+    'category.university.pageTitle': 'University 101: guide al primo anno di Università!',
+    'category.milan.pageTitle': 'Milan 101: scopri Milano prima di trasferirti!',
+    'category.burocrazia.pageTitle': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
+    'category.master_admissions.pageTitle': 'Master Admissions',
+    'category.tesi.pageTitle': 'Tesi 101: guida per la tesi triennale',
+    'category.ecdl.pageTitle': 'ECDL 101: tutto quello che devi sapere',
+    'category.funding.pageTitle': 'Funding: scopri le opportunità di finanziamento!',
+    'category.linkedin.pageTitle': 'LinkedIn: le nostre guide per il tuo profilo LinkedIn!',
+
     // Dispense Section
     'dispense.title': 'Dispense Universitarie',
     'dispense.subtitle': 'Accedi alle dispense organizzate per anno accademico. Materiali di studio condivisi dalla comunità studentesca.',
@@ -607,7 +630,30 @@ const translations = {
     'category.funding.description': 'Available funding opportunities',
     'category.linkedin.title': 'LinkedIn',
     'category.linkedin.description': 'Tips and guides for your LinkedIn profile',
-    
+
+    // Guide Category Page
+    'guideCategory.backToGuides': 'Back to Guides',
+    'guideCategory.subtitle': 'Explore all available guides for this category',
+    'guideCategory.noGuides': 'No guides found',
+    'guideCategory.noGuidesDescription': 'No guides are available for this category yet.',
+    'category.associations.pageTitle': 'Associations 101: discover Bocconi associations!',
+    'category.opzionali.pageTitle': 'Optional Courses 101: guides for choosing your electives!',
+    'category.graduate.pageTitle': 'Graduate 101: our guides for your Master\'s degree!',
+    'category.stage.pageTitle': 'Internship 101: our guides for your internship!',
+    'category.spring weeks.pageTitle': 'Spring Weeks: discover available spring weeks!',
+    'category.freemover.pageTitle': 'Freemover 101: our guides for freemover programs!',
+    'category.residenze.pageTitle': 'Residences 101: our guides for student residences!',
+    'category.exchange_magistrale.pageTitle': 'Exchange 101: guides for your Master\'s exchange!',
+    'category.exchange_triennale.pageTitle': 'Exchange 101: guides for your Bachelor\'s exchange!',
+    'category.university.pageTitle': 'University 101: guides for your first year!',
+    'category.milan.pageTitle': 'Milan 101: discover Milan before moving here!',
+    'category.burocrazia.pageTitle': 'Bureaucracy 101: navigating Italian bureaucracy!',
+    'category.master_admissions.pageTitle': 'Master Admissions',
+    'category.tesi.pageTitle': 'Thesis 101: guide for your Bachelor\'s thesis',
+    'category.ecdl.pageTitle': 'ECDL 101: everything you need to know',
+    'category.funding.pageTitle': 'Funding: discover available funding opportunities!',
+    'category.linkedin.pageTitle': 'LinkedIn: our guides for your LinkedIn profile!',
+
     // Dispense Section
     'dispense.title': 'University Handouts',
     'dispense.subtitle': 'Access handouts organized by academic year. Study materials shared by the student community.',

@@ -29,24 +29,10 @@ const GuideCategory: React.FC = () => {
     return t(`category.${category}.title`) || category;
   };
 
-  const categoryTitles: Record<string, string> = {
-    'associations': 'Associations 101: scopri le associazioni Bocconi!',
-    'opzionali': 'Opzionali 101: le nostre guide per la scelta dei tuoi opzionali!',
-    'graduate': 'Graduate 101: le nostre guide per la tua magistrale!',
-    'stage': 'Stage 101: le nostre guide per il tuo stage!',
-    'spring weeks': 'Spring Weeks: scopri le spring weeks disponibili!',
-    'freemover': 'Freemover 101: le nostre guide per il freemover!',
-    'residenze': 'Residenze 101: le nostre guide per le residenze degli studenti!',
-    'exchange_magistrale': 'Exchange 101: le nostre guide per il tuo exchange magistrale!',
-    'exchange_triennale': 'Exchange 101: le nostre guide per il tuo exchange triennale!',
-    'university': 'University 101: le nostre guide al primo anno di Università!',
-    'milan': 'Milan 101: scopri Milano prima di trasferirti!',
-    'burocrazia': 'Burocrazia 101: come districarsi nella burocrazia italiana!',
-    'master_admissions': 'Master Admissions',
-    'tesi': 'Tesi 101: guida per la tesi triennale',
-    'ecdl': 'ECDL 101: una guida per tutto quello che devi sapere',
-    'funding': 'Funding: scopri le opportunità di finanziamento disponibili!',
-    'linkedin': 'LinkedIn: le nostre guide per il tuo profilo LinkedIn!'
+  const getCategoryPageTitle = (category: string) => {
+    const key = `category.${category}.pageTitle`;
+    const translated = t(key);
+    return translated !== key ? translated : getCategoryTitle(category);
   };
 
   const getCategoryIcon = (category: string) => {
@@ -175,7 +161,7 @@ const GuideCategory: React.FC = () => {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />
-            Torna alle Guide
+            {t('guideCategory.backToGuides')}
           </Link>
         </div>
 
@@ -191,10 +177,10 @@ const GuideCategory: React.FC = () => {
               <IconComponent className="w-10 h-10" />
             </div>
             <h1 className="text-4xl font-bold mb-4">
-              {categoryTitles[category] || category}
+              {getCategoryPageTitle(category)}
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Esplora tutte le guide disponibili per questa categoria
+              {t('guideCategory.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -203,9 +189,9 @@ const GuideCategory: React.FC = () => {
         {guides.length === 0 ? (
           <div className="text-center py-12">
             <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nessuna guida trovata</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('guideCategory.noGuides')}</h3>
             <p className="text-muted-foreground">
-              Non sono ancora disponibili guide per questa categoria.
+              {t('guideCategory.noGuidesDescription')}
             </p>
           </div>
         ) : (
