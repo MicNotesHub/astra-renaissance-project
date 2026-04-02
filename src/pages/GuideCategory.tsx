@@ -66,7 +66,8 @@ const GuideCategory: React.FC = () => {
       'master_admissions': Trophy,
       'tesi': FileText,
       'ecdl': Monitor,
-      'funding': DollarSign
+      'funding': DollarSign,
+      'linkedin': Linkedin
     };
     return iconMap[category] || Globe;
   };
