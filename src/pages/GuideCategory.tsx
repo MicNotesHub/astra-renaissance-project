@@ -161,7 +161,7 @@ const GuideCategory: React.FC = () => {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />
-            Torna alle Guide
+            {t('guideCategory.backToGuides')}
           </Link>
         </div>
 
@@ -177,7 +177,7 @@ const GuideCategory: React.FC = () => {
               <IconComponent className="w-10 h-10" />
             </div>
             <h1 className="text-4xl font-bold mb-4">
-              {categoryTitles[category] || category}
+              {getCategoryPageTitle(category)}
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Esplora tutte le guide disponibili per questa categoria
