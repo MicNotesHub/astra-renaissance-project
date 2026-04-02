@@ -630,7 +630,30 @@ const translations = {
     'category.funding.description': 'Available funding opportunities',
     'category.linkedin.title': 'LinkedIn',
     'category.linkedin.description': 'Tips and guides for your LinkedIn profile',
-    
+
+    // Guide Category Page
+    'guideCategory.backToGuides': 'Back to Guides',
+    'guideCategory.subtitle': 'Explore all available guides for this category',
+    'guideCategory.noGuides': 'No guides found',
+    'guideCategory.noGuidesDescription': 'No guides are available for this category yet.',
+    'category.associations.pageTitle': 'Associations 101: discover Bocconi associations!',
+    'category.opzionali.pageTitle': 'Optional Courses 101: guides for choosing your electives!',
+    'category.graduate.pageTitle': 'Graduate 101: our guides for your Master\'s degree!',
+    'category.stage.pageTitle': 'Internship 101: our guides for your internship!',
+    'category.spring weeks.pageTitle': 'Spring Weeks: discover available spring weeks!',
+    'category.freemover.pageTitle': 'Freemover 101: our guides for freemover programs!',
+    'category.residenze.pageTitle': 'Residences 101: our guides for student residences!',
+    'category.exchange_magistrale.pageTitle': 'Exchange 101: guides for your Master\'s exchange!',
+    'category.exchange_triennale.pageTitle': 'Exchange 101: guides for your Bachelor\'s exchange!',
+    'category.university.pageTitle': 'University 101: guides for your first year!',
+    'category.milan.pageTitle': 'Milan 101: discover Milan before moving here!',
+    'category.burocrazia.pageTitle': 'Bureaucracy 101: navigating Italian bureaucracy!',
+    'category.master_admissions.pageTitle': 'Master Admissions',
+    'category.tesi.pageTitle': 'Thesis 101: guide for your Bachelor\'s thesis',
+    'category.ecdl.pageTitle': 'ECDL 101: everything you need to know',
+    'category.funding.pageTitle': 'Funding: discover available funding opportunities!',
+    'category.linkedin.pageTitle': 'LinkedIn: our guides for your LinkedIn profile!',
+
     // Dispense Section
     'dispense.title': 'University Handouts',
     'dispense.subtitle': 'Access handouts organized by academic year. Study materials shared by the student community.',
