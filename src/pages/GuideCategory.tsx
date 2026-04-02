@@ -189,9 +189,9 @@ const GuideCategory: React.FC = () => {
         {guides.length === 0 ? (
           <div className="text-center py-12">
             <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nessuna guida trovata</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('guideCategory.noGuides')}</h3>
             <p className="text-muted-foreground">
-              Non sono ancora disponibili guide per questa categoria.
+              {t('guideCategory.noGuidesDescription')}
             </p>
           </div>
         ) : (
