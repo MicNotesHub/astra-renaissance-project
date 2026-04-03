@@ -25,7 +25,6 @@ const Calcolatori = () => {
     features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"],
     externalLink: null
   }, {
-  }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
     description: t('calculators.exchange-ug.description'),
