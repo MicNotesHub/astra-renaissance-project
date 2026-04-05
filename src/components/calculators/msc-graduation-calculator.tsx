@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -39,7 +38,6 @@ export function MscGraduationCalculator() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  // Fetch available MSc courses
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -64,7 +62,6 @@ export function MscGraduationCalculator() {
     fetchCourses();
   }, [toast]);
 
-  // Fetch subjects for selected course
   useEffect(() => {
     if (!selectedCourse) return;
 
@@ -99,7 +96,7 @@ export function MscGraduationCalculator() {
           cfu: subject.cfu,
           grade: '',
           completed: false,
-          isSeminar: false
+          isSeminar: subject.subject.toLowerCase().includes('seminar')
         }));
 
         setExamGrades(initialGrades);
@@ -180,7 +177,6 @@ export function MscGraduationCalculator() {
   return (
     <TooltipProvider>
       <div className="space-y-6">
-        {/* Course Selection */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -204,16 +200,13 @@ export function MscGraduationCalculator() {
           </CardContent>
         </Card>
 
-        {/* Main Results Panel */}
         {selectedCourse && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-6"
           >
-            {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* GPA Card */}
               <Card>
                 <CardContent className="p-6">
                   <div className="text-center space-y-3">
@@ -237,7 +230,6 @@ export function MscGraduationCalculator() {
                 </CardContent>
               </Card>
 
-              {/* Base Score Card */}
               <Card>
                 <CardContent className="p-6">
                   <div className="text-center space-y-3">
@@ -261,7 +253,6 @@ export function MscGraduationCalculator() {
                 </CardContent>
               </Card>
 
-              {/* Final Score Card */}
               <Card>
                 <CardContent className="p-6">
                   <div className="text-center space-y-3">
@@ -291,7 +282,6 @@ export function MscGraduationCalculator() {
               </Card>
             </div>
 
-            {/* Progress Info */}
             <div className="flex items-center justify-between bg-primary/10 rounded-lg p-4">
               <div className="flex gap-6 text-sm">
                 <div>
@@ -310,9 +300,7 @@ export function MscGraduationCalculator() {
               )}
             </div>
 
-            {/* Thesis & Bonus Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Thesis Points */}
               <Card>
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base">
@@ -345,7 +333,6 @@ export function MscGraduationCalculator() {
                 </CardContent>
               </Card>
 
-              {/* Bonus Points */}
               <Card>
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base">
@@ -381,7 +368,6 @@ export function MscGraduationCalculator() {
           </motion.div>
         )}
 
-        {/* Exams Table */}
         {selectedCourse && !loading && (
           <Card id="msc-exams-section">
             <CardHeader>
@@ -407,62 +393,37 @@ export function MscGraduationCalculator() {
                           onCheckedChange={(checked) => {
                             updateExamGrade(exam.id, 'completed', checked);
                             if (!checked) {
-                              updateExamGrade(exam.id, 'isSeminar', false);
                               updateExamGrade(exam.id, 'grade', '');
                             }
                           }}
                         />
                       </div>
 
-                      {exam.completed && (
-                        <>
-                          <div className="flex items-center space-x-2">
-                            <Switch
-                              checked={exam.isSeminar}
-                              onCheckedChange={(checked) => {
-                                updateExamGrade(exam.id, 'isSeminar', checked);
-                                if (checked) {
-                                  updateExamGrade(exam.id, 'grade', '');
-                                }
-                              }}
-                            />
-                            <Label className="text-xs text-muted-foreground">Seminario</Label>
-                          </div>
+                      {exam.completed && !exam.isSeminar && (
+                        <div>
+                          <Label className="text-xs text-muted-foreground">Voto</Label>
+                          <Select
+                            value={exam.grade?.toString() || ""}
+                            onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
+                          >
+                            <SelectTrigger className="mt-1">
+                              <SelectValue placeholder="Seleziona voto" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                <SelectItem key={grade} value={grade.toString()}>
+                                  {grade === 31 ? "30L" : grade.toString()}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
 
-                          {!exam.isSeminar && (
-                            <div>
-                              <Label className="text-xs text-muted-foreground">Voto</Label>
-                              <Select
-                                value={exam.grade?.toString() || ""}
-                                onValueChange={(value) => {
-                                  if (value === "no-grade") {
-                                    updateExamGrade(exam.id, 'grade', '');
-                                  } else {
-                                    updateExamGrade(exam.id, 'grade', Number(value));
-                                  }
-                                }}
-                              >
-                                <SelectTrigger className="mt-1">
-                                  <SelectValue placeholder="Seleziona voto" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="no-grade">Nessun voto</SelectItem>
-                                  {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
-                                    <SelectItem key={grade} value={grade.toString()}>
-                                      {grade === 31 ? "30L" : grade.toString()}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          )}
-
-                          {exam.isSeminar && (
-                            <div className="text-center p-2 bg-muted rounded-md">
-                              <span className="text-xs text-muted-foreground">Seminario - Nessun voto richiesto</span>
-                            </div>
-                          )}
-                        </>
+                      {exam.completed && exam.isSeminar && (
+                        <div className="text-center p-2 bg-muted rounded-md">
+                          <span className="text-xs text-muted-foreground">Seminario - Nessun voto richiesto</span>
+                        </div>
                       )}
                     </div>
                   </motion.div>
@@ -479,7 +440,6 @@ export function MscGraduationCalculator() {
           </div>
         )}
 
-        {/* Disclaimer */}
         {selectedCourse && (
           <div className="text-center text-xs text-muted-foreground bg-muted/50 rounded-lg p-4">
             <p>⚠️ Questo è uno strumento di stima. Il voto finale di laurea è determinato dalla commissione di Bocconi.</p>
