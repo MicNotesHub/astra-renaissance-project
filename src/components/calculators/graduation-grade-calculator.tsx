@@ -381,55 +381,37 @@ export function GraduationGradeCalculator() {
                           onCheckedChange={(checked) => {
                             updateExamGrade(exam.id, 'completed', checked);
                             if (!checked) {
-                              updateExamGrade(exam.id, 'isSeminar', false);
                               updateExamGrade(exam.id, 'grade', '');
                             }
                           }}
                         />
                       </div>
                       
-                      {exam.completed && (
-                        <>
-                          <div className="flex items-center space-x-2">
-                            <Switch
-                              checked={exam.isSeminar}
-                              onCheckedChange={(checked) => {
-                                updateExamGrade(exam.id, 'isSeminar', checked);
-                                if (checked) {
-                                  updateExamGrade(exam.id, 'grade', '');
-                                }
-                              }}
-                            />
-                            <Label className="text-xs text-muted-foreground">Seminario</Label>
-                          </div>
-                          
-                          {!exam.isSeminar && (
-                            <div>
-                              <Label className="text-xs text-muted-foreground">Voto</Label>
-                              <Select
-                                value={exam.grade?.toString() || ""}
-                                onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
-                              >
-                                <SelectTrigger className="mt-1">
-                                  <SelectValue placeholder="Seleziona voto" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
-                                    <SelectItem key={grade} value={grade.toString()}>
-                                      {grade === 31 ? "30L" : grade.toString()}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          )}
-                          
-                          {exam.isSeminar && (
-                            <div className="text-center p-2 bg-muted rounded-md">
-                              <span className="text-xs text-muted-foreground">Seminario - Nessun voto richiesto</span>
-                            </div>
-                          )}
-                        </>
+                      {exam.completed && !exam.isSeminar && (
+                        <div>
+                          <Label className="text-xs text-muted-foreground">Voto</Label>
+                          <Select
+                            value={exam.grade?.toString() || ""}
+                            onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
+                          >
+                            <SelectTrigger className="mt-1">
+                              <SelectValue placeholder="Seleziona voto" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                <SelectItem key={grade} value={grade.toString()}>
+                                  {grade === 31 ? "30L" : grade.toString()}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+                      
+                      {exam.completed && exam.isSeminar && (
+                        <div className="text-center p-2 bg-muted rounded-md">
+                          <span className="text-xs text-muted-foreground">Seminario - Nessun voto richiesto</span>
+                        </div>
                       )}
                     </div>
                   </div>
