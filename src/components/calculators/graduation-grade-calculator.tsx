@@ -93,14 +93,14 @@ export function GraduationGradeCalculator() {
         
         setSubjects(fetchedSubjects);
         
-        // Initialize exam grades
+        // Initialize exam grades - auto-detect seminars by subject name
         const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
           id: subject.id,
           subject: subject.subject,
           cfu: subject.cfu,
           grade: '',
           completed: false,
-          isSeminar: false
+          isSeminar: subject.subject.toLowerCase().includes('seminar')
         }));
         
         setExamGrades(initialGrades);
