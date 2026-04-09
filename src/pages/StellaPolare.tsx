@@ -60,11 +60,11 @@ export default function StellaPolare() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-16">
+      <section className="relative h-[35vh] sm:h-[50vh] min-h-[250px] sm:min-h-[400px] flex items-center justify-center overflow-hidden pt-16">
         <img
           src={stellaPolareHero}
           alt="Stella Polare"
-          className="absolute inset-0 w-full h-full object-contain sm:object-cover object-center sm:object-[center_30%]"
+          className="absolute inset-0 w-full h-full object-cover object-top sm:object-[center_30%]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background" />
       </section>
