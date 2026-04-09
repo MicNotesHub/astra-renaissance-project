@@ -6,6 +6,7 @@ import { ExternalLink, FileText, Loader2, Youtube, ChevronDown } from "lucide-re
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import stellaPolareHero from "@/assets/stella-polare-hero.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,16 +24,17 @@ interface Article {
 
 type CategoryFilter = "all" | "settimanale" | "mensile";
 
-const categoryLabels: Record<CategoryFilter, string> = {
-  all: "Tutte le rubriche",
-  settimanale: "Rubriche settimanali",
-  mensile: "Rubriche mensili",
-};
-
 export default function StellaPolare() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<CategoryFilter>("all");
+  const { t } = useLanguage();
+
+  const categoryLabels: Record<CategoryFilter, string> = {
+    all: t('stellapolare.all'),
+    settimanale: t('stellapolare.weekly'),
+    mensile: t('stellapolare.monthly'),
+  };
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -78,7 +80,7 @@ export default function StellaPolare() {
             transition={{ delay: 0.2 }}
             className="text-center text-lg text-muted-foreground mb-8"
           >
-            Tutte le rubriche redatte dai nostri ragazzi della divisione Press!
+            {t('stellapolare.subtitle')}
           </motion.p>
 
           {/* Podcast Box */}
@@ -96,7 +98,7 @@ export default function StellaPolare() {
             >
               <Youtube className="w-6 h-6 text-red-500 shrink-0" />
               <span className="font-semibold text-foreground">
-                Ascolta il nostro Podcast su YouTube
+                {t('stellapolare.podcast')}
               </span>
               <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" />
             </a>
@@ -137,7 +139,7 @@ export default function StellaPolare() {
             </div>
           ) : filteredArticles.length === 0 ? (
             <p className="text-center text-muted-foreground">
-              Nessun articolo disponibile per questa categoria.
+              {t('stellapolare.noArticles')}
             </p>
           ) : (
             <motion.div
@@ -162,7 +164,7 @@ export default function StellaPolare() {
                     className="w-full gap-3 px-8 py-6 text-lg font-semibold"
                   >
                     <FileText className="w-5 h-5" />
-                    {article.Title || "Articolo"}
+                    {article.Title || t('stellapolare.article')}
                     <ExternalLink className="w-4 h-4 ml-auto" />
                   </Button>
                 </motion.a>
