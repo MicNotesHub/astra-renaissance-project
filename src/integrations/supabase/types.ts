@@ -731,18 +731,21 @@ export type Database = {
       }
       Stella_Polare: {
         Row: {
+          category: string
           created_at: string
           id: number
           Title: string | null
           URL: string | null
         }
         Insert: {
+          category?: string
           created_at?: string
           id?: number
           Title?: string | null
           URL?: string | null
         }
         Update: {
+          category?: string
           created_at?: string
           id?: number
           Title?: string | null
