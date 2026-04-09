@@ -67,6 +67,14 @@ export default function StellaPolare() {
           className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background" />
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-10 text-white text-center font-bold text-5xl sm:text-6xl leading-tight drop-shadow-lg"
+        >
+          <span className="block sm:inline">Stella</span>
+          <span className="block sm:inline sm:ml-3">Polare</span>
+        </motion.h1>
       </section>
 
       {/* Content Section */}
