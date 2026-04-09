@@ -747,6 +747,15 @@ const translations = {
     'common.learnMore': 'Learn more',
     'common.backToDispense': 'Back to Handouts',
     'common.backToHome': 'Back to Home',
+
+    // Stella Polare
+    'stellapolare.subtitle': 'All the columns written by our Press division team!',
+    'stellapolare.podcast': 'Listen to our Podcast on YouTube',
+    'stellapolare.all': 'All columns',
+    'stellapolare.weekly': 'Weekly columns',
+    'stellapolare.monthly': 'Monthly columns',
+    'stellapolare.noArticles': 'No articles available for this category.',
+    'stellapolare.article': 'Article',
   }
 };
 
