@@ -380,6 +380,15 @@ const translations = {
     'common.learnMore': 'Scopri di più',
     'common.backToDispense': 'Torna alle Dispense',
     'common.backToHome': 'Torna alla Home',
+
+    // Stella Polare
+    'stellapolare.subtitle': 'Tutte le rubriche redatte dai nostri ragazzi della divisione Press!',
+    'stellapolare.podcast': 'Ascolta il nostro Podcast su YouTube',
+    'stellapolare.all': 'Tutte le rubriche',
+    'stellapolare.weekly': 'Rubriche settimanali',
+    'stellapolare.monthly': 'Rubriche mensili',
+    'stellapolare.noArticles': 'Nessun articolo disponibile per questa categoria.',
+    'stellapolare.article': 'Articolo',
   },
   en: {
     // Navigation
