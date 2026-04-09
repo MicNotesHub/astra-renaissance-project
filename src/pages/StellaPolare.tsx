@@ -24,16 +24,17 @@ interface Article {
 
 type CategoryFilter = "all" | "settimanale" | "mensile";
 
-const categoryLabels: Record<CategoryFilter, string> = {
-  all: "Tutte le rubriche",
-  settimanale: "Rubriche settimanali",
-  mensile: "Rubriche mensili",
-};
-
 export default function StellaPolare() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<CategoryFilter>("all");
+  const { t } = useLanguage();
+
+  const categoryLabels: Record<CategoryFilter, string> = {
+    all: t('stellapolare.all'),
+    settimanale: t('stellapolare.weekly'),
+    mensile: t('stellapolare.monthly'),
+  };
 
   useEffect(() => {
     const fetchArticles = async () => {
