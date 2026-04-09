@@ -6,6 +6,7 @@ import { ExternalLink, FileText, Loader2, Youtube, ChevronDown } from "lucide-re
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import stellaPolareHero from "@/assets/stella-polare-hero.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
