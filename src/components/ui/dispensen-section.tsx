@@ -20,17 +20,10 @@ interface Handout {
 
 export const DispensenSection = () => {
   const { t } = useLanguage();
-  const [selectedYear, setSelectedYear] = useState("First Year");
   const [handouts, setHandouts] = useState<Handout[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  const yearOptions = [
-    { key: "First Year", display: t('handouts.firstYear'), route: "/dispense/primo-anno" },
-    { key: "Second Year", display: t('handouts.secondYear'), route: "/dispense/secondo-anno" },
-    { key: "Third Year", display: t('handouts.thirdYear'), route: "/dispense/terzo-anno" }
-  ];
 
   useEffect(() => {
     if (searchTerm.trim()) {
@@ -38,7 +31,7 @@ export const DispensenSection = () => {
     } else {
       fetchHandouts();
     }
-  }, [selectedYear, searchTerm]);
+  }, [searchTerm]);
 
   const fetchHandouts = async () => {
     setLoading(true);
@@ -46,9 +39,8 @@ export const DispensenSection = () => {
       const { data, error } = await supabase
         .from('handouts')
         .select('*')
-        .eq('year', selectedYear)
         .order('uploaded_at', { ascending: false })
-        .limit(3);
+        .limit(6);
 
       if (error) {
         console.error('Error fetching handouts:', error);
