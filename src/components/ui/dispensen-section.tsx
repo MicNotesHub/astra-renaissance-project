@@ -80,12 +80,6 @@ export const DispensenSection = () => {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('it-IT');
-  };
-
-  const selectedYearOption = yearOptions.find(option => option.key === selectedYear);
-
   return (
     <section id="dispensen" className="py-12 bg-gradient-subtle">
       <div className="container mx-auto px-4">
@@ -124,39 +118,12 @@ export const DispensenSection = () => {
           </div>
         </motion.div>
 
-        {/* Year Selection */}
-        {!isSearching && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.6, delay: 0.4 }} 
-            className="mb-8 flex flex-wrap gap-4 items-center justify-center"
-          >
-            {yearOptions.map(option => (
-              <Button 
-                key={option.key}
-                variant={selectedYear === option.key ? "default" : "outline"} 
-                size="lg"
-                onClick={() => {
-                  setSelectedYear(option.key);
-                  setSearchTerm("");
-                }}
-                className="min-w-[120px]"
-              >
-                {option.display}
-              </Button>
-            ))}
-          </motion.div>
-        )}
-
         {loading ? (
           <div className="text-center py-12">
             <p className="text-muted-foreground">{t('handouts.loading')}</p>
           </div>
         ) : (
           <>
-            {/* Handouts Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {handouts.map((handout, index) => (
                 <motion.div 
@@ -167,40 +134,31 @@ export const DispensenSection = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
                   <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
-                     <CardHeader>
-                       <div className="flex items-start justify-between">
-                         <FileText className="h-8 w-8 text-primary mb-2" />
-                         <Badge variant="secondary">
-                           {isSearching 
-                             ? yearOptions.find(opt => opt.key === handout.year)?.display || handout.year
-                             : selectedYearOption?.display
-                           }
-                         </Badge>
-                       </div>
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <FileText className="h-8 w-8 text-primary mb-2" />
+                        <Badge variant="secondary">{handout.subject}</Badge>
+                      </div>
                       <CardTitle className="group-hover:text-primary transition-colors">
-                        {handout.subject}
+                        {handout.filename}
                       </CardTitle>
-                      <CardDescription>{handout.filename}</CardDescription>
+                      <CardDescription>{handout.year}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-4">
-                        
-                        <Button 
-                          className="w-full flex items-center gap-2 group-hover:bg-primary-light transition-colors"
-                          onClick={() => window.open(handout.file_url, '_blank')}
-                        >
-                          <Download className="h-4 w-4" />
-                          {t('handouts.download')}
-                        </Button>
-                      </div>
+                      <Button 
+                        className="w-full flex items-center gap-2"
+                        onClick={() => window.open(handout.file_url, '_blank')}
+                      >
+                        <Download className="h-4 w-4" />
+                        {t('handouts.download')}
+                      </Button>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </div>
 
-            {/* See More Button */}
-            {handouts.length > 0 && !isSearching && (
+            {handouts.length > 0 && (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
@@ -208,27 +166,11 @@ export const DispensenSection = () => {
                 transition={{ duration: 0.6 }} 
                 className="text-center"
               >
-                <Link to={selectedYearOption?.route || "/dispense"}>
-                  <Button size="lg" className="flex items-center gap-2">
-                    {t('handouts.seeAll')} {selectedYearOption?.display}
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </motion.div>
-            )}
-
-            {/* Search results count or see all dispense button for search */}
-            {isSearching && handouts.length > 0 && (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ duration: 0.6 }} 
-                className="text-center"
-              >
-                <p className="text-muted-foreground mb-4">
-                  {handouts.length} {t('handouts.results')}{handouts.length === 1 ? 'o' : 'i'} {t('handouts.resultsFound')} "{searchTerm}"
-                </p>
+                {isSearching && (
+                  <p className="text-muted-foreground mb-4">
+                    {handouts.length} {t('handouts.results')}{handouts.length === 1 ? 'o' : 'i'} {t('handouts.resultsFound')} "{searchTerm}"
+                  </p>
+                )}
                 <Link to="/dispense">
                   <Button size="lg" className="flex items-center gap-2">
                     {t('handouts.seeAllGeneral')}
@@ -249,7 +191,7 @@ export const DispensenSection = () => {
                 <p className="text-muted-foreground">
                   {isSearching 
                     ? `${t('handouts.noResults')} ${t('handouts.noResultsSearch')} "${searchTerm}".`
-                    : `${t('handouts.noResults')} ${t('handouts.noResultsYear')} ${selectedYearOption?.display}.`
+                    : `${t('handouts.noResults')}.`
                   }
                 </p>
               </motion.div>
