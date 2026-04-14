@@ -63,7 +63,7 @@ const Dispense = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {courses.map((course) => (
               <Link key={course.key} to={`/dispense/${encodeURIComponent(course.key)}`}>
-                <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0">
+                <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
                   {course.cover ? (
                     <div className="relative h-64 overflow-hidden">
                       <img
