@@ -5,22 +5,26 @@ import { FileText, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import bemaccCover from "@/assets/course-covers/bemacc-new.jpg";
-
-interface CourseInfo {
-  key: string;
-  cover?: string;
-}
+import cleaccCover from "@/assets/course-covers/cleacc.jpg";
+import biemCover from "@/assets/course-covers/biem.jpg";
+import bemacsCover from "@/assets/course-covers/bemacs.jpg";
+import biefCover from "@/assets/course-covers/bief.jpg";
+import cleamCover from "@/assets/course-covers/cleam.jpg";
+import clmgCover from "@/assets/course-covers/clmg.jpg";
+import bglCover from "@/assets/course-covers/bgl.jpg";
+import baiCover from "@/assets/course-covers/bai.jpg";
 
 const courses: CourseInfo[] = [
-  { key: "BIEM" },
-  { key: "CLEAM" },
-  { key: "BIEF" },
-  { key: "BAI" },
+  { key: "BIEM", cover: biemCover },
+  { key: "CLEAM", cover: cleamCover },
+  { key: "BIEF", cover: biefCover },
+  { key: "BAI", cover: baiCover },
   { key: "BEMACC", cover: bemaccCover },
-  { key: "BEMACS" },
-  { key: "BGL" },
+  { key: "BEMACS", cover: bemacsCover },
+  { key: "BGL", cover: bglCover },
   { key: "BIG" },
-  { key: "CLEACC" },
+  { key: "CLEACC", cover: cleaccCover },
+  { key: "CLMG", cover: clmgCover },
 ];
 
 const Dispense = () => {
