@@ -659,16 +659,9 @@ const translations = {
 
     // Dispense Section
     'dispense.title': 'University Handouts',
-    'dispense.subtitle': 'Access handouts organized by academic year. Study materials shared by the student community.',
-    'dispense.firstYear': 'First Year',
-    'dispense.firstYearDesc': 'Materials for first year courses',
-    'dispense.secondYear': 'Second Year', 
-    'dispense.secondYearDesc': 'Materials for second year courses',
-    'dispense.thirdYear': 'Third Year',
-    'dispense.thirdYearDesc': 'Materials for third year courses',
-    'dispense.clmg': 'CLMG',
-    'dispense.clmgDesc': 'Materials for the Law degree program (5 years)',
+    'dispense.subtitle': 'Access handouts organized by course. Study materials shared by the student community.',
     'dispense.accessHandouts': 'Access Handouts',
+    'dispense.selectYear': 'Select the academic year to view available handouts',
     
     // CLMG Section
     'clmg.title': 'CLMG - Law',
@@ -703,9 +696,7 @@ const translations = {
     'womensDay.cta': 'Read the Article',
 
     // CourseHandouts
-    'courseHandouts.backFirstYear': 'Back to First Year',
-    'courseHandouts.backSecondYear': 'Back to Second Year',
-    'courseHandouts.backThirdYear': 'Back to Third Year',
+    'courseHandouts.backToCourse': 'Back to Course',
     'courseHandouts.availableHandouts': 'Available handouts for this course',
     'courseHandouts.searchPlaceholder': 'Search handouts...',
     'courseHandouts.loading': 'Loading handouts...',
@@ -717,9 +708,12 @@ const translations = {
     'courseHandouts.errorGeneric': 'Error loading handouts',
     'courseHandouts.fileUnavailable': 'File URL not available',
     'courseHandouts.all': 'All',
-    'courseHandouts.semester1': 'Semester 1',
-    'courseHandouts.semester2': 'Semester 2',
-    'courseHandouts.year': 'Year',
+    'courseHandouts.semester1': '1st Semester',
+    'courseHandouts.semester2': '2nd Semester',
+    'courseHandouts.filterSemester': 'Filter by semester',
+    'courseHandouts.filterExamType': 'Filter by exam type',
+    'courseHandouts.parziale': 'Partial',
+    'courseHandouts.generale': 'General',
 
     // Year Pages
     'yearPage.firstYear': 'First Year',
