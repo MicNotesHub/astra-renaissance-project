@@ -69,8 +69,8 @@ const Dispense = () => {
                     </div>
                   ) : (
                     <CardContent className="p-8 text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <FileText className="w-8 h-8 text-primary" />
+                    <div className="w-24 h-24 mx-auto mb-4 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <FileText className="w-12 h-12 text-primary" />
                       </div>
                       <h3 className="text-xl font-semibold">{course.key}</h3>
                     </CardContent>
