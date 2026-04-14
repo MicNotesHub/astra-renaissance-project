@@ -4,7 +4,6 @@ import { DispensenSection } from "@/components/ui/dispensen-section";
 import { MasterResultsSection } from "@/components/ui/master-results-section";
 import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
 import { FreeAtBSection } from "@/components/ui/freeatb-section";
-import { EventiSection } from "@/components/ui/eventi-section";
 import { Footer } from "@/components/ui/footer";
 
 const Index = () => {
@@ -17,7 +16,6 @@ const Index = () => {
       <DispensenSection />
       <CalcolatoriSection />
       <FreeAtBSection />
-      <EventiSection />
       <Footer />
     </div>
   );
