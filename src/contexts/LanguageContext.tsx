@@ -286,16 +286,9 @@ const translations = {
 
     // Dispense Section
     'dispense.title': 'Dispense Universitarie',
-    'dispense.subtitle': 'Accedi alle dispense organizzate per anno accademico. Materiali di studio condivisi dalla comunità studentesca.',
-    'dispense.firstYear': 'Primo Anno',
-    'dispense.firstYearDesc': 'Materiali per i corsi del primo anno',
-    'dispense.secondYear': 'Secondo Anno',
-    'dispense.secondYearDesc': 'Materiali per i corsi del secondo anno',
-    'dispense.thirdYear': 'Terzo Anno',
-    'dispense.thirdYearDesc': 'Materiali per i corsi del terzo anno',
-    'dispense.clmg': 'CLMG',
-    'dispense.clmgDesc': 'Materiali per il corso di Giurisprudenza (5 anni)',
+    'dispense.subtitle': 'Accedi alle dispense organizzate per corso. Materiali di studio condivisi dalla comunità studentesca.',
     'dispense.accessHandouts': 'Accedi alle Dispense',
+    'dispense.selectYear': 'Seleziona l\'anno accademico per visualizzare le dispense disponibili',
 
     // CLMG Section
     'clmg.title': 'CLMG - Giurisprudenza',
@@ -342,9 +335,7 @@ const translations = {
     'freeatb.cta.button': 'Vai a Free@B',
 
     // CourseHandouts
-    'courseHandouts.backFirstYear': 'Torna al Primo Anno',
-    'courseHandouts.backSecondYear': 'Torna al Secondo Anno',
-    'courseHandouts.backThirdYear': 'Torna al Terzo Anno',
+    'courseHandouts.backToCourse': 'Torna al Corso',
     'courseHandouts.availableHandouts': 'Dispense disponibili per questo corso',
     'courseHandouts.searchPlaceholder': 'Cerca dispense...',
     'courseHandouts.loading': 'Caricamento dispense...',
@@ -356,9 +347,12 @@ const translations = {
     'courseHandouts.errorGeneric': 'Errore nel caricamento delle dispense',
     'courseHandouts.fileUnavailable': 'URL del file non disponibile',
     'courseHandouts.all': 'Tutti',
-    'courseHandouts.semester1': 'Semestre 1',
-    'courseHandouts.semester2': 'Semestre 2',
-    'courseHandouts.year': 'Anno',
+    'courseHandouts.semester1': '1° Semestre',
+    'courseHandouts.semester2': '2° Semestre',
+    'courseHandouts.filterSemester': 'Filtra per semestre',
+    'courseHandouts.filterExamType': 'Filtra per tipo di esame',
+    'courseHandouts.parziale': 'Parziale',
+    'courseHandouts.generale': 'Generale',
 
     // Year Pages
     'yearPage.firstYear': 'Primo Anno',
