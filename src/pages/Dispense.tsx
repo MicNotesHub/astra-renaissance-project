@@ -54,7 +54,7 @@ const Dispense = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {courses.map((course) => (
               <Link key={course.key} to={`/dispense/${encodeURIComponent(course.key)}`}>
-                <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full">
+                <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0">
                   {course.cover ? (
                     <div className="relative h-64 overflow-hidden">
                       <img
@@ -67,9 +67,9 @@ const Dispense = () => {
                         <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-4">
                           {course.key}
                         </h3>
-                        <Button variant="ghost" className="text-white hover:bg-white/20 hover:text-white border border-white/30">
+                        <span className="text-white/80 text-sm border border-white/30 rounded-md px-4 py-2">
                           {t('dispense.accessHandouts')}
-                        </Button>
+                        </span>
                       </div>
                     </div>
                   ) : (
