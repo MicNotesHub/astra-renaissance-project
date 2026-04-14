@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FileText, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import bemaccCover from "@/assets/course-covers/bemacc.jpg";
+import bemaccCover from "@/assets/course-covers/bemacc-new.jpg";
 
 interface CourseInfo {
   key: string;
