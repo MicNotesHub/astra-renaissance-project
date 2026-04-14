@@ -14,6 +14,11 @@ import clmgCover from "@/assets/course-covers/clmg.jpg";
 import bglCover from "@/assets/course-covers/bgl.jpg";
 import baiCover from "@/assets/course-covers/bai.jpg";
 
+interface CourseInfo {
+  key: string;
+  cover?: string;
+}
+
 const courses: CourseInfo[] = [
   { key: "BIEM", cover: biemCover },
   { key: "CLEAM", cover: cleamCover },
