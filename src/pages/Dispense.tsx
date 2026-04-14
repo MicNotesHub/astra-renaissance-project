@@ -56,38 +56,36 @@ const Dispense = () => {
               <Link key={course.key} to={`/dispense/${encodeURIComponent(course.key)}`}>
                 <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full">
                   {course.cover ? (
-                    <div className="relative h-40 overflow-hidden">
+                    <div className="relative h-64 overflow-hidden">
                       <img
                         src={course.cover}
                         alt={course.key}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                      <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white drop-shadow-lg">
-                        {course.key}
-                      </h3>
+                      <div className="absolute inset-0 bg-black/40" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                        <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-4">
+                          {course.key}
+                        </h3>
+                        <Button variant="outline" className="border-white text-white hover:bg-white/20 hover:text-white">
+                          {t('dispense.accessHandouts')}
+                        </Button>
+                      </div>
                     </div>
                   ) : (
+                    <>
                     <CardContent className="p-8 text-center">
-                    <div className="w-24 h-24 mx-auto mb-4 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <div className="w-24 h-24 mx-auto mb-4 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         <FileText className="w-12 h-12 text-primary" />
                       </div>
                       <h3 className="text-xl font-semibold">{course.key}</h3>
                     </CardContent>
-                  )}
-                  {course.cover && (
-                    <CardContent className="p-4 text-center">
-                      <Button variant="outline" className="w-full">
-                        {t('dispense.accessHandouts')}
-                      </Button>
-                    </CardContent>
-                  )}
-                  {!course.cover && (
                     <CardContent className="px-8 pb-8 pt-0 text-center">
                       <Button variant="outline" className="w-full">
                         {t('dispense.accessHandouts')}
                       </Button>
                     </CardContent>
+                    </>
                   )}
                 </Card>
               </Link>
