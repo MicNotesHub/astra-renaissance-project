@@ -16,8 +16,8 @@ const Index = () => {
       <MasterResultsSection />
       <DispensenSection />
       <CalcolatoriSection />
-      <FreeAtBSection />
       <MarketplaceSection />
+      <FreeAtBSection />
       <Footer />
     </div>
   );
