@@ -548,6 +548,7 @@ export type Database = {
       }
       handouts: {
         Row: {
+          exam_type: string | null
           file_url: string
           filename: string
           id: number
@@ -557,6 +558,7 @@ export type Database = {
           year: string
         }
         Insert: {
+          exam_type?: string | null
           file_url: string
           filename: string
           id?: number
@@ -566,6 +568,7 @@ export type Database = {
           year: string
         }
         Update: {
+          exam_type?: string | null
           file_url?: string
           filename?: string
           id?: number

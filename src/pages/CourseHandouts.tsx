@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { FileText, Download, ArrowLeft, Search } from "lucide-react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -17,42 +17,40 @@ interface HandoutFile {
   file_url: string;
   uploaded_at: string;
   semester: number | null;
+  exam_type: string | null;
 }
 
+const slugToYear: Record<string, string> = {
+  "primo-anno": "First Year",
+  "secondo-anno": "Second Year",
+  "terzo-anno": "Third Year",
+};
+
 const CourseHandouts = () => {
-  const { courseName } = useParams<{ courseName: string }>();
-  const location = useLocation();
+  const { courseName, year: yearSlug } = useParams<{ courseName: string; year: string }>();
   const [files, setFiles] = useState<HandoutFile[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [semesterFilter, setSemesterFilter] = useState<number | null>(null);
+  const [examTypeFilter, setExamTypeFilter] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const { t } = useLanguage();
-
-  const filteredFiles = files.filter(f => {
-    const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSemester = semesterFilter === null || (f as any).semester === semesterFilter;
-    return matchesSearch && matchesSemester;
-  });
+  const { t, language } = useLanguage();
   const { toast } = useToast();
 
   const decodedCourseName = courseName ? decodeURIComponent(courseName) : '';
-  
-  const isSecondYear = location.pathname.includes('/secondo-anno');
-  const isThirdYear = location.pathname.includes('/terzo-anno');
-  
-  let yearFilter = 'First Year';
-  let backLink = '/dispense/primo-anno';
-  let backTextKey = 'courseHandouts.backFirstYear';
-  
-  if (isSecondYear) {
-    yearFilter = 'Second Year';
-    backLink = '/dispense/secondo-anno';
-    backTextKey = 'courseHandouts.backSecondYear';
-  } else if (isThirdYear) {
-    yearFilter = 'Third Year';
-    backLink = '/dispense/terzo-anno';
-    backTextKey = 'courseHandouts.backThirdYear';
-  }
+  const yearFilter = yearSlug ? slugToYear[yearSlug] || "First Year" : "First Year";
+
+  const yearDisplayMap: Record<string, string> = {
+    "First Year": language === 'it' ? "Primo Anno" : "First Year",
+    "Second Year": language === 'it' ? "Secondo Anno" : "Second Year",
+    "Third Year": language === 'it' ? "Terzo Anno" : "Third Year",
+  };
+
+  const filteredFiles = files.filter(f => {
+    const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSemester = semesterFilter === null || f.semester === semesterFilter;
+    const matchesExamType = examTypeFilter === null || f.exam_type === examTypeFilter;
+    return matchesSearch && matchesSemester && matchesExamType;
+  });
 
   useEffect(() => {
     if (decodedCourseName) {
@@ -60,7 +58,13 @@ const CourseHandouts = () => {
     }
   }, [decodedCourseName, yearFilter]);
 
+  // Reset exam type when semester changes
+  useEffect(() => {
+    setExamTypeFilter(null);
+  }, [semesterFilter]);
+
   const fetchCourseHandouts = async () => {
+    setLoading(true);
     try {
       const { data, error } = await supabase
         .from('handouts' as any)
@@ -71,22 +75,13 @@ const CourseHandouts = () => {
 
       if (error) {
         console.error('Error fetching handouts:', error);
-        toast({
-          title: t('common.error'),
-          description: t('courseHandouts.errorLoading'),
-          variant: "destructive"
-        });
+        toast({ title: t('common.error'), description: t('courseHandouts.errorLoading'), variant: "destructive" });
         return;
       }
 
       setFiles((data as any[]) || []);
     } catch (error) {
       console.error('Error:', error);
-      toast({
-        title: t('common.error'),
-        description: t('courseHandouts.errorGeneric'),
-        variant: "destructive"
-      });
     } finally {
       setLoading(false);
     }
@@ -94,51 +89,35 @@ const CourseHandouts = () => {
 
   const handleFileClick = async (fileUrl: string | null) => {
     if (!fileUrl) {
-      toast({
-        title: t('common.error'),
-        description: t('courseHandouts.fileUnavailable'),
-        variant: "destructive"
-      });
+      toast({ title: t('common.error'), description: t('courseHandouts.fileUnavailable'), variant: "destructive" });
       return;
     }
-
     try {
       if (fileUrl.includes('handouts-bucket')) {
         const fileName = fileUrl.split('/').pop() || '';
-        const { data, error } = await supabase.storage
-          .from('handouts-bucket')
-          .createSignedUrl(fileName, 315360000);
-
-        if (error) {
-          console.error('Error creating signed URL:', error);
-          window.open(fileUrl, '_blank');
+        const { data, error } = await supabase.storage.from('handouts-bucket').createSignedUrl(fileName, 315360000);
+        if (!error && data?.signedUrl) {
+          window.open(data.signedUrl, '_blank');
           return;
         }
-
-        if (data?.signedUrl) {
-          window.open(data.signedUrl, '_blank');
-        } else {
-          window.open(fileUrl, '_blank');
-        }
-      } else {
-        window.open(fileUrl, '_blank');
       }
-    } catch (error) {
-      console.error('Error:', error);
+      window.open(fileUrl, '_blank');
+    } catch {
       window.open(fileUrl, '_blank');
     }
   };
+
+  // Check if exam type options exist for current semester filter
+  const hasExamTypes = semesterFilter !== null && files.some(f => f.semester === semesterFilter && f.exam_type);
+
+  const backLink = `/dispense/${encodeURIComponent(decodedCourseName)}`;
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
         <Navigation />
-        <div className="pt-24 pb-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <p className="text-lg">{t('courseHandouts.loading')}</p>
-            </div>
-          </div>
+        <div className="pt-24 pb-16 text-center">
+          <p className="text-lg">{t('courseHandouts.loading')}</p>
         </div>
       </div>
     );
@@ -147,28 +126,25 @@ const CourseHandouts = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
       <Navigation />
-      
       <div className="pt-24 pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex items-center mb-6">
-              <Link to={backLink} className="mr-6">
-                <Button variant="outline" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  {t(backTextKey)}
-                </Button>
-              </Link>
-            </div>
-            <h1 className="text-4xl font-bold text-foreground mb-4">
-              {decodedCourseName}
+            <Link to={backLink} className="mb-6 inline-block">
+              <Button variant="outline" size="sm">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                {t('courseHandouts.backToCourse')}
+              </Button>
+            </Link>
+            <h1 className="text-4xl font-bold text-foreground mb-2">
+              {decodedCourseName} — {yearDisplayMap[yearFilter]}
             </h1>
             <p className="text-lg text-muted-foreground">
               {t('courseHandouts.availableHandouts')}
             </p>
           </div>
 
-          {/* Search Bar */}
+          {/* Search */}
           <div className="relative mb-6 max-w-md">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
@@ -180,16 +156,16 @@ const CourseHandouts = () => {
           </div>
 
           {/* Semester Filter */}
-          {!(isThirdYear && decodedCourseName.toUpperCase().includes('BIEF')) && 
-           !decodedCourseName.toUpperCase().includes('ELECTIVE') && (
-            <div className="flex gap-2 mb-6">
+          <div className="mb-4">
+            <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterSemester')}</p>
+            <div className="flex gap-2">
               {[
                 { label: t('courseHandouts.all'), value: null },
                 { label: t('courseHandouts.semester1'), value: 1 },
                 { label: t('courseHandouts.semester2'), value: 2 },
               ].map((opt) => (
                 <Button
-                  key={opt.label}
+                  key={String(opt.value)}
                   variant={semesterFilter === opt.value ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSemesterFilter(opt.value)}
@@ -198,7 +174,32 @@ const CourseHandouts = () => {
                 </Button>
               ))}
             </div>
+          </div>
+
+          {/* Exam Type Filter - shows only when a semester is selected and exam types exist */}
+          {hasExamTypes && (
+            <div className="mb-6">
+              <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterExamType')}</p>
+              <div className="flex gap-2">
+                {[
+                  { label: t('courseHandouts.all'), value: null },
+                  { label: t('courseHandouts.parziale'), value: "parziale" },
+                  { label: t('courseHandouts.generale'), value: "generale" },
+                ].map((opt) => (
+                  <Button
+                    key={String(opt.value)}
+                    variant={examTypeFilter === opt.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setExamTypeFilter(opt.value)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
           )}
+
+          {/* Files */}
           {filteredFiles.length === 0 ? (
             <div className="text-center py-12">
               <FileText className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
@@ -232,9 +233,6 @@ const CourseHandouts = () => {
                           <h4 className="font-medium group-hover:text-primary transition-colors">
                             {file.filename}
                           </h4>
-                          <p className="text-sm text-muted-foreground">
-                            PDF • {t('courseHandouts.year')}: {file.year}
-                          </p>
                         </div>
                       </div>
                       <Download className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />

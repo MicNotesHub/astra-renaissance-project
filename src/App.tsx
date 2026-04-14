@@ -11,9 +11,7 @@ import NotFound from "./pages/NotFound";
 import Dispense from "./pages/Dispense";
 import ChiSiamo from "./pages/ChiSiamo";
 import Rappresentanti from "./pages/Rappresentanti";
-import { PrimoAnno } from "./pages/PrimoAnno";
-import { SecondoAnno } from "./pages/SecondoAnno";
-import { TerzoAnno } from "./pages/TerzoAnno";
+import CourseYears from "./pages/CourseYears";
 import CourseHandouts from "./pages/CourseHandouts";
 import Guide from "./pages/Guide";
 import GuideCategory from "./pages/GuideCategory";
@@ -27,7 +25,6 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Extract PDF content on app load
     extractPdfContent().catch(error => {
       console.error('PDF extraction failed:', error);
     });
@@ -47,14 +44,10 @@ const App = () => {
               <Route path="/calcolatori" element={<Calcolatori />} />
               <Route path="/exchange" element={<ExchangeEmbed />} />
               <Route path="/dispense" element={<Dispense />} />
-              <Route path="/dispense/primo-anno" element={<PrimoAnno />} />
-              <Route path="/dispense/primo-anno/:courseName" element={<CourseHandouts />} />
-              <Route path="/dispense/secondo-anno" element={<SecondoAnno />} />
-              <Route path="/dispense/secondo-anno/:courseName" element={<CourseHandouts />} />
-              <Route path="/dispense/terzo-anno" element={<TerzoAnno />} />
-              <Route path="/dispense/terzo-anno/:courseName" element={<CourseHandouts />} />
               <Route path="/dispense/clmg" element={<CLMGDispense />} />
               <Route path="/dispense/clmg/:year" element={<CLMGYearHandouts />} />
+              <Route path="/dispense/:courseName" element={<CourseYears />} />
+              <Route path="/dispense/:courseName/:year" element={<CourseHandouts />} />
               <Route path="/guide" element={<Guide />} />
               <Route path="/guide/:category" element={<GuideCategory />} />
               <Route path="/stella-polare" element={<StellaPolare />} />

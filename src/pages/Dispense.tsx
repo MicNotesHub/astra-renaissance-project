@@ -1,9 +1,27 @@
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileText, ArrowLeft, ExternalLink } from "lucide-react";
+import { FileText, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import bemaccCover from "@/assets/course-covers/bemacc.jpg";
+
+interface CourseInfo {
+  key: string;
+  cover?: string;
+}
+
+const courses: CourseInfo[] = [
+  { key: "BIEM" },
+  { key: "CLEAM" },
+  { key: "BIEF" },
+  { key: "BAI" },
+  { key: "BEMACC", cover: bemaccCover },
+  { key: "BEMACS" },
+  { key: "BGL" },
+  { key: "BIG" },
+  { key: "CLEACC" },
+];
 
 const Dispense = () => {
   const { t } = useLanguage();
@@ -32,81 +50,49 @@ const Dispense = () => {
             </p>
           </div>
 
-          {/* Year Selection Cards and CLMG */}
-          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {/* First Year Card */}
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <FileText className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{t('dispense.firstYear')}</h3>
-                <p className="text-muted-foreground mb-6">
-                  {t('dispense.firstYearDesc')}
-                </p>
-                <Link to="/dispense/primo-anno">
-                  <Button className="w-full">
-                    {t('dispense.accessHandouts')}
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* Second Year Card */}
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <FileText className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{t('dispense.secondYear')}</h3>
-                <p className="text-muted-foreground mb-6">
-                  {t('dispense.secondYearDesc')}
-                </p>
-                <Link to="/dispense/secondo-anno">
-                  <Button className="w-full">
-                    {t('dispense.accessHandouts')}
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* Third Year Card */}
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <FileText className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{t('dispense.thirdYear')}</h3>
-                <p className="text-muted-foreground mb-6">
-                  {t('dispense.thirdYearDesc')}
-                </p>
-                <Link to="/dispense/terzo-anno">
-                  <Button className="w-full">
-                    {t('dispense.accessHandouts')}
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* CLMG Card */}
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-br from-primary/5 to-primary/10">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                  <FileText className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{t('dispense.clmg')}</h3>
-                <p className="text-muted-foreground mb-6">
-                  {t('dispense.clmgDesc')}
-                </p>
-                <Link to="/dispense/clmg">
-                  <Button className="w-full" variant="outline">
-                    {t('dispense.accessHandouts')}
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+          {/* Course Cards Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {courses.map((course) => (
+              <Link key={course.key} to={`/dispense/${encodeURIComponent(course.key)}`}>
+                <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full">
+                  {course.cover ? (
+                    <div className="relative h-40 overflow-hidden">
+                      <img
+                        src={course.cover}
+                        alt={course.key}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                      <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white drop-shadow-lg">
+                        {course.key}
+                      </h3>
+                    </div>
+                  ) : (
+                    <CardContent className="p-8 text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <FileText className="w-8 h-8 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold">{course.key}</h3>
+                    </CardContent>
+                  )}
+                  {course.cover && (
+                    <CardContent className="p-4 text-center">
+                      <Button variant="outline" className="w-full">
+                        {t('dispense.accessHandouts')}
+                      </Button>
+                    </CardContent>
+                  )}
+                  {!course.cover && (
+                    <CardContent className="px-8 pb-8 pt-0 text-center">
+                      <Button variant="outline" className="w-full">
+                        {t('dispense.accessHandouts')}
+                      </Button>
+                    </CardContent>
+                  )}
+                </Card>
+              </Link>
+            ))}
           </div>
-
         </div>
       </div>
     </div>
