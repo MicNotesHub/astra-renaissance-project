@@ -67,7 +67,7 @@ const Dispense = () => {
                         <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-4">
                           {course.key}
                         </h3>
-                        <Button variant="outline" className="border-white text-white hover:bg-white/20 hover:text-white">
+                        <Button variant="ghost" className="text-white hover:bg-white/20 hover:text-white border border-white/30">
                           {t('dispense.accessHandouts')}
                         </Button>
                       </div>
