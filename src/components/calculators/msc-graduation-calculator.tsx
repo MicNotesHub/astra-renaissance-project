@@ -237,7 +237,32 @@ export function MscGraduationCalculator() {
           </CardContent>
         </Card>
 
-        {selectedCourse && (
+        {selectedCourse && TRACK_COURSES[selectedCourse] && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Target className="h-5 w-5" />
+                Seleziona Track
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Select value={selectedTrack} onValueChange={setSelectedTrack}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Scegli il tuo track" />
+                </SelectTrigger>
+                <SelectContent>
+                  {TRACK_COURSES[selectedCourse].tracks.map(track => (
+                    <SelectItem key={track} value={track}>
+                      {track}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+        )}
+
+        {selectedCourse && (!TRACK_COURSES[selectedCourse] || selectedTrack) && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
