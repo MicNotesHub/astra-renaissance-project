@@ -163,9 +163,10 @@ const Guide = () => {
           </div>
 
           {/* Category Selection Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {orderedCategories.map((category, index) => {
               const IconComponent = getCategoryIcon(category);
+              const colorClass = getCategoryColor(category);
               
               return (
                 <motion.div
@@ -174,26 +175,24 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 hover:border-primary/20 h-64 flex flex-col">
-                    <CardContent className="p-6 text-center flex flex-col h-full gap-3">
-                      <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center group-hover:from-primary/15 group-hover:to-primary/10 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
-                        <IconComponent className="w-10 h-10 text-primary group-hover:text-primary/90 transition-colors" />
+                  <Link to={`/guide/${category}`}>
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
+                      <div className={`relative h-64 overflow-hidden ${colorClass}`}>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                          <IconComponent className="w-12 h-12 mb-3 opacity-90" />
+                          <h3 className="text-2xl font-bold drop-shadow-lg mb-1 text-center">
+                            {getCategoryTitle(category)}
+                          </h3>
+                          <p className="text-sm opacity-80 text-center mb-4 px-2">
+                            {getCategoryDescription(category)}
+                          </p>
+                          <span className="text-sm border border-current/30 rounded-md px-4 py-2 opacity-80">
+                            {t('guide.explore')}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex-1 flex flex-col justify-center min-h-0">
-                        <h3 className="text-lg font-semibold mb-2">
-                          {getCategoryTitle(category)}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {getCategoryDescription(category)}
-                        </p>
-                      </div>
-                      <Link to={`/guide/${category}`} className="flex-shrink-0">
-                        <Button className="w-full">
-                          {t('guide.explore')}
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
+                    </Card>
+                  </Link>
                 </motion.div>
               );
             })}
