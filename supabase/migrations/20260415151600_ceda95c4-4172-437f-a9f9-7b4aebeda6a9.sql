@@ -1,0 +1,1 @@
+DELETE FROM handouts WHERE id = 158;
