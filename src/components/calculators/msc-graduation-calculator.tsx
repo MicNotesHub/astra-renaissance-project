@@ -28,9 +28,27 @@ interface ExamGrade {
   isSeminar: boolean;
 }
 
+// Track definitions: maps course to track options and their exclusive subjects
+const TRACK_COURSES: Record<string, { tracks: string[]; subjectTrackMap: Record<string, string> }> = {
+  'DSBA': {
+    tracks: ['Business Analytics', 'Data Science'],
+    subjectTrackMap: {
+      'Innovation and Marketing Analytics': 'Business Analytics',
+      'Simulation and Modeling': 'Business Analytics',
+      'Finance with Big Data': 'Business Analytics',
+      'Deep Learning for Computer Vision': 'Business Analytics',
+      'Optimization': 'Data Science',
+      'Computer Science (algorithms)': 'Data Science',
+      'Stochastic Processes': 'Data Science',
+      'Machine Learning II': 'Data Science',
+    }
+  }
+};
+
 export function MscGraduationCalculator() {
   const [courses, setCourses] = useState<string[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<string>("");
+  const [selectedTrack, setSelectedTrack] = useState<string>("");
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [examGrades, setExamGrades] = useState<ExamGrade[]>([]);
   const [thesisPoints, setThesisPoints] = useState<number>(0);
@@ -62,8 +80,16 @@ export function MscGraduationCalculator() {
     fetchCourses();
   }, [toast]);
 
+  // Reset track when course changes
+  useEffect(() => {
+    setSelectedTrack("");
+  }, [selectedCourse]);
+
   useEffect(() => {
     if (!selectedCourse) return;
+    // For track courses, wait until a track is selected
+    const trackConfig = TRACK_COURSES[selectedCourse];
+    if (trackConfig && !selectedTrack) return;
 
     const fetchSubjects = async () => {
       setLoading(true);
@@ -76,12 +102,23 @@ export function MscGraduationCalculator() {
 
         if (error) throw error;
 
+        const trackConfig = TRACK_COURSES[selectedCourse];
+
         const fetchedSubjects: Subject[] = data?.filter(item => {
           const subjectName = item.subject?.toLowerCase() || '';
-          return !subjectName.includes('tesi') &&
-                 !subjectName.includes('final paper') &&
-                 !subjectName.includes('thesis') &&
-                 !subjectName.includes('elaborato finale');
+          // Filter out thesis
+          if (subjectName.includes('tesi') || subjectName.includes('final paper') ||
+              subjectName.includes('thesis') || subjectName.includes('elaborato finale')) {
+            return false;
+          }
+          // Filter by track if applicable
+          if (trackConfig && selectedTrack) {
+            const subjectTrack = trackConfig.subjectTrackMap[item.subject || ''];
+            if (subjectTrack && subjectTrack !== selectedTrack) {
+              return false;
+            }
+          }
+          return true;
         }).map(item => ({
           id: item.id,
           subject: item.subject || '',
@@ -112,7 +149,7 @@ export function MscGraduationCalculator() {
     };
 
     fetchSubjects();
-  }, [selectedCourse, toast]);
+  }, [selectedCourse, selectedTrack, toast]);
 
   const updateExamGrade = (id: number, field: keyof ExamGrade, value: any) => {
     setExamGrades(prev => prev.map(exam =>
@@ -200,7 +237,32 @@ export function MscGraduationCalculator() {
           </CardContent>
         </Card>
 
-        {selectedCourse && (
+        {selectedCourse && TRACK_COURSES[selectedCourse] && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Target className="h-5 w-5" />
+                Seleziona Track
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Select value={selectedTrack} onValueChange={setSelectedTrack}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Scegli il tuo track" />
+                </SelectTrigger>
+                <SelectContent>
+                  {TRACK_COURSES[selectedCourse].tracks.map(track => (
+                    <SelectItem key={track} value={track}>
+                      {track}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+        )}
+
+        {selectedCourse && (!TRACK_COURSES[selectedCourse] || selectedTrack) && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -368,7 +430,7 @@ export function MscGraduationCalculator() {
           </motion.div>
         )}
 
-        {selectedCourse && !loading && (
+        {selectedCourse && (!TRACK_COURSES[selectedCourse] || selectedTrack) && !loading && (
           <Card id="msc-exams-section">
             <CardHeader>
               <CardTitle>Esami - {selectedCourse}</CardTitle>
