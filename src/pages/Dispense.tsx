@@ -13,6 +13,7 @@ import cleamCover from "@/assets/course-covers/cleam.jpg";
 import clmgCover from "@/assets/course-covers/clmg.jpg";
 import bglCover from "@/assets/course-covers/bgl.jpg";
 import baiCover from "@/assets/course-covers/bai.jpg";
+import bigCover from "@/assets/course-covers/big.jpg";
 
 interface CourseInfo {
   key: string;
@@ -27,7 +28,7 @@ const courses: CourseInfo[] = [
   { key: "BEMACC", cover: bemaccCover },
   { key: "BEMACS", cover: bemacsCover },
   { key: "BGL", cover: bglCover },
-  { key: "BIG" },
+  { key: "BIG", cover: bigCover },
   { key: "CLEACC", cover: cleaccCover },
   { key: "CLMG", cover: clmgCover },
 ];
