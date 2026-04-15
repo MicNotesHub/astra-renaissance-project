@@ -138,6 +138,7 @@ const Guide = () => {
   const categoryOrder = [
     'funding',
     'residenze',
+    'tesi',
     'linkedin',
     'associations',
     'opzionali', 
@@ -151,7 +152,6 @@ const Guide = () => {
     'milan',
     'burocrazia',
     'master_admissions',
-    'tesi',
     'ecdl',
   ];
 
