@@ -80,8 +80,16 @@ export function MscGraduationCalculator() {
     fetchCourses();
   }, [toast]);
 
+  // Reset track when course changes
+  useEffect(() => {
+    setSelectedTrack("");
+  }, [selectedCourse]);
+
   useEffect(() => {
     if (!selectedCourse) return;
+    // For track courses, wait until a track is selected
+    const trackConfig = TRACK_COURSES[selectedCourse];
+    if (trackConfig && !selectedTrack) return;
 
     const fetchSubjects = async () => {
       setLoading(true);
