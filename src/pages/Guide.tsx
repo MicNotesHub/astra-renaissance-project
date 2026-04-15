@@ -114,6 +114,7 @@ const Guide = () => {
   
   const categoryOrder = [
     'funding',
+    'residenze',
     'linkedin',
     'associations',
     'opzionali', 
@@ -121,7 +122,6 @@ const Guide = () => {
     'stage',
     'spring weeks',
     'freemover',
-    'residenze',
     'exchange_magistrale',
     'exchange_triennale',
     'university',
