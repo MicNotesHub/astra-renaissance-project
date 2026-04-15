@@ -16,7 +16,7 @@ const categoryCoverMap: Record<string, string> = {
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
-const directDownloadCategories: Record<string, { it: string; en: string }> = {
+const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   'funding': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
@@ -32,6 +32,9 @@ const directDownloadCategories: Record<string, { it: string; en: string }> = {
   'opzionali': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/OPZIONALI.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/ELECTIVES-GUIDE_merged.pdf',
+  },
+  'graduate': {
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/graduate/Guida-Magistrali.pdf',
   },
 };
 
