@@ -15,6 +15,14 @@ const categoryCoverMap: Record<string, string> = {
   'residenze': residenzeCover,
 };
 
+// Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
+const directDownloadCategories: Record<string, { it: string; en: string }> = {
+  'funding': {
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
+  },
+};
+
 interface Guide {
   id: string;
   title: string;
