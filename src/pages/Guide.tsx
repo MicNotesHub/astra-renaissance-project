@@ -160,7 +160,7 @@ const Guide = () => {
     'linkedin',
     'associations',
     'opzionali', 
-    'graduate',
+    
     'stage',
     'spring weeks',
     'freemover',
