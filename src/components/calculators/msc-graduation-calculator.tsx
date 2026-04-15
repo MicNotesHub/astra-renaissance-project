@@ -149,7 +149,7 @@ export function MscGraduationCalculator() {
     };
 
     fetchSubjects();
-  }, [selectedCourse, toast]);
+  }, [selectedCourse, selectedTrack, toast]);
 
   const updateExamGrade = (id: number, field: keyof ExamGrade, value: any) => {
     setExamGrades(prev => prev.map(exam =>
