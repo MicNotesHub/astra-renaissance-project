@@ -1,6 +1,26 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { FileText, FileSpreadsheet, ArrowRight } from "lucide-react";
+import { FileSpreadsheet, ArrowRight } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import fundingCover from "@/assets/guide-covers/funding.jpg";
+import residenzeCover from "@/assets/guide-covers/residenze.jpg";
+
+const exchangeCards = [
+  {
+    title: 'Funding',
+    description: 'Guida alle agevolazioni economiche',
+    cover: fundingCover,
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
+  },
+  {
+    title: 'Residenze',
+    description: 'Guida alle residenze universitarie',
+    cover: residenzeCover,
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/residenze/Guida%20Residenze_compressed.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/residenze/Residences%20Guide%20(1).pdf',
+  },
+];
 
 export const MasterResultsSection = () => {
   return (
@@ -29,25 +49,51 @@ export const MasterResultsSection = () => {
             viewport={{ once: true }}
             className="flex justify-center"
           >
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                onClick={() => window.open("https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/exchange%20triennale/University_Brochure%20.pdf", "_blank")}
-                size="lg"
-                className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <FileText className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                <span>Undergrad Brochure</span>
-                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </Button>
-              <Button
-                onClick={() => window.open("https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/exchange%20triennale/ASTRA-Exchange-Guide-UG-ENG-26-27.pdf", "_blank")}
-                size="lg"
-                className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <FileText className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                <span>Undergrad Guide</span>
-                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </Button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl w-full">
+              {exchangeCards.map((card) => (
+                <Card key={card.title} className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden border-0 p-0">
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={card.cover}
+                      alt={card.title}
+                      className="w-full h-full object-cover object-bottom group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                      <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-1 text-center">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm text-white/80 text-center mb-4 px-2">
+                        {card.description}
+                      </p>
+                      <div className="flex items-center gap-4">
+                        {card.it && (
+                          <a
+                            href={card.it}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
+                            title="Italiano"
+                          >
+                            <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
+                          </a>
+                        )}
+                        {card.en && (
+                          <a
+                            href={card.en}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
+                            title="English"
+                          >
+                            <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-full h-full object-cover" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           </motion.div>
         </div>
