@@ -309,7 +309,7 @@ export function MscGraduationCalculator() {
                     <Tooltip>
                       <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                       <TooltipContent className="max-w-xs">
-                        <p>Punti assegnati dalla commissione per la tesi di laurea magistrale (0-7 punti).</p>
+                        <p>Punti assegnati dalla commissione per la tesi di laurea magistrale (0-8 punti).</p>
                       </TooltipContent>
                     </Tooltip>
                   </CardTitle>
