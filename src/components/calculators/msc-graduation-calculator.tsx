@@ -94,12 +94,23 @@ export function MscGraduationCalculator() {
 
         if (error) throw error;
 
+        const trackConfig = TRACK_COURSES[selectedCourse];
+
         const fetchedSubjects: Subject[] = data?.filter(item => {
           const subjectName = item.subject?.toLowerCase() || '';
-          return !subjectName.includes('tesi') &&
-                 !subjectName.includes('final paper') &&
-                 !subjectName.includes('thesis') &&
-                 !subjectName.includes('elaborato finale');
+          // Filter out thesis
+          if (subjectName.includes('tesi') || subjectName.includes('final paper') ||
+              subjectName.includes('thesis') || subjectName.includes('elaborato finale')) {
+            return false;
+          }
+          // Filter by track if applicable
+          if (trackConfig && selectedTrack) {
+            const subjectTrack = trackConfig.subjectTrackMap[item.subject || ''];
+            if (subjectTrack && subjectTrack !== selectedTrack) {
+              return false;
+            }
+          }
+          return true;
         }).map(item => ({
           id: item.id,
           subject: item.subject || '',
