@@ -226,7 +226,7 @@ const translations = {
     'guide.noCategoriesDescription': 'Non sono ancora disponibili guide.',
     
     // Guide Category Titles
-    'category.associations.title': 'Associations 101',
+    'category.associations.title': 'Associations',
     'category.associations.description': 'Scopri le associazioni Bocconi!',
     'category.opzionali.title': 'Opzionali',
     'category.opzionali.description': 'Guide per la scelta dei tuoi opzionali',
@@ -266,7 +266,7 @@ const translations = {
     'guideCategory.subtitle': 'Esplora tutte le guide disponibili per questa categoria',
     'guideCategory.noGuides': 'Nessuna guida trovata',
     'guideCategory.noGuidesDescription': 'Non sono ancora disponibili guide per questa categoria.',
-    'category.associations.pageTitle': 'Associations 101: scopri le associazioni Bocconi!',
+    'category.associations.pageTitle': 'Associations: scopri le associazioni Bocconi!',
     'category.opzionali.pageTitle': 'Opzionali 101: le nostre guide per la scelta dei tuoi opzionali!',
     'category.graduate.pageTitle': 'Graduate 101: le nostre guide per la tua magistrale!',
     'category.stage.pageTitle': 'Stage 101: le nostre guide per il tuo stage!',
@@ -599,7 +599,7 @@ const translations = {
     'guide.noCategoriesDescription': 'No guides are available yet.',
     
     // Guide Category Titles
-    'category.associations.title': 'Associations 101',
+    'category.associations.title': 'Associations',
     'category.associations.description': 'Discover Bocconi associations!',
     'category.opzionali.title': 'Optional Courses',
     'category.opzionali.description': 'Guides for choosing your electives',
@@ -639,7 +639,7 @@ const translations = {
     'guideCategory.subtitle': 'Explore all available guides for this category',
     'guideCategory.noGuides': 'No guides found',
     'guideCategory.noGuidesDescription': 'No guides are available for this category yet.',
-    'category.associations.pageTitle': 'Associations 101: discover Bocconi associations!',
+    'category.associations.pageTitle': 'Associations: discover Bocconi associations!',
     'category.opzionali.pageTitle': 'Optional Courses 101: guides for choosing your electives!',
     'category.graduate.pageTitle': 'Graduate 101: our guides for your Master\'s degree!',
     'category.stage.pageTitle': 'Internship 101: our guides for your internship!',
