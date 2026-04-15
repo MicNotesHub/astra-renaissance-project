@@ -8,9 +8,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import fundingCover from "@/assets/guide-covers/funding.jpg";
+import residenzeCover from "@/assets/guide-covers/residenze.jpg";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
+  'residenze': residenzeCover,
 };
 
 interface Guide {
