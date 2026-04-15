@@ -21,16 +21,16 @@ interface CourseInfo {
 }
 
 const courses: CourseInfo[] = [
-  { key: "BIEM", cover: biemCover },
   { key: "CLEAM", cover: cleamCover },
-  { key: "BIEF", cover: biefCover },
-  { key: "BAI", cover: baiCover },
+  { key: "BIEM", cover: biemCover },
+  { key: "CLEACC", cover: cleaccCover },
   { key: "BEMACC", cover: bemaccCover },
   { key: "BEMACS", cover: bemacsCover },
-  { key: "BGL", cover: bglCover },
+  { key: "BAI", cover: baiCover },
   { key: "BIG", cover: bigCover },
-  { key: "CLEACC", cover: cleaccCover },
+  { key: "BIEF", cover: biefCover },
   { key: "CLMG", cover: clmgCover },
+  { key: "BGL", cover: bglCover },
 ];
 
 const Dispense = () => {
