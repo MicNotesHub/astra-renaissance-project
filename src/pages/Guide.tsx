@@ -16,7 +16,7 @@ const categoryCoverMap: Record<string, string> = {
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
-const directDownloadCategories: Record<string, { it: string; en: string }> = {
+const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   'funding': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
@@ -32,6 +32,9 @@ const directDownloadCategories: Record<string, { it: string; en: string }> = {
   'opzionali': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/OPZIONALI.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/ELECTIVES-GUIDE_merged.pdf',
+  },
+  'graduate': {
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/graduate/Guida-Magistrali.pdf',
   },
 };
 
@@ -220,24 +223,28 @@ const Guide = () => {
                               {getCategoryDescription(category)}
                             </p>
                             <div className="flex items-center gap-4">
-                              <a
-                                href={directDownloadCategories[category].it}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
-                                title="Italiano"
-                              >
-                                <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
-                              </a>
-                              <a
-                                href={directDownloadCategories[category].en}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
-                                title="English"
-                              >
-                                <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-full h-full object-cover" />
-                              </a>
+                              {directDownloadCategories[category].it && (
+                                <a
+                                  href={directDownloadCategories[category].it}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
+                                  title="Italiano"
+                                >
+                                  <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
+                                </a>
+                              )}
+                              {directDownloadCategories[category].en && (
+                                <a
+                                  href={directDownloadCategories[category].en}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
+                                  title="English"
+                                >
+                                  <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-full h-full object-cover" />
+                                </a>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -252,24 +259,28 @@ const Guide = () => {
                               {getCategoryDescription(category)}
                             </p>
                             <div className="flex items-center gap-4">
-                              <a
-                                href={directDownloadCategories[category].it}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
-                                title="Italiano"
-                              >
-                                <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
-                              </a>
-                              <a
-                                href={directDownloadCategories[category].en}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
-                                title="English"
-                              >
-                                <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-full h-full object-cover" />
-                              </a>
+                              {directDownloadCategories[category].it && (
+                                <a
+                                  href={directDownloadCategories[category].it}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
+                                  title="Italiano"
+                                >
+                                  <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
+                                </a>
+                              )}
+                              {directDownloadCategories[category].en && (
+                                <a
+                                  href={directDownloadCategories[category].en}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
+                                  title="English"
+                                >
+                                  <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-full h-full object-cover" />
+                                </a>
+                              )}
                             </div>
                           </div>
                         </div>
