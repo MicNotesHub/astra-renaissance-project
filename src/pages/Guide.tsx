@@ -29,6 +29,10 @@ const directDownloadCategories: Record<string, { it: string; en: string }> = {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20IT.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20EN.pdf',
   },
+  'opzionali': {
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/OPZIONALI.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/ELECTIVES-GUIDE_merged.pdf',
+  },
 };
 
 interface Guide {
