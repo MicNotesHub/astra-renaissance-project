@@ -320,7 +320,7 @@ export function MscGraduationCalculator() {
                       value={[thesisPoints]}
                       onValueChange={([v]) => setThesisPoints(v)}
                       min={0}
-                      max={7}
+                      max={8}
                       step={1}
                       className="flex-1"
                     />
@@ -328,7 +328,7 @@ export function MscGraduationCalculator() {
                   </div>
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>0</span>
-                    <span>7</span>
+                    <span>8</span>
                   </div>
                 </CardContent>
               </Card>
@@ -341,7 +341,7 @@ export function MscGraduationCalculator() {
                     <Tooltip>
                       <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                       <TooltipContent className="max-w-xs">
-                        <p>Bonus per exchange, tirocinio o attività extracurriculari (varia per programma, tipicamente 0-3).</p>
+                        <p>Bonus per exchange, tirocinio o attività extracurriculari (0-1).</p>
                       </TooltipContent>
                     </Tooltip>
                   </CardTitle>
@@ -352,7 +352,7 @@ export function MscGraduationCalculator() {
                       value={[bonusPoints]}
                       onValueChange={([v]) => setBonusPoints(v)}
                       min={0}
-                      max={3}
+                      max={1}
                       step={1}
                       className="flex-1"
                     />
@@ -360,7 +360,7 @@ export function MscGraduationCalculator() {
                   </div>
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>0</span>
-                    <span>3</span>
+                    <span>1</span>
                   </div>
                 </CardContent>
               </Card>
