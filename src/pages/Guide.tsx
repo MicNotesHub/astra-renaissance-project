@@ -190,7 +190,7 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Link to={`/guide/${category}`}>
+                  {directDownloadCategories[category] ? (
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
                       {categoryCoverMap[category] ? (
                         <div className="relative h-64 overflow-hidden">
@@ -207,9 +207,26 @@ const Guide = () => {
                             <p className="text-sm text-white/80 text-center mb-4 px-2">
                               {getCategoryDescription(category)}
                             </p>
-                            <span className="text-white/80 text-sm border border-white/30 rounded-md px-4 py-2">
-                              {t('guide.explore')}
-                            </span>
+                            <div className="flex items-center gap-4">
+                              <a
+                                href={directDownloadCategories[category].it}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
+                                title="Italiano"
+                              >
+                                <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
+                              </a>
+                              <a
+                                href={directDownloadCategories[category].en}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
+                                title="English"
+                              >
+                                <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-full h-full object-cover" />
+                              </a>
+                            </div>
                           </div>
                         </div>
                       ) : (
@@ -222,14 +239,72 @@ const Guide = () => {
                             <p className="text-sm opacity-80 text-center mb-4 px-2">
                               {getCategoryDescription(category)}
                             </p>
-                            <span className="text-sm border border-current/30 rounded-md px-4 py-2 opacity-80">
-                              {t('guide.explore')}
-                            </span>
+                            <div className="flex items-center gap-4">
+                              <a
+                                href={directDownloadCategories[category].it}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
+                                title="Italiano"
+                              >
+                                <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
+                              </a>
+                              <a
+                                href={directDownloadCategories[category].en}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
+                                title="English"
+                              >
+                                <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-full h-full object-cover" />
+                              </a>
+                            </div>
                           </div>
                         </div>
                       )}
                     </Card>
-                  </Link>
+                  ) : (
+                    <Link to={`/guide/${category}`}>
+                      <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
+                        {categoryCoverMap[category] ? (
+                          <div className="relative h-64 overflow-hidden">
+                            <img
+                              src={categoryCoverMap[category]}
+                              alt={getCategoryTitle(category)}
+                              className="w-full h-full object-cover object-bottom group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-black/40" />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                              <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-1 text-center">
+                                {getCategoryTitle(category)}
+                              </h3>
+                              <p className="text-sm text-white/80 text-center mb-4 px-2">
+                                {getCategoryDescription(category)}
+                              </p>
+                              <span className="text-white/80 text-sm border border-white/30 rounded-md px-4 py-2">
+                                {t('guide.explore')}
+                              </span>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className={`relative h-64 overflow-hidden ${colorClass}`}>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                              <IconComponent className="w-12 h-12 mb-3 opacity-90" />
+                              <h3 className="text-2xl font-bold drop-shadow-lg mb-1 text-center">
+                                {getCategoryTitle(category)}
+                              </h3>
+                              <p className="text-sm opacity-80 text-center mb-4 px-2">
+                                {getCategoryDescription(category)}
+                              </p>
+                              <span className="text-sm border border-current/30 rounded-md px-4 py-2 opacity-80">
+                                {t('guide.explore')}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </Card>
+                    </Link>
+                  )}
                 </motion.div>
               );
             })}
