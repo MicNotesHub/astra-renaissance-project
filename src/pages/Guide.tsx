@@ -29,6 +29,10 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20IT.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20EN.pdf',
   },
+  'tesi': {
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/tesi%20101/Guida%20Lavoro%20Finale%20e%20Laurea.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/tesi%20101/Guide%20Final%20Paper%20and%20Graduation.pdf',
+  },
   'opzionali': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/OPZIONALI.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/ELECTIVES-GUIDE_merged.pdf',
