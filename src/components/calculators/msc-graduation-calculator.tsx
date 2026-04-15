@@ -430,7 +430,7 @@ export function MscGraduationCalculator() {
           </motion.div>
         )}
 
-        {selectedCourse && !loading && (
+        {selectedCourse && (!TRACK_COURSES[selectedCourse] || selectedTrack) && !loading && (
           <Card id="msc-exams-section">
             <CardHeader>
               <CardTitle>Esami - {selectedCourse}</CardTitle>
