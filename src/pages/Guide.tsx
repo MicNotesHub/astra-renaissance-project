@@ -217,7 +217,7 @@ const Guide = () => {
                             </span>
                           </div>
                         </div>
-                      )
+                      }
                     </Card>
                   </Link>
                 </motion.div>
