@@ -28,9 +28,27 @@ interface ExamGrade {
   isSeminar: boolean;
 }
 
+// Track definitions: maps course to track options and their exclusive subjects
+const TRACK_COURSES: Record<string, { tracks: string[]; subjectTrackMap: Record<string, string> }> = {
+  'DSBA': {
+    tracks: ['Business Analytics', 'Data Science'],
+    subjectTrackMap: {
+      'Innovation and Marketing Analytics': 'Business Analytics',
+      'Simulation and Modeling': 'Business Analytics',
+      'Finance with Big Data': 'Business Analytics',
+      'Deep Learning for Computer Vision': 'Business Analytics',
+      'Optimization': 'Data Science',
+      'Computer Science (algorithms)': 'Data Science',
+      'Stochastic Processes': 'Data Science',
+      'Machine Learning II': 'Data Science',
+    }
+  }
+};
+
 export function MscGraduationCalculator() {
   const [courses, setCourses] = useState<string[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<string>("");
+  const [selectedTrack, setSelectedTrack] = useState<string>("");
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [examGrades, setExamGrades] = useState<ExamGrade[]>([]);
   const [thesisPoints, setThesisPoints] = useState<number>(0);
