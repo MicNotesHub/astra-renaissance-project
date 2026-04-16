@@ -47,7 +47,7 @@ export const MarketplaceSection = () => {
     title: t('marketplace.features.commission'),
     description: t('marketplace.features.commission.description')
   }];
-  return <section id="marketplace" className="py-0 bg-background">
+  return <section id="marketplace" className="pt-0 pb-8 bg-background">
       <div className="container mx-auto px-4">
         <motion.div initial={{
         opacity: 0,
