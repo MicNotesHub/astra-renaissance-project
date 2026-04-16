@@ -492,7 +492,7 @@ export function MscGraduationCalculator() {
 
                       {exam.completed && exam.isSeminar && (
                         <div className="text-center p-2 bg-muted rounded-md">
-                          <span className="text-xs text-muted-foreground">Seminario - Nessun voto richiesto</span>
+                          <span className="text-xs text-muted-foreground">Pass/Fail - Nessun voto richiesto</span>
                         </div>
                       )}
                     </div>
