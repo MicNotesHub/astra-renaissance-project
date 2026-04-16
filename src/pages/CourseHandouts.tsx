@@ -1,7 +1,8 @@
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { PdfThumbnail } from "@/components/ui/pdf-thumbnail";
 import { FileText, Download, ArrowLeft, Search, ExternalLink } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
