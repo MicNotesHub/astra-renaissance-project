@@ -45,7 +45,11 @@ const TRACK_COURSES: Record<string, { tracks: string[]; subjectTrackMap: Record<
   }
 };
 
-const THESIS_CFU = 18;
+// Thesis CFU per course (default 18 if not listed)
+const THESIS_CFU_MAP: Record<string, number> = {
+  'DAAIHS': 14,
+};
+const getThesisCfu = (course: string) => THESIS_CFU_MAP[course] ?? 18;
 
 export function MscGraduationCalculator() {
   const [courses, setCourses] = useState<string[]>([]);
@@ -131,7 +135,8 @@ export function MscGraduationCalculator() {
           return lower.includes('seminar') || lower.includes('internship') ||
                  lower.includes('tirocinio') || lower.includes('stage') ||
                  lower.includes('lab') || lower.includes('foreign language') ||
-                 lower.includes('lingua') || lower.includes('privacy');
+                 lower.includes('lingua') || lower.includes('privacy') ||
+                 lower.includes('guidelines');
         };
 
         const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
@@ -169,11 +174,12 @@ export function MscGraduationCalculator() {
       exam.completed && (exam.isSeminar || (exam.grade !== '' && Number(exam.grade) >= 18))
     );
 
+    const thesisCfu = getThesisCfu(selectedCourse);
     const examCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
-    const totalCfu = examCfu + THESIS_CFU; // Display total includes thesis
+    const totalCfu = examCfu + thesisCfu;
 
     if (completedExams.length === 0) {
-      return { gpa: 0, baseScore: 0, finalScore: 0, rawFinalScore: 0, totalCfu, completedCfu: 0 };
+      return { gpa: 0, baseScore: 0, finalScore: 0, rawFinalScore: 0, totalCfu, completedCfu: thesisCfu };
     }
 
     const gradedExams = completedExams.filter(exam =>
@@ -190,7 +196,7 @@ export function MscGraduationCalculator() {
       gpa = gradedCfu > 0 ? totalWeightedGrades / gradedCfu : 0;
     }
 
-    const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
+    const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0) + getThesisCfu(selectedCourse);
 
     const baseScore = gpa > 0 ? (gpa / 30) * 110 : 0;
     const rawFinalScore = baseScore + thesisPoints + bonusPoints;
@@ -207,7 +213,7 @@ export function MscGraduationCalculator() {
   };
 
   const results = calculateResults();
-  const hasData = results.completedCfu > 0;
+  const hasData = examGrades.some(e => e.completed);
 
   const getGradeColor = (grade: number) => {
     if (grade >= 105) return "text-green-600 dark:text-green-400";
