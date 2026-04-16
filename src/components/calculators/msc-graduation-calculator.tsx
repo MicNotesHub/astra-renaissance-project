@@ -370,6 +370,7 @@ export function MscGraduationCalculator() {
                   <span className="text-muted-foreground">{t('msc_calc.credits')}: </span>
                   <span className="font-medium">{results.completedCfu}/{results.totalCfu}</span>
                 </div>
+                <p className="text-xs text-muted-foreground mt-1">{t('msc_calc.thesis_note')}</p>
               </div>
               {!hasData && (
                 <Button variant="outline" size="sm" onClick={scrollToExams}>
@@ -518,7 +519,6 @@ export function MscGraduationCalculator() {
         {selectedCourse && (
           <div className="text-center text-xs text-muted-foreground bg-muted/50 rounded-lg p-4">
             <p>{t('msc_calc.disclaimer')}</p>
-            <p className="mt-1">{t('msc_calc.disclaimer2')}</p>
           </div>
         )}
       </div>
