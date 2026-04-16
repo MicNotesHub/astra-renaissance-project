@@ -173,9 +173,10 @@ export function MscGraduationCalculator() {
     const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
 
     if (completedExams.length === 0) {
-      return { gpa: 0, baseScore: 0, finalScore: 0, totalCfu, completedCfu: 0 };
+      return { gpa: 0, baseScore: 0, finalScore: 0, rawFinalScore: 0, totalCfu, completedCfu: 0 };
     }
 
+    // Step 1: Weighted GPA on 30 — only graded exams, 30L treated as 30
     const gradedExams = completedExams.filter(exam =>
       !exam.isSeminar && exam.grade !== '' && Number(exam.grade) >= 18
     );
@@ -183,7 +184,7 @@ export function MscGraduationCalculator() {
     let gpa = 0;
     if (gradedExams.length > 0) {
       const totalWeightedGrades = gradedExams.reduce((sum, exam) => {
-        const gradeValue = Number(exam.grade) === 31 ? 31 : Number(exam.grade);
+        const gradeValue = Math.min(Number(exam.grade), 30); // 30L (31) → 30
         return sum + (gradeValue * exam.cfu);
       }, 0);
       const gradedCfu = gradedExams.reduce((sum, exam) => sum + exam.cfu, 0);
@@ -191,14 +192,21 @@ export function MscGraduationCalculator() {
     }
 
     const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
-    const baseScore = gpa > 0 ? (gpa * 110) / 30 : 0;
-    const rawFinal = baseScore + thesisPoints + bonusPoints;
-    const finalScore = rawFinal >= 110.5 ? 111 : Math.min(110, rawFinal);
+
+    // Step 2: Base score on 110
+    const baseScore = gpa > 0 ? (gpa / 30) * 110 : 0;
+
+    // Step 3: Final estimated score
+    const rawFinalScore = baseScore + thesisPoints + bonusPoints;
+
+    // Step 4: Display cap — min(final, 110)
+    const finalScore = Math.min(rawFinalScore, 110);
 
     return {
       gpa: Number(gpa.toFixed(2)),
       baseScore: Number(baseScore.toFixed(1)),
       finalScore: Number(finalScore.toFixed(1)),
+      rawFinalScore: Number(rawFinalScore.toFixed(1)),
       totalCfu,
       completedCfu
     };
@@ -338,12 +346,12 @@ export function MscGraduationCalculator() {
                     </div>
                     <div className="space-y-1">
                       <div className={`text-3xl font-bold ${hasData ? getGradeColor(results.finalScore) : 'text-muted-foreground'}`}>
-                        {hasData ? (results.finalScore >= 111 ? '110L' : results.finalScore) : '--'}
+                        {hasData ? results.finalScore : '--'}
                       </div>
                       <div className="text-sm text-muted-foreground">su 110</div>
-                      {hasData && results.finalScore >= 111 && (
+                      {hasData && results.rawFinalScore >= 110 && (
                         <Badge className="mt-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                          Eligible for 110 e Lode ✨
+                          Eligible for 110 e Lode (subject to committee approval) ✨
                         </Badge>
                       )}
                     </div>
@@ -411,26 +419,23 @@ export function MscGraduationCalculator() {
                     <Tooltip>
                       <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                       <TooltipContent className="max-w-xs">
-                        <p>Bonus per exchange, tirocinio o attività extracurriculari (0-1).</p>
+                        <p>Bonus per exchange, tirocinio o attività extracurriculari. Inserisci un valore numerico.</p>
                       </TooltipContent>
                     </Tooltip>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent>
                   <div className="flex items-center gap-4">
-                    <Slider
-                      value={[bonusPoints]}
-                      onValueChange={([v]) => setBonusPoints(v)}
+                    <Input
+                      type="number"
                       min={0}
-                      max={1}
-                      step={1}
-                      className="flex-1"
+                      step={0.5}
+                      value={bonusPoints || ''}
+                      onChange={(e) => setBonusPoints(e.target.value ? Number(e.target.value) : 0)}
+                      placeholder="0"
+                      className="w-24"
                     />
-                    <span className="text-xl font-bold text-primary w-8 text-center">{bonusPoints}</span>
-                  </div>
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>0</span>
-                    <span>1</span>
+                    <span className="text-sm text-muted-foreground">punti</span>
                   </div>
                 </CardContent>
               </Card>
