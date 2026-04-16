@@ -59,7 +59,7 @@ export const MarketplaceSection = () => {
         once: true
       }} transition={{
         duration: 0.8
-      }} className="text-center mb-16">
+      }} className="text-center mb-10 mt-0">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text relative inline-block">
   🛍️ {t('marketplace.title')}
   <sup className="absolute -top-1 -right-3 text-sm" style={{ color: "#082cb4" }}>©</sup>
