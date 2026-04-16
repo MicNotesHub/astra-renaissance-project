@@ -230,7 +230,7 @@ const Guide = () => {
                           <img
                             src={categoryCoverMap[category]}
                             alt={getCategoryTitle(category)}
-                            className="w-full h-full object-cover object-bottom group-hover:scale-110 transition-transform duration-500"
+                            className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ${category === 'funding' ? 'object-center' : 'object-bottom'}`}
                           />
                           <div className="absolute inset-0 bg-black/40" />
                           <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
