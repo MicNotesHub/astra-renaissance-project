@@ -32,6 +32,7 @@ const courses: CourseInfo[] = [
   { key: "BIEF", cover: biefCover },
   { key: "CLMG", cover: clmgCover },
   { key: "BGL", cover: bglCover },
+  { key: "BESS", cover: bessCover },
 ];
 
 const Dispense = () => {
