@@ -14,6 +14,7 @@ import clmgCover from "@/assets/course-covers/clmg.jpg";
 import bglCover from "@/assets/course-covers/bgl.jpg";
 import baiCover from "@/assets/course-covers/bai.jpg";
 import bigCover from "@/assets/course-covers/big.jpg";
+import bessCover from "@/assets/bess-cover.png";
 
 interface CourseInfo {
   key: string;
