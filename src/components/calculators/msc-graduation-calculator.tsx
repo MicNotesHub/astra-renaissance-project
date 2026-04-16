@@ -127,13 +127,21 @@ export function MscGraduationCalculator() {
 
         setSubjects(fetchedSubjects);
 
+        const isPassFail = (name: string) => {
+          const lower = name.toLowerCase();
+          return lower.includes('seminar') || lower.includes('internship') ||
+                 lower.includes('tirocinio') || lower.includes('stage') ||
+                 lower.includes('lab') || lower.includes('foreign language') ||
+                 lower.includes('lingua') || lower.includes('privacy');
+        };
+
         const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
           id: subject.id,
           subject: subject.subject,
           cfu: subject.cfu,
           grade: '',
           completed: false,
-          isSeminar: subject.subject.toLowerCase().includes('seminar')
+          isSeminar: isPassFail(subject.subject)
         }));
 
         setExamGrades(initialGrades);
@@ -484,7 +492,7 @@ export function MscGraduationCalculator() {
 
                       {exam.completed && exam.isSeminar && (
                         <div className="text-center p-2 bg-muted rounded-md">
-                          <span className="text-xs text-muted-foreground">Seminario - Nessun voto richiesto</span>
+                          <span className="text-xs text-muted-foreground">Pass/Fail - Nessun voto richiesto</span>
                         </div>
                       )}
                     </div>
