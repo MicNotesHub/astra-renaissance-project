@@ -40,9 +40,6 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   'graduate': {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/graduate/Guida-Magistrali.pdf',
   },
-  'spring weeks': {
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/spring%20weeks/Spring%20Weeks%20Guide.pdf',
-  },
   'exchange_magistrale': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/exchange_magistrale/Guida%20Exchange%20Magistrale.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/exchange_magistrale/Exchange%20MSc%20Guide.pdf',
