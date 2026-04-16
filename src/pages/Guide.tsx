@@ -153,6 +153,7 @@ const Guide = () => {
   const categoryOrder = [
     'funding',
     'residenze',
+    'ecdl',
     'tesi',
     'linkedin',
     'associations',
@@ -167,7 +168,6 @@ const Guide = () => {
     'milan',
     'burocrazia',
     'master_admissions',
-    'ecdl',
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
