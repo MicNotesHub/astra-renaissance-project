@@ -173,9 +173,10 @@ export function MscGraduationCalculator() {
     const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
 
     if (completedExams.length === 0) {
-      return { gpa: 0, baseScore: 0, finalScore: 0, totalCfu, completedCfu: 0 };
+      return { gpa: 0, baseScore: 0, finalScore: 0, rawFinalScore: 0, totalCfu, completedCfu: 0 };
     }
 
+    // Step 1: Weighted GPA on 30 — only graded exams, 30L treated as 30
     const gradedExams = completedExams.filter(exam =>
       !exam.isSeminar && exam.grade !== '' && Number(exam.grade) >= 18
     );
@@ -183,7 +184,7 @@ export function MscGraduationCalculator() {
     let gpa = 0;
     if (gradedExams.length > 0) {
       const totalWeightedGrades = gradedExams.reduce((sum, exam) => {
-        const gradeValue = Number(exam.grade) === 31 ? 31 : Number(exam.grade);
+        const gradeValue = Math.min(Number(exam.grade), 30); // 30L (31) → 30
         return sum + (gradeValue * exam.cfu);
       }, 0);
       const gradedCfu = gradedExams.reduce((sum, exam) => sum + exam.cfu, 0);
@@ -191,14 +192,21 @@ export function MscGraduationCalculator() {
     }
 
     const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
-    const baseScore = gpa > 0 ? (gpa * 110) / 30 : 0;
-    const rawFinal = baseScore + thesisPoints + bonusPoints;
-    const finalScore = rawFinal >= 110.5 ? 111 : Math.min(110, rawFinal);
+
+    // Step 2: Base score on 110
+    const baseScore = gpa > 0 ? (gpa / 30) * 110 : 0;
+
+    // Step 3: Final estimated score
+    const rawFinalScore = baseScore + thesisPoints + bonusPoints;
+
+    // Step 4: Display cap — min(final, 110)
+    const finalScore = Math.min(rawFinalScore, 110);
 
     return {
       gpa: Number(gpa.toFixed(2)),
       baseScore: Number(baseScore.toFixed(1)),
       finalScore: Number(finalScore.toFixed(1)),
+      rawFinalScore: Number(rawFinalScore.toFixed(1)),
       totalCfu,
       completedCfu
     };
