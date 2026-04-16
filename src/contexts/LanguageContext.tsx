@@ -202,7 +202,7 @@ const translations = {
     'msc_calc.pass_fail': 'Pass/Fail - Nessun voto richiesto',
     'msc_calc.loading': 'Caricamento esami...',
     'msc_calc.disclaimer': '⚠️ Questo è uno strumento di stima. Il voto finale di laurea è determinato dalla commissione di Bocconi.',
-    'msc_calc.disclaimer2': '"30 e lode" viene trattato come 30 nel calcolo della media. Voti inferiori a 18 non sono ammessi.',
+    'msc_calc.thesis_note': 'Nota: La tesi è inclusa automaticamente nel calcolo dei crediti',
     
     // Marketplace Section
     'marketplace.title': 'ASTRA x UniMarket',
@@ -592,7 +592,7 @@ const translations = {
     'msc_calc.pass_fail': 'Pass/Fail - No grade required',
     'msc_calc.loading': 'Loading exams...',
     'msc_calc.disclaimer': '⚠️ This is an estimation tool. The final graduation grade is determined by the Bocconi committee.',
-    'msc_calc.disclaimer2': '"30 e lode" is treated as 30 in the GPA calculation. Grades below 18 are not accepted.',
+    'msc_calc.thesis_note': 'Note: The thesis is automatically included in the credit calculation',
     
     // Marketplace Section
     'marketplace.title': 'ASTRA x UniMarket',
