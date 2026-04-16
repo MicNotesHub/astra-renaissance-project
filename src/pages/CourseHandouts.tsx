@@ -1,8 +1,9 @@
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { FileText, Download, ArrowLeft, Search } from "lucide-react";
+import { PdfThumbnail } from "@/components/ui/pdf-thumbnail";
+import { FileText, Download, ArrowLeft, Search, ExternalLink } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -209,38 +210,36 @@ const CourseHandouts = () => {
               </p>
             </div>
           ) : (
-            <Card className="shadow-lg">
-              <CardHeader className="bg-primary/5">
-                <CardTitle className="flex items-center gap-3">
-                  <FileText className="w-6 h-6 text-primary" />
-                  {t('courseHandouts.courseHandouts')}
-                  <span className="text-sm font-normal text-muted-foreground">
-                    ({filteredFiles.length} {t('yearPage.files')}{filteredFiles.length !== 1 ? 's' : ''})
-                  </span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="grid gap-3">
-                  {filteredFiles.map((file) => (
-                    <div
-                      key={file.id}
-                      onClick={() => handleFileClick(file.file_url)}
-                      className="flex items-center justify-between p-4 rounded-lg border hover:bg-muted/50 cursor-pointer transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <FileText className="w-5 h-5 text-primary" />
-                        <div>
-                          <h4 className="font-medium group-hover:text-primary transition-colors">
-                            {file.filename}
-                          </h4>
-                        </div>
-                      </div>
-                      <Download className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            <>
+              <p className="text-sm text-muted-foreground mb-4">
+                {filteredFiles.length} {t('yearPage.files')}{filteredFiles.length !== 1 ? 's' : ''}
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {filteredFiles.map((file) => (
+                  <Card
+                    key={file.id}
+                    onClick={() => handleFileClick(file.file_url)}
+                    className="cursor-pointer hover:shadow-lg transition-all duration-300 group overflow-hidden"
+                  >
+                    <div className="aspect-[3/4] overflow-hidden border-b">
+                      <PdfThumbnail
+                        fileUrl={file.file_url}
+                        className="w-full h-full"
+                      />
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <CardContent className="p-3">
+                      <h4 className="text-sm font-medium leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                        {file.filename}
+                      </h4>
+                      <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                        <Download className="w-3 h-3" />
+                        <span>{t('handouts.download')}</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
