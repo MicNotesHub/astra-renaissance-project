@@ -57,7 +57,7 @@ export const CalcolatoriSection = () => {
     features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"],
     externalLink: null
   }];
-  return <section id="calcolatori" className="py-20 bg-background">
+  return <section id="calcolatori" className="py-10 bg-background">
       <div className="container mx-auto px-4">
         <motion.div initial={{
         opacity: 0,
