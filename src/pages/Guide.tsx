@@ -157,7 +157,7 @@ const Guide = () => {
     'stage',
     'spring weeks',
     'freemover',
-    'exchange_magistrale',
+    
     'exchange_triennale',
     'university',
     'milan',
