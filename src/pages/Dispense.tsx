@@ -73,7 +73,7 @@ const Dispense = () => {
                       <img
                         src={course.cover}
                         alt={course.key}
-                        className="w-full h-full object-cover object-bottom group-hover:scale-110 transition-transform duration-500"
+                        className={`w-full h-full object-cover ${course.coverPosition || 'object-bottom'} group-hover:scale-110 transition-transform duration-500`}
                       />
                       <div className="absolute inset-0 bg-black/40" />
                       <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
