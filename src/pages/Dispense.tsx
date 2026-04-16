@@ -19,6 +19,7 @@ import bessCover from "@/assets/bess-cover.png";
 interface CourseInfo {
   key: string;
   cover?: string;
+  coverPosition?: string;
 }
 
 const courses: CourseInfo[] = [
