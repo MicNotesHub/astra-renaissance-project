@@ -419,26 +419,23 @@ export function MscGraduationCalculator() {
                     <Tooltip>
                       <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                       <TooltipContent className="max-w-xs">
-                        <p>Bonus per exchange, tirocinio o attività extracurriculari (0-1).</p>
+                        <p>Bonus per exchange, tirocinio o attività extracurriculari. Inserisci un valore numerico.</p>
                       </TooltipContent>
                     </Tooltip>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent>
                   <div className="flex items-center gap-4">
-                    <Slider
-                      value={[bonusPoints]}
-                      onValueChange={([v]) => setBonusPoints(v)}
+                    <Input
+                      type="number"
                       min={0}
-                      max={1}
-                      step={1}
-                      className="flex-1"
+                      step={0.5}
+                      value={bonusPoints || ''}
+                      onChange={(e) => setBonusPoints(e.target.value ? Number(e.target.value) : 0)}
+                      placeholder="0"
+                      className="w-24"
                     />
-                    <span className="text-xl font-bold text-primary w-8 text-center">{bonusPoints}</span>
-                  </div>
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>0</span>
-                    <span>1</span>
+                    <span className="text-sm text-muted-foreground">punti</span>
                   </div>
                 </CardContent>
               </Card>
