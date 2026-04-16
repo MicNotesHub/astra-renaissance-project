@@ -47,7 +47,7 @@ export const MarketplaceSection = () => {
     title: t('marketplace.features.commission'),
     description: t('marketplace.features.commission.description')
   }];
-  return <section id="marketplace" className="py-0 bg-background">
+  return <section id="marketplace" className="pt-0 pb-8 bg-background">
       <div className="container mx-auto px-4">
         <motion.div initial={{
         opacity: 0,
@@ -59,7 +59,7 @@ export const MarketplaceSection = () => {
         once: true
       }} transition={{
         duration: 0.8
-      }} className="text-center mb-16">
+      }} className="text-center mb-10 mt-0">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text relative inline-block">
   🛍️ {t('marketplace.title')}
   <sup className="absolute -top-1 -right-3 text-sm" style={{ color: "#082cb4" }}>©</sup>
