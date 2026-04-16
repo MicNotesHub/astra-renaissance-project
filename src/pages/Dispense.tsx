@@ -33,7 +33,7 @@ const courses: CourseInfo[] = [
   { key: "BIG", cover: bigCover },
   { key: "CLMG", cover: clmgCover },
   { key: "BGL", cover: bglCover },
-  { key: "BESS", cover: bessCover, coverPosition: "object-top" },
+  { key: "BESS", cover: bessCover, coverPosition: "object-[60%]" },
 ];
 
 const Dispense = () => {
