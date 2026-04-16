@@ -346,12 +346,12 @@ export function MscGraduationCalculator() {
                     </div>
                     <div className="space-y-1">
                       <div className={`text-3xl font-bold ${hasData ? getGradeColor(results.finalScore) : 'text-muted-foreground'}`}>
-                        {hasData ? (results.finalScore >= 111 ? '110L' : results.finalScore) : '--'}
+                        {hasData ? results.finalScore : '--'}
                       </div>
                       <div className="text-sm text-muted-foreground">su 110</div>
-                      {hasData && results.finalScore >= 111 && (
+                      {hasData && results.rawFinalScore >= 110 && (
                         <Badge className="mt-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                          Eligible for 110 e Lode ✨
+                          Eligible for 110 e Lode (subject to committee approval) ✨
                         </Badge>
                       )}
                     </div>
