@@ -66,8 +66,16 @@ export const PdfThumbnail = ({ fileUrl, className = "" }: PdfThumbnailProps) => 
   return (
     <div className={`relative overflow-hidden bg-white ${className}`}>
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted/20 animate-pulse">
-          <FileText className="w-10 h-10 text-muted-foreground/50" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-muted/10 gap-3">
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-muted/10 to-muted/20 animate-pulse" />
+          <div className="relative space-y-3 w-3/4">
+            <div className="h-3 bg-muted/40 rounded animate-pulse" />
+            <div className="h-3 bg-muted/30 rounded animate-pulse w-5/6" />
+            <div className="h-3 bg-muted/40 rounded animate-pulse w-4/6" />
+            <div className="h-3 bg-muted/30 rounded animate-pulse w-full" />
+            <div className="h-3 bg-muted/40 rounded animate-pulse w-3/4" />
+          </div>
+          <FileText className="relative w-8 h-8 text-muted-foreground/30 mt-2" />
         </div>
       )}
       <canvas ref={canvasRef} className="w-full object-cover" />
