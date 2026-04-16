@@ -14,10 +14,12 @@ import clmgCover from "@/assets/course-covers/clmg.jpg";
 import bglCover from "@/assets/course-covers/bgl.jpg";
 import baiCover from "@/assets/course-covers/bai.jpg";
 import bigCover from "@/assets/course-covers/big.jpg";
+import bessCover from "@/assets/bess-cover.png";
 
 interface CourseInfo {
   key: string;
   cover?: string;
+  coverPosition?: string;
 }
 
 const courses: CourseInfo[] = [
@@ -31,6 +33,7 @@ const courses: CourseInfo[] = [
   { key: "BIEF", cover: biefCover },
   { key: "CLMG", cover: clmgCover },
   { key: "BGL", cover: bglCover },
+  { key: "BESS", cover: bessCover, coverPosition: "object-top" },
 ];
 
 const Dispense = () => {
@@ -70,7 +73,7 @@ const Dispense = () => {
                       <img
                         src={course.cover}
                         alt={course.key}
-                        className="w-full h-full object-cover object-bottom group-hover:scale-110 transition-transform duration-500"
+                        className={`w-full h-full object-cover ${course.coverPosition || 'object-bottom'} group-hover:scale-110 transition-transform duration-500`}
                       />
                       <div className="absolute inset-0 bg-black/40" />
                       <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
