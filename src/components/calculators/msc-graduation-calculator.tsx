@@ -135,7 +135,8 @@ export function MscGraduationCalculator() {
           return lower.includes('seminar') || lower.includes('internship') ||
                  lower.includes('tirocinio') || lower.includes('stage') ||
                  lower.includes('lab') || lower.includes('foreign language') ||
-                 lower.includes('lingua') || lower.includes('privacy');
+                 lower.includes('lingua') || lower.includes('privacy') ||
+                 lower.includes('guidelines');
         };
 
         const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
