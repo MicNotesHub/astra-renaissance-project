@@ -219,13 +219,15 @@ const CourseHandouts = () => {
                   <Card
                     key={file.id}
                     onClick={() => handleFileClick(file.file_url)}
-                    className="cursor-pointer hover:shadow-lg transition-all duration-300 group overflow-hidden"
+                    className="cursor-pointer hover:shadow-xl hover:scale-[1.03] transition-all duration-300 group overflow-hidden"
                   >
                     <div className="aspect-[3/4] overflow-hidden border-b">
-                      <PdfThumbnail
-                        fileUrl={file.file_url}
-                        className="w-full h-full"
-                      />
+                      <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out">
+                        <PdfThumbnail
+                          fileUrl={file.file_url}
+                          className="w-full h-full"
+                        />
+                      </div>
                     </div>
                     <CardContent className="p-3">
                       <h4 className="text-sm font-medium leading-tight group-hover:text-primary transition-colors line-clamp-2">
