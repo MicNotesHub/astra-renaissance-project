@@ -12,6 +12,7 @@ import { GraduationCap, Calculator, Target, Info, ChevronDown } from "lucide-rea
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Subject {
   id: number;
@@ -28,7 +29,6 @@ interface ExamGrade {
   isSeminar: boolean;
 }
 
-// Track definitions: maps course to track options and their exclusive subjects
 const TRACK_COURSES: Record<string, { tracks: string[]; subjectTrackMap: Record<string, string> }> = {
   'DSBA': {
     tracks: ['Business Analytics', 'Data Science'],
@@ -45,6 +45,8 @@ const TRACK_COURSES: Record<string, { tracks: string[]; subjectTrackMap: Record<
   }
 };
 
+const THESIS_CFU = 18;
+
 export function MscGraduationCalculator() {
   const [courses, setCourses] = useState<string[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<string>("");
@@ -55,6 +57,7 @@ export function MscGraduationCalculator() {
   const [bonusPoints, setBonusPoints] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -70,8 +73,8 @@ export function MscGraduationCalculator() {
         setCourses(uniqueCourses);
       } catch (error) {
         toast({
-          title: "Errore",
-          description: "Impossibile caricare i corsi di laurea magistrale",
+          title: "Error",
+          description: "Could not load courses",
           variant: "destructive",
         });
       }
@@ -80,14 +83,12 @@ export function MscGraduationCalculator() {
     fetchCourses();
   }, [toast]);
 
-  // Reset track when course changes
   useEffect(() => {
     setSelectedTrack("");
   }, [selectedCourse]);
 
   useEffect(() => {
     if (!selectedCourse) return;
-    // For track courses, wait until a track is selected
     const trackConfig = TRACK_COURSES[selectedCourse];
     if (trackConfig && !selectedTrack) return;
 
@@ -106,12 +107,10 @@ export function MscGraduationCalculator() {
 
         const fetchedSubjects: Subject[] = data?.filter(item => {
           const subjectName = item.subject?.toLowerCase() || '';
-          // Filter out thesis
           if (subjectName.includes('tesi') || subjectName.includes('final paper') ||
               subjectName.includes('thesis') || subjectName.includes('elaborato finale')) {
             return false;
           }
-          // Filter by track if applicable
           if (trackConfig && selectedTrack) {
             const subjectTrack = trackConfig.subjectTrackMap[item.subject || ''];
             if (subjectTrack && subjectTrack !== selectedTrack) {
@@ -147,8 +146,8 @@ export function MscGraduationCalculator() {
         setExamGrades(initialGrades);
       } catch (error) {
         toast({
-          title: "Errore",
-          description: "Impossibile caricare gli esami per questo corso",
+          title: "Error",
+          description: "Could not load exams",
           variant: "destructive",
         });
       } finally {
@@ -170,13 +169,13 @@ export function MscGraduationCalculator() {
       exam.completed && (exam.isSeminar || (exam.grade !== '' && Number(exam.grade) >= 18))
     );
 
-    const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
+    const examCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
+    const totalCfu = examCfu + THESIS_CFU; // Display total includes thesis
 
     if (completedExams.length === 0) {
       return { gpa: 0, baseScore: 0, finalScore: 0, rawFinalScore: 0, totalCfu, completedCfu: 0 };
     }
 
-    // Step 1: Weighted GPA on 30 — only graded exams, 30L treated as 30
     const gradedExams = completedExams.filter(exam =>
       !exam.isSeminar && exam.grade !== '' && Number(exam.grade) >= 18
     );
@@ -184,7 +183,7 @@ export function MscGraduationCalculator() {
     let gpa = 0;
     if (gradedExams.length > 0) {
       const totalWeightedGrades = gradedExams.reduce((sum, exam) => {
-        const gradeValue = Math.min(Number(exam.grade), 30); // 30L (31) → 30
+        const gradeValue = Math.min(Number(exam.grade), 30);
         return sum + (gradeValue * exam.cfu);
       }, 0);
       const gradedCfu = gradedExams.reduce((sum, exam) => sum + exam.cfu, 0);
@@ -193,13 +192,8 @@ export function MscGraduationCalculator() {
 
     const completedCfu = completedExams.reduce((sum, exam) => sum + exam.cfu, 0);
 
-    // Step 2: Base score on 110
     const baseScore = gpa > 0 ? (gpa / 30) * 110 : 0;
-
-    // Step 3: Final estimated score
     const rawFinalScore = baseScore + thesisPoints + bonusPoints;
-
-    // Step 4: Display cap — min(final, 110)
     const finalScore = Math.min(rawFinalScore, 110);
 
     return {
@@ -234,13 +228,13 @@ export function MscGraduationCalculator() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <GraduationCap className="h-5 w-5" />
-              Seleziona Corso di Laurea Magistrale
+              {t('msc_calc.select_course')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <Select value={selectedCourse} onValueChange={setSelectedCourse}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Scegli il tuo corso di laurea magistrale" />
+                <SelectValue placeholder={t('msc_calc.select_course_placeholder')} />
               </SelectTrigger>
               <SelectContent>
                 {courses.map(course => (
@@ -258,13 +252,13 @@ export function MscGraduationCalculator() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
                 <Target className="h-5 w-5" />
-                Seleziona Track
+                {t('msc_calc.select_track')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Select value={selectedTrack} onValueChange={setSelectedTrack}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Scegli il tuo track" />
+                  <SelectValue placeholder={t('msc_calc.select_track_placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   {TRACK_COURSES[selectedCourse].tracks.map(track => (
@@ -294,7 +288,7 @@ export function MscGraduationCalculator() {
                       <Tooltip>
                         <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                         <TooltipContent className="max-w-xs">
-                          <p>Media ponderata dei voti per i crediti. "30 e lode" = 31 nel calcolo.</p>
+                          <p>{t('msc_calc.gpa_tooltip')}</p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
@@ -302,7 +296,7 @@ export function MscGraduationCalculator() {
                       <div className="text-3xl font-bold text-primary">
                         {hasData ? results.gpa : '--'}
                       </div>
-                      <div className="text-sm text-muted-foreground">su 30</div>
+                      <div className="text-sm text-muted-foreground">{t('msc_calc.out_of_30')}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -313,11 +307,11 @@ export function MscGraduationCalculator() {
                   <div className="text-center space-y-3">
                     <div className="flex items-center justify-center gap-2">
                       <Target className="h-5 w-5 text-primary" />
-                      <h3 className="font-semibold">Punteggio Base</h3>
+                      <h3 className="font-semibold">{t('msc_calc.base_score')}</h3>
                       <Tooltip>
                         <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                         <TooltipContent className="max-w-xs">
-                          <p>Conversione in centodecimi: (GPA / 30) × 110</p>
+                          <p>{t('msc_calc.base_score_tooltip')}</p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
@@ -325,7 +319,7 @@ export function MscGraduationCalculator() {
                       <div className="text-3xl font-bold text-muted-foreground">
                         {hasData ? results.baseScore : '--'}
                       </div>
-                      <div className="text-sm text-muted-foreground">su 110</div>
+                      <div className="text-sm text-muted-foreground">{t('msc_calc.out_of_110')}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -336,11 +330,11 @@ export function MscGraduationCalculator() {
                   <div className="text-center space-y-3">
                     <div className="flex items-center justify-center gap-2">
                       <GraduationCap className="h-5 w-5 text-primary" />
-                      <h3 className="font-semibold">Voto di Laurea</h3>
+                      <h3 className="font-semibold">{t('msc_calc.graduation_grade')}</h3>
                       <Tooltip>
                         <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                         <TooltipContent className="max-w-xs">
-                          <p>Punteggio base + punti tesi + bonus. Se ≥ 110.5 → 110 e Lode.</p>
+                          <p>{t('msc_calc.graduation_tooltip')}</p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
@@ -348,10 +342,10 @@ export function MscGraduationCalculator() {
                       <div className={`text-3xl font-bold ${hasData ? getGradeColor(results.finalScore) : 'text-muted-foreground'}`}>
                         {hasData ? results.finalScore : '--'}
                       </div>
-                      <div className="text-sm text-muted-foreground">su 110</div>
+                      <div className="text-sm text-muted-foreground">{t('msc_calc.out_of_110')}</div>
                       {hasData && results.rawFinalScore >= 110 && (
                         <Badge className="mt-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                          Eligible for 110 e Lode (subject to committee approval) ✨
+                          {t('msc_calc.lode_badge')}
                         </Badge>
                       )}
                     </div>
@@ -363,17 +357,17 @@ export function MscGraduationCalculator() {
             <div className="flex items-center justify-between bg-primary/10 rounded-lg p-4">
               <div className="flex gap-6 text-sm">
                 <div>
-                  <span className="text-muted-foreground">Esami inseriti: </span>
+                  <span className="text-muted-foreground">{t('msc_calc.exams_entered')}: </span>
                   <span className="font-medium">{examGrades.filter(e => e.completed).length}</span>
                 </div>
                 <div>
-                  <span className="text-muted-foreground">Crediti: </span>
+                  <span className="text-muted-foreground">{t('msc_calc.credits')}: </span>
                   <span className="font-medium">{results.completedCfu}/{results.totalCfu}</span>
                 </div>
               </div>
               {!hasData && (
                 <Button variant="outline" size="sm" onClick={scrollToExams}>
-                  Inserisci voti <ChevronDown className="h-4 w-4 ml-1" />
+                  {t('msc_calc.enter_grades')} <ChevronDown className="h-4 w-4 ml-1" />
                 </Button>
               )}
             </div>
@@ -383,11 +377,11 @@ export function MscGraduationCalculator() {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base">
                     <GraduationCap className="h-5 w-5" />
-                    Punti Tesi
+                    {t('msc_calc.thesis_points')}
                     <Tooltip>
                       <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                       <TooltipContent className="max-w-xs">
-                        <p>Punti assegnati dalla commissione per la tesi di laurea magistrale (0-8 punti).</p>
+                        <p>{t('msc_calc.thesis_tooltip')}</p>
                       </TooltipContent>
                     </Tooltip>
                   </CardTitle>
@@ -415,11 +409,11 @@ export function MscGraduationCalculator() {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base">
                     <Calculator className="h-5 w-5" />
-                    Bonus Aggiuntivi
+                    {t('msc_calc.bonus_points')}
                     <Tooltip>
                       <TooltipTrigger><Info className="h-3.5 w-3.5 text-muted-foreground" /></TooltipTrigger>
                       <TooltipContent className="max-w-xs">
-                        <p>Bonus per exchange, tirocinio o attività extracurriculari. Inserisci un valore numerico.</p>
+                        <p>{t('msc_calc.bonus_tooltip')}</p>
                       </TooltipContent>
                     </Tooltip>
                   </CardTitle>
@@ -435,7 +429,7 @@ export function MscGraduationCalculator() {
                       placeholder="0"
                       className="w-24"
                     />
-                    <span className="text-sm text-muted-foreground">punti</span>
+                    <span className="text-sm text-muted-foreground">{t('msc_calc.points')}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -446,7 +440,7 @@ export function MscGraduationCalculator() {
         {selectedCourse && (!TRACK_COURSES[selectedCourse] || selectedTrack) && !loading && (
           <Card id="msc-exams-section">
             <CardHeader>
-              <CardTitle>Esami - {selectedCourse}</CardTitle>
+              <CardTitle>{t('msc_calc.exams_title')} - {selectedCourse}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -476,13 +470,13 @@ export function MscGraduationCalculator() {
 
                       {exam.completed && !exam.isSeminar && (
                         <div>
-                          <Label className="text-xs text-muted-foreground">Voto</Label>
+                          <Label className="text-xs text-muted-foreground">{t('msc_calc.grade')}</Label>
                           <Select
                             value={exam.grade?.toString() || ""}
                             onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
                           >
                             <SelectTrigger className="mt-1">
-                              <SelectValue placeholder="Seleziona voto" />
+                              <SelectValue placeholder={t('msc_calc.select_grade')} />
                             </SelectTrigger>
                             <SelectContent>
                               {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
@@ -497,7 +491,7 @@ export function MscGraduationCalculator() {
 
                       {exam.completed && exam.isSeminar && (
                         <div className="text-center p-2 bg-muted rounded-md">
-                          <span className="text-xs text-muted-foreground">Pass/Fail - Nessun voto richiesto</span>
+                          <span className="text-xs text-muted-foreground">{t('msc_calc.pass_fail')}</span>
                         </div>
                       )}
                     </div>
@@ -511,14 +505,14 @@ export function MscGraduationCalculator() {
         {loading && (
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-2 text-muted-foreground">Caricamento esami...</p>
+            <p className="mt-2 text-muted-foreground">{t('msc_calc.loading')}</p>
           </div>
         )}
 
         {selectedCourse && (
           <div className="text-center text-xs text-muted-foreground bg-muted/50 rounded-lg p-4">
-            <p>⚠️ Questo è uno strumento di stima. Il voto finale di laurea è determinato dalla commissione di Bocconi.</p>
-            <p className="mt-1">"30 e lode" viene trattato come 31 nel calcolo della media. Voti inferiori a 18 non sono ammessi.</p>
+            <p>{t('msc_calc.disclaimer')}</p>
+            <p className="mt-1">{t('msc_calc.disclaimer2')}</p>
           </div>
         )}
       </div>
