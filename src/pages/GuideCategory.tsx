@@ -196,34 +196,48 @@ const GuideCategory: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center max-w-6xl mx-auto">
-            {guides.map((guide, index) => (
-              <motion.div
-                key={guide.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex flex-col items-center space-y-3"
-              >
-                <a
-                  href={guide.file_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer flex items-center justify-center ${colorClasses}`}
+            {guides.map((guide, index) => {
+              const titleLower = guide.title.toLowerCase();
+              const isItalian = titleLower.includes('guida') || titleLower.includes('ita') || titleLower.endsWith(' it');
+              const isEnglish = titleLower.includes('guide') || titleLower.includes('eng') || titleLower.endsWith(' en');
+              const flagUrl = isItalian ? 'https://flagcdn.com/w80/it.png' : isEnglish ? 'https://flagcdn.com/w80/gb.png' : null;
+
+              return (
+                <motion.div
+                  key={guide.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex flex-col items-center space-y-3"
                 >
-                  <IconComponent size={48} />
-                </a>
-                <p className="text-sm font-medium text-center text-foreground leading-tight max-w-[150px]">
-                  {guide.title}
-                </p>
-                {guide.description && (
-                  <p className="text-xs text-muted-foreground text-center max-w-[150px] line-clamp-2">
-                    {guide.description}
+                  <a
+                    href={guide.file_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer flex items-center justify-center ${colorClasses}`}
+                  >
+                    <IconComponent size={48} />
+                    {flagUrl && (
+                      <img
+                        src={flagUrl}
+                        alt={isItalian ? 'Italiano' : 'English'}
+                        className="absolute -top-2 -right-2 w-7 h-7 rounded-full object-cover border-2 border-white shadow-md"
+                      />
+                    )}
+                  </a>
+                  <p className="text-sm font-medium text-center text-foreground leading-tight max-w-[150px]">
+                    {guide.title}
                   </p>
-                )}
-              </motion.div>
-            ))}
+                  {guide.description && (
+                    <p className="text-xs text-muted-foreground text-center max-w-[150px] line-clamp-2">
+                      {guide.description}
+                    </p>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         )}
       </div>
