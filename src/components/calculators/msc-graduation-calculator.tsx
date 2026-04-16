@@ -212,7 +212,7 @@ export function MscGraduationCalculator() {
   };
 
   const results = calculateResults();
-  const hasData = results.completedCfu > 0;
+  const hasData = examGrades.some(e => e.completed);
 
   const getGradeColor = (grade: number) => {
     if (grade >= 105) return "text-green-600 dark:text-green-400";
