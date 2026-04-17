@@ -223,6 +223,11 @@ const Guide = () => {
             {orderedCategories.map((category, index) => {
               const IconComponent = getCategoryIcon(category);
               const colorClass = getCategoryColor(category);
+              const links = {
+                ...(directDownloadCategories[category] || {}),
+                ...(dynamicLinks[category] || {}),
+              };
+              const hasDirectDownload = directDownloadCategories[category] !== undefined;
               
               return (
                 <motion.div
@@ -231,7 +236,7 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  {directDownloadCategories[category] ? (
+                  {hasDirectDownload ? (
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
                       {categoryCoverMap[category] ? (
                         <div className="relative h-64 overflow-hidden">
