@@ -63,6 +63,7 @@ interface Guide {
 const Guide = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [dynamicLinks, setDynamicLinks] = useState<Record<string, { it?: string; en?: string }>>({});
   const { t } = useLanguage();
 
   const getCategoryTitle = (category: string) => {
@@ -85,7 +86,7 @@ const Guide = () => {
     try {
       const { data, error } = await supabase
         .from('guides')
-        .select('category')
+        .select('category, title, file_url')
         .eq('is_active', true);
 
       if (error) throw error;
@@ -93,6 +94,19 @@ const Guide = () => {
       // Get unique categories
       const uniqueCategories = [...new Set(data?.map(guide => guide.category) || [])];
       setCategories(uniqueCategories);
+
+      // Build dynamic links for ECDL from DB (matched by title language)
+      const ecdlGuides = (data || []).filter(g => g.category === 'ecdl');
+      const ecdlLinks: { it?: string; en?: string } = {};
+      ecdlGuides.forEach(g => {
+        const titleLower = (g.title || '').toLowerCase();
+        if (titleLower.includes('english') || titleLower.includes(' en')) {
+          ecdlLinks.en = g.file_url;
+        } else {
+          ecdlLinks.it = g.file_url;
+        }
+      });
+      setDynamicLinks({ ecdl: ecdlLinks });
     } catch (error) {
       console.error('Error fetching categories:', error);
     } finally {
