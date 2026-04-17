@@ -48,8 +48,8 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
   },
   'ecdl': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ECDL%20IT.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ECDL%20EN.pdf',
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ICDL.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ICDL%20ENGLISH.pdf',
   },
 };
 
