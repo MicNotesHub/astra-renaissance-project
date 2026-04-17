@@ -254,9 +254,9 @@ const Guide = () => {
                               {getCategoryDescription(category)}
                             </p>
                             <div className="flex items-center gap-4">
-                              {directDownloadCategories[category].it && (
+                              {links.it && (
                                 <a
-                                  href={directDownloadCategories[category].it}
+                                  href={links.it}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
@@ -265,9 +265,9 @@ const Guide = () => {
                                   <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
                                 </a>
                               )}
-                              {directDownloadCategories[category].en && (
+                              {links.en && (
                                 <a
-                                  href={directDownloadCategories[category].en}
+                                  href={links.en}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
@@ -290,9 +290,9 @@ const Guide = () => {
                               {getCategoryDescription(category)}
                             </p>
                             <div className="flex items-center gap-4">
-                              {directDownloadCategories[category].it && (
+                              {links.it && (
                                 <a
-                                  href={directDownloadCategories[category].it}
+                                  href={links.it}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
@@ -301,9 +301,9 @@ const Guide = () => {
                                   <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
                                 </a>
                               )}
-                              {directDownloadCategories[category].en && (
+                              {links.en && (
                                 <a
-                                  href={directDownloadCategories[category].en}
+                                  href={links.en}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
