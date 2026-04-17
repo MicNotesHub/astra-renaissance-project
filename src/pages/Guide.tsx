@@ -47,10 +47,7 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   'burocrazia': {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
   },
-  'ecdl': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ICDL.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/ecdl/ICDL%20ENGLISH.pdf',
-  },
+  'ecdl': {},
 };
 
 interface Guide {
@@ -66,6 +63,7 @@ interface Guide {
 const Guide = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [dynamicLinks, setDynamicLinks] = useState<Record<string, { it?: string; en?: string }>>({});
   const { t } = useLanguage();
 
   const getCategoryTitle = (category: string) => {
@@ -88,7 +86,7 @@ const Guide = () => {
     try {
       const { data, error } = await supabase
         .from('guides')
-        .select('category')
+        .select('category, title, file_url')
         .eq('is_active', true);
 
       if (error) throw error;
@@ -96,6 +94,19 @@ const Guide = () => {
       // Get unique categories
       const uniqueCategories = [...new Set(data?.map(guide => guide.category) || [])];
       setCategories(uniqueCategories);
+
+      // Build dynamic links for ECDL from DB (matched by title language)
+      const ecdlGuides = (data || []).filter(g => g.category === 'ecdl');
+      const ecdlLinks: { it?: string; en?: string } = {};
+      ecdlGuides.forEach(g => {
+        const titleLower = (g.title || '').toLowerCase();
+        if (titleLower.includes('english') || titleLower.includes(' en')) {
+          ecdlLinks.en = g.file_url;
+        } else {
+          ecdlLinks.it = g.file_url;
+        }
+      });
+      setDynamicLinks({ ecdl: ecdlLinks });
     } catch (error) {
       console.error('Error fetching categories:', error);
     } finally {
@@ -212,6 +223,11 @@ const Guide = () => {
             {orderedCategories.map((category, index) => {
               const IconComponent = getCategoryIcon(category);
               const colorClass = getCategoryColor(category);
+              const links = {
+                ...(directDownloadCategories[category] || {}),
+                ...(dynamicLinks[category] || {}),
+              };
+              const hasDirectDownload = directDownloadCategories[category] !== undefined;
               
               return (
                 <motion.div
@@ -220,7 +236,7 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  {directDownloadCategories[category] ? (
+                  {hasDirectDownload ? (
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
                       {categoryCoverMap[category] ? (
                         <div className="relative h-64 overflow-hidden">
@@ -238,9 +254,9 @@ const Guide = () => {
                               {getCategoryDescription(category)}
                             </p>
                             <div className="flex items-center gap-4">
-                              {directDownloadCategories[category].it && (
+                              {links.it && (
                                 <a
-                                  href={directDownloadCategories[category].it}
+                                  href={links.it}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
@@ -249,9 +265,9 @@ const Guide = () => {
                                   <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
                                 </a>
                               )}
-                              {directDownloadCategories[category].en && (
+                              {links.en && (
                                 <a
-                                  href={directDownloadCategories[category].en}
+                                  href={links.en}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/60 hover:border-white hover:scale-110 transition-all duration-200 shadow-lg"
@@ -274,9 +290,9 @@ const Guide = () => {
                               {getCategoryDescription(category)}
                             </p>
                             <div className="flex items-center gap-4">
-                              {directDownloadCategories[category].it && (
+                              {links.it && (
                                 <a
-                                  href={directDownloadCategories[category].it}
+                                  href={links.it}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
@@ -285,9 +301,9 @@ const Guide = () => {
                                   <img src="https://flagcdn.com/w80/it.png" alt="Italiano" className="w-full h-full object-cover" />
                                 </a>
                               )}
-                              {directDownloadCategories[category].en && (
+                              {links.en && (
                                 <a
-                                  href={directDownloadCategories[category].en}
+                                  href={links.en}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-9 h-9 rounded-full overflow-hidden border-2 border-current/40 hover:scale-110 transition-all duration-200"
