@@ -43,8 +43,25 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Legal - Right */}
+          {/* Socials + Legal - Right */}
           <div className="md:text-right">
+            <h3 className="text-xl font-semibold mb-6 text-yellow-400">Socials</h3>
+            <div className="flex space-x-4 md:justify-end mb-8">
+              {socialLinks.map((social) => (
+                <Button
+                  key={social.label}
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-white/10 hover:text-white p-2"
+                  asChild
+                >
+                  <a href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer">
+                    <social.icon className="h-5 w-5" />
+                  </a>
+                </Button>
+              ))}
+            </div>
+
             <h3 className="text-xl font-semibold mb-6 text-yellow-400">Legal</h3>
             <PrivacyPolicyDialog>
               <Button
@@ -60,22 +77,6 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-8 flex flex-col items-center">
-          <div className="flex space-x-4 justify-center mb-4">
-            {socialLinks.map((social) => (
-              <Button
-                key={social.label}
-                variant="ghost"
-                size="sm"
-                className="text-white hover:bg-white/10 hover:text-white p-2"
-                asChild
-              >
-                <a href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer">
-                  <social.icon className="h-5 w-5" />
-                </a>
-              </Button>
-            ))}
-          </div>
-          
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center">
               <img 
