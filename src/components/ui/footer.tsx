@@ -45,7 +45,7 @@ export function Footer() {
 
           {/* Socials + Legal - Right */}
           <div className="md:text-right">
-            <h3 className="text-xl font-semibold mb-6 text-yellow-400">Socials</h3>
+            <h3 className="text-xl font-semibold mb-6 text-yellow-400">Social</h3>
             <div className="flex space-x-4 md:justify-end mb-8">
               {socialLinks.map((social) => (
                 <Button
