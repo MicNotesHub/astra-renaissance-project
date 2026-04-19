@@ -27,12 +27,12 @@ export function Footer() {
                   <p className="text-white">{t('footer.addressValue')}</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <Mail className="h-5 w-5 mr-3 mt-1 text-white/80" />
                 <div>
                   <p className="text-white/80 text-sm">{t('footer.email')}</p>
-                  <a 
+                  <a
                     href="mailto:info@astrabocconi.com"
                     className="text-white hover:text-white/80 transition-smooth"
                   >
@@ -79,99 +79,22 @@ export function Footer() {
         <div className="border-t border-white/20 pt-8 flex flex-col items-center">
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center">
-              <img 
-                src="/astra-logo-blue.png" 
-                alt="ASTRA Bocconi Logo" 
+              <img
+                src="/astra-logo-blue.png"
+                alt="ASTRA Bocconi Logo"
                 className="h-8 w-8 mr-3"
               />
               <p className="text-white/60 text-sm">
                 {t('footer.copyright')}
               </p>
             </div>
-            <a 
-              href="https://michelematozza.com" 
-              target="_blank" 
+            <a
+              href="https://michelematozza.com"
+              target="_blank"
               rel="noopener"
               className="text-white/20 text-[10px] hover:text-white/30 transition-colors"
             >
               {t('footer.developedBy')}
-            </a>
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <MapPin className="h-5 w-5 mr-3 mt-1 text-white/80" />
-                <div>
-                  <p className="text-white/80 text-sm">Indirizzo:</p>
-                  <p className="text-white">Via Sarfatti 25, Milano (MI)</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <Mail className="h-5 w-5 mr-3 mt-1 text-white/80" />
-                <div>
-                  <p className="text-white/80 text-sm">Email:</p>
-                  <a 
-                    href="mailto:info@astrabocconi.com"
-                    className="text-white hover:text-white/80 transition-smooth"
-                  >
-                    info@astrabocconi.com
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Socials + Legal - Right */}
-          <div className="md:text-right">
-            <h3 className="text-xl font-semibold mb-6 text-yellow-400">Social</h3>
-            <div className="flex space-x-4 md:justify-end mb-8">
-              {socialLinks.map((social) => (
-                <Button
-                  key={social.label}
-                  variant="ghost"
-                  size="sm"
-                  className="text-white hover:bg-white/10 hover:text-white p-2"
-                  asChild
-                >
-                  <a href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer">
-                    <social.icon className="h-5 w-5" />
-                  </a>
-                </Button>
-              ))}
-            </div>
-
-            <h3 className="text-xl font-semibold mb-6 text-yellow-400">Legal</h3>
-            <PrivacyPolicyDialog>
-              <Button
-                variant="outline"
-                size="sm"
-                className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white"
-              >
-                Privacy Policy
-              </Button>
-            </PrivacyPolicyDialog>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-white/20 pt-8 flex flex-col items-center">
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex items-center">
-              <img 
-                src="/astra-logo-blue.png" 
-                alt="ASTRA Bocconi Logo" 
-                className="h-8 w-8 mr-3"
-              />
-              <p className="text-white/60 text-sm">
-                Copyright © 2026 Astra Bocconi
-              </p>
-            </div>
-            <a 
-              href="https://michelematozza.com" 
-              target="_blank" 
-              rel="noopener"
-              className="text-white/20 text-[10px] hover:text-white/30 transition-colors"
-            >
-              developed by Michele F. Matozza
             </a>
           </div>
         </div>
