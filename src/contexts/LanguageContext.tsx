@@ -238,9 +238,15 @@ const translations = {
     'footer.handouts': 'Dispense',
     'footer.calculators': 'Calcolatori',
     'footer.guides': 'Guide',
-    'footer.contact': 'Contatti',
+    'footer.contact': 'Contattaci',
     'footer.faq': 'FAQ',
-    'footer.privacy': 'Privacy',
+    'footer.privacy': 'Privacy Policy',
+    'footer.address': 'Indirizzo:',
+    'footer.addressValue': 'Via Sarfatti 5, Milano (MI)',
+    'footer.email': 'Email:',
+    'footer.legal': 'Legal',
+    'footer.copyright': 'Copyright © 2026 Astra Bocconi',
+    'footer.developedBy': 'sviluppato da Michele F. Matozza',
     
     // Guide Categories
     'guide.title': 'Guide Universitarie',
