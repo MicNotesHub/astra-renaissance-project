@@ -646,9 +646,15 @@ const translations = {
     'footer.handouts': 'Handouts',
     'footer.calculators': 'Calculators',
     'footer.guides': 'Guides',
-    'footer.contact': 'Contact',
+    'footer.contact': 'Contact Us',
     'footer.faq': 'FAQ',
-    'footer.privacy': 'Privacy',
+    'footer.privacy': 'Privacy Policy',
+    'footer.address': 'Address:',
+    'footer.addressValue': 'Via Sarfatti 5, Milan (MI)',
+    'footer.email': 'Email:',
+    'footer.legal': 'Legal',
+    'footer.copyright': 'Copyright © 2026 Astra Bocconi',
+    'footer.developedBy': 'developed by Michele F. Matozza',
     
     // Guide Categories
     'guide.title': 'University Guides',
