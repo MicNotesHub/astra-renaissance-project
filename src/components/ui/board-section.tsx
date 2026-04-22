@@ -29,18 +29,18 @@ export const BoardSection = () => {
   return (
     <section className="py-10 bg-background">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-foreground">
-        {t("board.title") || "Our Board"}
+        {t("board.title")}
       </h2>
       <div
         className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
       >
-        <div className="flex gap-4 px-4 pb-2" style={{ width: "max-content" }}>
+        <div className="flex gap-4 px-6 pb-2" style={{ width: "max-content" }}>
           {slides.map((s, i) => (
             <div
               key={i}
               className="snap-start shrink-0 overflow-hidden rounded-2xl shadow-lg"
-              style={{ width: "min(70vw, 480px)", aspectRatio: "4 / 5" }}
+              style={{ width: "min(40vw, 320px)", aspectRatio: "4 / 5" }}
             >
               <img
                 src={s.src}
