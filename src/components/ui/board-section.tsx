@@ -11,7 +11,7 @@ import img8 from "@/assets/board/08-conferences.jpg";
 import img9 from "@/assets/board/09-sport.jpg";
 import img10 from "@/assets/board/10-events.jpg";
 
-const slides = [
+const baseSlides = [
   { src: img1, alt: "Presidents" },
   { src: img2, alt: "Executive" },
   { src: img3, alt: "Representation" },
@@ -24,18 +24,49 @@ const slides = [
   { src: img10, alt: "Events" },
 ];
 
+// Duplicate slides to create a seamless looping carousel feel
+const slides = [...baseSlides, ...baseSlides, ...baseSlides];
+
 export const BoardSection = () => {
   const { t } = useLanguage();
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  // Start scrolled to the middle copy so the user can scroll left or right seamlessly
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollLeft = el.scrollWidth / 3;
+  }, []);
+
+  // When the user scrolls near either end, jump back to the middle copy invisibly
+  const handleScroll = React.useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const third = el.scrollWidth / 3;
+    if (el.scrollLeft <= third * 0.1) {
+      el.scrollLeft += third;
+    } else if (el.scrollLeft >= third * 1.9) {
+      el.scrollLeft -= third;
+    }
+  }, []);
+
   return (
     <section className="py-10 bg-background">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-foreground">
         {t("board.title")}
       </h2>
       <div
-        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth px-[5vw]"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          scrollPaddingLeft: "5vw",
+          scrollPaddingRight: "5vw",
+        } as React.CSSProperties}
       >
-        <div className="flex gap-4 pl-[5vw] pr-[5vw] pb-2" style={{ width: "max-content" }}>
+        <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
           {slides.map((s, i) => (
             <div
               key={i}
