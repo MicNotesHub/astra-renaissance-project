@@ -31,11 +31,28 @@ export const BoardSection = () => {
   const { t } = useLanguage();
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  const recenter = React.useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
-    el.scrollLeft = el.scrollWidth / 3;
+    // Land exactly at the start of the second copy so "Presidents" is the
+    // first visible card with no previous slide peeking on the left.
+    el.scrollTo({ left: el.scrollWidth / 3, behavior: "instant" as ScrollBehavior });
   }, []);
+
+  React.useLayoutEffect(() => {
+    recenter();
+    // Re-center once images have loaded (scrollWidth depends on layout).
+    const imgs = scrollRef.current?.querySelectorAll("img") ?? [];
+    let pending = 0;
+    imgs.forEach((img) => {
+      if (!img.complete) {
+        pending += 1;
+        img.addEventListener("load", recenter, { once: true });
+        img.addEventListener("error", recenter, { once: true });
+      }
+    });
+    if (pending === 0) recenter();
+  }, [recenter]);
 
   const handleScroll = React.useCallback(() => {
     const el = scrollRef.current;
