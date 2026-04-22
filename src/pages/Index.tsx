@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/ui/navigation";
 import { HeroSection } from "@/components/ui/hero-section";
+import { BoardSection } from "@/components/ui/board-section";
 import { DispensenSection } from "@/components/ui/dispensen-section";
 import { MasterResultsSection } from "@/components/ui/master-results-section";
 import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
@@ -12,6 +13,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <HeroSection />
+      <BoardSection />
       
       <MasterResultsSection />
       <DispensenSection />
