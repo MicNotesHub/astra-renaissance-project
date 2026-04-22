@@ -24,24 +24,23 @@ const baseSlides = [
   { src: img10, alt: "Events" },
 ];
 
-// Duplicate slides to create a seamless looping carousel feel
 const slides = [...baseSlides, ...baseSlides, ...baseSlides];
+const SIDE_PADDING = "clamp(20px, 5vw, 56px)";
 
 export const BoardSection = () => {
   const { t } = useLanguage();
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
-  // Start scrolled to the middle copy so the user can scroll left or right seamlessly
   React.useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollLeft = el.scrollWidth / 3;
   }, []);
 
-  // When the user scrolls near either end, jump back to the middle copy invisibly
   const handleScroll = React.useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
+
     const third = el.scrollWidth / 3;
     if (el.scrollLeft <= third * 0.1) {
       el.scrollLeft += third;
@@ -52,35 +51,37 @@ export const BoardSection = () => {
 
   return (
     <section className="py-10 bg-background">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-foreground">
+      <h2 className="mb-8 text-center text-3xl font-bold text-foreground md:text-4xl">
         {t("board.title")}
       </h2>
-      <div
-        ref={scrollRef}
-        onScroll={handleScroll}
-        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth px-[5vw]"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          scrollPaddingLeft: "5vw",
-          scrollPaddingRight: "5vw",
-        } as React.CSSProperties}
-      >
-        <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
-          {slides.map((s, i) => (
-            <div
-              key={i}
-              className="snap-start shrink-0 overflow-hidden rounded-2xl shadow-lg"
-              style={{ width: "min(40vw, 320px)", aspectRatio: "4 / 5" }}
-            >
-              <img
-                src={s.src}
-                alt={s.alt}
-                className="w-full h-full object-cover"
-                draggable={false}
-              />
-            </div>
-          ))}
+      <div className="w-full" style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}>
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            scrollPaddingLeft: SIDE_PADDING,
+            scrollPaddingRight: SIDE_PADDING,
+          } as React.CSSProperties}
+        >
+          <div className="flex w-max gap-4 pb-2">
+            {slides.map((s, i) => (
+              <div
+                key={`${s.alt}-${i}`}
+                className="snap-start shrink-0 overflow-hidden rounded-2xl shadow-lg"
+                style={{ width: "min(40vw, 320px)", aspectRatio: "4 / 5" }}
+              >
+                <img
+                  src={s.src}
+                  alt={s.alt}
+                  className="h-full w-full object-cover"
+                  draggable={false}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
