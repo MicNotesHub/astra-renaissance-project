@@ -35,7 +35,7 @@ export const BoardSection = () => {
         className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
       >
-        <div className="flex gap-8 px-8 pb-2" style={{ width: "max-content" }}>
+        <div className="flex gap-4 pl-6 pr-6 pb-2" style={{ width: "max-content" }}>
           {slides.map((s, i) => (
             <div
               key={i}
