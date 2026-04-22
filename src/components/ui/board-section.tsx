@@ -35,12 +35,12 @@ export const BoardSection = () => {
         className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
       >
-        <div className="flex gap-4 pl-4 pr-6 pb-2" style={{ width: "max-content" }}>
+        <div className="flex gap-4 px-6 pb-2" style={{ width: "max-content" }}>
           {slides.map((s, i) => (
             <div
               key={i}
               className="snap-start shrink-0 overflow-hidden rounded-2xl shadow-lg"
-              style={{ width: "min(80vw, 640px)", aspectRatio: "4 / 5" }}
+              style={{ width: "min(40vw, 320px)", aspectRatio: "4 / 5" }}
             >
               <img
                 src={s.src}
