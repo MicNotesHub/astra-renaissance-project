@@ -1,4 +1,4 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import * as React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import img1 from "@/assets/board/01-presidents.jpg";
 import img2 from "@/assets/board/02-executive.jpg";
