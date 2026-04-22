@@ -28,30 +28,29 @@ export const BoardSection = () => {
   const { t } = useLanguage();
   return (
     <section className="py-10 bg-background">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-foreground">
-          {t("board.title") || "Board"}
-        </h2>
-        <Carousel
-          opts={{ align: "start", loop: true }}
-          className="w-full max-w-6xl mx-auto"
-        >
-          <CarouselContent>
-            {slides.map((s, i) => (
-              <CarouselItem key={i} className="basis-4/5 sm:basis-1/2 lg:basis-1/3">
-                <div className="overflow-hidden rounded-2xl shadow-lg aspect-[4/5]">
-                  <img
-                    src={s.src}
-                    alt={s.alt}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
-        </Carousel>
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-foreground">
+        {t("board.title") || "Our Board"}
+      </h2>
+      <div
+        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+      >
+        <div className="flex gap-4 px-4 pb-2" style={{ width: "max-content" }}>
+          {slides.map((s, i) => (
+            <div
+              key={i}
+              className="snap-start shrink-0 overflow-hidden rounded-2xl shadow-lg"
+              style={{ width: "min(70vw, 480px)", aspectRatio: "4 / 5" }}
+            >
+              <img
+                src={s.src}
+                alt={s.alt}
+                className="w-full h-full object-cover"
+                draggable={false}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
