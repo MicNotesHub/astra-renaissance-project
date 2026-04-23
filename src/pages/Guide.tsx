@@ -93,6 +93,17 @@ const Guide = () => {
       
       // Get unique categories
       const uniqueCategories = [...new Set(data?.map(guide => guide.category) || [])];
+
+      // Check if there are any language handouts and inject the synthetic 'languages' category
+      const { data: langData } = await supabase
+        .from('handouts')
+        .select('id')
+        .ilike('subject', 'languages')
+        .limit(1);
+      if (langData && langData.length > 0 && !uniqueCategories.includes('languages')) {
+        uniqueCategories.push('languages');
+      }
+
       setCategories(uniqueCategories);
 
       // Build dynamic links for ECDL from DB (matched by title language)
