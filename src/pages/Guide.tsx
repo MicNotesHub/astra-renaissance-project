@@ -16,6 +16,7 @@ import masterAdmissionsCover from "@/assets/guide-covers/master-admissions.jpg";
 import linkedinCover from "@/assets/guide-covers/linkedin.jpg";
 import languagesCover from "@/assets/guide-covers/languages.jpg";
 import exchangeCover from "@/assets/guide-covers/exchange.jpg";
+import bglCover from "@/assets/guide-covers/bgl.jpg";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
@@ -28,6 +29,7 @@ const categoryCoverMap: Record<string, string> = {
   'languages': languagesCover,
   'exchange_triennale': exchangeCover,
   'exchange_magistrale': exchangeCover,
+  'bgl_domestic_track': bglCover,
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
