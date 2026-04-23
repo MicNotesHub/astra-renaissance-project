@@ -299,6 +299,8 @@ const translations = {
     'category.languages.title': 'Lingue',
     'category.languages.description': 'Esercizi e materiali per imparare le lingue',
     'category.languages.pageTitle': 'Lingue: esercizi e materiali per le tue lingue!',
+    'category.bgl_domestic_track.title': 'BGL Domestic Track',
+    'category.bgl_domestic_track.description': 'Guida al percorso BGL Domestic Track',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Torna alle Guide',
@@ -721,6 +723,8 @@ const translations = {
     'category.languages.title': 'Languages',
     'category.languages.description': 'Exercises and materials to learn languages',
     'category.languages.pageTitle': 'Languages: exercises and materials for your languages!',
+    'category.bgl_domestic_track.title': 'BGL Domestic Track',
+    'category.bgl_domestic_track.description': 'Guide to the BGL Domestic Track path',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Back to Guides',

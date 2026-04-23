@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin, Languages } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin, Languages, Scale } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -63,6 +63,11 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
   },
   'ecdl': {},
+};
+
+// Categories with a single, language-agnostic file. The whole card opens the PDF.
+const singleFileDownloadCategories: Record<string, string> = {
+  'bgl_domestic_track': 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/dispense-uploads/BGL%20domestic%20track%20Guide.pdf',
 };
 
 interface Guide {
@@ -160,7 +165,8 @@ const Guide = () => {
       'spring weeks': Briefcase,
       'funding': DollarSign,
       'linkedin': Linkedin,
-      'languages': Languages
+      'languages': Languages,
+      'bgl_domestic_track': Scale
     };
     return iconMap[category] || Globe;
   };
@@ -184,7 +190,8 @@ const Guide = () => {
       'spring weeks': 'text-violet-500 bg-violet-50 hover:bg-violet-100',
       'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100',
       'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100',
-      'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100'
+      'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100',
+      'bgl_domestic_track': 'text-red-600 bg-red-50 hover:bg-red-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
@@ -208,6 +215,7 @@ const Guide = () => {
     'milan',
     'burocrazia',
     'master_admissions',
+    'bgl_domestic_track',
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
@@ -257,7 +265,8 @@ const Guide = () => {
                 ...(dynamicLinks[category] || {}),
               };
               const hasDirectDownload = directDownloadCategories[category] !== undefined;
-              
+              const singleFileUrl = singleFileDownloadCategories[category];
+
               return (
                 <motion.div
                   key={category}
@@ -265,7 +274,26 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  {hasDirectDownload ? (
+                  {singleFileUrl ? (
+                    <a href={singleFileUrl} target="_blank" rel="noopener noreferrer">
+                      <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
+                        <div className={`relative h-64 overflow-hidden ${colorClass}`}>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                            <IconComponent className="w-12 h-12 mb-3 opacity-90" />
+                            <h3 className="text-2xl font-bold drop-shadow-lg mb-1 text-center">
+                              {getCategoryTitle(category)}
+                            </h3>
+                            <p className="text-sm opacity-80 text-center mb-4 px-2">
+                              {getCategoryDescription(category)}
+                            </p>
+                            <span className="text-sm border border-current/30 rounded-md px-4 py-2 opacity-80">
+                              {t('guide.explore')}
+                            </span>
+                          </div>
+                        </div>
+                      </Card>
+                    </a>
+                  ) : hasDirectDownload ? (
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
                       {categoryCoverMap[category] ? (
                         <div className="relative h-64 overflow-hidden">
