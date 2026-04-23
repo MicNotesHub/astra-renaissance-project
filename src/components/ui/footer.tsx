@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Instagram, Linkedin, MapPin, Video } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PrivacyPolicyDialog } from "@/components/ui/privacy-policy-dialog";
+import vangogh from "@/assets/astra-vangogh.jpg";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -13,8 +14,12 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-primary text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <footer
+      className="relative text-white bg-primary bg-cover bg-no-repeat"
+      style={{ backgroundImage: `url(${vangogh})`, backgroundPosition: "center top" }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(225_70%_10%/0.75)] via-[hsl(225_75%_8%/0.8)] to-[hsl(225_80%_6%/0.9)]" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid md:grid-cols-2 gap-12 mb-12">
           {/* Contattaci - Left */}
           <div>
