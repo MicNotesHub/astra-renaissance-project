@@ -144,7 +144,8 @@ const Guide = () => {
       'ecdl': Monitor,
       'spring weeks': Briefcase,
       'funding': DollarSign,
-      'linkedin': Linkedin
+      'linkedin': Linkedin,
+      'languages': Languages
     };
     return iconMap[category] || Globe;
   };
@@ -167,7 +168,8 @@ const Guide = () => {
       'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100',
       'spring weeks': 'text-violet-500 bg-violet-50 hover:bg-violet-100',
       'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100',
-      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100'
+      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
