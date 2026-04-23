@@ -22,6 +22,11 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import stellaPolareHero from "@/assets/stella-polare-hero.png";
 import sportCover from "@/assets/stella-polare-sport-cover.jpeg";
+import internationalCover from "@/assets/stella-polare-covers/international.jpg";
+import astraNewsCover from "@/assets/stella-polare-covers/astranews.jpg";
+import legalCover from "@/assets/stella-polare-covers/legal.jpg";
+import economicsCover from "@/assets/stella-polare-covers/economics.jpg";
+import arteCulturaCover from "@/assets/stella-polare-covers/arte-cultura.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
@@ -201,12 +206,12 @@ export default function StellaPolare() {
   }, [weeklyArticles, activeTheme]);
 
   const themes: { key: WeeklyTheme; icon: typeof Palette; gradient: string; cover?: string }[] = [
-    { key: "arte", icon: Palette, gradient: "from-rose-500/20 to-orange-500/20" },
-    { key: "economia", icon: TrendingUp, gradient: "from-emerald-500/20 to-teal-500/20" },
-    { key: "international", icon: Globe2, gradient: "from-sky-500/20 to-indigo-500/20" },
-    { key: "legal", icon: Scale, gradient: "from-amber-500/20 to-yellow-500/20" },
+    { key: "international", icon: Globe2, gradient: "from-sky-500/20 to-indigo-500/20", cover: internationalCover },
+    { key: "astranews", icon: Newspaper, gradient: "from-blue-500/20 to-cyan-500/20", cover: astraNewsCover },
+    { key: "legal", icon: Scale, gradient: "from-amber-500/20 to-yellow-500/20", cover: legalCover },
+    { key: "economia", icon: TrendingUp, gradient: "from-emerald-500/20 to-teal-500/20", cover: economicsCover },
+    { key: "arte", icon: Palette, gradient: "from-rose-500/20 to-orange-500/20", cover: arteCulturaCover },
     { key: "sport", icon: Trophy, gradient: "from-muted/40 to-muted/20", cover: sportCover },
-    { key: "astranews", icon: Newspaper, gradient: "from-blue-500/20 to-cyan-500/20" },
   ];
 
   const goHome = () => {
