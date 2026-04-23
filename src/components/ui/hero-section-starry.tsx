@@ -86,18 +86,18 @@ export function HeroSectionStarry() {
             }}
           >
             <svg
-              width="18"
-              height="18"
+              width="8"
+              height="8"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               style={{
-                filter: "drop-shadow(0 0 6px rgba(253, 224, 71, 0.9))",
+                filter: "drop-shadow(0 0 4px rgba(250, 204, 21, 1))",
               }}
             >
               <path
                 d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z"
-                fill="#FDE68A"
+                fill="#FDE047"
               />
             </svg>
           </span>
