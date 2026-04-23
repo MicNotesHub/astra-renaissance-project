@@ -127,7 +127,7 @@ export const DispensenSection = () => {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">{t('handouts.loading')}</p>
+            <p className="text-white/80">{t('handouts.loading')}</p>
           </div>
         ) : (
           <>
