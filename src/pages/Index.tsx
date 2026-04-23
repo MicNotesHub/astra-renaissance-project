@@ -19,6 +19,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <HeroSection />
+      <HeroSectionStarry />
       <BoardSection />
 
       {/* Painting placement previews — temporary showcase */}
