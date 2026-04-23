@@ -82,8 +82,14 @@ export const DispensenSection = () => {
   };
 
   return (
-    <section id="dispensen" className="py-12 bg-gradient-subtle">
-      <div className="container mx-auto px-4">
+    <section
+      id="dispensen"
+      className="relative py-12 bg-fixed bg-cover bg-center"
+      style={{ backgroundImage: `url(${painting})` }}
+    >
+      {/* Tinted overlay for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(225_70%_12%/0.85)] via-[hsl(225_75%_10%/0.8)] to-[hsl(225_80%_8%/0.92)]" />
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 30 }} 
           whileInView={{ opacity: 1, y: 0 }} 
@@ -91,11 +97,11 @@ export const DispensenSection = () => {
           transition={{ duration: 0.8 }} 
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text flex items-center justify-center gap-3">
-            <GraduationCap className="h-12 w-12 text-primary" />
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg flex items-center justify-center gap-3">
+            <GraduationCap className="h-12 w-12 text-yellow-300" />
             {t('handouts.title')}
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-white/85 max-w-3xl mx-auto drop-shadow">
             {t('handouts.subtitle')}
           </p>
         </motion.div>
