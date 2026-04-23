@@ -109,12 +109,49 @@ const themeMatchers: Record<WeeklyTheme, (val: string) => boolean> = {
   sport: (v) => /(sport)/i.test(v),
 };
 
+const STORAGE_KEY = "stellaPolare:lastView";
+
+interface StoredView {
+  view: MainView;
+  activeTheme: WeeklyTheme | null;
+}
+
 export default function StellaPolare() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState<MainView>("home");
-  const [activeTheme, setActiveTheme] = useState<WeeklyTheme | null>(null);
+  const [view, setView] = useState<MainView>(() => {
+    if (typeof window === "undefined") return "home";
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return "home";
+      return (JSON.parse(raw) as StoredView).view ?? "home";
+    } catch {
+      return "home";
+    }
+  });
+  const [activeTheme, setActiveTheme] = useState<WeeklyTheme | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return (JSON.parse(raw) as StoredView).activeTheme ?? null;
+    } catch {
+      return null;
+    }
+  });
   const { t } = useLanguage();
+
+  // Persist current view so we can restore it after visiting an article.
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ view, activeTheme } satisfies StoredView)
+      );
+    } catch {
+      /* ignore */
+    }
+  }, [view, activeTheme]);
 
   useEffect(() => {
     const fetchArticles = async () => {
