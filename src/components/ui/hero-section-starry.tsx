@@ -21,16 +21,16 @@ export function HeroSectionStarry() {
       drift: number;
       yellow: boolean;
     }>;
-    const total = 90;
+    const total = 220;
     for (let i = 0; i < total; i++) {
       arr.push({
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
-        size: Math.random() * 2.5 + 1, // 1px – 3.5px
+        size: Math.random() * 3 + 1.2, // 1.2px – 4.2px
         delay: Math.random() * 5,
-        duration: 2 + Math.random() * 3, // 2s – 5s twinkle
-        drift: 6 + Math.random() * 10, // px of slow drift
-        yellow: Math.random() < 0.35, // ~35% are eye-catching yellow
+        duration: 1.8 + Math.random() * 2.8,
+        drift: 6 + Math.random() * 12,
+        yellow: Math.random() < 0.65, // ~65% bright yellow
       });
     }
     return arr;
@@ -38,7 +38,7 @@ export function HeroSectionStarry() {
 
   // A handful of larger "hero" stars with cross sparkle
   const sparkleStars = useMemo(() => {
-    return Array.from({ length: 8 }).map(() => ({
+    return Array.from({ length: 16 }).map(() => ({
       top: `${10 + Math.random() * 80}%`,
       left: `${10 + Math.random() * 80}%`,
       delay: Math.random() * 4,
@@ -47,15 +47,18 @@ export function HeroSectionStarry() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#03040f]">
-      {/* Deep night sky base */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#04061a] via-[#0a1240] to-[#020416]" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050826]">
+      {/* Deep, vivid night sky base — richer royal/cobalt blue */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,_#1e3a8a_0%,_#0b1a5e_35%,_#070a30_70%,_#02030f_100%)]" />
 
-      {/* Animated aurora gradient layer */}
-      <div className="absolute inset-0 opacity-70 mix-blend-screen animate-aurora bg-[linear-gradient(120deg,_rgba(56,189,248,0.35)_0%,_rgba(99,102,241,0.25)_25%,_rgba(16,185,129,0.25)_50%,_rgba(168,85,247,0.3)_75%,_rgba(56,189,248,0.35)_100%)] bg-[length:300%_300%]" />
+      {/* Animated aurora gradient layer — punchier teal/indigo/magenta */}
+      <div className="absolute inset-0 opacity-80 mix-blend-screen animate-aurora bg-[linear-gradient(120deg,_rgba(34,211,238,0.55)_0%,_rgba(99,102,241,0.5)_25%,_rgba(16,185,129,0.45)_50%,_rgba(217,70,239,0.5)_75%,_rgba(34,211,238,0.55)_100%)] bg-[length:300%_300%]" />
 
       {/* Secondary aurora wave */}
-      <div className="absolute inset-0 opacity-40 mix-blend-screen animate-aurora-slow bg-[radial-gradient(ellipse_at_30%_40%,_rgba(34,211,238,0.4),_transparent_60%),radial-gradient(ellipse_at_70%_60%,_rgba(139,92,246,0.35),_transparent_60%)]" />
+      <div className="absolute inset-0 opacity-60 mix-blend-screen animate-aurora-slow bg-[radial-gradient(ellipse_at_25%_35%,_rgba(56,189,248,0.6),_transparent_55%),radial-gradient(ellipse_at_75%_65%,_rgba(168,85,247,0.55),_transparent_55%),radial-gradient(ellipse_at_50%_85%,_rgba(16,185,129,0.35),_transparent_60%)]" />
+
+      {/* Warm golden glow to make yellow stars pop */}
+      <div className="absolute inset-0 opacity-30 mix-blend-screen bg-[radial-gradient(ellipse_at_50%_50%,_rgba(250,204,21,0.18),_transparent_70%)]" />
 
       {/* Stars layer */}
       <div className="absolute inset-0">
@@ -68,10 +71,10 @@ export function HeroSectionStarry() {
               left: s.left,
               width: `${s.size}px`,
               height: `${s.size}px`,
-              backgroundColor: s.yellow ? "#FDE68A" : "#E0F2FE",
+              backgroundColor: s.yellow ? "#FEF08A" : "#F0F9FF",
               boxShadow: s.yellow
-                ? `0 0 ${s.size * 3}px rgba(253, 224, 71, 0.9), 0 0 ${s.size * 6}px rgba(250, 204, 21, 0.5)`
-                : `0 0 ${s.size * 2}px rgba(186, 230, 253, 0.7)`,
+                ? `0 0 ${s.size * 4}px rgba(250, 204, 21, 1), 0 0 ${s.size * 8}px rgba(253, 224, 71, 0.8), 0 0 ${s.size * 14}px rgba(250, 204, 21, 0.4)`
+                : `0 0 ${s.size * 3}px rgba(186, 230, 253, 0.9), 0 0 ${s.size * 6}px rgba(125, 211, 252, 0.5)`,
               animationDelay: `${s.delay}s`,
               animationDuration: `${s.duration}s`,
               ["--drift" as any]: `${s.drift}px`,
