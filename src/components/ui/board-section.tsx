@@ -32,62 +32,100 @@ const baseSlides = [
   { src: img14, alt: "Career Service" },
 ];
 
+// Triple buffer so we can seamlessly wrap forward and backward.
 const slides = [...baseSlides, ...baseSlides, ...baseSlides];
 const SIDE_PADDING = "clamp(20px, 5vw, 56px)";
+// Pixels per second for the auto-scrolling marquee.
+const AUTO_SPEED = 40;
 
 export const BoardSection = () => {
   const { t } = useLanguage();
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const pausedRef = React.useRef(false);
+  const rafRef = React.useRef<number | null>(null);
+  const lastTimeRef = React.useRef<number | null>(null);
 
-  const recenter = React.useCallback(() => {
+  // Recenter into the middle copy without animation. Used on mount and to
+  // wrap seamlessly when we cross a boundary.
+  const wrapIfNeeded = React.useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
-    // Land exactly at the start of the second copy so "Presidents" is the
-    // first visible card with no previous slide peeking on the left.
-    el.scrollTo({ left: el.scrollWidth / 3, behavior: "instant" as ScrollBehavior });
-  }, []);
-
-  React.useLayoutEffect(() => {
-    recenter();
-    // Re-center once images have loaded (scrollWidth depends on layout).
-    const imgs = scrollRef.current?.querySelectorAll("img") ?? [];
-    let pending = 0;
-    imgs.forEach((img) => {
-      if (!img.complete) {
-        pending += 1;
-        img.addEventListener("load", recenter, { once: true });
-        img.addEventListener("error", recenter, { once: true });
-      }
-    });
-    if (pending === 0) recenter();
-  }, [recenter]);
-
-  const handleScroll = React.useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
     const third = el.scrollWidth / 3;
-    if (el.scrollLeft <= third * 0.1) {
-      el.scrollLeft += third;
-    } else if (el.scrollLeft >= third * 1.9) {
+    if (!third) return;
+    if (el.scrollLeft >= third * 2) {
       el.scrollLeft -= third;
+    } else if (el.scrollLeft < third) {
+      el.scrollLeft += third;
     }
   }, []);
 
-  // Translate vertical mouse-wheel scroll into horizontal scroll so desktop
-  // users (with a regular mouse, not a trackpad) can browse the carousel.
+  // Initial centering on the middle copy.
+  React.useLayoutEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const center = () => {
+      el.scrollLeft = el.scrollWidth / 3;
+    };
+    center();
+    const imgs = el.querySelectorAll("img");
+    imgs.forEach((img) => {
+      if (!img.complete) {
+        img.addEventListener("load", center, { once: true });
+        img.addEventListener("error", center, { once: true });
+      }
+    });
+  }, []);
+
+  // Continuous auto-scroll loop — true infinite marquee feel.
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const tick = (time: number) => {
+      if (lastTimeRef.current == null) lastTimeRef.current = time;
+      const dt = (time - lastTimeRef.current) / 1000;
+      lastTimeRef.current = time;
+      if (!pausedRef.current) {
+        el.scrollLeft += AUTO_SPEED * dt;
+        wrapIfNeeded();
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+      lastTimeRef.current = null;
+    };
+  }, [wrapIfNeeded]);
+
+  // Translate vertical mouse-wheel scroll into horizontal scroll.
   React.useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
-      // Ignore if the user is intentionally scrolling horizontally already.
       if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
       e.preventDefault();
       el.scrollLeft += e.deltaY;
+      wrapIfNeeded();
     };
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
-  }, []);
+  }, [wrapIfNeeded]);
+
+  // Wrap on every scroll event to handle drag/touch/keyboard scrolling too.
+  const handleScroll = React.useCallback(() => {
+    wrapIfNeeded();
+  }, [wrapIfNeeded]);
+
+  const pause = () => {
+    pausedRef.current = true;
+  };
+  const resume = () => {
+    pausedRef.current = false;
+    lastTimeRef.current = null;
+  };
 
   const scrollByCard = (direction: 1 | -1) => {
     const el = scrollRef.current;
@@ -102,7 +140,14 @@ export const BoardSection = () => {
       <h2 className="mb-8 text-center text-3xl font-bold text-foreground md:text-4xl">
         {t("board.title")}
       </h2>
-      <div className="relative w-full" style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}>
+      <div
+        className="relative w-full"
+        style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}
+        onMouseEnter={pause}
+        onMouseLeave={resume}
+        onTouchStart={pause}
+        onTouchEnd={resume}
+      >
         <button
           type="button"
           aria-label="Previous"
@@ -122,12 +167,10 @@ export const BoardSection = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
+          className="w-full overflow-x-auto overflow-y-hidden"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
-            scrollPaddingLeft: SIDE_PADDING,
-            scrollPaddingRight: SIDE_PADDING,
           } as React.CSSProperties}
         >
           <div className="flex w-max gap-4 pb-2">
@@ -135,7 +178,7 @@ export const BoardSection = () => {
               <div
                 key={`${s.alt}-${i}`}
                 data-board-card
-                className="snap-start shrink-0 overflow-hidden rounded-2xl shadow-lg"
+                className="shrink-0 overflow-hidden rounded-2xl shadow-lg"
                 style={{ width: "min(40vw, 320px)", aspectRatio: "4 / 5" }}
               >
                 <img
