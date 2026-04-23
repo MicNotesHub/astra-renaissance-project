@@ -414,11 +414,20 @@ const translations = {
     // Stella Polare
     'stellapolare.subtitle': 'Tutte le rubriche redatte dai nostri ragazzi della divisione Press!',
     'stellapolare.podcast': 'Ascolta il nostro Podcast su YouTube',
-    'stellapolare.all': 'Tutte le rubriche',
-    'stellapolare.weekly': 'Rubriche settimanali',
-    'stellapolare.monthly': 'Rubriche mensili',
+    'stellapolare.weekly': 'Settimanale',
+    'stellapolare.monthly': 'Mensile',
+    'stellapolare.podcastBtn': 'Podcast',
     'stellapolare.noArticles': 'Nessun articolo disponibile per questa categoria.',
     'stellapolare.article': 'Articolo',
+    'stellapolare.back': 'Indietro',
+    'stellapolare.weeklyTitle': 'Rubriche Settimanali',
+    'stellapolare.weeklySubtitle': 'Scegli un tema per esplorare le rubriche',
+    'stellapolare.monthlyTitle': 'Rubriche Mensili',
+    'stellapolare.theme.arte': 'Arte, Cultura, Cinema e Teatro',
+    'stellapolare.theme.economia': 'Economia',
+    'stellapolare.theme.international': 'International',
+    'stellapolare.theme.legal': 'Legal',
+    'stellapolare.theme.sport': 'Sport',
   },
   en: {
     // Navigation
@@ -811,11 +820,20 @@ const translations = {
     // Stella Polare
     'stellapolare.subtitle': 'All the columns written by our Press division team!',
     'stellapolare.podcast': 'Listen to our Podcast on YouTube',
-    'stellapolare.all': 'All columns',
-    'stellapolare.weekly': 'Weekly columns',
-    'stellapolare.monthly': 'Monthly columns',
+    'stellapolare.weekly': 'Weekly',
+    'stellapolare.monthly': 'Monthly',
+    'stellapolare.podcastBtn': 'Podcast',
     'stellapolare.noArticles': 'No articles available for this category.',
     'stellapolare.article': 'Article',
+    'stellapolare.back': 'Back',
+    'stellapolare.weeklyTitle': 'Weekly Columns',
+    'stellapolare.weeklySubtitle': 'Pick a theme to explore the columns',
+    'stellapolare.monthlyTitle': 'Monthly Columns',
+    'stellapolare.theme.arte': 'Art, Culture, Cinema & Theatre',
+    'stellapolare.theme.economia': 'Economics',
+    'stellapolare.theme.international': 'International',
+    'stellapolare.theme.legal': 'Legal',
+    'stellapolare.theme.sport': 'Sport',
   }
 };
 

@@ -737,6 +737,7 @@ export type Database = {
           category: string
           created_at: string
           id: number
+          theme: string | null
           Title: string | null
           URL: string | null
         }
@@ -744,6 +745,7 @@ export type Database = {
           category?: string
           created_at?: string
           id?: number
+          theme?: string | null
           Title?: string | null
           URL?: string | null
         }
@@ -751,6 +753,7 @@ export type Database = {
           category?: string
           created_at?: string
           id?: number
+          theme?: string | null
           Title?: string | null
           URL?: string | null
         }
