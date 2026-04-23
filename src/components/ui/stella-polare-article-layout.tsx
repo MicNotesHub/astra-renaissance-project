@@ -14,6 +14,10 @@ interface Props {
 }
 
 export function StellaPolareArticleLayout({ eyebrow, title, author, children }: Props) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
