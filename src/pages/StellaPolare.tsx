@@ -119,6 +119,7 @@ const themeMatchers: Record<WeeklyTheme, (val: string) => boolean> = {
   international: (v) => /(international|internazional)/i.test(v),
   legal: (v) => /(legal|legge|giurid)/i.test(v),
   sport: (v) => /(sport)/i.test(v),
+  astranews: (v) => /(astra\s*news|astranews)/i.test(v),
 };
 
 const STORAGE_KEY = "stellaPolare:lastView";
@@ -205,6 +206,7 @@ export default function StellaPolare() {
     { key: "international", icon: Globe2, gradient: "from-sky-500/20 to-indigo-500/20" },
     { key: "legal", icon: Scale, gradient: "from-amber-500/20 to-yellow-500/20" },
     { key: "sport", icon: Trophy, gradient: "from-muted/40 to-muted/20", cover: sportCover },
+    { key: "astranews", icon: Newspaper, gradient: "from-blue-500/20 to-cyan-500/20" },
   ];
 
   const goHome = () => {
