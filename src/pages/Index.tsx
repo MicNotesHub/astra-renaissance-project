@@ -7,6 +7,11 @@ import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
 import { FreeAtBSection } from "@/components/ui/freeatb-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
 import { Footer } from "@/components/ui/footer";
+import {
+  AstraPaintingHeroPreview,
+  AstraPaintingSplitPreview,
+  AstraPaintingParallaxPreview,
+} from "@/components/ui/astra-painting-previews";
 
 const Index = () => {
   return (
@@ -14,7 +19,12 @@ const Index = () => {
       <Navigation />
       <HeroSection />
       <BoardSection />
-      
+
+      {/* Painting placement previews — temporary showcase */}
+      <AstraPaintingHeroPreview />
+      <AstraPaintingSplitPreview />
+      <AstraPaintingParallaxPreview />
+
       <MasterResultsSection />
       <DispensenSection />
       <CalcolatoriSection />
