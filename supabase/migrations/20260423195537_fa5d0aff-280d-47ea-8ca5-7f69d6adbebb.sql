@@ -1,0 +1,1 @@
+ALTER TABLE public."Stella_Polare" ADD COLUMN IF NOT EXISTS theme text;
