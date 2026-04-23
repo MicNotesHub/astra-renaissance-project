@@ -113,6 +113,22 @@ export default {
 				'glow-pulse': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.5' }
+				},
+				'aurora': {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' }
+				},
+				'aurora-slow': {
+					'0%, 100%': { transform: 'translate3d(0,0,0) scale(1)', opacity: '0.4' },
+					'50%': { transform: 'translate3d(2%, -1%, 0) scale(1.05)', opacity: '0.55' }
+				},
+				'twinkle': {
+					'0%, 100%': { opacity: '0.25', transform: 'scale(0.9)' },
+					'50%': { opacity: '1', transform: 'scale(1.15)' }
+				},
+				'twinkle-drift': {
+					'0%, 100%': { opacity: '0.3', transform: 'translate(0,0)' },
+					'50%': { opacity: '1', transform: 'translate(var(--drift, 6px), calc(var(--drift, 6px) * -0.6))' }
 				}
 			},
 			animation: {
@@ -123,7 +139,11 @@ export default {
 				'fade-in-right': 'fade-in-right 0.6s ease-out',
 				'fade-in-up': 'fade-in-up 0.8s ease-out',
 				'float': 'float 6s ease-in-out infinite',
-				'glow-pulse': 'glow-pulse 2s ease-in-out infinite'
+				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+				'aurora': 'aurora 18s ease-in-out infinite',
+				'aurora-slow': 'aurora-slow 24s ease-in-out infinite',
+				'twinkle': 'twinkle 3s ease-in-out infinite',
+				'twinkle-drift': 'twinkle-drift 4s ease-in-out infinite'
 			}
 		}
 	},
