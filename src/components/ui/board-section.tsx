@@ -10,6 +10,10 @@ import img7 from "@/assets/board/07-partnership.jpg";
 import img8 from "@/assets/board/08-conferences.jpg";
 import img9 from "@/assets/board/09-sport.jpg";
 import img10 from "@/assets/board/10-events.jpg";
+import img11 from "@/assets/board/11-legal.jpg";
+import img12 from "@/assets/board/12-international.jpg";
+import img13 from "@/assets/board/13-press.jpg";
+import img14 from "@/assets/board/14-career-service.jpg";
 
 const baseSlides = [
   { src: img1, alt: "Presidents" },
@@ -22,6 +26,10 @@ const baseSlides = [
   { src: img8, alt: "Conferences" },
   { src: img9, alt: "Sport" },
   { src: img10, alt: "Events" },
+  { src: img11, alt: "Legal" },
+  { src: img12, alt: "International" },
+  { src: img13, alt: "Press" },
+  { src: img14, alt: "Career Service" },
 ];
 
 const slides = [...baseSlides, ...baseSlides, ...baseSlides];
