@@ -33,7 +33,6 @@ interface ManualArticle {
   title: string;
   excerpt: string;
   accent: string;
-  cover?: string;
 }
 
 const manualArticles: ManualArticle[] = [
@@ -86,7 +85,6 @@ const manualArticles: ManualArticle[] = [
     excerpt:
       "Dalla mancata qualificazione ai Mondiali ai problemi del settore giovanile: perché il calcio italiano è in crisi e cosa serve per cambiare.",
     accent: "from-violet-500 to-fuchsia-500",
-    cover: sportCover,
   },
 ];
 
@@ -190,12 +188,12 @@ export default function StellaPolare() {
     });
   }, [weeklyArticles, activeTheme]);
 
-  const themes: { key: WeeklyTheme; icon: typeof Palette; gradient: string }[] = [
+  const themes: { key: WeeklyTheme; icon: typeof Palette; gradient: string; cover?: string }[] = [
     { key: "arte", icon: Palette, gradient: "from-rose-500/20 to-orange-500/20" },
     { key: "economia", icon: TrendingUp, gradient: "from-emerald-500/20 to-teal-500/20" },
     { key: "international", icon: Globe2, gradient: "from-sky-500/20 to-indigo-500/20" },
     { key: "legal", icon: Scale, gradient: "from-amber-500/20 to-yellow-500/20" },
-    { key: "sport", icon: Trophy, gradient: "from-violet-500/20 to-fuchsia-500/20" },
+    { key: "sport", icon: Trophy, gradient: "from-violet-500/20 to-fuchsia-500/20", cover: sportCover },
   ];
 
   const goHome = () => {
