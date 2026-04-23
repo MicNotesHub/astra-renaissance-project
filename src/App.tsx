@@ -22,6 +22,7 @@ import StellaPolareArticleAprilCulture from "./pages/StellaPolareArticleAprilCul
 import StellaPolareArticleReferendumGiustizia from "./pages/StellaPolareArticleReferendumGiustizia";
 import StellaPolareArticleNoBorders from "./pages/StellaPolareArticleNoBorders";
 import StellaPolareArticleGasolineGeopolitics from "./pages/StellaPolareArticleGasolineGeopolitics";
+import StellaPolareArticleItalianFootballCrisis from "./pages/StellaPolareArticleItalianFootballCrisis";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
 
