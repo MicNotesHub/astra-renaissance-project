@@ -293,7 +293,7 @@ export default function StellaPolare() {
                               className="group block"
                             >
                               <article className="aspect-[3/4] bg-card border border-border rounded-xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col p-6 relative">
-                                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-orange-500" />
+                                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${a.accent}`} />
                                 <p className="text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">
                                   {a.eyebrow}
                                 </p>
