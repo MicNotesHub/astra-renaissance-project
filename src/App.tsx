@@ -18,6 +18,7 @@ import GuideCategory from "./pages/GuideCategory";
 import CLMGDispense from "./pages/CLMGDispense";
 import CLMGYearHandouts from "./pages/CLMGYearHandouts";
 import StellaPolare from "./pages/StellaPolare";
+import StellaPolareArticleAprilCulture from "./pages/StellaPolareArticleAprilCulture";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
 
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/guide" element={<Guide />} />
               <Route path="/guide/:category" element={<GuideCategory />} />
               <Route path="/stella-polare" element={<StellaPolare />} />
+              <Route path="/stella-polare/april-cultural-overload" element={<StellaPolareArticleAprilCulture />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
