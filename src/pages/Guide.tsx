@@ -9,10 +9,25 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import fundingCover from "@/assets/guide-covers/funding.jpg";
 import residenzeCover from "@/assets/guide-covers/residenze.jpg";
+import tesiCover from "@/assets/guide-covers/tesi.jpg";
+import stageCover from "@/assets/guide-covers/stage.jpg";
+import associationsCover from "@/assets/guide-covers/associations.jpg";
+import masterAdmissionsCover from "@/assets/guide-covers/master-admissions.jpg";
+import linkedinCover from "@/assets/guide-covers/linkedin.jpg";
+import languagesCover from "@/assets/guide-covers/languages.jpg";
+import exchangeCover from "@/assets/guide-covers/exchange.jpg";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
   'residenze': residenzeCover,
+  'tesi': tesiCover,
+  'stage': stageCover,
+  'associations': associationsCover,
+  'master_admissions': masterAdmissionsCover,
+  'linkedin': linkedinCover,
+  'languages': languagesCover,
+  'exchange_triennale': exchangeCover,
+  'exchange_magistrale': exchangeCover,
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
