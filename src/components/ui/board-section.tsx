@@ -74,12 +74,51 @@ export const BoardSection = () => {
     }
   }, []);
 
+  // Translate vertical mouse-wheel scroll into horizontal scroll so desktop
+  // users (with a regular mouse, not a trackpad) can browse the carousel.
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      // Ignore if the user is intentionally scrolling horizontally already.
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
+
+  const scrollByCard = (direction: 1 | -1) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLDivElement>("[data-board-card]");
+    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.6;
+    el.scrollBy({ left: step * direction, behavior: "smooth" });
+  };
+
   return (
     <section className="py-10 bg-background">
       <h2 className="mb-8 text-center text-3xl font-bold text-foreground md:text-4xl">
         {t("board.title")}
       </h2>
-      <div className="w-full" style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}>
+      <div className="relative w-full" style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}>
+        <button
+          type="button"
+          aria-label="Previous"
+          onClick={() => scrollByCard(-1)}
+          className="absolute left-2 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full bg-background/80 p-2 shadow-lg backdrop-blur transition hover:bg-background md:flex"
+        >
+          <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+        </button>
+        <button
+          type="button"
+          aria-label="Next"
+          onClick={() => scrollByCard(1)}
+          className="absolute right-2 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full bg-background/80 p-2 shadow-lg backdrop-blur transition hover:bg-background md:flex"
+        >
+          <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
         <div
           ref={scrollRef}
           onScroll={handleScroll}
@@ -95,6 +134,7 @@ export const BoardSection = () => {
             {slides.map((s, i) => (
               <div
                 key={`${s.alt}-${i}`}
+                data-board-card
                 className="snap-start shrink-0 overflow-hidden rounded-2xl shadow-lg"
                 style={{ width: "min(40vw, 320px)", aspectRatio: "4 / 5" }}
               >
