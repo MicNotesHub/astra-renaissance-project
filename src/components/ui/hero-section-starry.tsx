@@ -21,16 +21,16 @@ export function HeroSectionStarry() {
       drift: number;
       yellow: boolean;
     }>;
-    const total = 220;
+    const total = 260;
     for (let i = 0; i < total; i++) {
       arr.push({
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
-        size: Math.random() * 3 + 1.2, // 1.2px – 4.2px
+        size: Math.random() * 1.3 + 0.6, // 0.6px – 1.9px tiny sparkles
         delay: Math.random() * 5,
-        duration: 1.8 + Math.random() * 2.8,
-        drift: 6 + Math.random() * 12,
-        yellow: Math.random() < 0.65, // ~65% bright yellow
+        duration: 1.5 + Math.random() * 2.5,
+        drift: 4 + Math.random() * 8,
+        yellow: Math.random() < 0.75, // mostly bright yellow
       });
     }
     return arr;
@@ -38,7 +38,7 @@ export function HeroSectionStarry() {
 
   // A handful of larger "hero" stars with cross sparkle
   const sparkleStars = useMemo(() => {
-    return Array.from({ length: 16 }).map(() => ({
+    return Array.from({ length: 10 }).map(() => ({
       top: `${10 + Math.random() * 80}%`,
       left: `${10 + Math.random() * 80}%`,
       delay: Math.random() * 4,
@@ -47,18 +47,9 @@ export function HeroSectionStarry() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050826]">
-      {/* Deep, vivid night sky base — richer royal/cobalt blue */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,_#1e3a8a_0%,_#0b1a5e_35%,_#070a30_70%,_#02030f_100%)]" />
-
-      {/* Animated aurora gradient layer — punchier teal/indigo/magenta */}
-      <div className="absolute inset-0 opacity-80 mix-blend-screen animate-aurora bg-[linear-gradient(120deg,_rgba(34,211,238,0.55)_0%,_rgba(99,102,241,0.5)_25%,_rgba(16,185,129,0.45)_50%,_rgba(217,70,239,0.5)_75%,_rgba(34,211,238,0.55)_100%)] bg-[length:300%_300%]" />
-
-      {/* Secondary aurora wave */}
-      <div className="absolute inset-0 opacity-60 mix-blend-screen animate-aurora-slow bg-[radial-gradient(ellipse_at_25%_35%,_rgba(56,189,248,0.6),_transparent_55%),radial-gradient(ellipse_at_75%_65%,_rgba(168,85,247,0.55),_transparent_55%),radial-gradient(ellipse_at_50%_85%,_rgba(16,185,129,0.35),_transparent_60%)]" />
-
-      {/* Warm golden glow to make yellow stars pop */}
-      <div className="absolute inset-0 opacity-30 mix-blend-screen bg-[radial-gradient(ellipse_at_50%_50%,_rgba(250,204,21,0.18),_transparent_70%)]" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a1a8c]">
+      {/* Deep, eye-catching royal blue night sky */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,_#1e3ab8_0%,_#10218f_40%,_#08146b_75%,_#040a3d_100%)]" />
 
       {/* Stars layer */}
       <div className="absolute inset-0">
@@ -71,10 +62,10 @@ export function HeroSectionStarry() {
               left: s.left,
               width: `${s.size}px`,
               height: `${s.size}px`,
-              backgroundColor: s.yellow ? "#FEF08A" : "#F0F9FF",
+              backgroundColor: s.yellow ? "#FDE047" : "#F8FAFC",
               boxShadow: s.yellow
-                ? `0 0 ${s.size * 4}px rgba(250, 204, 21, 1), 0 0 ${s.size * 8}px rgba(253, 224, 71, 0.8), 0 0 ${s.size * 14}px rgba(250, 204, 21, 0.4)`
-                : `0 0 ${s.size * 3}px rgba(186, 230, 253, 0.9), 0 0 ${s.size * 6}px rgba(125, 211, 252, 0.5)`,
+                ? `0 0 ${s.size * 3}px rgba(250, 204, 21, 1), 0 0 ${s.size * 6}px rgba(253, 224, 71, 0.6)`
+                : `0 0 ${s.size * 2}px rgba(224, 242, 254, 0.8)`,
               animationDelay: `${s.delay}s`,
               animationDuration: `${s.duration}s`,
               ["--drift" as any]: `${s.drift}px`,
@@ -95,18 +86,18 @@ export function HeroSectionStarry() {
             }}
           >
             <svg
-              width="18"
-              height="18"
+              width="8"
+              height="8"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               style={{
-                filter: "drop-shadow(0 0 6px rgba(253, 224, 71, 0.9))",
+                filter: "drop-shadow(0 0 4px rgba(250, 204, 21, 1))",
               }}
             >
               <path
                 d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z"
-                fill="#FDE68A"
+                fill="#FDE047"
               />
             </svg>
           </span>
