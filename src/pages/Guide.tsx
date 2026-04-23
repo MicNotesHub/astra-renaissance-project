@@ -179,6 +179,7 @@ const Guide = () => {
     'residenze',
     'ecdl',
     'tesi',
+    'languages',
     'linkedin',
     'associations',
     'opzionali', 
