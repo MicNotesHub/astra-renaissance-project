@@ -431,6 +431,7 @@ const translations = {
     'stellapolare.theme.international': 'International',
     'stellapolare.theme.legal': 'Legal',
     'stellapolare.theme.sport': 'Sport',
+    'stellapolare.theme.astranews': 'Astra News',
   },
   en: {
     // Navigation
@@ -840,6 +841,7 @@ const translations = {
     'stellapolare.theme.international': 'International',
     'stellapolare.theme.legal': 'Legal',
     'stellapolare.theme.sport': 'Sport',
+    'stellapolare.theme.astranews': 'Astra News',
   }
 };
 

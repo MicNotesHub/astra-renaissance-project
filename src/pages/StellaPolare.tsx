@@ -15,6 +15,7 @@ import {
   Globe2,
   Scale,
   Trophy,
+  Newspaper,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -23,7 +24,7 @@ import stellaPolareHero from "@/assets/stella-polare-hero.png";
 import sportCover from "@/assets/stella-polare-sport-cover.jpeg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport";
+type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
 
 interface ManualArticle {
   slug: string;
@@ -86,6 +87,16 @@ const manualArticles: ManualArticle[] = [
       "Dalla mancata qualificazione ai Mondiali ai problemi del settore giovanile: perché il calcio italiano è in crisi e cosa serve per cambiare.",
     accent: "from-violet-500 to-fuchsia-500",
   },
+  {
+    slug: "astra-news-influencers",
+    href: "/stella-polare/astra-news-influencers",
+    category: "astranews",
+    eyebrow: "Aprile 2026",
+    title: "Astra hosts Emily Pallini and Rachele Santoro",
+    excerpt:
+      "Una conversazione con due delle content creator più seguite in Italia: dal percorso professionale all'identità online, fino al futuro del mestiere con l'AI.",
+    accent: "from-blue-500 to-cyan-500",
+  },
 ];
 
 interface Article {
@@ -98,7 +109,7 @@ interface Article {
 }
 
 type MainView = "home" | "weekly" | "monthly";
-type WeeklyTheme = "arte" | "economia" | "international" | "legal" | "sport";
+type WeeklyTheme = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
 
 const PODCAST_URL = "https://youtube.com/@astrabocconi99?si=rA0hFwtnOQJufgVF";
 
@@ -108,6 +119,7 @@ const themeMatchers: Record<WeeklyTheme, (val: string) => boolean> = {
   international: (v) => /(international|internazional)/i.test(v),
   legal: (v) => /(legal|legge|giurid)/i.test(v),
   sport: (v) => /(sport)/i.test(v),
+  astranews: (v) => /(astra\s*news|astranews)/i.test(v),
 };
 
 const STORAGE_KEY = "stellaPolare:lastView";
@@ -194,6 +206,7 @@ export default function StellaPolare() {
     { key: "international", icon: Globe2, gradient: "from-sky-500/20 to-indigo-500/20" },
     { key: "legal", icon: Scale, gradient: "from-amber-500/20 to-yellow-500/20" },
     { key: "sport", icon: Trophy, gradient: "from-muted/40 to-muted/20", cover: sportCover },
+    { key: "astranews", icon: Newspaper, gradient: "from-blue-500/20 to-cyan-500/20" },
   ];
 
   const goHome = () => {
