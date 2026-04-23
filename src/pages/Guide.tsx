@@ -265,7 +265,8 @@ const Guide = () => {
                 ...(dynamicLinks[category] || {}),
               };
               const hasDirectDownload = directDownloadCategories[category] !== undefined;
-              
+              const singleFileUrl = singleFileDownloadCategories[category];
+
               return (
                 <motion.div
                   key={category}
@@ -273,7 +274,26 @@ const Guide = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  {hasDirectDownload ? (
+                  {singleFileUrl ? (
+                    <a href={singleFileUrl} target="_blank" rel="noopener noreferrer">
+                      <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
+                        <div className={`relative h-64 overflow-hidden ${colorClass}`}>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                            <IconComponent className="w-12 h-12 mb-3 opacity-90" />
+                            <h3 className="text-2xl font-bold drop-shadow-lg mb-1 text-center">
+                              {getCategoryTitle(category)}
+                            </h3>
+                            <p className="text-sm opacity-80 text-center mb-4 px-2">
+                              {getCategoryDescription(category)}
+                            </p>
+                            <span className="text-sm border border-current/30 rounded-md px-4 py-2 opacity-80">
+                              {t('guide.explore')}
+                            </span>
+                          </div>
+                        </div>
+                      </Card>
+                    </a>
+                  ) : hasDirectDownload ? (
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
                       {categoryCoverMap[category] ? (
                         <div className="relative h-64 overflow-hidden">
