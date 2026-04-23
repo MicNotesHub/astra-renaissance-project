@@ -22,13 +22,16 @@ import { supabase } from "@/integrations/supabase/client";
 import stellaPolareHero from "@/assets/stella-polare-hero.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport";
+
 interface ManualArticle {
   slug: string;
   href: string;
-  category: "arte";
+  category: ManualCategory;
   eyebrow: string;
   title: string;
   excerpt: string;
+  accent: string;
 }
 
 const manualArticles: ManualArticle[] = [
@@ -40,6 +43,37 @@ const manualArticles: ManualArticle[] = [
     title: "April, the month of cultural overload",
     excerpt:
       "Design Week, Miart & Milano Art Week e Gelato Week: tutti gli eventi che rendono aprile il mese più ricco di cultura in Italia.",
+    accent: "from-rose-500 to-orange-500",
+  },
+  {
+    slug: "referendum-giustizia-2026",
+    href: "/stella-polare/referendum-giustizia-2026",
+    category: "legal",
+    eyebrow: "Marzo 2026",
+    title: "Referendum sulla giustizia: contenuti, posizioni e esito del voto",
+    excerpt:
+      "Separazione delle carriere, doppio CSM e sorteggio: cosa prevedeva la riforma costituzionale, le ragioni del Sì e del No e l'esito del voto.",
+    accent: "from-amber-500 to-yellow-500",
+  },
+  {
+    slug: "no-borders-just-stories",
+    href: "/stella-polare/no-borders-just-stories",
+    category: "international",
+    eyebrow: "International",
+    title: "No borders, just stories",
+    excerpt:
+      "Una nuova rubrica dedicata all'ascolto e alla condivisione: uno spazio sicuro dove gli studenti internazionali possono raccontare la loro storia.",
+    accent: "from-sky-500 to-indigo-500",
+  },
+  {
+    slug: "gasoline-and-geopolitics",
+    href: "/stella-polare/gasoline-and-geopolitics",
+    category: "economia",
+    eyebrow: "Economia",
+    title: "The relationship between gasoline and geopolitics",
+    excerpt:
+      "Dal Covid alla guerra in Ucraina fino alle tensioni in Medio Oriente: come i prezzi del carburante riflettono gli equilibri geopolitici globali.",
+    accent: "from-emerald-500 to-teal-500",
   },
 ];
 
