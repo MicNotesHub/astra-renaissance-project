@@ -193,7 +193,7 @@ export default function StellaPolare() {
     { key: "economia", icon: TrendingUp, gradient: "from-emerald-500/20 to-teal-500/20" },
     { key: "international", icon: Globe2, gradient: "from-sky-500/20 to-indigo-500/20" },
     { key: "legal", icon: Scale, gradient: "from-amber-500/20 to-yellow-500/20" },
-    { key: "sport", icon: Trophy, gradient: "from-violet-500/20 to-fuchsia-500/20", cover: sportCover },
+    { key: "sport", icon: Trophy, gradient: "from-muted/40 to-muted/20", cover: sportCover },
   ];
 
   const goHome = () => {
@@ -321,22 +321,20 @@ export default function StellaPolare() {
                         className={`group relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${gradient} text-left shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-primary/40 ${cover ? "" : "p-6"}`}
                       >
                         {cover ? (
-                          <>
-                            <div className="relative w-full aspect-[16/10] overflow-hidden">
-                              <img
-                                src={cover}
-                                alt={t(`stellapolare.theme.${key}`)}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="p-6 flex items-center gap-3">
-                              <Icon className="w-7 h-7 text-foreground" />
-                              <h4 className="text-lg font-semibold text-foreground">
+                          <div className="relative w-full aspect-[4/3] overflow-hidden">
+                            <img
+                              src={cover}
+                              alt={t(`stellapolare.theme.${key}`)}
+                              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                            <div className="absolute inset-x-0 bottom-0 p-5">
+                              <h4 className="text-2xl font-serif italic font-semibold text-white tracking-wide drop-shadow-lg">
                                 {t(`stellapolare.theme.${key}`)}
                               </h4>
                             </div>
-                          </>
+                          </div>
                         ) : (
                           <>
                             <Icon className="w-8 h-8 text-foreground mb-3" />
