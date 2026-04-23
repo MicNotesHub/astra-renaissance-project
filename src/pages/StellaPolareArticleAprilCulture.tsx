@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 export default function StellaPolareArticleAprilCulture() {
   const author = "Viktoria Kriatsiotis";
+  const author = "Viktoria Kriatsiotis";
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
