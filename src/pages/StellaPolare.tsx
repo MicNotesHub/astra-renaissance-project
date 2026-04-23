@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import stellaPolareHero from "@/assets/stella-polare-hero.png";
+import sportCover from "@/assets/stella-polare-sport-cover.jpeg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport";
@@ -32,6 +33,7 @@ interface ManualArticle {
   title: string;
   excerpt: string;
   accent: string;
+  cover?: string;
 }
 
 const manualArticles: ManualArticle[] = [
@@ -84,6 +86,7 @@ const manualArticles: ManualArticle[] = [
     excerpt:
       "Dalla mancata qualificazione ai Mondiali ai problemi del settore giovanile: perché il calcio italiano è in crisi e cosa serve per cambiare.",
     accent: "from-violet-500 to-fuchsia-500",
+    cover: sportCover,
   },
 ];
 
