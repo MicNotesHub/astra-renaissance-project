@@ -314,16 +314,37 @@ export default function StellaPolare() {
 
                 {!activeTheme ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {themes.map(({ key, icon: Icon, gradient }) => (
+                    {themes.map(({ key, icon: Icon, gradient, cover }) => (
                       <button
                         key={key}
                         onClick={() => setActiveTheme(key)}
-                        className={`group relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${gradient} p-6 text-left shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-primary/40`}
+                        className={`group relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${gradient} text-left shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-primary/40 ${cover ? "" : "p-6"}`}
                       >
-                        <Icon className="w-8 h-8 text-foreground mb-3" />
-                        <h4 className="text-lg font-semibold text-foreground">
-                          {t(`stellapolare.theme.${key}`)}
-                        </h4>
+                        {cover ? (
+                          <>
+                            <div className="relative w-full aspect-[16/10] overflow-hidden">
+                              <img
+                                src={cover}
+                                alt={t(`stellapolare.theme.${key}`)}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                loading="lazy"
+                              />
+                            </div>
+                            <div className="p-6 flex items-center gap-3">
+                              <Icon className="w-7 h-7 text-foreground" />
+                              <h4 className="text-lg font-semibold text-foreground">
+                                {t(`stellapolare.theme.${key}`)}
+                              </h4>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <Icon className="w-8 h-8 text-foreground mb-3" />
+                            <h4 className="text-lg font-semibold text-foreground">
+                              {t(`stellapolare.theme.${key}`)}
+                            </h4>
+                          </>
+                        )}
                       </button>
                     ))}
                   </div>
@@ -340,33 +361,21 @@ export default function StellaPolare() {
                               to={a.href}
                               className="group block"
                             >
-                              <article className="aspect-[3/4] bg-card border border-border rounded-xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col relative">
-                                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${a.accent} z-10`} />
-                                {a.cover && (
-                                  <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted">
-                                    <img
-                                      src={a.cover}
-                                      alt={a.title}
-                                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                      loading="lazy"
-                                    />
-                                  </div>
-                                )}
-                                <div className="flex flex-col flex-1 p-6">
-                                  <p className="text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">
-                                    {a.eyebrow}
-                                  </p>
-                                  <h4 className="text-lg font-bold text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">
-                                    {a.title}
-                                  </h4>
-                                  <div className="w-10 h-px bg-border mb-3" />
-                                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-5 flex-1">
-                                    {a.excerpt}
-                                  </p>
-                                  <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-primary">
-                                    Leggi l'articolo
-                                    <ExternalLink className="w-3 h-3" />
-                                  </div>
+                              <article className="aspect-[3/4] bg-card border border-border rounded-xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col p-6 relative">
+                                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${a.accent}`} />
+                                <p className="text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">
+                                  {a.eyebrow}
+                                </p>
+                                <h4 className="text-lg font-bold text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">
+                                  {a.title}
+                                </h4>
+                                <div className="w-10 h-px bg-border mb-3" />
+                                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-6 flex-1">
+                                  {a.excerpt}
+                                </p>
+                                <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-primary">
+                                  Leggi l'articolo
+                                  <ExternalLink className="w-3 h-3" />
                                 </div>
                               </article>
                             </Link>
