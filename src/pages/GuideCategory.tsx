@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, FileText, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, Trophy, Monitor, Globe, DollarSign, Linkedin, Languages } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { PdfThumbnail } from "@/components/ui/pdf-thumbnail";
+import { ArrowLeft, FileText, Download, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, Trophy, Monitor, Globe, DollarSign, Linkedin, Languages } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
@@ -236,7 +238,7 @@ const GuideCategory: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {guides.map((guide, index) => {
               const titleLower = guide.title.toLowerCase();
               const isItalian = titleLower.includes('guida') || titleLower.includes('ita') || titleLower.endsWith(' it');
@@ -248,34 +250,46 @@ const GuideCategory: React.FC = () => {
                   key={guide.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex flex-col items-center space-y-3"
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
                 >
                   <a
                     href={guide.file_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`relative p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer flex items-center justify-center ${colorClasses}`}
+                    className="block"
                   >
-                    <IconComponent size={48} />
-                    {flagUrl && (
-                      <img
-                        src={flagUrl}
-                        alt={isItalian ? 'Italiano' : 'English'}
-                        className="absolute -top-2 -right-2 w-7 h-7 rounded-full object-cover border-2 border-white shadow-md"
-                      />
-                    )}
+                    <Card className="cursor-pointer hover:shadow-xl hover:scale-[1.03] transition-all duration-300 group overflow-hidden h-full">
+                      <div className="aspect-[3/4] overflow-hidden border-b relative">
+                        <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out">
+                          <PdfThumbnail
+                            fileUrl={guide.file_url}
+                            className="w-full h-full"
+                          />
+                        </div>
+                        {flagUrl && (
+                          <img
+                            src={flagUrl}
+                            alt={isItalian ? 'Italiano' : 'English'}
+                            className="absolute top-2 right-2 w-7 h-7 rounded-full object-cover border-2 border-white shadow-md"
+                          />
+                        )}
+                      </div>
+                      <CardContent className="p-3">
+                        <h4 className="text-sm font-medium leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                          {guide.title}
+                        </h4>
+                        {guide.description && (
+                          <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                            {guide.description}
+                          </p>
+                        )}
+                        <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                          <Download className="w-3 h-3" />
+                          <span>{t('handouts.download')}</span>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </a>
-                  <p className="text-sm font-medium text-center text-foreground leading-tight max-w-[150px]">
-                    {guide.title}
-                  </p>
-                  {guide.description && (
-                    <p className="text-xs text-muted-foreground text-center max-w-[150px] line-clamp-2">
-                      {guide.description}
-                    </p>
-                  )}
                 </motion.div>
               );
             })}
