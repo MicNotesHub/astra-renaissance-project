@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function StellaPolareArticleAprilCulture() {
+  const author = "Viktoria Kriatsiotis";
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -66,6 +67,12 @@ export default function StellaPolareArticleAprilCulture() {
                 And now the fun part, Italy will host its annual Gelato Week between the 14th and the 19th of April in 11 different cities across the country. The main scope of the event is to promote artisanal quality while boosting tourism in the host cities allowing participants to explore urban areas through a large variety of trails. This week, people get the chance to buy a ticket for a city and neighborhood of their choice, which allows them to visit 5 different ice cream shops and try their products over the course of 6 days. The event brings together locals and tourists, industry professionals and the general public. People get to discover something new every day of the week, be that a new neighborhood, a new favorite ice cream place, or a flavor.
               </p>
             </section>
+
+            {author && (
+              <footer className="mt-10 pt-6 border-t border-border">
+                <p className="text-sm text-muted-foreground italic">— {author}</p>
+              </footer>
+            )}
           </motion.article>
         </div>
       </section>
