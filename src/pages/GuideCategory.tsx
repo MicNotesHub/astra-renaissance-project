@@ -87,6 +87,45 @@ const GuideCategory: React.FC = () => {
     if (!category) return;
 
     try {
+      // Special case: 'languages' pulls from the handouts table (subject = 'languages')
+      if (category === 'languages') {
+        const { data, error } = await supabase
+          .from('handouts')
+          .select('id, filename, file_url')
+          .ilike('subject', 'languages')
+          .order('filename');
+
+        if (error) {
+          console.error('Error fetching language handouts:', error);
+          toast({
+            title: t('common.error'),
+            description: "Impossibile caricare le guide",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        // Deduplicate by file_url so duplicate rows show once
+        const seen = new Set<string>();
+        const mapped: Guide[] = (data || [])
+          .filter((row) => {
+            if (seen.has(row.file_url)) return false;
+            seen.add(row.file_url);
+            return true;
+          })
+          .map((row, idx) => ({
+            id: String(row.id),
+            title: row.filename,
+            description: null,
+            category: 'languages',
+            file_url: row.file_url,
+            thumbnail_url: null,
+            order_index: idx,
+          }));
+        setGuides(mapped);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('guides')
         .select('*')
