@@ -352,29 +352,29 @@ export default function StellaPolare() {
                   <>
                     {/* Manual featured articles for this theme */}
                     {manualArticles.filter((a) => a.category === activeTheme).length > 0 && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                      <div className="flex flex-wrap gap-5 mb-8 justify-center sm:justify-start">
                         {manualArticles
                           .filter((a) => a.category === activeTheme)
                           .map((a) => (
                             <Link
                               key={a.slug}
                               to={a.href}
-                              className="group block"
+                              className="group block w-full max-w-[220px]"
                             >
-                              <article className="aspect-[3/4] bg-card border border-border rounded-xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col p-6 relative">
+                              <article className="aspect-[3/4] bg-card border border-border rounded-xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col p-4 relative">
                                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${a.accent}`} />
-                                <p className="text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">
+                                <p className="text-[9px] uppercase tracking-widest text-primary font-semibold mb-1.5 mt-1">
                                   {a.eyebrow}
                                 </p>
-                                <h4 className="text-lg font-bold text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">
+                                <h4 className="text-sm font-bold text-foreground leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-3">
                                   {a.title}
                                 </h4>
-                                <div className="w-10 h-px bg-border mb-3" />
-                                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-6 flex-1">
+                                <div className="w-8 h-px bg-border mb-2" />
+                                <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-5 flex-1">
                                   {a.excerpt}
                                 </p>
-                                <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-primary">
-                                  Leggi l'articolo
+                                <div className="mt-3 flex items-center gap-1 text-[11px] font-medium text-primary">
+                                  Leggi
                                   <ExternalLink className="w-3 h-3" />
                                 </div>
                               </article>
