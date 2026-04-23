@@ -75,6 +75,16 @@ const manualArticles: ManualArticle[] = [
       "Dal Covid alla guerra in Ucraina fino alle tensioni in Medio Oriente: come i prezzi del carburante riflettono gli equilibri geopolitici globali.",
     accent: "from-emerald-500 to-teal-500",
   },
+  {
+    slug: "italian-football-crisis",
+    href: "/stella-polare/italian-football-crisis",
+    category: "sport",
+    eyebrow: "Sport",
+    title: "The structural crisis of Italian football",
+    excerpt:
+      "Dalla mancata qualificazione ai Mondiali ai problemi del settore giovanile: perché il calcio italiano è in crisi e cosa serve per cambiare.",
+    accent: "from-violet-500 to-fuchsia-500",
+  },
 ];
 
 interface Article {
