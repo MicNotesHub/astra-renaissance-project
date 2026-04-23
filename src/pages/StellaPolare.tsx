@@ -100,7 +100,7 @@ interface Article {
 type MainView = "home" | "weekly" | "monthly";
 type WeeklyTheme = "arte" | "economia" | "international" | "legal" | "sport";
 
-const PODCAST_URL = "https://www.youtube.com/@astrabocconi99";
+const PODCAST_URL = "https://youtube.com/@astrabocconi99?si=rA0hFwtnOQJufgVF";
 
 const themeMatchers: Record<WeeklyTheme, (val: string) => boolean> = {
   arte: (v) => /(arte|cultura|cinema|teatro|art|culture|theatre|theater)/i.test(v),
