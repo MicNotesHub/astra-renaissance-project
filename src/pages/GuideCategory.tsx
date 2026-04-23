@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, FileText, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, Trophy, Monitor, Globe, DollarSign, Linkedin } from "lucide-react";
+import { ArrowLeft, FileText, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, Trophy, Monitor, Globe, DollarSign, Linkedin, Languages } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
@@ -53,7 +53,8 @@ const GuideCategory: React.FC = () => {
       'tesi': FileText,
       'ecdl': Monitor,
       'funding': DollarSign,
-      'linkedin': Linkedin
+      'linkedin': Linkedin,
+      'languages': Languages
     };
     return iconMap[category] || Globe;
   };
@@ -76,7 +77,8 @@ const GuideCategory: React.FC = () => {
       'tesi': 'text-teal-500 bg-teal-50 hover:bg-teal-100 border-teal-200',
       'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100 border-slate-200',
       'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100 border-lime-200',
-      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100 border-blue-200'
+      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100 border-blue-200',
+      'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100 border-fuchsia-200'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20 border-primary/20';
   };
@@ -85,6 +87,45 @@ const GuideCategory: React.FC = () => {
     if (!category) return;
 
     try {
+      // Special case: 'languages' pulls from the handouts table (subject = 'languages')
+      if (category === 'languages') {
+        const { data, error } = await supabase
+          .from('handouts')
+          .select('id, filename, file_url')
+          .ilike('subject', 'languages')
+          .order('filename');
+
+        if (error) {
+          console.error('Error fetching language handouts:', error);
+          toast({
+            title: t('common.error'),
+            description: "Impossibile caricare le guide",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        // Deduplicate by file_url so duplicate rows show once
+        const seen = new Set<string>();
+        const mapped: Guide[] = (data || [])
+          .filter((row) => {
+            if (seen.has(row.file_url)) return false;
+            seen.add(row.file_url);
+            return true;
+          })
+          .map((row, idx) => ({
+            id: String(row.id),
+            title: row.filename,
+            description: null,
+            category: 'languages',
+            file_url: row.file_url,
+            thumbnail_url: null,
+            order_index: idx,
+          }));
+        setGuides(mapped);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('guides')
         .select('*')

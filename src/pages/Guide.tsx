@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin, Languages } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -93,6 +93,17 @@ const Guide = () => {
       
       // Get unique categories
       const uniqueCategories = [...new Set(data?.map(guide => guide.category) || [])];
+
+      // Check if there are any language handouts and inject the synthetic 'languages' category
+      const { data: langData } = await supabase
+        .from('handouts')
+        .select('id')
+        .ilike('subject', 'languages')
+        .limit(1);
+      if (langData && langData.length > 0 && !uniqueCategories.includes('languages')) {
+        uniqueCategories.push('languages');
+      }
+
       setCategories(uniqueCategories);
 
       // Build dynamic links for ECDL from DB (matched by title language)
@@ -133,7 +144,8 @@ const Guide = () => {
       'ecdl': Monitor,
       'spring weeks': Briefcase,
       'funding': DollarSign,
-      'linkedin': Linkedin
+      'linkedin': Linkedin,
+      'languages': Languages
     };
     return iconMap[category] || Globe;
   };
@@ -156,7 +168,8 @@ const Guide = () => {
       'ecdl': 'text-slate-500 bg-slate-50 hover:bg-slate-100',
       'spring weeks': 'text-violet-500 bg-violet-50 hover:bg-violet-100',
       'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100',
-      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100'
+      'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
@@ -166,6 +179,7 @@ const Guide = () => {
     'residenze',
     'ecdl',
     'tesi',
+    'languages',
     'linkedin',
     'associations',
     'opzionali', 

@@ -296,6 +296,9 @@ const translations = {
     'category.funding.description': 'Opportunità di finanziamento disponibili',
     'category.linkedin.title': 'LinkedIn',
     'category.linkedin.description': 'Consigli e guide per il tuo profilo LinkedIn',
+    'category.languages.title': 'Lingue',
+    'category.languages.description': 'Esercizi e materiali per imparare le lingue',
+    'category.languages.pageTitle': 'Lingue: esercizi e materiali per le tue lingue!',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Torna alle Guide',
@@ -714,6 +717,9 @@ const translations = {
     'category.funding.description': 'Available funding opportunities',
     'category.linkedin.title': 'LinkedIn',
     'category.linkedin.description': 'Tips and guides for your LinkedIn profile',
+    'category.languages.title': 'Languages',
+    'category.languages.description': 'Exercises and materials to learn languages',
+    'category.languages.pageTitle': 'Languages: exercises and materials for your languages!',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Back to Guides',
