@@ -301,6 +301,8 @@ const translations = {
     'category.languages.pageTitle': 'Lingue: esercizi e materiali per le tue lingue!',
     'category.bgl_domestic_track.title': 'BGL Domestic Track',
     'category.bgl_domestic_track.description': 'Guida al percorso BGL Domestic Track',
+    'category.program_change.title': 'Cambio Corso Triennale',
+    'category.program_change.description': 'Guida al cambio corso triennale',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Torna alle Guide',
@@ -725,6 +727,8 @@ const translations = {
     'category.languages.pageTitle': 'Languages: exercises and materials for your languages!',
     'category.bgl_domestic_track.title': 'BGL Domestic Track',
     'category.bgl_domestic_track.description': 'Guide to the BGL Domestic Track path',
+    'category.program_change.title': 'Program Change Undergraduate',
+    'category.program_change.description': 'Guide to changing your undergraduate program',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Back to Guides',

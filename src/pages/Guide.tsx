@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin, Languages, Scale } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin, Languages, Scale, Repeat } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -77,6 +77,10 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   },
   'burocrazia': {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
+  },
+  'program_change': {
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ITA.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ENG.pdf',
   },
   'ecdl': {},
 };
@@ -182,7 +186,8 @@ const Guide = () => {
       'funding': DollarSign,
       'linkedin': Linkedin,
       'languages': Languages,
-      'bgl_domestic_track': Scale
+      'bgl_domestic_track': Scale,
+      'program_change': Repeat
     };
     return iconMap[category] || Globe;
   };
@@ -207,7 +212,8 @@ const Guide = () => {
       'funding': 'text-lime-500 bg-lime-50 hover:bg-lime-100',
       'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100',
       'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100',
-      'bgl_domestic_track': 'text-red-600 bg-red-50 hover:bg-red-100'
+      'bgl_domestic_track': 'text-red-600 bg-red-50 hover:bg-red-100',
+      'program_change': 'text-purple-600 bg-purple-50 hover:bg-purple-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
@@ -232,6 +238,7 @@ const Guide = () => {
     'burocrazia',
     'master_admissions',
     'bgl_domestic_track',
+    'program_change',
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
