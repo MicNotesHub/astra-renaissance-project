@@ -21,6 +21,9 @@ import burocraziaCover from "@/assets/guide-covers/burocrazia.png";
 import ecdlCover from "@/assets/guide-covers/ecdl.png";
 import milanCover from "@/assets/guide-covers/milan.png";
 import universityCover from "@/assets/guide-covers/university.png";
+import freemoverCover from "@/assets/guide-covers/freemover.png";
+import opzionaliCover from "@/assets/guide-covers/opzionali.png";
+import springWeeksCover from "@/assets/guide-covers/spring-weeks.png";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
@@ -38,6 +41,9 @@ const categoryCoverMap: Record<string, string> = {
   'ecdl': ecdlCover,
   'milan': milanCover,
   'university': universityCover,
+  'freemover': freemoverCover,
+  'opzionali': opzionaliCover,
+  'spring weeks': springWeeksCover,
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
