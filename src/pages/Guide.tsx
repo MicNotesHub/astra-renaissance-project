@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/ui/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin, Languages, Scale } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, FileText, Trophy, Monitor, Globe, ArrowLeft, DollarSign, Linkedin, Languages, Scale, Repeat } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -77,6 +77,10 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   },
   'burocrazia': {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
+  },
+  'program_change': {
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ITA.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ENG.pdf',
   },
   'ecdl': {},
 };
