@@ -17,6 +17,10 @@ import linkedinCover from "@/assets/guide-covers/linkedin.jpg";
 import languagesCover from "@/assets/guide-covers/languages.jpg";
 import exchangeCover from "@/assets/guide-covers/exchange.jpg";
 import bglCover from "@/assets/guide-covers/bgl.jpg";
+import burocraziaCover from "@/assets/guide-covers/burocrazia.png";
+import ecdlCover from "@/assets/guide-covers/ecdl.png";
+import milanCover from "@/assets/guide-covers/milan.png";
+import universityCover from "@/assets/guide-covers/university.png";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
@@ -30,6 +34,10 @@ const categoryCoverMap: Record<string, string> = {
   'exchange_triennale': exchangeCover,
   'exchange_magistrale': exchangeCover,
   'bgl_domestic_track': bglCover,
+  'burocrazia': burocraziaCover,
+  'ecdl': ecdlCover,
+  'milan': milanCover,
+  'university': universityCover,
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
