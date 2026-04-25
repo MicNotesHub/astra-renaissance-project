@@ -159,8 +159,6 @@ export const BoardSection = () => {
         style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}
         onMouseEnter={pause}
         onMouseLeave={resume}
-        onTouchStart={pause}
-        onTouchEnd={resume}
       >
         <button
           type="button"
