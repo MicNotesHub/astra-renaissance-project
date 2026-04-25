@@ -79,6 +79,7 @@ export const CalcolatoriSection = () => {
           </p>
         </motion.div>
 
+        <div className="relative">
         <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
           {calcolatori.map((calc, index) => {
           const IconComponent = calc.icon;
