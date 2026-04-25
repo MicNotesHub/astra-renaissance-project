@@ -60,12 +60,12 @@ export const MarketplaceSection = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-10 mt-0">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text relative inline-block">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white relative inline-block drop-shadow-lg">
   🛍️ {t('marketplace.title')}
-  <sup className="absolute -top-1 -right-3 text-sm" style={{ color: "#082cb4" }}>©</sup>
+  <sup className="absolute -top-1 -right-3 text-sm text-white/90">©</sup>
 </h2>
 
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto drop-shadow">
             {t('marketplace.subtitle')}
           </p>
         </motion.div>
