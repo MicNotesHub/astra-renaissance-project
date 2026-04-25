@@ -105,6 +105,31 @@ const manualArticles: ManualArticle[] = [
   },
 ];
 
+interface MonthlyManualArticle {
+  slug: string;
+  href: string;
+  cover: string;
+  eyebrow: string;
+  title: string;
+  excerpt: string;
+  accent: string;
+  author: string;
+}
+
+const monthlyManualArticles: MonthlyManualArticle[] = [
+  {
+    slug: "liberation-day-april-25",
+    href: "/stella-polare/liberation-day-april-25",
+    cover: liberationDayCover,
+    eyebrow: "Aprile 2026 · Mensile",
+    title: "For all the days April 25th",
+    excerpt:
+      "Memoria, Resistenza e libertà: perché il 25 aprile riguarda ancora ognuno di noi. Un viaggio nelle storie che hanno costruito l'Italia democratica.",
+    accent: "from-red-600 via-white to-green-600",
+    author: "Marco Ferraù",
+  },
+];
+
 interface Article {
   id: number;
   Title: string | null;
