@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SparklesCore } from "@/components/ui/sparkles";
 import img1 from "@/assets/board/01-presidents.jpg";
 import img2 from "@/assets/board/02-executive.jpg";
 import img3 from "@/assets/board/03-representation.jpg";
@@ -136,12 +137,25 @@ export const BoardSection = () => {
   };
 
   return (
-    <section className="py-10 bg-background">
-      <h2 className="mb-8 text-center text-3xl font-bold text-foreground md:text-4xl">
+    <section className="relative py-10 overflow-hidden bg-[#0a1a8c]">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,_#1e3ab8_0%,_#10218f_40%,_#08146b_75%,_#040a3d_100%)]" />
+      <div className="absolute inset-0">
+        <SparklesCore
+          id="board-starry-sparkles"
+          background="transparent"
+          minSize={0.4}
+          maxSize={1.2}
+          particleDensity={90}
+          particleColor="#FDE047"
+          speed={3}
+          className="h-full w-full"
+        />
+      </div>
+      <h2 className="relative z-10 mb-8 text-center text-3xl font-bold text-[#FDE047] md:text-4xl">
         {t("board.title")}
       </h2>
       <div
-        className="relative w-full"
+        className="relative z-10 w-full"
         style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}
         onMouseEnter={pause}
         onMouseLeave={resume}
