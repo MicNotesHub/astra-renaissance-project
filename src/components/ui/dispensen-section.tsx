@@ -149,7 +149,9 @@ export const DispensenSection = () => {
                       <CardTitle className="group-hover:text-primary transition-colors">
                         {handout.filename}
                       </CardTitle>
-                      <CardDescription>{handout.year}</CardDescription>
+                      {handout.year && handout.year.toUpperCase() !== 'NULL' && (
+                        <CardDescription>{handout.year}</CardDescription>
+                      )}
                     </CardHeader>
                     <CardContent>
                       <Button 
