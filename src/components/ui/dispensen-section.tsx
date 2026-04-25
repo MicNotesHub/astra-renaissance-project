@@ -181,7 +181,7 @@ export const DispensenSection = () => {
                   </p>
                 )}
                 <Link to="/dispense">
-                  <Button size="lg" className="flex items-center gap-2">
+                  <Button size="lg" className="flex items-center gap-2 bg-yellow-300 text-slate-900 hover:bg-yellow-400">
                     {t('handouts.seeAllGeneral')}
                     <ArrowRight className="h-4 w-4" />
                   </Button>

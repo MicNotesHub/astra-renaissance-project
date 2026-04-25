@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp, GraduationCap, Users } from "lucide-react";
+import { Calculator, TrendingUp, GraduationCap, Users, ChevronRight } from "lucide-react";
 import { CalculatorModal } from "../calculators/calculator-modal";
 import { useLanguage } from "@/contexts/LanguageContext";
 export const CalcolatoriSection = () => {
@@ -79,6 +79,7 @@ export const CalcolatoriSection = () => {
           </p>
         </motion.div>
 
+        <div className="relative">
         <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
           {calcolatori.map((calc, index) => {
           const IconComponent = calc.icon;
@@ -151,6 +152,10 @@ export const CalcolatoriSection = () => {
                 </Card>
               </motion.div>;
         })}
+        </div>
+          <div className="md:hidden pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full bg-primary/90 text-primary-foreground shadow-lg animate-pulse">
+            <ChevronRight className="h-6 w-6" />
+          </div>
         </div>
 
         {/* Call to Action */}
