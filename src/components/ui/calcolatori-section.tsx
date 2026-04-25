@@ -153,6 +153,10 @@ export const CalcolatoriSection = () => {
               </motion.div>;
         })}
         </div>
+          <div className="md:hidden pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full bg-primary/90 text-primary-foreground shadow-lg animate-pulse">
+            <ChevronRight className="h-6 w-6" />
+          </div>
+        </div>
 
         {/* Call to Action */}
         <motion.div initial={{
