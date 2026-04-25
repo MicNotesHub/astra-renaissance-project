@@ -84,7 +84,7 @@ export const DispensenSection = () => {
   return (
     <section
       id="dispensen"
-      className="relative py-12 bg-fixed bg-cover bg-center"
+      className="relative py-12 bg-cover bg-center md:bg-fixed"
       style={{ backgroundImage: `url(${painting})` }}
     >
       {/* Tinted overlay for text contrast */}
