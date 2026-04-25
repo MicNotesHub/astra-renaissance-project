@@ -27,6 +27,7 @@ import astraNewsCover from "@/assets/stella-polare-covers/astranews.jpg";
 import legalCover from "@/assets/stella-polare-covers/legal.jpg";
 import economicsCover from "@/assets/stella-polare-covers/economics.jpg";
 import arteCulturaCover from "@/assets/stella-polare-covers/arte-cultura.jpg";
+import liberationDayCover from "@/assets/stella-polare-covers/liberation-day.jpeg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
@@ -101,6 +102,31 @@ const manualArticles: ManualArticle[] = [
     excerpt:
       "Una conversazione con due delle content creator più seguite in Italia: dal percorso professionale all'identità online, fino al futuro del mestiere con l'AI.",
     accent: "from-blue-500 to-cyan-500",
+  },
+];
+
+interface MonthlyManualArticle {
+  slug: string;
+  href: string;
+  cover: string;
+  eyebrow: string;
+  title: string;
+  excerpt: string;
+  accent: string;
+  author: string;
+}
+
+const monthlyManualArticles: MonthlyManualArticle[] = [
+  {
+    slug: "liberation-day-april-25",
+    href: "/stella-polare/liberation-day-april-25",
+    cover: liberationDayCover,
+    eyebrow: "Aprile 2026 · Mensile",
+    title: "For all the days April 25th",
+    excerpt:
+      "Memoria, Resistenza e libertà: perché il 25 aprile riguarda ancora ognuno di noi. Un viaggio nelle storie che hanno costruito l'Italia democratica.",
+    accent: "from-red-600 via-white to-green-600",
+    author: "Marco Ferraù",
   },
 ];
 
@@ -433,10 +459,56 @@ export default function StellaPolare() {
                   <div className="w-20" />
                 </div>
 
+                {/* Manual featured monthly articles with cover-card style */}
+                {monthlyManualArticles.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                    {monthlyManualArticles.map((a) => (
+                      <Link
+                        key={a.slug}
+                        to={a.href}
+                        className="group block"
+                      >
+                        <article className="bg-card border border-border rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col h-full">
+                          <div className="relative w-full aspect-[4/5] overflow-hidden bg-muted">
+                            <img
+                              src={a.cover}
+                              alt={a.title}
+                              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                            <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${a.accent}`} />
+                          </div>
+                          <div className="p-5 flex flex-col flex-1">
+                            <p className="text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">
+                              {a.eyebrow}
+                            </p>
+                            <h4 className="text-lg font-bold text-foreground leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-3">
+                              {a.title}
+                            </h4>
+                            <div className="w-10 h-px bg-border mb-2.5" />
+                            <p className="text-[12px] text-muted-foreground leading-relaxed line-clamp-5 flex-1">
+                              {a.excerpt}
+                            </p>
+                            <div className="mt-4 flex items-center justify-between">
+                              <span className="text-[11px] text-muted-foreground italic">
+                                — {a.author}
+                              </span>
+                              <span className="flex items-center gap-1 text-[12px] font-medium text-primary">
+                                Leggi
+                                <ExternalLink className="w-3.5 h-3.5" />
+                              </span>
+                            </div>
+                          </div>
+                        </article>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
                 <ArticlesList
                   loading={loading}
                   articles={monthlyArticles}
-                  emptyText={t("stellapolare.noArticles")}
+                  emptyText=""
                   fallbackTitle={t("stellapolare.article")}
                 />
               </motion.div>
