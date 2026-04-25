@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp, GraduationCap, Users } from "lucide-react";
+import { Calculator, TrendingUp, GraduationCap, Users, ChevronRight } from "lucide-react";
 import { CalculatorModal } from "../calculators/calculator-modal";
 import { useLanguage } from "@/contexts/LanguageContext";
 export const CalcolatoriSection = () => {
