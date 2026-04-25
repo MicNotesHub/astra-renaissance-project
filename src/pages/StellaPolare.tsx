@@ -27,6 +27,7 @@ import astraNewsCover from "@/assets/stella-polare-covers/astranews.jpg";
 import legalCover from "@/assets/stella-polare-covers/legal.jpg";
 import economicsCover from "@/assets/stella-polare-covers/economics.jpg";
 import arteCulturaCover from "@/assets/stella-polare-covers/arte-cultura.jpg";
+import liberationDayCover from "@/assets/stella-polare-covers/liberation-day.jpeg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
