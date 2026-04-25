@@ -16,7 +16,7 @@ export function Footer() {
   return (
     <footer
       className="relative text-white bg-primary bg-cover bg-no-repeat"
-      style={{ backgroundImage: `url(${vangogh})`, backgroundPosition: "center 15%" }}
+      style={{ backgroundImage: `url(${vangogh})`, backgroundPosition: "center 20%" }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(225_70%_10%/0.75)] via-[hsl(225_75%_8%/0.8)] to-[hsl(225_80%_6%/0.9)]" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
