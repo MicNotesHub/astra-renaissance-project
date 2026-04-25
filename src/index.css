@@ -181,3 +181,14 @@ All colors MUST be HSL.
     display: none;
   }
 }
+@keyframes marketplace-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.marketplace-animated-bg {
+  background: linear-gradient(110deg, #3b82f6, #60a5fa, #2563eb, #93c5fd, #3b82f6);
+  background-size: 300% 300%;
+  animation: marketplace-gradient-shift 12s ease-in-out infinite;
+}
