@@ -97,9 +97,9 @@ export const DispensenSection = () => {
           transition={{ duration: 0.8 }} 
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg flex items-center justify-center gap-3">
-            <GraduationCap className="h-12 w-12 text-yellow-300" />
-            {t('handouts.title')}
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg flex flex-row items-center justify-center gap-3 flex-nowrap">
+            <GraduationCap className="h-10 w-10 md:h-12 md:w-12 text-yellow-300 shrink-0" />
+            <span>{t('handouts.title')}</span>
           </h2>
           <p className="text-xl text-white/85 max-w-3xl mx-auto drop-shadow">
             {t('handouts.subtitle')}
