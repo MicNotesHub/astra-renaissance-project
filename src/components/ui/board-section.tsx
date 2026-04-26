@@ -151,7 +151,7 @@ export const BoardSection = () => {
           className="h-full w-full"
         />
       </div>
-      <h2 className="relative z-10 mb-8 text-center text-3xl font-bold text-[#FDE047] md:text-4xl">
+      <h2 className="relative z-10 mb-8 text-center text-3xl font-bold text-white md:text-4xl">
         {t("board.title")}
       </h2>
       <div
