@@ -115,7 +115,7 @@ export const MarketplaceSection = () => {
           duration: 0.6,
           delay: index * 0.1
         }}>
-              <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden cursor-pointer" onClick={() => window.open(product.url, '_blank')}>
+              <Card className="border-0 premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden cursor-pointer bg-white" onClick={() => window.open(product.url, '_blank')}>
                 <div className="relative">
                   <a href="https://uni-market.it" target="_blank" rel="noopener noreferrer">
                     <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -172,19 +172,31 @@ export const MarketplaceSection = () => {
         duration: 0.8,
         delay: 0.4
       }}>
-          <Card className="glass-card premium-shadow overflow-hidden">
-            <div className="bg-gradient-hero p-8 md:p-12 text-white text-center">
-              <div className="max-w-3xl mx-auto">
-                <h3 className="text-3xl md:text-4xl font-bold mb-6">
+          <Card className="border-0 premium-shadow overflow-hidden">
+            <div className="relative p-8 md:p-12 text-white text-center overflow-hidden" style={{
+              background: 'linear-gradient(135deg, #fb923c 0%, #f97316 35%, #ef4444 70%, #ec4899 100%)'
+            }}>
+              {/* Animated shine overlay */}
+              <div className="pointer-events-none absolute inset-0 opacity-40 mix-blend-overlay" style={{
+                background: 'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.5), transparent 40%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.35), transparent 45%)'
+              }} />
+              <div className="relative max-w-3xl mx-auto">
+                <h3 className="text-3xl md:text-4xl font-bold mb-6 drop-shadow-md">
                   {t('marketplace.cta.title')}
                 </h3>
                 
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 flex items-center gap-2 mb-8 mx-auto px-[32px] py-[23px] text-center text-2xl rounded-3xl" onClick={() => window.open('https://uni-market.it', '_blank')}>
-                  {t('marketplace.cta.button')}
-                  <ArrowRight className="h-6 w-6" />
+                <Button
+                  size="lg"
+                  onClick={() => window.open('https://uni-market.it', '_blank')}
+                  className="group relative overflow-hidden bg-white/15 hover:bg-white/25 text-white border border-white/40 backdrop-blur-xl flex items-center gap-2 mb-8 mx-auto px-[32px] py-[23px] text-center text-2xl rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] hover:shadow-[0_12px_40px_rgba(255,255,255,0.35)] transition-all duration-300 hover:scale-105"
+                >
+                  {/* Liquid glass shine sweep */}
+                  <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                  <span className="relative z-10 font-semibold">{t('marketplace.cta.button')}</span>
+                  <ArrowRight className="relative z-10 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 
-                <p className="text-lg opacity-90 mb-6">
+                <p className="text-lg opacity-95 mb-6 drop-shadow">
                   {t('marketplace.cta.description')}
                 </p>
                 
