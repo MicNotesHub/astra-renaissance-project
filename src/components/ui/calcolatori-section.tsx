@@ -80,7 +80,7 @@ export const CalcolatoriSection = () => {
         </motion.div>
 
         <div className="relative">
-        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-6 overflow-x-auto overflow-y-visible pt-4 pb-4 scrollbar-hide">
           {calcolatori.map((calc, index) => {
           const IconComponent = calc.icon;
            return <motion.div key={index} initial={{
