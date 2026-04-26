@@ -70,9 +70,9 @@ export const CalcolatoriSection = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text flex items-center justify-center gap-3">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text flex flex-col md:flex-row items-center justify-center gap-3 text-center">
             <Calculator className="h-12 w-12 text-primary" />
-            {t('calculators.title')}
+            <span>{t('calculators.title')}</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             {t('calculators.subtitle')}
