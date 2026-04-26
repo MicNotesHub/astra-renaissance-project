@@ -174,7 +174,7 @@ export const MarketplaceSection = () => {
       }}>
           <Card className="border-0 premium-shadow overflow-hidden">
             <div className="relative p-8 md:p-12 text-white text-center overflow-hidden" style={{
-              background: 'linear-gradient(135deg, #0b1d4d 0%, #11337a 35%, #1e40af 70%, #2563eb 100%)'
+              background: 'linear-gradient(180deg, #0b1d4d 0%, #11337a 35%, #1e40af 70%, #2563eb 100%)'
             }}>
               {/* Animated shine overlay */}
               <div className="pointer-events-none absolute inset-0 opacity-40 mix-blend-overlay" style={{
