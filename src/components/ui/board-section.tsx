@@ -120,9 +120,58 @@ export const BoardSection = () => {
     return () => el.removeEventListener("wheel", onWheel);
   }, [wrapIfNeeded]);
 
+  // Mobile: drag-to-scroll + tap-to-toggle pause.
+  React.useEffect(() => {
+    if (!isMobileViewport()) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    let startX = 0;
+    let startScroll = 0;
+    let dragging = false;
+    let moved = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      dragging = true;
+      moved = false;
+      startX = e.touches[0].clientX;
+      startScroll = el.scrollLeft;
+      pausedRef.current = true;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      el.scrollLeft = startScroll - dx;
+      wrapIfNeeded();
+    };
+    const onTouchEnd = () => {
+      dragging = false;
+      // If it was a tap (no real drag), toggle pause; otherwise resume.
+      if (!moved) {
+        // Toggle: was set to true on start; flip to keep paused or resume.
+        pausedRef.current = !pausedRef.current ? true : !pausedRef.current;
+        // Simpler: tap toggles — if paused, resume; if playing, pause.
+        pausedRef.current = !pausedRef.current;
+      } else {
+        pausedRef.current = false;
+        lastTimeRef.current = null;
+      }
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchend", onTouchEnd);
+    el.addEventListener("touchcancel", onTouchEnd);
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("touchcancel", onTouchEnd);
+    };
+  }, [wrapIfNeeded]);
+
   // Wrap on every scroll event to handle drag/touch/keyboard scrolling too.
   const handleScroll = React.useCallback(() => {
-    if (!isDesktopViewport()) return;
     wrapIfNeeded();
   }, [wrapIfNeeded]);
 
