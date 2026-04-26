@@ -173,7 +173,7 @@ export function Navigation() {
 
           {/* Mobile menu button */}
           <div className="lg:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn("relative p-2 rounded-lg transition-all duration-200", (isOnWhitePage || isOverWhiteSection) ? "text-primary hover:bg-primary/10" : "text-white bg-black/30 backdrop-blur-sm hover:bg-black/40 border border-white/20")} aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}>
+            <Button variant="ghost" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn("relative p-2 rounded-lg transition-all duration-200 bg-white hover:bg-white/90 border border-border shadow-sm", (isOnWhitePage || isOverWhiteSection) ? "text-primary" : "text-primary")} aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}>
               <motion.div animate={{
               rotate: isMobileMenuOpen ? 180 : 0
             }} transition={{
