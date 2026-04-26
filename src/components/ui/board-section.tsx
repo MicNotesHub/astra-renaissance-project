@@ -129,12 +129,14 @@ export const BoardSection = () => {
     let startScroll = 0;
     let dragging = false;
     let moved = false;
+    let wasPausedBeforeTap = false;
 
     const onTouchStart = (e: TouchEvent) => {
       dragging = true;
       moved = false;
       startX = e.touches[0].clientX;
       startScroll = el.scrollLeft;
+      wasPausedBeforeTap = pausedRef.current;
       pausedRef.current = true;
     };
     const onTouchMove = (e: TouchEvent) => {
