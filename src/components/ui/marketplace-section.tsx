@@ -115,7 +115,7 @@ export const MarketplaceSection = () => {
           duration: 0.6,
           delay: index * 0.1
         }}>
-              <Card className="border-0 premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden cursor-pointer bg-white" onClick={() => window.open(product.url, '_blank')}>
+              <Card className="border-0 premium-shadow hover:shadow-glow hover:scale-105 transition-all duration-300 group overflow-hidden cursor-pointer bg-white" onClick={() => window.open(product.url, '_blank')}>
                 <div className="relative">
                   <a href="https://uni-market.it" target="_blank" rel="noopener noreferrer">
                     <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
