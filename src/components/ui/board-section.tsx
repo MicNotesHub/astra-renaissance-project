@@ -66,7 +66,6 @@ export const BoardSection = () => {
 
   // Initial centering on the middle copy.
   React.useLayoutEffect(() => {
-    if (!isDesktopViewport()) return;
     const el = scrollRef.current;
     if (!el) return;
     const center = () => {
@@ -84,7 +83,6 @@ export const BoardSection = () => {
 
   // Continuous auto-scroll loop — true infinite marquee feel.
   React.useEffect(() => {
-    if (!isDesktopViewport()) return;
     const el = scrollRef.current;
     if (!el) return;
 
