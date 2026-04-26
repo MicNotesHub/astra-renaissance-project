@@ -234,13 +234,13 @@ export const BoardSection = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="w-full overflow-x-hidden overflow-y-hidden md:overflow-x-auto"
+          className="w-full overflow-x-auto overflow-y-hidden"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
           } as React.CSSProperties}
         >
-          <div className="board-mobile-marquee flex w-max gap-4 pb-2">
+          <div className="flex w-max gap-4 pb-2">
             {slides.map((s, i) => (
               <div
                 key={`${s.alt}-${i}`}
