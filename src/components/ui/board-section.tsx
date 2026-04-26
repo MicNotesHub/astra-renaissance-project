@@ -40,6 +40,8 @@ const AUTO_SPEED = 40;
 
 const isDesktopViewport = () =>
   typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches;
+const isMobileViewport = () =>
+  typeof window !== "undefined" && !window.matchMedia("(min-width: 768px)").matches;
 
 export const BoardSection = () => {
   const { t } = useLanguage();
