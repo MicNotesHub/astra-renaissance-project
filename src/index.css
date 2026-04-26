@@ -193,7 +193,7 @@ All colors MUST be HSL.
 }
 
 .board-mobile-marquee {
-  animation: board-mobile-marquee 34s linear infinite;
+  animation: board-mobile-marquee 68s linear infinite;
   will-change: transform;
 }
 
