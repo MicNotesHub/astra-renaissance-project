@@ -88,7 +88,7 @@ export const MarketplaceSection = () => {
       }} className="grid md:grid-cols-3 gap-6 mb-12">
           {features.map((feature, index) => {
           const IconComponent = feature.icon;
-          return <Card key={index} className="text-center p-6 hover:shadow-glow transition-all duration-300 rounded-2xl" style={{
+          return <Card key={index} className="text-center p-6 hover:shadow-glow hover:scale-105 transition-all duration-300 rounded-2xl cursor-default" style={{
             backgroundColor: '#DCEBFA'
           }}>
                 <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
@@ -115,7 +115,7 @@ export const MarketplaceSection = () => {
           duration: 0.6,
           delay: index * 0.1
         }}>
-              <Card className="border-0 premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden cursor-pointer bg-white" onClick={() => window.open(product.url, '_blank')}>
+              <Card className="border-0 premium-shadow hover:shadow-glow hover:scale-105 transition-all duration-300 group overflow-hidden cursor-pointer bg-white" onClick={() => window.open(product.url, '_blank')}>
                 <div className="relative">
                   <a href="https://uni-market.it" target="_blank" rel="noopener noreferrer">
                     <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -174,7 +174,7 @@ export const MarketplaceSection = () => {
       }}>
           <Card className="border-0 premium-shadow overflow-hidden">
             <div className="relative p-8 md:p-12 text-white text-center overflow-hidden" style={{
-              background: 'linear-gradient(135deg, #fb923c 0%, #f97316 35%, #ef4444 70%, #ec4899 100%)'
+              background: 'linear-gradient(135deg, #0b1d4d 0%, #11337a 35%, #1e40af 70%, #2563eb 100%)'
             }}>
               {/* Animated shine overlay */}
               <div className="pointer-events-none absolute inset-0 opacity-40 mix-blend-overlay" style={{
