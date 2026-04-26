@@ -35,9 +35,11 @@ const baseSlides = [
 
 // Triple buffer so we can seamlessly wrap forward and backward.
 const slides = [...baseSlides, ...baseSlides, ...baseSlides];
-const SIDE_PADDING = "clamp(20px, 5vw, 56px)";
 // Pixels per second for the auto-scrolling marquee.
 const AUTO_SPEED = 40;
+
+const isDesktopViewport = () =>
+  typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches;
 
 export const BoardSection = () => {
   const { t } = useLanguage();
@@ -62,6 +64,7 @@ export const BoardSection = () => {
 
   // Initial centering on the middle copy.
   React.useLayoutEffect(() => {
+    if (!isDesktopViewport()) return;
     const el = scrollRef.current;
     if (!el) return;
     const center = () => {
@@ -79,6 +82,7 @@ export const BoardSection = () => {
 
   // Continuous auto-scroll loop — true infinite marquee feel.
   React.useEffect(() => {
+    if (!isDesktopViewport()) return;
     const el = scrollRef.current;
     if (!el) return;
 
@@ -103,6 +107,7 @@ export const BoardSection = () => {
 
   // Translate vertical mouse-wheel scroll into horizontal scroll.
   React.useEffect(() => {
+    if (!isDesktopViewport()) return;
     const el = scrollRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
@@ -117,6 +122,7 @@ export const BoardSection = () => {
 
   // Wrap on every scroll event to handle drag/touch/keyboard scrolling too.
   const handleScroll = React.useCallback(() => {
+    if (!isDesktopViewport()) return;
     wrapIfNeeded();
   }, [wrapIfNeeded]);
 
@@ -155,8 +161,7 @@ export const BoardSection = () => {
         {t("board.title")}
       </h2>
       <div
-        className="relative z-10 w-full"
-        style={{ paddingLeft: SIDE_PADDING, paddingRight: SIDE_PADDING }}
+        className="relative z-10 w-full px-2 md:px-[clamp(20px,5vw,56px)]"
         onMouseEnter={pause}
         onMouseLeave={resume}
       >
@@ -179,13 +184,13 @@ export const BoardSection = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="w-full overflow-x-auto overflow-y-hidden"
+          className="w-full overflow-x-hidden overflow-y-hidden md:overflow-x-auto"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
           } as React.CSSProperties}
         >
-          <div className="flex w-max gap-4 pb-2">
+          <div className="board-mobile-marquee flex w-max gap-4 pb-2">
             {slides.map((s, i) => (
               <div
                 key={`${s.alt}-${i}`}

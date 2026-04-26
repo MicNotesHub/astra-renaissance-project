@@ -187,6 +187,29 @@ All colors MUST be HSL.
   100% { background-position: 0% 50%; }
 }
 
+@keyframes board-mobile-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-100% / 3), 0, 0); }
+}
+
+.board-mobile-marquee {
+  animation: board-mobile-marquee 34s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .board-mobile-marquee {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board-mobile-marquee {
+    animation: none;
+  }
+}
+
 .marketplace-animated-bg {
   background: linear-gradient(110deg, #0a72e0, #1e90ff, #0560c9, #2b8bf2, #0a72e0);
   background-size: 300% 300%;
