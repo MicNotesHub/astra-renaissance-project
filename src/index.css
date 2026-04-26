@@ -188,7 +188,7 @@ All colors MUST be HSL.
 }
 
 .marketplace-animated-bg {
-  background: linear-gradient(110deg, #3b82f6, #4f9eff, #2563eb, #5ba3f5, #3b82f6);
+  background: linear-gradient(110deg, #0a72e0, #1e90ff, #0560c9, #2b8bf2, #0a72e0);
   background-size: 300% 300%;
   animation: marketplace-gradient-shift 12s ease-in-out infinite;
 }
