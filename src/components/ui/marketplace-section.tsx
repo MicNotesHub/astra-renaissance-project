@@ -88,7 +88,7 @@ export const MarketplaceSection = () => {
       }} className="grid md:grid-cols-3 gap-6 mb-12">
           {features.map((feature, index) => {
           const IconComponent = feature.icon;
-          return <Card key={index} className="text-center p-6 hover:shadow-glow transition-all duration-300 rounded-2xl" style={{
+          return <Card key={index} className="text-center p-6 hover:shadow-glow hover:scale-105 transition-all duration-300 rounded-2xl cursor-default" style={{
             backgroundColor: '#DCEBFA'
           }}>
                 <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
