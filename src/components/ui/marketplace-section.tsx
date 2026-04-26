@@ -60,9 +60,9 @@ export const MarketplaceSection = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-10 mt-0">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white relative inline-flex items-center justify-center gap-3 drop-shadow-lg">
-  <ShoppingBag className="h-9 w-9 md:h-10 md:w-10 text-white" strokeWidth={2.25} />
-  <span className="relative">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white flex flex-col md:flex-row items-center justify-center gap-3 drop-shadow-lg text-center">
+  <ShoppingBag className="h-9 w-9 md:h-10 md:w-10 text-white shrink-0" strokeWidth={2.25} />
+  <span className="relative inline-block">
     {t('marketplace.title')}
     <sup className="absolute -top-1 -right-3 text-sm text-white/90">©</sup>
   </span>
