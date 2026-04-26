@@ -93,15 +93,6 @@ export function HeroSection() {
 
         </motion.div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in" style={{
-        animationDelay: "1s"
-      }}>
-          <div className="flex flex-col items-center text-white/70">
-            
-            <div className="w-px h-8 bg-white/50 animate-pulse"></div>
-          </div>
-        </div>
       </div>
     </section>
   );
