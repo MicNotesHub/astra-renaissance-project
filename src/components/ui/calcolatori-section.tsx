@@ -95,7 +95,7 @@ export const CalcolatoriSection = () => {
              duration: 0.6,
              delay: index * 0.1
            }} className="flex-shrink-0 w-96">
-                 <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group h-full">
+                 <Card className="glass-card premium-shadow hover:shadow-glow hover:scale-105 transition-all duration-300 group h-full bg-gradient-to-br from-primary/5 via-primary/10 to-primary/15 border-primary/20">
                   <CardHeader>
                     <div className={`w-12 h-12 rounded-lg ${calc.bgColor} flex items-center justify-center mb-4`}>
                       <IconComponent className={`h-6 w-6 ${calc.color}`} />
