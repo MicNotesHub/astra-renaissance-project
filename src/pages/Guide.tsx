@@ -213,7 +213,7 @@ const Guide = () => {
       'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100',
       'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100',
       'bgl_domestic_track': 'text-red-600 bg-red-50 hover:bg-red-100',
-      'program_change': 'text-purple-600 bg-purple-50 hover:bg-purple-100'
+      'program_change': 'text-blue-600 bg-blue-50 hover:bg-blue-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
