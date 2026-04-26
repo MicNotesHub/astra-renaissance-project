@@ -145,17 +145,16 @@ export const BoardSection = () => {
       wrapIfNeeded();
     };
     const onTouchEnd = () => {
+      if (!dragging) return;
       dragging = false;
-      // If it was a tap (no real drag), toggle pause; otherwise resume.
       if (!moved) {
-        // Toggle: was set to true on start; flip to keep paused or resume.
-        pausedRef.current = !pausedRef.current ? true : !pausedRef.current;
-        // Simpler: tap toggles — if paused, resume; if playing, pause.
-        pausedRef.current = !pausedRef.current;
+        // Tap (no drag): toggle pause/play.
+        // pausedRef was set true on touchstart, so flipping gives toggle vs prior state.
+        pausedRef.current = !wasPausedBeforeTap;
       } else {
         pausedRef.current = false;
-        lastTimeRef.current = null;
       }
+      lastTimeRef.current = null;
     };
 
     el.addEventListener("touchstart", onTouchStart, { passive: true });
