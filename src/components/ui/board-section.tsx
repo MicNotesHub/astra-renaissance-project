@@ -212,8 +212,8 @@ export const BoardSection = () => {
       </h2>
       <div
         className="relative z-10 w-full px-2 md:px-[clamp(20px,5vw,56px)]"
-        onMouseEnter={pause}
-        onMouseLeave={resume}
+        onMouseEnter={() => { if (isDesktopViewport()) pause(); }}
+        onMouseLeave={() => { if (isDesktopViewport()) resume(); }}
       >
         <button
           type="button"
