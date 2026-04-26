@@ -40,6 +40,8 @@ const AUTO_SPEED = 40;
 
 const isDesktopViewport = () =>
   typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches;
+const isMobileViewport = () =>
+  typeof window !== "undefined" && !window.matchMedia("(min-width: 768px)").matches;
 
 export const BoardSection = () => {
   const { t } = useLanguage();
@@ -64,7 +66,6 @@ export const BoardSection = () => {
 
   // Initial centering on the middle copy.
   React.useLayoutEffect(() => {
-    if (!isDesktopViewport()) return;
     const el = scrollRef.current;
     if (!el) return;
     const center = () => {
@@ -82,7 +83,6 @@ export const BoardSection = () => {
 
   // Continuous auto-scroll loop — true infinite marquee feel.
   React.useEffect(() => {
-    if (!isDesktopViewport()) return;
     const el = scrollRef.current;
     if (!el) return;
 
@@ -120,9 +120,59 @@ export const BoardSection = () => {
     return () => el.removeEventListener("wheel", onWheel);
   }, [wrapIfNeeded]);
 
+  // Mobile: drag-to-scroll + tap-to-toggle pause.
+  React.useEffect(() => {
+    if (!isMobileViewport()) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    let startX = 0;
+    let startScroll = 0;
+    let dragging = false;
+    let moved = false;
+    let wasPausedBeforeTap = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      dragging = true;
+      moved = false;
+      startX = e.touches[0].clientX;
+      startScroll = el.scrollLeft;
+      wasPausedBeforeTap = pausedRef.current;
+      pausedRef.current = true;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      el.scrollLeft = startScroll - dx;
+      wrapIfNeeded();
+    };
+    const onTouchEnd = () => {
+      if (!dragging) return;
+      dragging = false;
+      if (!moved) {
+        // Tap (no drag): toggle pause/play.
+        // pausedRef was set true on touchstart, so flipping gives toggle vs prior state.
+        pausedRef.current = !wasPausedBeforeTap;
+      } else {
+        pausedRef.current = false;
+      }
+      lastTimeRef.current = null;
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchend", onTouchEnd);
+    el.addEventListener("touchcancel", onTouchEnd);
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("touchcancel", onTouchEnd);
+    };
+  }, [wrapIfNeeded]);
+
   // Wrap on every scroll event to handle drag/touch/keyboard scrolling too.
   const handleScroll = React.useCallback(() => {
-    if (!isDesktopViewport()) return;
     wrapIfNeeded();
   }, [wrapIfNeeded]);
 
@@ -184,13 +234,13 @@ export const BoardSection = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="w-full overflow-x-hidden overflow-y-hidden md:overflow-x-auto"
+          className="w-full overflow-x-auto overflow-y-hidden"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
           } as React.CSSProperties}
         >
-          <div className="board-mobile-marquee flex w-max gap-4 pb-2">
+          <div className="flex w-max gap-4 pb-2">
             {slides.map((s, i) => (
               <div
                 key={`${s.alt}-${i}`}
