@@ -24,6 +24,7 @@ import universityCover from "@/assets/guide-covers/university.png";
 import freemoverCover from "@/assets/guide-covers/freemover.png";
 import opzionaliCover from "@/assets/guide-covers/opzionali.png";
 import springWeeksCover from "@/assets/guide-covers/spring-weeks.png";
+import programChangeCover from "@/assets/guide-covers/program-change.jpg";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
@@ -44,6 +45,7 @@ const categoryCoverMap: Record<string, string> = {
   'freemover': freemoverCover,
   'opzionali': opzionaliCover,
   'spring weeks': springWeeksCover,
+  'program_change': programChangeCover,
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
