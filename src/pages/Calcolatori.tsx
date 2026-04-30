@@ -138,8 +138,12 @@ const Calcolatori = () => {
                         <Button 
                           className={`${calc.externalLink ? 'flex-1' : 'w-full'} group-hover:bg-primary-light transition-colors`}
                           onClick={() => {
-                            if (calc.id === 'exchange-calculator' || calc.id === 'exchange-calculator-ug' || calc.id === 'exchange-calculator-clmg') {
-                              navigate('/exchange');
+                            if (calc.id === 'exchange-calculator-ug') {
+                              navigate('/exchange?type=undergraduate');
+                            } else if (calc.id === 'exchange-calculator') {
+                              navigate('/exchange?type=graduate');
+                            } else if (calc.id === 'exchange-calculator-clmg') {
+                              navigate('/exchange?type=law');
                             } else {
                               setSelectedCalculator(calc.id);
                             }
