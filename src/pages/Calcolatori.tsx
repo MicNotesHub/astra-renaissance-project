@@ -98,7 +98,7 @@ const Calcolatori = () => {
                       <div className={`w-12 h-12 rounded-lg ${calc.bgColor} flex items-center justify-center mb-4`}>
                         <IconComponent className={`h-6 w-6 ${calc.color}`} />
                       </div>
-                      <CardTitle className="group-hover:text-primary transition-colors">
+                      <CardTitle className="text-primary group-hover:text-primary/80 transition-colors">
                         {calc.title}
                       </CardTitle>
                       <CardDescription className="text-sm">
