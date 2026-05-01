@@ -25,6 +25,7 @@ import StellaPolareArticleGasolineGeopolitics from "./pages/StellaPolareArticleG
 import StellaPolareArticleItalianFootballCrisis from "./pages/StellaPolareArticleItalianFootballCrisis";
 import StellaPolareArticleAstraNewsInfluencers from "./pages/StellaPolareArticleAstraNewsInfluencers";
 import StellaPolareArticleLiberationDay from "./pages/StellaPolareArticleLiberationDay";
+import StellaPolareArticleLabourDay from "./pages/StellaPolareArticleLabourDay";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
 
@@ -65,6 +66,7 @@ const App = () => {
               <Route path="/stella-polare/italian-football-crisis" element={<StellaPolareArticleItalianFootballCrisis />} />
               <Route path="/stella-polare/astra-news-influencers" element={<StellaPolareArticleAstraNewsInfluencers />} />
               <Route path="/stella-polare/liberation-day-april-25" element={<StellaPolareArticleLiberationDay />} />
+              <Route path="/stella-polare/labour-day-may-1" element={<StellaPolareArticleLabourDay />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

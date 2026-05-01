@@ -28,6 +28,7 @@ import legalCover from "@/assets/stella-polare-covers/legal.jpg";
 import economicsCover from "@/assets/stella-polare-covers/economics.jpg";
 import arteCulturaCover from "@/assets/stella-polare-covers/arte-cultura.jpg";
 import liberationDayCover from "@/assets/stella-polare-covers/liberation-day.jpeg";
+import labourDayCover from "@/assets/stella-polare-covers/labour-day.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
@@ -117,6 +118,17 @@ interface MonthlyManualArticle {
 }
 
 const monthlyManualArticles: MonthlyManualArticle[] = [
+  {
+    slug: "labour-day-may-1",
+    href: "/stella-polare/labour-day-may-1",
+    cover: labourDayCover,
+    eyebrow: "Maggio 2026 · Mensile",
+    title: "1° Maggio, il lavoro come valore civile e sociale",
+    excerpt:
+      "La Festa dei Lavoratori non è soltanto una ricorrenza simbolica, ma un momento per riflettere sul significato del lavoro, sui diritti conquistati nel tempo e sulle sfide che ancora attraversano la società.",
+    accent: "from-blue-600 via-blue-500 to-sky-400",
+    author: "Astra Bocconi",
+  },
   {
     slug: "liberation-day-april-25",
     href: "/stella-polare/liberation-day-april-25",
