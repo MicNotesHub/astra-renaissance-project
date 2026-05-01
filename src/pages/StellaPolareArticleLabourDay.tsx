@@ -99,6 +99,10 @@ export default function StellaPolareArticleLabourDay() {
                   Più che una semplice festa, il 1° maggio resta quindi un'occasione di memoria e riflessione. Memoria di chi ha lottato per ottenere condizioni più giuste, e riflessione su quanto ci sia ancora da fare perché il lavoro continui a essere davvero sinonimo di dignità, sicurezza e cittadinanza. Ed è proprio in questo equilibrio tra passato e presente che questa giornata conserva ancora oggi tutta la sua forza.
                 </p>
               </div>
+
+              <footer className="mt-10 pt-6 border-t border-border">
+                <p className="text-sm text-muted-foreground italic">— Giorgia Caruana</p>
+              </footer>
             </div>
           </motion.article>
         </div>

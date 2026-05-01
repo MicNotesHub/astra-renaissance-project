@@ -127,7 +127,7 @@ const monthlyManualArticles: MonthlyManualArticle[] = [
     excerpt:
       "La Festa dei Lavoratori non è soltanto una ricorrenza simbolica, ma un momento per riflettere sul significato del lavoro, sui diritti conquistati nel tempo e sulle sfide che ancora attraversano la società.",
     accent: "from-blue-600 via-blue-500 to-sky-400",
-    author: "Astra Bocconi",
+    author: "Giorgia Caruana",
   },
   {
     slug: "liberation-day-april-25",
