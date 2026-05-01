@@ -28,6 +28,7 @@ import StellaPolareArticleLiberationDay from "./pages/StellaPolareArticleLiberat
 import StellaPolareArticleLabourDay from "./pages/StellaPolareArticleLabourDay";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/chi-siamo" element={<ChiSiamo />} />
