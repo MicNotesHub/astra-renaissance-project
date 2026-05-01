@@ -241,9 +241,9 @@ const GuideCategory: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {guides.map((guide, index) => {
               const titleLower = guide.title.toLowerCase();
-              // Check English markers FIRST (eng, english, " en") because "guida ... eng" also contains "guida"
-              const isEnglish = /\b(eng|english)\b/.test(titleLower) || titleLower.endsWith(' en') || titleLower.includes('guide ');
-              const isItalian = !isEnglish && (/\b(ita|italiano)\b/.test(titleLower) || titleLower.includes('guida') || titleLower.endsWith(' it'));
+              // Check English markers FIRST because "guida ... eng" also contains "guida"
+              const isEnglish = /\b(eng|english|guide)\b/.test(titleLower) || titleLower.endsWith(' en');
+              const isItalian = !isEnglish && (/\b(ita|italiano|guida)\b/.test(titleLower) || titleLower.endsWith(' it'));
               const flagUrl = isEnglish ? 'https://flagcdn.com/w80/gb.png' : isItalian ? 'https://flagcdn.com/w80/it.png' : null;
 
               return (
