@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { FileText } from "lucide-react";
 import * as pdfjsLib from "pdfjs-dist";
+import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
-// Configure worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+// Configure worker via Vite-bundled URL (avoids CDN version mismatches)
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 interface PdfThumbnailProps {
   fileUrl: string;
