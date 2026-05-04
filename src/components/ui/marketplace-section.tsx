@@ -118,7 +118,7 @@ export const MarketplaceSection = () => {
               <Card className="border-0 premium-shadow hover:shadow-glow hover:scale-105 transition-all duration-300 group overflow-hidden cursor-pointer bg-white" onClick={() => window.open(product.url, '_blank')}>
                 <div className="relative">
                   <a href="https://uni-market.it" target="_blank" rel="noopener noreferrer">
-                    <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <img src={product.image} alt={product.name} className={`w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 ${product.name === "Jacquemus Grand Bambino Black" ? "object-top" : ""}`} />
                   </a>
                   <div className="absolute top-3 left-3">
                     <Badge className="text-xs">
