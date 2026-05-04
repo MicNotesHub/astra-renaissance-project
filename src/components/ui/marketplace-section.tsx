@@ -16,10 +16,10 @@ export const MarketplaceSection = () => {
     badge: "Offerta",
     url: "https://uni-market.it"
   }, {
-    name: "Inox casserole",
-    price: "10€",
-    originalPrice: "45€",
-    image: "/lovable-uploads/inox-casserole.jpeg",
+    name: "Jacquemus Grand Bambino Black",
+    price: "400€",
+    originalPrice: "500€",
+    image: "/lovable-uploads/jacquemus-grand-bambino-black.jpg",
     rating: 4.6,
     reviews: 18,
     badge: "Nuovo",
