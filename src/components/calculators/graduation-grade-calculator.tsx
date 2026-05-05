@@ -25,6 +25,8 @@ interface ExamGrade {
   grade: number | '';
   completed: boolean;
   isSeminar: boolean;
+  hasInternshipOption: boolean;
+  internshipChoice: 'internship' | 'elective' | '';
 }
 
 export function GraduationGradeCalculator() {
