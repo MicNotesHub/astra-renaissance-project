@@ -595,6 +595,12 @@ const translations = {
     'calculators.exchange-ug.description': 'Calculate your Exchange Score for Undergraduate',
     'calculators.features': 'Features:',
     'calculators.use': 'Use Calculator',
+    'calculators.feat.gpa.1': 'Graduation grade out of 110',
+    'calculators.feat.gpa.2': 'GPA out of 30',
+    'calculators.feat.gpa.3': 'Configurable bonuses',
+    'calculators.feat.exchange.1': 'Exchange Score calculation',
+    'calculators.feat.exchange.2': 'Destinations by continent',
+    'calculators.feat.exchange.3': 'Acceptance Rate',
     
     // MSc Calculator
     'msc_calc.select_course': 'Select Master\'s Degree',
