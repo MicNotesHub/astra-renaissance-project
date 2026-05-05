@@ -27,6 +27,8 @@ interface ExamGrade {
   grade: number | '';
   completed: boolean;
   isSeminar: boolean;
+  hasInternshipOption: boolean;
+  internshipChoice: 'internship' | 'elective' | '';
 }
 
 const TRACK_COURSES: Record<string, { tracks: string[]; subjectTrackMap: Record<string, string> }> = {
@@ -132,21 +134,30 @@ export function MscGraduationCalculator() {
 
         const isPassFail = (name: string) => {
           const lower = name.toLowerCase();
-          return lower.includes('seminar') || lower.includes('internship') ||
-                 lower.includes('tirocinio') || lower.includes('stage') ||
+          // Internships are now handled separately as a user choice
+          if (lower.includes('internship') || lower.includes('tirocinio') || lower.includes('stage')) {
+            return false;
+          }
+          return lower.includes('seminar') ||
                  lower.includes('lab') || lower.includes('foreign language') ||
                  lower.includes('lingua') || lower.includes('privacy') ||
                  lower.includes('guidelines');
         };
 
-        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
-          id: subject.id,
-          subject: subject.subject,
-          cfu: subject.cfu,
-          grade: '',
-          completed: false,
-          isSeminar: isPassFail(subject.subject)
-        }));
+        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => {
+          const lower = subject.subject.toLowerCase();
+          const hasInternshipOption = lower.includes('internship') || lower.includes('tirocinio') || lower.includes('stage');
+          return {
+            id: subject.id,
+            subject: subject.subject,
+            cfu: subject.cfu,
+            grade: '' as number | '',
+            completed: false,
+            isSeminar: isPassFail(subject.subject),
+            hasInternshipOption,
+            internshipChoice: '' as 'internship' | 'elective' | '',
+          };
+        });
 
         setExamGrades(initialGrades);
       } catch (error) {
@@ -170,9 +181,16 @@ export function MscGraduationCalculator() {
   };
 
   const calculateResults = () => {
-    const completedExams = examGrades.filter(exam =>
-      exam.completed && (exam.isSeminar || (exam.grade !== '' && Number(exam.grade) >= 18))
-    );
+    const completedExams = examGrades.filter(exam => {
+      if (!exam.completed) return false;
+      if (exam.isSeminar) return true;
+      if (exam.hasInternshipOption) {
+        if (exam.internshipChoice === 'internship') return true;
+        if (exam.internshipChoice === 'elective') return exam.grade !== '' && Number(exam.grade) >= 18;
+        return false;
+      }
+      return exam.grade !== '' && Number(exam.grade) >= 18;
+    });
 
     const thesisCfu = getThesisCfu(selectedCourse);
     const examCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
@@ -475,7 +493,55 @@ export function MscGraduationCalculator() {
                         />
                       </div>
 
-                      {exam.completed && !exam.isSeminar && (
+                      {exam.completed && exam.hasInternshipOption && (
+                        <div className="space-y-2">
+                          <div className="flex gap-2">
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant={exam.internshipChoice === 'internship' ? 'default' : 'outline'}
+                              className="flex-1 text-xs h-8"
+                              onClick={() => {
+                                updateExamGrade(exam.id, 'internshipChoice', 'internship');
+                                updateExamGrade(exam.id, 'grade', '');
+                              }}
+                            >
+                              Internship (pass)
+                            </Button>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant={exam.internshipChoice === 'elective' ? 'default' : 'outline'}
+                              className="flex-1 text-xs h-8"
+                              onClick={() => updateExamGrade(exam.id, 'internshipChoice', 'elective')}
+                            >
+                              Elective (grade)
+                            </Button>
+                          </div>
+                          {exam.internshipChoice === 'elective' && (
+                            <div>
+                              <Label className="text-xs text-muted-foreground">{t('msc_calc.grade')}</Label>
+                              <Select
+                                value={exam.grade?.toString() || ""}
+                                onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
+                              >
+                                <SelectTrigger className="mt-1">
+                                  <SelectValue placeholder={t('msc_calc.select_grade')} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                    <SelectItem key={grade} value={grade.toString()}>
+                                      {grade === 31 ? "30L" : grade.toString()}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {exam.completed && !exam.isSeminar && !exam.hasInternshipOption && (
                         <div>
                           <Label className="text-xs text-muted-foreground">{t('msc_calc.grade')}</Label>
                           <Select

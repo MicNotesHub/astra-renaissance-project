@@ -25,6 +25,8 @@ interface ExamGrade {
   grade: number | '';
   completed: boolean;
   isSeminar: boolean;
+  hasInternshipOption: boolean;
+  internshipChoice: 'internship' | 'elective' | '';
 }
 
 export function GraduationGradeCalculator() {
@@ -94,18 +96,24 @@ export function GraduationGradeCalculator() {
         setSubjects(fetchedSubjects);
         
         // Initialize exam grades - auto-detect seminars by subject name
-        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
-          id: subject.id,
-          subject: subject.subject,
-          cfu: subject.cfu,
-          grade: '',
-          completed: false,
-          isSeminar: subject.subject.toLowerCase().includes('seminar') ||
-            (selectedCourse === 'BIG' && (
-              subject.subject === 'Marketing Research Skills for Public Policy' ||
-              subject.subject === 'Negotiation Skills'
-            ))
-        }));
+        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => {
+          const lower = subject.subject.toLowerCase();
+          const hasInternshipOption = lower.includes('internship') || lower.includes('tirocinio') || lower.includes('stage');
+          return {
+            id: subject.id,
+            subject: subject.subject,
+            cfu: subject.cfu,
+            grade: '' as number | '',
+            completed: false,
+            isSeminar: lower.includes('seminar') ||
+              (selectedCourse === 'BIG' && (
+                subject.subject === 'Marketing Research Skills for Public Policy' ||
+                subject.subject === 'Negotiation Skills'
+              )),
+            hasInternshipOption,
+            internshipChoice: '' as 'internship' | 'elective' | '',
+          };
+        });
         
         setExamGrades(initialGrades);
       } catch (error) {
@@ -130,10 +138,21 @@ export function GraduationGradeCalculator() {
   };
 
   const calculateResults = () => {
-    // Include only completed exams (seminars with no grade OR exams with grades)
-    const completedExams = examGrades.filter(exam => 
-      exam.completed && (exam.isSeminar || (exam.grade !== '' && Number(exam.grade) >= 18))
-    );
+    // An exam counts as completed if:
+    // - seminar: just completed
+    // - internship-option chosen as 'internship': completed (pass/fail, no grade)
+    // - internship-option chosen as 'elective': needs valid grade
+    // - regular: needs valid grade
+    const completedExams = examGrades.filter(exam => {
+      if (!exam.completed) return false;
+      if (exam.isSeminar) return true;
+      if (exam.hasInternshipOption) {
+        if (exam.internshipChoice === 'internship') return true;
+        if (exam.internshipChoice === 'elective') return exam.grade !== '' && Number(exam.grade) >= 18;
+        return false;
+      }
+      return exam.grade !== '' && Number(exam.grade) >= 18;
+    });
     
     if (completedExams.length === 0) {
       const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0) + 3; // Add 3 CFU for thesis
@@ -391,7 +410,56 @@ export function GraduationGradeCalculator() {
                         />
                       </div>
                       
-                      {exam.completed && !exam.isSeminar && (
+                      {exam.completed && exam.hasInternshipOption && !exam.isSeminar && (
+                        <div className="space-y-2">
+                          <Label className="text-xs text-muted-foreground">Tipo</Label>
+                          <div className="flex gap-2">
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant={exam.internshipChoice === 'internship' ? 'default' : 'outline'}
+                              className="flex-1 text-xs h-8"
+                              onClick={() => {
+                                updateExamGrade(exam.id, 'internshipChoice', 'internship');
+                                updateExamGrade(exam.id, 'grade', '');
+                              }}
+                            >
+                              Tirocinio (pass)
+                            </Button>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant={exam.internshipChoice === 'elective' ? 'default' : 'outline'}
+                              className="flex-1 text-xs h-8"
+                              onClick={() => updateExamGrade(exam.id, 'internshipChoice', 'elective')}
+                            >
+                              Opzionale (voto)
+                            </Button>
+                          </div>
+                          {exam.internshipChoice === 'elective' && (
+                            <div>
+                              <Label className="text-xs text-muted-foreground">Voto</Label>
+                              <Select
+                                value={exam.grade?.toString() || ""}
+                                onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
+                              >
+                                <SelectTrigger className="mt-1">
+                                  <SelectValue placeholder="Seleziona voto" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                    <SelectItem key={grade} value={grade.toString()}>
+                                      {grade === 31 ? "30L" : grade.toString()}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {exam.completed && !exam.isSeminar && !exam.hasInternshipOption && (
                         <div>
                           <Label className="text-xs text-muted-foreground">Voto</Label>
                           <Select
