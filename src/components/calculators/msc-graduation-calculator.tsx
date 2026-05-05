@@ -181,9 +181,16 @@ export function MscGraduationCalculator() {
   };
 
   const calculateResults = () => {
-    const completedExams = examGrades.filter(exam =>
-      exam.completed && (exam.isSeminar || (exam.grade !== '' && Number(exam.grade) >= 18))
-    );
+    const completedExams = examGrades.filter(exam => {
+      if (!exam.completed) return false;
+      if (exam.isSeminar) return true;
+      if (exam.hasInternshipOption) {
+        if (exam.internshipChoice === 'internship') return true;
+        if (exam.internshipChoice === 'elective') return exam.grade !== '' && Number(exam.grade) >= 18;
+        return false;
+      }
+      return exam.grade !== '' && Number(exam.grade) >= 18;
+    });
 
     const thesisCfu = getThesisCfu(selectedCourse);
     const examCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0);
