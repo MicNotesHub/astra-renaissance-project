@@ -108,7 +108,10 @@ export function GraduationGradeCalculator() {
             isSeminar: lower.includes('seminar') ||
               (selectedCourse === 'BIG' && (
                 subject.subject === 'Marketing Research Skills for Public Policy' ||
-                subject.subject === 'Negotiation Skills'
+                subject.subject === 'Negotiation Skills' ||
+                subject.subject === 'CSR  & Ethics in Business' ||
+                subject.subject === 'CSR & Ethics in Business' ||
+                subject.subject === 'Globalization, Societies and Institutions'
               )),
             hasInternshipOption,
             internshipChoice: '' as 'internship' | 'elective' | '',
