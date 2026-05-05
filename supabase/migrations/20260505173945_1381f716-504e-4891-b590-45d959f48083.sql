@@ -1,0 +1,1 @@
+UPDATE public.course_subjects SET cfu = 6 WHERE id = 163;
