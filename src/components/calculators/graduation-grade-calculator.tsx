@@ -410,7 +410,56 @@ export function GraduationGradeCalculator() {
                         />
                       </div>
                       
-                      {exam.completed && !exam.isSeminar && (
+                      {exam.completed && exam.hasInternshipOption && !exam.isSeminar && (
+                        <div className="space-y-2">
+                          <Label className="text-xs text-muted-foreground">Tipo</Label>
+                          <div className="flex gap-2">
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant={exam.internshipChoice === 'internship' ? 'default' : 'outline'}
+                              className="flex-1 text-xs h-8"
+                              onClick={() => {
+                                updateExamGrade(exam.id, 'internshipChoice', 'internship');
+                                updateExamGrade(exam.id, 'grade', '');
+                              }}
+                            >
+                              Tirocinio (pass)
+                            </Button>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant={exam.internshipChoice === 'elective' ? 'default' : 'outline'}
+                              className="flex-1 text-xs h-8"
+                              onClick={() => updateExamGrade(exam.id, 'internshipChoice', 'elective')}
+                            >
+                              Opzionale (voto)
+                            </Button>
+                          </div>
+                          {exam.internshipChoice === 'elective' && (
+                            <div>
+                              <Label className="text-xs text-muted-foreground">Voto</Label>
+                              <Select
+                                value={exam.grade?.toString() || ""}
+                                onValueChange={(value) => updateExamGrade(exam.id, 'grade', value ? Number(value) : '')}
+                              >
+                                <SelectTrigger className="mt-1">
+                                  <SelectValue placeholder="Seleziona voto" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {Array.from({ length: 14 }, (_, i) => i + 18).map((grade) => (
+                                    <SelectItem key={grade} value={grade.toString()}>
+                                      {grade === 31 ? "30L" : grade.toString()}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {exam.completed && !exam.isSeminar && !exam.hasInternshipOption && (
                         <div>
                           <Label className="text-xs text-muted-foreground">Voto</Label>
                           <Select
