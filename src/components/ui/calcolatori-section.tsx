@@ -96,24 +96,24 @@ export const CalcolatoriSection = () => {
              duration: 0.6,
              delay: index * 0.1
            }} className="flex-shrink-0 w-80 sm:w-96">
-                 <Card className="glass-card premium-shadow hover:shadow-glow hover:scale-105 transition-all duration-300 group h-full bg-gradient-to-br from-primary/5 via-primary/10 to-primary/15 border-primary/20">
+                 <Card className="h-full group transition-all duration-300 bg-[hsl(230,60%,96%)] dark:bg-[hsl(230,30%,15%)] border border-[hsl(230,40%,88%)] dark:border-[hsl(230,30%,25%)] rounded-2xl shadow-sm hover:shadow-[0_8px_30px_-4px_hsl(230,80%,70%,0.35)] hover:-translate-y-1 hover:border-[hsl(230,70%,75%)]">
                   <CardHeader>
                     <div className={`w-12 h-12 rounded-lg ${calc.bgColor} flex items-center justify-center mb-4`}>
                       <IconComponent className={`h-6 w-6 ${calc.color}`} />
                     </div>
-                    <CardTitle className="group-hover:text-primary transition-colors">
+                    <CardTitle className="text-[hsl(230,60%,18%)] dark:text-foreground text-2xl font-bold leading-tight">
                       {calc.title}
                     </CardTitle>
-                    <CardDescription className="text-sm">
+                    <CardDescription className="text-sm text-[hsl(230,20%,45%)] dark:text-muted-foreground">
                       {calc.description}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-muted-foreground">{t('calculators.features')}</p>
+                      <p className="text-sm font-medium text-[hsl(230,30%,35%)] dark:text-muted-foreground">{t('calculators.features')}</p>
                       <ul className="space-y-1">
-                        {calc.features.map((feature, fIndex) => <li key={fIndex} className="text-sm flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                        {calc.features.map((feature, fIndex) => <li key={fIndex} className="text-sm flex items-center gap-2 text-[hsl(230,30%,25%)] dark:text-foreground">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[hsl(230,60%,30%)]"></div>
                             {feature}
                           </li>)}
                       </ul>
@@ -122,8 +122,7 @@ export const CalcolatoriSection = () => {
                     <div className="flex gap-2">
                       {calc.externalLink && (
                         <Button 
-                          variant="outline"
-                          className="flex-1 transition-colors" 
+                          className="flex-1 bg-white hover:bg-white/90 text-[hsl(230,60%,18%)] border border-[hsl(230,40%,88%)] shadow-sm" 
                           onClick={() => {
                             const link = document.createElement('a');
                             link.href = calc.externalLink!;
@@ -137,7 +136,7 @@ export const CalcolatoriSection = () => {
                         </Button>
                       )}
                       <Button 
-                        className={`${calc.externalLink ? 'flex-1' : 'w-full'} group-hover:bg-primary-light transition-colors`}
+                        className={`${calc.externalLink ? 'flex-1' : 'w-full'} bg-[hsl(230,75%,22%)] hover:bg-[hsl(230,75%,28%)] text-white transition-colors`}
                         onClick={() => {
                           if (calc.id === 'exchange-calculator-ug') {
                             navigate('/exchange?type=undergraduate');
