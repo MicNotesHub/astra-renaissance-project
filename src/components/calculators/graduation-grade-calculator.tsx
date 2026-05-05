@@ -109,7 +109,10 @@ export function GraduationGradeCalculator() {
               (selectedCourse === 'BIG' && (
                 subject.subject === 'Marketing Research Skills for Public Policy' ||
                 subject.subject === 'Negotiation Skills'
-              )),
+              )) ||
+              lower.includes('csr') ||
+              lower.includes('ethics in business') ||
+              lower.includes('globalization, societies and institutions'),
             hasInternshipOption,
             internshipChoice: '' as 'internship' | 'elective' | '',
           };
