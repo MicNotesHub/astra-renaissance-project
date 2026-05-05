@@ -100,7 +100,11 @@ export function GraduationGradeCalculator() {
           cfu: subject.cfu,
           grade: '',
           completed: false,
-          isSeminar: subject.subject.toLowerCase().includes('seminar')
+          isSeminar: subject.subject.toLowerCase().includes('seminar') ||
+            (selectedCourse === 'BIG' && (
+              subject.subject === 'Marketing Research Skills for Public Policy' ||
+              subject.subject === 'Negotiation Skills'
+            ))
         }));
         
         setExamGrades(initialGrades);
