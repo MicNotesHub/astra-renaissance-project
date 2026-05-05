@@ -96,18 +96,24 @@ export function GraduationGradeCalculator() {
         setSubjects(fetchedSubjects);
         
         // Initialize exam grades - auto-detect seminars by subject name
-        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
-          id: subject.id,
-          subject: subject.subject,
-          cfu: subject.cfu,
-          grade: '',
-          completed: false,
-          isSeminar: subject.subject.toLowerCase().includes('seminar') ||
-            (selectedCourse === 'BIG' && (
-              subject.subject === 'Marketing Research Skills for Public Policy' ||
-              subject.subject === 'Negotiation Skills'
-            ))
-        }));
+        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => {
+          const lower = subject.subject.toLowerCase();
+          const hasInternshipOption = lower.includes('internship') || lower.includes('tirocinio') || lower.includes('stage');
+          return {
+            id: subject.id,
+            subject: subject.subject,
+            cfu: subject.cfu,
+            grade: '' as number | '',
+            completed: false,
+            isSeminar: lower.includes('seminar') ||
+              (selectedCourse === 'BIG' && (
+                subject.subject === 'Marketing Research Skills for Public Policy' ||
+                subject.subject === 'Negotiation Skills'
+              )),
+            hasInternshipOption,
+            internshipChoice: '' as 'internship' | 'elective' | '',
+          };
+        });
         
         setExamGrades(initialGrades);
       } catch (error) {
