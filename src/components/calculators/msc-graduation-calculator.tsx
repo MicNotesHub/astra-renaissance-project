@@ -134,21 +134,30 @@ export function MscGraduationCalculator() {
 
         const isPassFail = (name: string) => {
           const lower = name.toLowerCase();
-          return lower.includes('seminar') || lower.includes('internship') ||
-                 lower.includes('tirocinio') || lower.includes('stage') ||
+          // Internships are now handled separately as a user choice
+          if (lower.includes('internship') || lower.includes('tirocinio') || lower.includes('stage')) {
+            return false;
+          }
+          return lower.includes('seminar') ||
                  lower.includes('lab') || lower.includes('foreign language') ||
                  lower.includes('lingua') || lower.includes('privacy') ||
                  lower.includes('guidelines');
         };
 
-        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => ({
-          id: subject.id,
-          subject: subject.subject,
-          cfu: subject.cfu,
-          grade: '',
-          completed: false,
-          isSeminar: isPassFail(subject.subject)
-        }));
+        const initialGrades: ExamGrade[] = fetchedSubjects.map(subject => {
+          const lower = subject.subject.toLowerCase();
+          const hasInternshipOption = lower.includes('internship') || lower.includes('tirocinio') || lower.includes('stage');
+          return {
+            id: subject.id,
+            subject: subject.subject,
+            cfu: subject.cfu,
+            grade: '' as number | '',
+            completed: false,
+            isSeminar: isPassFail(subject.subject),
+            hasInternshipOption,
+            internshipChoice: '' as 'internship' | 'elective' | '',
+          };
+        });
 
         setExamGrades(initialGrades);
       } catch (error) {
