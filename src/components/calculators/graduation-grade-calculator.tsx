@@ -138,10 +138,21 @@ export function GraduationGradeCalculator() {
   };
 
   const calculateResults = () => {
-    // Include only completed exams (seminars with no grade OR exams with grades)
-    const completedExams = examGrades.filter(exam => 
-      exam.completed && (exam.isSeminar || (exam.grade !== '' && Number(exam.grade) >= 18))
-    );
+    // An exam counts as completed if:
+    // - seminar: just completed
+    // - internship-option chosen as 'internship': completed (pass/fail, no grade)
+    // - internship-option chosen as 'elective': needs valid grade
+    // - regular: needs valid grade
+    const completedExams = examGrades.filter(exam => {
+      if (!exam.completed) return false;
+      if (exam.isSeminar) return true;
+      if (exam.hasInternshipOption) {
+        if (exam.internshipChoice === 'internship') return true;
+        if (exam.internshipChoice === 'elective') return exam.grade !== '' && Number(exam.grade) >= 18;
+        return false;
+      }
+      return exam.grade !== '' && Number(exam.grade) >= 18;
+    });
     
     if (completedExams.length === 0) {
       const totalCfu = examGrades.reduce((sum, exam) => sum + exam.cfu, 0) + 3; // Add 3 CFU for thesis
