@@ -15,6 +15,9 @@ const Calcolatori = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   
+  const gpaFeatures = [t('calculators.feat.gpa.1'), t('calculators.feat.gpa.2'), t('calculators.feat.gpa.3')];
+  const exchangeFeatures = [t('calculators.feat.exchange.1'), t('calculators.feat.exchange.2'), t('calculators.feat.exchange.3')];
+
   const calcolatori = [{
     id: "graduation",
     title: t('calculators.gpa.title'),
@@ -22,7 +25,7 @@ const Calcolatori = () => {
     icon: GraduationCap,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"],
+    features: gpaFeatures,
     externalLink: null
   }, {
     id: "graduation-msc",
@@ -31,7 +34,7 @@ const Calcolatori = () => {
     icon: GraduationCap,
     color: "text-purple-500",
     bgColor: "bg-purple-50 dark:bg-purple-950/30",
-    features: ["Voto di laurea su 110", "GPA su 30", "Bonus configurabili"],
+    features: gpaFeatures,
     externalLink: null
   }, {
     id: "exchange-calculator-ug",
@@ -40,7 +43,7 @@ const Calcolatori = () => {
     icon: Users,
     color: "text-emerald-500",
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
-    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"],
+    features: exchangeFeatures,
     externalLink: "/files/EXCHANGE_CALCULATOR_UNDERGRAD.xlsm"
   }, {
     id: "exchange-calculator",
@@ -49,7 +52,7 @@ const Calcolatori = () => {
     icon: Calculator,
     color: "text-purple-500",
     bgColor: "bg-purple-50 dark:bg-purple-950/30",
-    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"],
+    features: exchangeFeatures,
     externalLink: null
   }, {
     id: "exchange-calculator-clmg",
@@ -58,7 +61,7 @@ const Calcolatori = () => {
     icon: TrendingUp,
     color: "text-indigo-500",
     bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-    features: ["Calcolo Exchange Score", "Destinazioni per continente", "Acceptance Rate"],
+    features: exchangeFeatures,
     externalLink: null
   }];
 
