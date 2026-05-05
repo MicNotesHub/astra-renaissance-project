@@ -175,6 +175,12 @@ const translations = {
     'calculators.exchange-ug.description': 'Calcola il tuo Exchange Score per l\'Undergraduate e scopri le destinazioni disponibili',
     'calculators.features': 'Funzionalità:',
     'calculators.use': 'Usa Calcolatore',
+    'calculators.feat.gpa.1': 'Voto di laurea su 110',
+    'calculators.feat.gpa.2': 'GPA su 30',
+    'calculators.feat.gpa.3': 'Bonus configurabili',
+    'calculators.feat.exchange.1': 'Calcolo Exchange Score',
+    'calculators.feat.exchange.2': 'Destinazioni per continente',
+    'calculators.feat.exchange.3': 'Acceptance Rate',
     
     // MSc Calculator
     'msc_calc.select_course': 'Seleziona Corso di Laurea Magistrale',
@@ -589,6 +595,12 @@ const translations = {
     'calculators.exchange-ug.description': 'Calculate your Exchange Score for Undergraduate',
     'calculators.features': 'Features:',
     'calculators.use': 'Use Calculator',
+    'calculators.feat.gpa.1': 'Graduation grade out of 110',
+    'calculators.feat.gpa.2': 'GPA out of 30',
+    'calculators.feat.gpa.3': 'Configurable bonuses',
+    'calculators.feat.exchange.1': 'Exchange Score calculation',
+    'calculators.feat.exchange.2': 'Destinations by continent',
+    'calculators.feat.exchange.3': 'Acceptance Rate',
     
     // MSc Calculator
     'msc_calc.select_course': 'Select Master\'s Degree',
