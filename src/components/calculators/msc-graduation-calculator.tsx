@@ -27,6 +27,8 @@ interface ExamGrade {
   grade: number | '';
   completed: boolean;
   isSeminar: boolean;
+  hasInternshipOption: boolean;
+  internshipChoice: 'internship' | 'elective' | '';
 }
 
 const TRACK_COURSES: Record<string, { tracks: string[]; subjectTrackMap: Record<string, string> }> = {
