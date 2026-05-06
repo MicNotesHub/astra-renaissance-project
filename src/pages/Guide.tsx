@@ -47,6 +47,7 @@ const categoryCoverMap: Record<string, string> = {
   'opzionali': opzionaliCover,
   'spring weeks': springWeeksCover,
   'program_change': programChangeCover,
+  'magistrali': magistraliCover,
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
