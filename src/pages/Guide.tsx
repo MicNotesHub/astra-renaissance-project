@@ -250,6 +250,7 @@ const Guide = () => {
     'master_admissions',
     'bgl_domestic_track',
     'program_change',
+    'magistrali',
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
