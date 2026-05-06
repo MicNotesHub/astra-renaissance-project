@@ -309,6 +309,9 @@ const translations = {
     'category.bgl_domestic_track.description': 'Guida al percorso BGL Domestic Track',
     'category.program_change.title': 'Cambio Corso Triennale',
     'category.program_change.description': 'Guida al cambio corso triennale',
+    'category.magistrali.title': 'Magistrali',
+    'category.magistrali.description': 'Guide per le lauree magistrali',
+    'category.magistrali.pageTitle': 'Magistrali: le nostre guide per le lauree magistrali!',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Torna alle Guide',
@@ -741,6 +744,9 @@ const translations = {
     'category.bgl_domestic_track.description': 'Guide to the BGL Domestic Track path',
     'category.program_change.title': 'Program Change Undergraduate',
     'category.program_change.description': 'Guide to changing your undergraduate program',
+    'category.magistrali.title': 'Masters',
+    'category.magistrali.description': 'Our guides for Master\'s degree programs',
+    'category.magistrali.pageTitle': 'Masters: our guides for Master\'s degree programs!',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Back to Guides',

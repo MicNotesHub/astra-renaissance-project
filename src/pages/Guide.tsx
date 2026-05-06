@@ -25,6 +25,7 @@ import freemoverCover from "@/assets/guide-covers/freemover.png";
 import opzionaliCover from "@/assets/guide-covers/opzionali.png";
 import springWeeksCover from "@/assets/guide-covers/spring-weeks.png";
 import programChangeCover from "@/assets/guide-covers/program-change.jpg";
+import magistraliCover from "@/assets/guide-covers/magistrali.jpg";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
@@ -46,6 +47,7 @@ const categoryCoverMap: Record<string, string> = {
   'opzionali': opzionaliCover,
   'spring weeks': springWeeksCover,
   'program_change': programChangeCover,
+  'magistrali': magistraliCover,
 };
 
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
@@ -146,6 +148,11 @@ const Guide = () => {
         uniqueCategories.push('languages');
       }
 
+      // Always show the Magistrali / Masters category
+      if (!uniqueCategories.includes('magistrali')) {
+        uniqueCategories.push('magistrali');
+      }
+
       setCategories(uniqueCategories);
 
       // Build dynamic links for ECDL from DB (matched by title language)
@@ -189,7 +196,8 @@ const Guide = () => {
       'linkedin': Linkedin,
       'languages': Languages,
       'bgl_domestic_track': Scale,
-      'program_change': Repeat
+      'program_change': Repeat,
+      'magistrali': GraduationCap
     };
     return iconMap[category] || Globe;
   };
@@ -215,7 +223,8 @@ const Guide = () => {
       'linkedin': 'text-blue-600 bg-blue-50 hover:bg-blue-100',
       'languages': 'text-fuchsia-500 bg-fuchsia-50 hover:bg-fuchsia-100',
       'bgl_domestic_track': 'text-red-600 bg-red-50 hover:bg-red-100',
-      'program_change': 'text-blue-600 bg-blue-50 hover:bg-blue-100'
+      'program_change': 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      'magistrali': 'text-purple-600 bg-purple-50 hover:bg-purple-100'
     };
     return colorMap[category] || 'text-primary bg-primary/10 hover:bg-primary/20';
   };
@@ -241,6 +250,7 @@ const Guide = () => {
     'master_admissions',
     'bgl_domestic_track',
     'program_change',
+    'magistrali',
   ];
 
   const orderedCategories = categoryOrder.filter(category => categories.includes(category));
