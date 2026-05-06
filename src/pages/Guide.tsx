@@ -25,6 +25,7 @@ import freemoverCover from "@/assets/guide-covers/freemover.png";
 import opzionaliCover from "@/assets/guide-covers/opzionali.png";
 import springWeeksCover from "@/assets/guide-covers/spring-weeks.png";
 import programChangeCover from "@/assets/guide-covers/program-change.jpg";
+import magistraliCover from "@/assets/guide-covers/magistrali.jpg";
 
 const categoryCoverMap: Record<string, string> = {
   'funding': fundingCover,
