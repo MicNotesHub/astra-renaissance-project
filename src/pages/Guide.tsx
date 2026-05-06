@@ -196,7 +196,8 @@ const Guide = () => {
       'linkedin': Linkedin,
       'languages': Languages,
       'bgl_domestic_track': Scale,
-      'program_change': Repeat
+      'program_change': Repeat,
+      'magistrali': GraduationCap
     };
     return iconMap[category] || Globe;
   };
