@@ -75,7 +75,6 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   'graduate': {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/graduate/Guida-Magistrali.pdf',
   },
-  'magistrali': {},
   'freemover': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/freemover/GUIDA-FREE-MOVER-ITA-BOCCONI-PDF.pdf',
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/freemover/FREE-MOVER-GUIDE-ENG-BOCCONI.pdf',
