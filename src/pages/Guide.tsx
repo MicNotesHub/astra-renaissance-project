@@ -148,6 +148,11 @@ const Guide = () => {
         uniqueCategories.push('languages');
       }
 
+      // Always show the Magistrali / Masters category
+      if (!uniqueCategories.includes('magistrali')) {
+        uniqueCategories.push('magistrali');
+      }
+
       setCategories(uniqueCategories);
 
       // Build dynamic links for ECDL from DB (matched by title language)
