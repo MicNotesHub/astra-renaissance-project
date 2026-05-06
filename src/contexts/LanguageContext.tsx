@@ -309,6 +309,9 @@ const translations = {
     'category.bgl_domestic_track.description': 'Guida al percorso BGL Domestic Track',
     'category.program_change.title': 'Cambio Corso Triennale',
     'category.program_change.description': 'Guida al cambio corso triennale',
+    'category.magistrali.title': 'Magistrali',
+    'category.magistrali.description': 'Guide per le lauree magistrali',
+    'category.magistrali.pageTitle': 'Magistrali: le nostre guide per le lauree magistrali!',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Torna alle Guide',
