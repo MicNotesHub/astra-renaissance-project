@@ -20,6 +20,7 @@ import CLMGYearHandouts from "./pages/CLMGYearHandouts";
 import StellaPolare from "./pages/StellaPolare";
 import StellaPolareArticleAprilCulture from "./pages/StellaPolareArticleAprilCulture";
 import StellaPolareArticleReferendumGiustizia from "./pages/StellaPolareArticleReferendumGiustizia";
+import StellaPolareArticleAgroalimentare from "./pages/StellaPolareArticleAgroalimentare";
 import StellaPolareArticleNoBorders from "./pages/StellaPolareArticleNoBorders";
 import StellaPolareArticleGasolineGeopolitics from "./pages/StellaPolareArticleGasolineGeopolitics";
 import StellaPolareArticleItalianFootballCrisis from "./pages/StellaPolareArticleItalianFootballCrisis";
@@ -63,6 +64,7 @@ const App = () => {
               <Route path="/stella-polare" element={<StellaPolare />} />
               <Route path="/stella-polare/april-cultural-overload" element={<StellaPolareArticleAprilCulture />} />
               <Route path="/stella-polare/referendum-giustizia-2026" element={<StellaPolareArticleReferendumGiustizia />} />
+              <Route path="/stella-polare/impresa-governance-agroalimentare" element={<StellaPolareArticleAgroalimentare />} />
               <Route path="/stella-polare/no-borders-just-stories" element={<StellaPolareArticleNoBorders />} />
               <Route path="/stella-polare/gasoline-and-geopolitics" element={<StellaPolareArticleGasolineGeopolitics />} />
               <Route path="/stella-polare/italian-football-crisis" element={<StellaPolareArticleItalianFootballCrisis />} />
