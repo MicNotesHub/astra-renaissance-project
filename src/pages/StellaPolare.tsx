@@ -45,6 +45,16 @@ interface ManualArticle {
 
 const manualArticles: ManualArticle[] = [
   {
+    slug: "impresa-governance-agroalimentare",
+    href: "/stella-polare/impresa-governance-agroalimentare",
+    category: "legal",
+    eyebrow: "Aprile 2026",
+    title: "Impresa e Governance Agroalimentare: il futuro del food italiano",
+    excerpt:
+      "La conferenza di Astra Bocconi, Corporate Law Academy e INSUD: quadro normativo, ddl 1519/2026, contraffazione, filiera e imprese familiari nel settore agroalimentare.",
+    accent: "from-amber-500 to-yellow-500",
+  },
+  {
     slug: "april-cultural-overload",
     href: "/stella-polare/april-cultural-overload",
     category: "arte",
