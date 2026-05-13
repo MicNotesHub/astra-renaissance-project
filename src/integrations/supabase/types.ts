@@ -96,24 +96,30 @@ export type Database = {
         Row: {
           course_year: number
           created_at: string
+          exam_type: string | null
           id: string
           name: string
+          semester: number | null
           updated_at: string
           url: string
         }
         Insert: {
           course_year: number
           created_at?: string
+          exam_type?: string | null
           id?: string
           name: string
+          semester?: number | null
           updated_at?: string
           url: string
         }
         Update: {
           course_year?: number
           created_at?: string
+          exam_type?: string | null
           id?: string
           name?: string
+          semester?: number | null
           updated_at?: string
           url?: string
         }
