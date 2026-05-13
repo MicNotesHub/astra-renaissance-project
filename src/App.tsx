@@ -56,6 +56,7 @@ const App = () => {
               <Route path="/calcolatori" element={<Calcolatori />} />
               <Route path="/exchange" element={<ExchangeEmbed />} />
               <Route path="/dispense" element={<Dispense />} />
+              <Route path="/dispense/magistrali" element={<MagistraliHandouts />} />
               <Route path="/dispense/clmg" element={<CLMGDispense />} />
               <Route path="/dispense/clmg/:year" element={<CLMGYearHandouts />} />
               <Route path="/dispense/:courseName" element={<CourseYears />} />
