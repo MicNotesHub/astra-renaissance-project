@@ -33,6 +33,7 @@ const CourseHandouts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [semesterFilter, setSemesterFilter] = useState<number | null>(null);
   const [examTypeFilter, setExamTypeFilter] = useState<string | null>(null);
+  const [biefTrackFilter, setBiefTrackFilter] = useState<'all' | 'fin' | 'econ'>('all');
   const [loading, setLoading] = useState(true);
   const { t, language } = useLanguage();
   const { toast } = useToast();
