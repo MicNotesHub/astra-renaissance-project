@@ -312,6 +312,10 @@ const translations = {
     'category.magistrali.title': 'Magistrali',
     'category.magistrali.description': 'Guide per le lauree magistrali',
     'category.magistrali.pageTitle': 'Magistrali: le nostre guide per le lauree magistrali!',
+    'magistrali.title': 'Dispense Magistrali',
+    'magistrali.subtitle': 'Materiali e dispense per le lauree magistrali',
+    'magistrali.filterProgram': 'Filtra per programma',
+    'magistrali.empty': 'Nessuna dispensa disponibile per ora.',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Torna alle Guide',
