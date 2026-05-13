@@ -1,0 +1,1 @@
+DELETE FROM public.handouts WHERE id = 44;

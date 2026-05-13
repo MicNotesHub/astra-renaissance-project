@@ -15,6 +15,8 @@ interface CLMGHandout {
   course_year: number;
   url: string;
   created_at: string;
+  semester: number | null;
+  exam_type: string | null;
 }
 
 const CLMGYearHandouts = () => {
