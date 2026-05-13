@@ -50,11 +50,21 @@ const CLMGYearHandouts = () => {
   }, [year]);
 
   useEffect(() => {
-    const filtered = handouts.filter(handout =>
-      handout.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filtered = handouts.filter(handout => {
+      const matchesSearch = handout.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSemester = semesterFilter === null || handout.semester === semesterFilter;
+      const matchesExamType = examTypeFilter === null || handout.exam_type === examTypeFilter;
+      return matchesSearch && matchesSemester && matchesExamType;
+    });
     setFilteredHandouts(filtered);
-  }, [handouts, searchTerm]);
+  }, [handouts, searchTerm, semesterFilter, examTypeFilter]);
+
+  // Reset exam type when semester changes
+  useEffect(() => {
+    setExamTypeFilter(null);
+  }, [semesterFilter]);
+
+  const hasExamTypes = semesterFilter !== null && handouts.some(h => h.semester === semesterFilter && h.exam_type);
 
   const fetchHandouts = async () => {
     if (!year || !yearKeys[year]) {
