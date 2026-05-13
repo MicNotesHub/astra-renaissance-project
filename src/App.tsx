@@ -17,6 +17,7 @@ import Guide from "./pages/Guide";
 import GuideCategory from "./pages/GuideCategory";
 import CLMGDispense from "./pages/CLMGDispense";
 import CLMGYearHandouts from "./pages/CLMGYearHandouts";
+import MagistraliHandouts from "./pages/MagistraliHandouts";
 import StellaPolare from "./pages/StellaPolare";
 import StellaPolareArticleAprilCulture from "./pages/StellaPolareArticleAprilCulture";
 import StellaPolareArticleReferendumGiustizia from "./pages/StellaPolareArticleReferendumGiustizia";
