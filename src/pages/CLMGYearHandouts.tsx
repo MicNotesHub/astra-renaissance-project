@@ -15,6 +15,8 @@ interface CLMGHandout {
   course_year: number;
   url: string;
   created_at: string;
+  semester: number | null;
+  exam_type: string | null;
 }
 
 const CLMGYearHandouts = () => {
@@ -23,6 +25,8 @@ const CLMGYearHandouts = () => {
   const [handouts, setHandouts] = useState<CLMGHandout[]>([]);
   const [filteredHandouts, setFilteredHandouts] = useState<CLMGHandout[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [semesterFilter, setSemesterFilter] = useState<number | null>(null);
+  const [examTypeFilter, setExamTypeFilter] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const yearLabels: { [key: string]: string } = {
@@ -46,11 +50,21 @@ const CLMGYearHandouts = () => {
   }, [year]);
 
   useEffect(() => {
-    const filtered = handouts.filter(handout =>
-      handout.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filtered = handouts.filter(handout => {
+      const matchesSearch = handout.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSemester = semesterFilter === null || handout.semester === semesterFilter;
+      const matchesExamType = examTypeFilter === null || handout.exam_type === examTypeFilter;
+      return matchesSearch && matchesSemester && matchesExamType;
+    });
     setFilteredHandouts(filtered);
-  }, [handouts, searchTerm]);
+  }, [handouts, searchTerm, semesterFilter, examTypeFilter]);
+
+  // Reset exam type when semester changes
+  useEffect(() => {
+    setExamTypeFilter(null);
+  }, [semesterFilter]);
+
+  const hasExamTypes = semesterFilter !== null && handouts.some(h => h.semester === semesterFilter && h.exam_type);
 
   const fetchHandouts = async () => {
     if (!year || !yearKeys[year]) {
@@ -147,6 +161,50 @@ const CLMGYearHandouts = () => {
               />
             </div>
           </div>
+
+          {/* Semester Filter */}
+          <div className="max-w-md mx-auto mb-4">
+            <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterSemester')}</p>
+            <div className="flex gap-2">
+              {[
+                { label: t('courseHandouts.all'), value: null },
+                { label: t('courseHandouts.semester1'), value: 1 },
+                { label: t('courseHandouts.semester2'), value: 2 },
+              ].map((opt) => (
+                <Button
+                  key={String(opt.value)}
+                  variant={semesterFilter === opt.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSemesterFilter(opt.value)}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Exam Type Filter */}
+          {hasExamTypes && (
+            <div className="max-w-md mx-auto mb-8">
+              <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterExamType')}</p>
+              <div className="flex gap-2">
+                {[
+                  { label: t('courseHandouts.all'), value: null },
+                  { label: t('courseHandouts.parziale'), value: "parziale" },
+                  { label: t('courseHandouts.generale'), value: "generale" },
+                ].map((opt) => (
+                  <Button
+                    key={String(opt.value)}
+                    variant={examTypeFilter === opt.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setExamTypeFilter(opt.value)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Content */}
           {loading ? (
