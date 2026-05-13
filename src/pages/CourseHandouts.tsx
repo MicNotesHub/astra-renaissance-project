@@ -41,17 +41,38 @@ const CourseHandouts = () => {
   const decodedCourseName = courseName ? decodeURIComponent(courseName) : '';
   const yearFilter = yearSlug ? slugToYear[yearSlug] || "First Year" : "First Year";
 
+  const isBiefTrackFilterable = decodedCourseName === 'BIEF' && yearFilter !== 'First Year';
+
   const yearDisplayMap: Record<string, string> = {
     "First Year": language === 'it' ? "Primo Anno" : "First Year",
     "Second Year": language === 'it' ? "Secondo Anno" : "Second Year",
     "Third Year": language === 'it' ? "Terzo Anno" : "Third Year",
   };
 
+  const getBiefTrack = (filename: string): ('fin' | 'econ' | 'both') => {
+    const lower = filename.toLowerCase();
+    
+    // BIEF-Fin exclusive subjects
+    if (lower.includes('financial economics')) return 'fin';
+    if (lower.includes('international and monetary economics')) return 'fin';
+    if (lower.includes('empirical methods for finance')) return 'fin';
+    
+    // BIEF-Econ exclusive subjects
+    if (lower.includes('empirical methods for economics')) return 'econ';
+    if (lower.includes('macroeconomics and the world economy')) return 'econ';
+    if (lower.includes('markets, organizations, and incentives')) return 'econ';
+    if (lower.includes('international economics') && !lower.includes('monetary')) return 'econ';
+    
+    return 'both';
+  };
+
   const filteredFiles = files.filter(f => {
     const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSemester = semesterFilter === null || f.semester === semesterFilter;
     const matchesExamType = examTypeFilter === null || f.exam_type === examTypeFilter;
-    return matchesSearch && matchesSemester && matchesExamType;
+    const track = getBiefTrack(f.filename);
+    const matchesTrack = !isBiefTrackFilterable || biefTrackFilter === 'all' || track === 'both' || track === biefTrackFilter;
+    return matchesSearch && matchesSemester && matchesExamType && matchesTrack;
   });
 
   useEffect(() => {
