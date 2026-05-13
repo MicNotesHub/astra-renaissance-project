@@ -603,6 +603,39 @@ export type Database = {
         }
         Relationships: []
       }
+      magistrali_handouts: {
+        Row: {
+          created_at: string
+          exam_type: string | null
+          id: string
+          name: string
+          program: string
+          semester: number | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          exam_type?: string | null
+          id?: string
+          name: string
+          program: string
+          semester?: number | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          exam_type?: string | null
+          id?: string
+          name?: string
+          program?: string
+          semester?: number | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       "minimum CFU required": {
         Row: {
           cfu_min: number | null

@@ -17,6 +17,7 @@ import Guide from "./pages/Guide";
 import GuideCategory from "./pages/GuideCategory";
 import CLMGDispense from "./pages/CLMGDispense";
 import CLMGYearHandouts from "./pages/CLMGYearHandouts";
+import MagistraliHandouts from "./pages/MagistraliHandouts";
 import StellaPolare from "./pages/StellaPolare";
 import StellaPolareArticleAprilCulture from "./pages/StellaPolareArticleAprilCulture";
 import StellaPolareArticleReferendumGiustizia from "./pages/StellaPolareArticleReferendumGiustizia";
@@ -55,6 +56,7 @@ const App = () => {
               <Route path="/calcolatori" element={<Calcolatori />} />
               <Route path="/exchange" element={<ExchangeEmbed />} />
               <Route path="/dispense" element={<Dispense />} />
+              <Route path="/dispense/magistrali" element={<MagistraliHandouts />} />
               <Route path="/dispense/clmg" element={<CLMGDispense />} />
               <Route path="/dispense/clmg/:year" element={<CLMGYearHandouts />} />
               <Route path="/dispense/:courseName" element={<CourseYears />} />

@@ -312,6 +312,10 @@ const translations = {
     'category.magistrali.title': 'Magistrali',
     'category.magistrali.description': 'Guide per le lauree magistrali',
     'category.magistrali.pageTitle': 'Magistrali: le nostre guide per le lauree magistrali!',
+    'magistrali.title': 'Dispense Magistrali',
+    'magistrali.subtitle': 'Materiali e dispense per le lauree magistrali',
+    'magistrali.filterProgram': 'Filtra per programma',
+    'magistrali.empty': 'Nessuna dispensa disponibile per ora.',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Torna alle Guide',
@@ -750,6 +754,10 @@ const translations = {
     'category.magistrali.title': 'Masters',
     'category.magistrali.description': 'Our guides for Master\'s degree programs',
     'category.magistrali.pageTitle': 'Masters: our guides for Master\'s degree programs!',
+    'magistrali.title': 'Master\'s Handouts',
+    'magistrali.subtitle': 'Materials and handouts for Master\'s degree programs',
+    'magistrali.filterProgram': 'Filter by program',
+    'magistrali.empty': 'No handouts available yet.',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Back to Guides',

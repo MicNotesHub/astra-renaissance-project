@@ -15,9 +15,12 @@ import bglCover from "@/assets/course-covers/bgl.jpg";
 import baiCover from "@/assets/course-covers/bai.jpg";
 import bigCover from "@/assets/course-covers/big.jpg";
 import bessCover from "@/assets/bess-cover.png";
+import magistraliCover from "@/assets/guide-covers/magistrali.jpg";
 
 interface CourseInfo {
   key: string;
+  label?: string;
+  route?: string;
   cover?: string;
   coverPosition?: string;
 }
@@ -34,6 +37,7 @@ const courses: CourseInfo[] = [
   { key: "CLMG", cover: clmgCover },
   { key: "BGL", cover: bglCover },
   { key: "BESS", cover: bessCover, coverPosition: "object-[90%]" },
+  { key: "MAGISTRALI", label: "Magistrali", route: "/dispense/magistrali", cover: magistraliCover },
 ];
 
 const Dispense = () => {
@@ -66,19 +70,19 @@ const Dispense = () => {
           {/* Course Cards Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {courses.map((course) => (
-              <Link key={course.key} to={`/dispense/${encodeURIComponent(course.key)}`}>
+              <Link key={course.key} to={course.route || `/dispense/${encodeURIComponent(course.key)}`}>
                 <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.03] overflow-hidden h-full border-0 p-0">
                   {course.cover ? (
                     <div className="relative h-64 overflow-hidden">
                       <img
                         src={course.cover}
-                        alt={course.key}
+                        alt={course.label || course.key}
                         className={`w-full h-full object-cover ${course.coverPosition || 'object-bottom'} group-hover:scale-110 transition-transform duration-500`}
                       />
                       <div className="absolute inset-0 bg-black/40" />
                       <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
                         <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-4">
-                          {course.key}
+                          {course.label || course.key}
                         </h3>
                         <span className="text-white/80 text-sm border border-white/30 rounded-md px-4 py-2">
                           {t('dispense.accessHandouts')}
