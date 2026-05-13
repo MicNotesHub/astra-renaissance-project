@@ -148,12 +148,10 @@ const Guide = () => {
         uniqueCategories.push('languages');
       }
 
-      // Always show the Magistrali / Masters category
-      if (!uniqueCategories.includes('magistrali')) {
-        uniqueCategories.push('magistrali');
-      }
+      // Magistrali / Masters has been moved to the Dispense (handouts) section
+      const filteredCategories = uniqueCategories.filter(c => c !== 'magistrali');
 
-      setCategories(uniqueCategories);
+      setCategories(filteredCategories);
 
       // Build dynamic links for ECDL from DB (matched by title language)
       const ecdlGuides = (data || []).filter(g => g.category === 'ecdl');
