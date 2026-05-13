@@ -222,6 +222,29 @@ const CourseHandouts = () => {
             </div>
           )}
 
+          {/* BIEF Track Filter */}
+          {isBiefTrackFilterable && (
+            <div className="mb-6">
+              <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterTrack')}</p>
+              <div className="flex gap-2">
+                {[
+                  { label: t('courseHandouts.all'), value: 'all' as const },
+                  { label: t('courseHandouts.biefFin'), value: 'fin' as const },
+                  { label: t('courseHandouts.biefEcon'), value: 'econ' as const },
+                ].map((opt) => (
+                  <Button
+                    key={opt.value}
+                    variant={biefTrackFilter === opt.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setBiefTrackFilter(opt.value)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Files */}
           {filteredFiles.length === 0 ? (
             <div className="text-center py-12">
