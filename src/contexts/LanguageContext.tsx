@@ -403,6 +403,9 @@ const translations = {
     'courseHandouts.semester2': '2° Semestre',
     'courseHandouts.filterSemester': 'Filtra per semestre',
     'courseHandouts.filterExamType': 'Filtra per tipo di esame',
+    'courseHandouts.filterTrack': 'Filtra per indirizzo',
+    'courseHandouts.biefFin': 'BIEF-Fin',
+    'courseHandouts.biefEcon': 'BIEF-Econ',
     'courseHandouts.parziale': 'Parziale',
     'courseHandouts.generale': 'Generale',
 
