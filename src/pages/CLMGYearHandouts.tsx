@@ -25,6 +25,8 @@ const CLMGYearHandouts = () => {
   const [handouts, setHandouts] = useState<CLMGHandout[]>([]);
   const [filteredHandouts, setFilteredHandouts] = useState<CLMGHandout[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [semesterFilter, setSemesterFilter] = useState<number | null>(null);
+  const [examTypeFilter, setExamTypeFilter] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const yearLabels: { [key: string]: string } = {
