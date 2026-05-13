@@ -754,6 +754,10 @@ const translations = {
     'category.magistrali.title': 'Masters',
     'category.magistrali.description': 'Our guides for Master\'s degree programs',
     'category.magistrali.pageTitle': 'Masters: our guides for Master\'s degree programs!',
+    'magistrali.title': 'Master\'s Handouts',
+    'magistrali.subtitle': 'Materials and handouts for Master\'s degree programs',
+    'magistrali.filterProgram': 'Filter by program',
+    'magistrali.empty': 'No handouts available yet.',
 
     // Guide Category Page
     'guideCategory.backToGuides': 'Back to Guides',
