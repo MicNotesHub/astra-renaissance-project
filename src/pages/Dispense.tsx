@@ -15,9 +15,12 @@ import bglCover from "@/assets/course-covers/bgl.jpg";
 import baiCover from "@/assets/course-covers/bai.jpg";
 import bigCover from "@/assets/course-covers/big.jpg";
 import bessCover from "@/assets/bess-cover.png";
+import magistraliCover from "@/assets/guide-covers/magistrali.jpg";
 
 interface CourseInfo {
   key: string;
+  label?: string;
+  route?: string;
   cover?: string;
   coverPosition?: string;
 }
@@ -34,6 +37,7 @@ const courses: CourseInfo[] = [
   { key: "CLMG", cover: clmgCover },
   { key: "BGL", cover: bglCover },
   { key: "BESS", cover: bessCover, coverPosition: "object-[90%]" },
+  { key: "MAGISTRALI", label: "Magistrali", route: "/dispense/magistrali", cover: magistraliCover },
 ];
 
 const Dispense = () => {
