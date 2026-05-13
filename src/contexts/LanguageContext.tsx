@@ -829,6 +829,9 @@ const translations = {
     'courseHandouts.semester2': '2nd Semester',
     'courseHandouts.filterSemester': 'Filter by semester',
     'courseHandouts.filterExamType': 'Filter by exam type',
+    'courseHandouts.filterTrack': 'Filter by track',
+    'courseHandouts.biefFin': 'BIEF-Fin',
+    'courseHandouts.biefEcon': 'BIEF-Econ',
     'courseHandouts.parziale': 'Partial',
     'courseHandouts.generale': 'General',
 
