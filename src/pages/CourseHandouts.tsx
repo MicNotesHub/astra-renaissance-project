@@ -33,6 +33,7 @@ const CourseHandouts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [semesterFilter, setSemesterFilter] = useState<number | null>(null);
   const [examTypeFilter, setExamTypeFilter] = useState<string | null>(null);
+  const [biefTrackFilter, setBiefTrackFilter] = useState<'all' | 'fin' | 'econ'>('all');
   const [loading, setLoading] = useState(true);
   const { t, language } = useLanguage();
   const { toast } = useToast();
@@ -40,17 +41,38 @@ const CourseHandouts = () => {
   const decodedCourseName = courseName ? decodeURIComponent(courseName) : '';
   const yearFilter = yearSlug ? slugToYear[yearSlug] || "First Year" : "First Year";
 
+  const isBiefTrackFilterable = decodedCourseName === 'BIEF' && yearFilter !== 'First Year';
+
   const yearDisplayMap: Record<string, string> = {
     "First Year": language === 'it' ? "Primo Anno" : "First Year",
     "Second Year": language === 'it' ? "Secondo Anno" : "Second Year",
     "Third Year": language === 'it' ? "Terzo Anno" : "Third Year",
   };
 
+  const getBiefTrack = (filename: string): ('fin' | 'econ' | 'both') => {
+    const lower = filename.toLowerCase();
+    
+    // BIEF-Fin exclusive subjects
+    if (lower.includes('financial economics')) return 'fin';
+    if (lower.includes('international and monetary economics')) return 'fin';
+    if (lower.includes('empirical methods for finance')) return 'fin';
+    
+    // BIEF-Econ exclusive subjects
+    if (lower.includes('empirical methods for economics')) return 'econ';
+    if (lower.includes('macroeconomics and the world economy')) return 'econ';
+    if (lower.includes('markets, organizations, and incentives')) return 'econ';
+    if (lower.includes('international economics') && !lower.includes('monetary')) return 'econ';
+    
+    return 'both';
+  };
+
   const filteredFiles = files.filter(f => {
     const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSemester = semesterFilter === null || f.semester === semesterFilter;
     const matchesExamType = examTypeFilter === null || f.exam_type === examTypeFilter;
-    return matchesSearch && matchesSemester && matchesExamType;
+    const track = getBiefTrack(f.filename);
+    const matchesTrack = !isBiefTrackFilterable || biefTrackFilter === 'all' || track === 'both' || track === biefTrackFilter;
+    return matchesSearch && matchesSemester && matchesExamType && matchesTrack;
   });
 
   useEffect(() => {
@@ -192,6 +214,29 @@ const CourseHandouts = () => {
                     variant={examTypeFilter === opt.value ? "default" : "outline"}
                     size="sm"
                     onClick={() => setExamTypeFilter(opt.value)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* BIEF Track Filter */}
+          {isBiefTrackFilterable && (
+            <div className="mb-6">
+              <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterTrack')}</p>
+              <div className="flex gap-2">
+                {[
+                  { label: t('courseHandouts.all'), value: 'all' as const },
+                  { label: t('courseHandouts.biefFin'), value: 'fin' as const },
+                  { label: t('courseHandouts.biefEcon'), value: 'econ' as const },
+                ].map((opt) => (
+                  <Button
+                    key={opt.value}
+                    variant={biefTrackFilter === opt.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setBiefTrackFilter(opt.value)}
                   >
                     {opt.label}
                   </Button>

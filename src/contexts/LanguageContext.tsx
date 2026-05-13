@@ -403,6 +403,9 @@ const translations = {
     'courseHandouts.semester2': '2° Semestre',
     'courseHandouts.filterSemester': 'Filtra per semestre',
     'courseHandouts.filterExamType': 'Filtra per tipo di esame',
+    'courseHandouts.filterTrack': 'Filtra per indirizzo',
+    'courseHandouts.biefFin': 'BIEF-Fin',
+    'courseHandouts.biefEcon': 'BIEF-Econ',
     'courseHandouts.parziale': 'Parziale',
     'courseHandouts.generale': 'Generale',
 
@@ -826,6 +829,9 @@ const translations = {
     'courseHandouts.semester2': '2nd Semester',
     'courseHandouts.filterSemester': 'Filter by semester',
     'courseHandouts.filterExamType': 'Filter by exam type',
+    'courseHandouts.filterTrack': 'Filter by track',
+    'courseHandouts.biefFin': 'BIEF-Fin',
+    'courseHandouts.biefEcon': 'BIEF-Econ',
     'courseHandouts.parziale': 'Partial',
     'courseHandouts.generale': 'General',
 
