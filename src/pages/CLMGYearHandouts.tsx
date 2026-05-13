@@ -162,6 +162,50 @@ const CLMGYearHandouts = () => {
             </div>
           </div>
 
+          {/* Semester Filter */}
+          <div className="max-w-md mx-auto mb-4">
+            <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterSemester')}</p>
+            <div className="flex gap-2">
+              {[
+                { label: t('courseHandouts.all'), value: null },
+                { label: t('courseHandouts.semester1'), value: 1 },
+                { label: t('courseHandouts.semester2'), value: 2 },
+              ].map((opt) => (
+                <Button
+                  key={String(opt.value)}
+                  variant={semesterFilter === opt.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSemesterFilter(opt.value)}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Exam Type Filter */}
+          {hasExamTypes && (
+            <div className="max-w-md mx-auto mb-8">
+              <p className="text-sm font-medium text-muted-foreground mb-2">{t('courseHandouts.filterExamType')}</p>
+              <div className="flex gap-2">
+                {[
+                  { label: t('courseHandouts.all'), value: null },
+                  { label: t('courseHandouts.parziale'), value: "parziale" },
+                  { label: t('courseHandouts.generale'), value: "generale" },
+                ].map((opt) => (
+                  <Button
+                    key={String(opt.value)}
+                    variant={examTypeFilter === opt.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setExamTypeFilter(opt.value)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Content */}
           {loading ? (
             <div className="text-center py-12">
