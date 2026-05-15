@@ -1,0 +1,1 @@
+ALTER TABLE public.handouts ADD COLUMN track TEXT CHECK (track IN ('fin','econ','both'));
