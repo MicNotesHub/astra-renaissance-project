@@ -19,7 +19,7 @@ interface HandoutFile {
   uploaded_at: string;
   semester: number | null;
   exam_type: string | null;
-  track: 'fin' | 'econ' | 'both' | null;
+  track: string | null;
 }
 
 const slugToYear: Record<string, string> = {
@@ -54,8 +54,8 @@ const CourseHandouts = () => {
     const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSemester = semesterFilter === null || f.semester === semesterFilter;
     const matchesExamType = examTypeFilter === null || f.exam_type === examTypeFilter;
-    const track = f.track ?? 'both';
-    const matchesTrack = !isBiefTrackFilterable || biefTrackFilter === 'all' || track === 'both' || track === biefTrackFilter;
+    const track = f.track?.trim().toLowerCase() ?? null;
+    const matchesTrack = !isBiefTrackFilterable || biefTrackFilter === 'all' || track === biefTrackFilter;
     return matchesSearch && matchesSemester && matchesExamType && matchesTrack;
   });
 
