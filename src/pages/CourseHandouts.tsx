@@ -19,6 +19,7 @@ interface HandoutFile {
   uploaded_at: string;
   semester: number | null;
   exam_type: string | null;
+  track: 'fin' | 'econ' | 'both' | null;
 }
 
 const slugToYear: Record<string, string> = {
@@ -49,28 +50,11 @@ const CourseHandouts = () => {
     "Third Year": language === 'it' ? "Terzo Anno" : "Third Year",
   };
 
-  const getBiefTrack = (filename: string): ('fin' | 'econ' | 'both') => {
-    const lower = filename.toLowerCase();
-    
-    // BIEF-Fin exclusive subjects
-    if (lower.includes('financial economics')) return 'fin';
-    if (lower.includes('international and monetary economics')) return 'fin';
-    if (lower.includes('empirical methods for finance')) return 'fin';
-    
-    // BIEF-Econ exclusive subjects
-    if (lower.includes('empirical methods for economics')) return 'econ';
-    if (lower.includes('macroeconomics and the world economy')) return 'econ';
-    if (lower.includes('markets, organizations, and incentives')) return 'econ';
-    if (lower.includes('international economics') && !lower.includes('monetary')) return 'econ';
-    
-    return 'both';
-  };
-
   const filteredFiles = files.filter(f => {
     const matchesSearch = f.filename.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSemester = semesterFilter === null || f.semester === semesterFilter;
     const matchesExamType = examTypeFilter === null || f.exam_type === examTypeFilter;
-    const track = getBiefTrack(f.filename);
+    const track = f.track ?? 'both';
     const matchesTrack = !isBiefTrackFilterable || biefTrackFilter === 'all' || track === 'both' || track === biefTrackFilter;
     return matchesSearch && matchesSemester && matchesExamType && matchesTrack;
   });
