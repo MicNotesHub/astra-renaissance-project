@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Play, Heart, Share2, MessageCircle, TrendingUp, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toCdnUrl } from "@/lib/cdn";
 import { toast } from "sonner";
 import astraLogo from "@/assets/astra-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
