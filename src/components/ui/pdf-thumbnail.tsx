@@ -22,7 +22,7 @@ export const PdfThumbnail = ({ fileUrl, className = "" }: PdfThumbnailProps) => 
 
     const renderPage = async () => {
       try {
-        const pdf = await pdfjsLib.getDocument(fileUrl).promise;
+        const pdf = await pdfjsLib.getDocument(toCdnUrl(fileUrl)).promise;
         if (cancelled) return;
         const page = await pdf.getPage(1);
         if (cancelled) return;
