@@ -108,7 +108,7 @@ export function AstraChatPanel({ onClose }: AstraChatPanelProps) {
                           <Button
                             size="sm"
                             variant="ghost"
-                            onClick={() => window.open(doc.url, '_blank')}
+                            onClick={() => window.open(toCdnUrl(doc.url), '_blank')}
                             className="h-8 px-2"
                           >
                             <ExternalLink className="h-3 w-3" />
