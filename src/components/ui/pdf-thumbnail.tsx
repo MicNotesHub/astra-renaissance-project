@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FileText } from "lucide-react";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import { toCdnUrl } from "@/lib/cdn";
 
 // Configure worker via Vite-bundled URL (avoids CDN version mismatches)
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
