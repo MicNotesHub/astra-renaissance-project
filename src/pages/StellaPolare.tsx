@@ -130,6 +130,17 @@ interface MonthlyManualArticle {
 
 const monthlyManualArticles: MonthlyManualArticle[] = [
   {
+    slug: "salute-mentale-maggio",
+    href: "/stella-polare/salute-mentale-maggio",
+    cover: mentalHealthCover,
+    eyebrow: "Maggio 2026 · Mensile",
+    title: "Maggio, mese della prevenzione della salute mentale",
+    excerpt:
+      "Una fragilità diffusa e spesso silenziosa attraversa le nuove generazioni: perché la prevenzione non può più essere rimandata, e quale ruolo hanno scuola, famiglia, istituzioni e diritto.",
+    accent: "from-emerald-500 via-rose-300 to-amber-300",
+    author: "Manfredi Donzelli & Sara Baloshi",
+  },
+  {
     slug: "labour-day-may-1",
     href: "/stella-polare/labour-day-may-1",
     cover: labourDayCover,
