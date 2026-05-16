@@ -255,7 +255,7 @@ const GuideCategory: React.FC = () => {
                   transition={{ duration: 0.4, delay: index * 0.06 }}
                 >
                   <a
-                    href={guide.file_url}
+                    href={toCdnUrl(guide.file_url)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
