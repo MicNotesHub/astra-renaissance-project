@@ -39,10 +39,11 @@ export default function StellaPolareArticleSaluteMentale() {
             <div className="p-8 md:p-14">
               <header className="mb-10">
                 <p className="text-sm uppercase tracking-widest text-primary font-semibold mb-3">
-                  Maggio 2026 · Mensile
+                  Maggio, mese della salute mentale
                 </p>
                 <h1 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                  Maggio, mese della salute mentale
+                  Prevenire il disagio psichico:<br />
+                  Il ruolo della società nella tutela della salute mentale
                 </h1>
                 <p className="mt-4 text-lg text-muted-foreground italic">
                   Una fragilità diffusa e spesso silenziosa attraversa le nuove generazioni: perché la prevenzione non può più essere rimandata, e quale ruolo hanno scuola, famiglia, istituzioni e diritto nel costruire una vera rete di protezione.
