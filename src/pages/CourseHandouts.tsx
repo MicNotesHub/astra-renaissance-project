@@ -104,13 +104,13 @@ const CourseHandouts = () => {
         const fileName = fileUrl.split('/').pop() || '';
         const { data, error } = await supabase.storage.from('handouts-bucket').createSignedUrl(fileName, 315360000);
         if (!error && data?.signedUrl) {
-          window.open(data.signedUrl, '_blank');
+          window.open(toCdnUrl(data.signedUrl), '_blank');
           return;
         }
       }
-      window.open(fileUrl, '_blank');
+      window.open(toCdnUrl(fileUrl), '_blank');
     } catch {
-      window.open(fileUrl, '_blank');
+      window.open(toCdnUrl(fileUrl), '_blank');
     }
   };
 
