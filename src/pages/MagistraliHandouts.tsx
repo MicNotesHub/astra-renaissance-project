@@ -62,7 +62,7 @@ const MagistraliHandouts = () => {
 
   const handleClick = (url: string) => {
     if (!url) return;
-    window.open(url, '_blank');
+    window.open(toCdnUrl(url), '_blank');
   };
 
   return (
