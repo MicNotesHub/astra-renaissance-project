@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toCdnUrl } from "@/lib/cdn";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const TeamSection = () => {
@@ -187,7 +188,7 @@ export const TeamSection = () => {
                                   <div key={rep.id} className="flex flex-col items-center space-y-2">
                                     {rep.url && (
                                       <img 
-                                        src={rep.url || '/placeholder.svg'} 
+                                        src={toCdnUrl(rep.url) || '/placeholder.svg'} 
                                         alt={rep.name}
                                         className="w-28 h-28 rounded-full object-cover shadow-md hover:shadow-lg transition-shadow"
                                         onError={(e) => {

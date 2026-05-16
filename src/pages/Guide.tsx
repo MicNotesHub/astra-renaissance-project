@@ -53,45 +53,45 @@ const categoryCoverMap: Record<string, string> = {
 // Categories with direct language-specific downloads (flag buttons instead of subcategory navigation)
 const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
   'funding': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
   },
   'residenze': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/residenze/Guida%20Residenze_compressed.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/residenze/Residences%20Guide%20(1).pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/residenze/Guida%20Residenze_compressed.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/residenze/Residences%20Guide%20(1).pdf',
   },
   'linkedin': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20IT.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20EN.pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20IT.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/linkedin/LinkedIn%20EN.pdf',
   },
   'tesi': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/tesi%20101/Guida%20Lavoro%20Finale%20e%20Laurea.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/tesi%20101/Guide%20Final%20Paper%20and%20Graduation.pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/tesi%20101/Guida%20Lavoro%20Finale%20e%20Laurea.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/tesi%20101/Guide%20Final%20Paper%20and%20Graduation.pdf',
   },
   'opzionali': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/OPZIONALI.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/opzionali/ELECTIVES-GUIDE_merged.pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/opzionali/OPZIONALI.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/opzionali/ELECTIVES-GUIDE_merged.pdf',
   },
   'graduate': {
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/graduate/Guida-Magistrali.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/graduate/Guida-Magistrali.pdf',
   },
   'freemover': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/freemover/GUIDA-FREE-MOVER-ITA-BOCCONI-PDF.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/freemover/FREE-MOVER-GUIDE-ENG-BOCCONI.pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/freemover/GUIDA-FREE-MOVER-ITA-BOCCONI-PDF.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/freemover/FREE-MOVER-GUIDE-ENG-BOCCONI.pdf',
   },
   'burocrazia': {
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
   },
   'program_change': {
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ITA.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ENG.pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ITA.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ENG.pdf',
   },
   'ecdl': {},
 };
 
 // Categories with a single, language-agnostic file. The whole card opens the PDF.
 const singleFileDownloadCategories: Record<string, string> = {
-  'bgl_domestic_track': 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/dispense-uploads/BGL%20domestic%20track%20Guide.pdf',
+  'bgl_domestic_track': 'https://cdn.astrabocconi.com/storage/v1/object/public/dispense-uploads/BGL%20domestic%20track%20Guide.pdf',
 };
 
 interface Guide {

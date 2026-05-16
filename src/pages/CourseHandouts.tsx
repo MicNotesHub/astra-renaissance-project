@@ -7,6 +7,7 @@ import { FileText, Download, ArrowLeft, Search, ExternalLink } from "lucide-reac
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toCdnUrl } from "@/lib/cdn";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -104,13 +105,13 @@ const CourseHandouts = () => {
         const fileName = fileUrl.split('/').pop() || '';
         const { data, error } = await supabase.storage.from('handouts-bucket').createSignedUrl(fileName, 315360000);
         if (!error && data?.signedUrl) {
-          window.open(data.signedUrl, '_blank');
+          window.open(toCdnUrl(data.signedUrl), '_blank');
           return;
         }
       }
-      window.open(fileUrl, '_blank');
+      window.open(toCdnUrl(fileUrl), '_blank');
     } catch {
-      window.open(fileUrl, '_blank');
+      window.open(toCdnUrl(fileUrl), '_blank');
     }
   };
 

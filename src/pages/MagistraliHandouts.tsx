@@ -7,6 +7,7 @@ import { FileText, Download, ArrowLeft, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toCdnUrl } from "@/lib/cdn";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -61,7 +62,7 @@ const MagistraliHandouts = () => {
 
   const handleClick = (url: string) => {
     if (!url) return;
-    window.open(url, '_blank');
+    window.open(toCdnUrl(url), '_blank');
   };
 
   return (

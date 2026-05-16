@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Play, Heart, Share2, MessageCircle, TrendingUp, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toCdnUrl } from "@/lib/cdn";
 import { toast } from "sonner";
 import astraLogo from "@/assets/astra-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -210,7 +211,7 @@ export const AstraPolareSection = () => {
                 <Card className="glass-card premium-shadow hover:shadow-glow transition-all duration-300 group overflow-hidden">
                   <div className="relative">
                     <img 
-                      src={item.thumbnail_url || astraLogo} 
+                      src={toCdnUrl(item.thumbnail_url) || astraLogo} 
                       alt={item.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />

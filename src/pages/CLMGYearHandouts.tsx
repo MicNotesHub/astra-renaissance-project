@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
+import { toCdnUrl } from "@/lib/cdn";
 
 interface CLMGHandout {
   id: string;
@@ -96,7 +97,7 @@ const CLMGYearHandouts = () => {
 
   const handleDownload = (url: string, name: string) => {
     // Open the file in a new tab for download
-    window.open(url, '_blank');
+    window.open(toCdnUrl(url), '_blank');
     toast.success(t('clmg.downloadStarted'));
   };
 

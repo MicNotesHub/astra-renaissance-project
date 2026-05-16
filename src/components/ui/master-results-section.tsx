@@ -8,15 +8,15 @@ const exchangeCards = [
     title: 'Funding',
     description: 'Guida alle agevolazioni economiche',
     cover: fundingCover,
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/funding/Guida%20Agevolazioni.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/funding/Funding%20Guide.pdf',
   },
   {
     title: 'Residenze',
     description: 'Guida alle residenze universitarie',
     cover: residenzeCover,
-    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/residenze/Guida%20Residenze_compressed.pdf',
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/residenze/Residences%20Guide%20(1).pdf',
+    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/residenze/Guida%20Residenze_compressed.pdf',
+    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/residenze/Residences%20Guide%20(1).pdf',
   },
 ];
 

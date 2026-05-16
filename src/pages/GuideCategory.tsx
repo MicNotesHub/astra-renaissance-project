@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PdfThumbnail } from "@/components/ui/pdf-thumbnail";
 import { ArrowLeft, FileText, Download, Users, GraduationCap, Briefcase, Plane, Home, Building, MapPin, Trophy, Monitor, Globe, DollarSign, Linkedin, Languages } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { toCdnUrl } from "@/lib/cdn";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -254,7 +255,7 @@ const GuideCategory: React.FC = () => {
                   transition={{ duration: 0.4, delay: index * 0.06 }}
                 >
                   <a
-                    href={guide.file_url}
+                    href={toCdnUrl(guide.file_url)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
