@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useAstraChat, type ChatMessage } from '@/hooks/useAstraChat';
+import { toCdnUrl } from '@/lib/cdn';
 
 interface AstraChatPanelProps {
   onClose: () => void;
