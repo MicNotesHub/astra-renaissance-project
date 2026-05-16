@@ -28,6 +28,7 @@ import StellaPolareArticleItalianFootballCrisis from "./pages/StellaPolareArticl
 import StellaPolareArticleAstraNewsInfluencers from "./pages/StellaPolareArticleAstraNewsInfluencers";
 import StellaPolareArticleLiberationDay from "./pages/StellaPolareArticleLiberationDay";
 import StellaPolareArticleLabourDay from "./pages/StellaPolareArticleLabourDay";
+import StellaPolareArticleSaluteMentale from "./pages/StellaPolareArticleSaluteMentale";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
 import ScrollToTop from "./components/ScrollToTop";
