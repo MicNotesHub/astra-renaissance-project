@@ -42,7 +42,7 @@ export default function StellaPolareArticleSaluteMentale() {
                   Maggio 2026 · Mensile
                 </p>
                 <h1 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                  Maggio, mese della prevenzione della salute mentale
+                  Maggio, mese della salute mentale
                 </h1>
                 <p className="mt-4 text-lg text-muted-foreground italic">
                   Una fragilità diffusa e spesso silenziosa attraversa le nuove generazioni: perché la prevenzione non può più essere rimandata, e quale ruolo hanno scuola, famiglia, istituzioni e diritto nel costruire una vera rete di protezione.

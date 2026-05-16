@@ -134,7 +134,7 @@ const monthlyManualArticles: MonthlyManualArticle[] = [
     href: "/stella-polare/salute-mentale-maggio",
     cover: mentalHealthCover,
     eyebrow: "Maggio 2026 · Mensile",
-    title: "Maggio, mese della prevenzione della salute mentale",
+    title: "Maggio, mese della salute mentale",
     excerpt:
       "Una fragilità diffusa e spesso silenziosa attraversa le nuove generazioni: perché la prevenzione non può più essere rimandata, e quale ruolo hanno scuola, famiglia, istituzioni e diritto.",
     accent: "from-emerald-500 via-rose-300 to-amber-300",
