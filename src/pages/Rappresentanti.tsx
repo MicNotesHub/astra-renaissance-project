@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toCdnUrl } from "@/lib/cdn";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Navigation } from "@/components/ui/navigation";
 import { Footer } from "@/components/ui/footer";
