@@ -97,7 +97,7 @@ const CLMGYearHandouts = () => {
 
   const handleDownload = (url: string, name: string) => {
     // Open the file in a new tab for download
-    window.open(url, '_blank');
+    window.open(toCdnUrl(url), '_blank');
     toast.success(t('clmg.downloadStarted'));
   };
 
