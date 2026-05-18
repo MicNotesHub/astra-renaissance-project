@@ -25,10 +25,10 @@ export const MarketplaceSection = () => {
     badge: "Nuovo",
     url: "https://uni-market.it"
   }, {
-    name: "Adidas football",
-    price: "30€",
-    originalPrice: "50€",
-    image: "/lovable-uploads/adidas-football.jpg",
+    name: "IPhone 13 - 128GB",
+    price: "200€",
+    originalPrice: "800€",
+    image: "/lovable-uploads/iphone-13-128gb.jpg",
     rating: 4.9,
     reviews: 31,
     badge: "Offerta",
