@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/ui/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, FileText, Download, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { PdfThumbnail } from "@/components/ui/pdf-thumbnail";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
@@ -227,24 +228,23 @@ const CLMGYearHandouts = () => {
               </p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredHandouts.map((handout) => (
-                <Card key={handout.id} className="group hover:shadow-lg transition-all duration-300">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors">
+                <Card
+                  key={handout.id}
+                  onClick={() => handleDownload(handout.url, handout.name)}
+                  className="cursor-pointer hover:shadow-xl hover:scale-[1.03] transition-all duration-300 group overflow-hidden"
+                >
+                  <div className="aspect-[3/4] overflow-hidden border-b">
+                    <PdfThumbnail fileUrl={handout.url} className="w-full h-full" />
+                  </div>
+                  <CardContent className="p-3">
+                    <h4 className="text-sm font-medium leading-tight group-hover:text-primary transition-colors line-clamp-2">
                       {handout.name}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-end">
-                      <Button
-                        size="sm"
-                        onClick={() => handleDownload(handout.url, handout.name)}
-                        className="gap-2"
-                      >
-                        <Download className="w-4 h-4" />
-                        {t('clmg.download')}
-                      </Button>
+                    </h4>
+                    <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                      <Download className="w-3 h-3" />
+                      <span>{t('clmg.download')}</span>
                     </div>
                   </CardContent>
                 </Card>
