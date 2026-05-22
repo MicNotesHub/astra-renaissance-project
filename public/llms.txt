@@ -1,0 +1,21 @@
+# ASTRA Bocconi
+
+> Associazione studentesca dell'Università Bocconi: rappresentanza, dispense, guide, calcolatori e iniziative per gli studenti.
+
+ASTRA Bocconi è l'associazione di rappresentanza studentesca dell'Università Bocconi di Milano. Il sito offre materiali di studio (dispense per Triennale, Magistrale e CLMG), guide universitarie, calcolatori accademici (GPA, voto di laurea, exchange), informazioni sui rappresentanti negli organi accademici, eventi, articoli editoriali (Stella Polare) e l'assistente AstraGPT.
+
+## Pages
+
+- [Home](/): Panoramica di ASTRA, valori, attività e sezioni principali.
+- [Chi Siamo](/chi-siamo): Storia, missione e team dell'associazione.
+- [Rappresentanti](/rappresentanti): Rappresentanti studenteschi negli organi accademici Bocconi.
+- [Dispense Triennale](/dispense): Dispense e materiali di studio per i corsi triennali.
+- [Dispense Magistrale](/magistrali-handouts): Dispense per i corsi di laurea magistrale.
+- [Dispense CLMG](/clmg-dispense): Materiali per il Corso di Laurea Magistrale in Giurisprudenza.
+- [Guide](/guide): Guide pratiche per la vita universitaria in Bocconi.
+- [Calcolatori](/calcolatori): Calcolatori per GPA, voto di laurea, exchange e piano di studi.
+- [Stella Polare](/stella-polare): Rivista editoriale di ASTRA con articoli su attualità e cultura.
+
+## Optional
+
+- [Privacy Policy](/): Informativa sulla privacy disponibile dal footer.
