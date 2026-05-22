@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEO } from "@/components/SEO";
 import fundingCover from "@/assets/guide-covers/funding.jpg";
 import residenzeCover from "@/assets/guide-covers/residenze.jpg";
 import tesiCover from "@/assets/guide-covers/tesi.jpg";
