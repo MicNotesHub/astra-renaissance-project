@@ -45,6 +45,11 @@ const Dispense = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
+      <SEO
+        title="Dispense | ASTRA Bocconi"
+        description="Dispense e materiali di studio per i corsi di laurea triennale dell'Università Bocconi."
+        path="/dispense"
+      />
       <Navigation />
       
       <div className="pt-24 pb-16">

@@ -9,6 +9,7 @@ import { Calculator, TrendingUp, GraduationCap, Users } from "lucide-react";
 import { CalculatorModal } from "@/components/calculators/calculator-modal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { AstraChatButton } from "@/components/ui/astra-chat-button";
+import { SEO } from "@/components/SEO";
 
 const Calcolatori = () => {
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>(null);
@@ -67,6 +68,11 @@ const Calcolatori = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Calcolatori | ASTRA Bocconi"
+        description="Calcolatori accademici Bocconi: GPA, voto di laurea triennale e magistrale, exchange e piano di studi."
+        path="/calcolatori"
+      />
       <Navigation />
       
       <main className="pt-24 pb-20">
