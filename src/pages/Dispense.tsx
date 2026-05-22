@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FileText, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEO } from "@/components/SEO";
 import bemaccCover from "@/assets/course-covers/bemacc-new.jpg";
 import cleaccCover from "@/assets/course-covers/cleacc.jpg";
 import biemCover from "@/assets/course-covers/biem.jpg";
