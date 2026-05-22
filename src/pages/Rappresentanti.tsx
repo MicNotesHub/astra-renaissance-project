@@ -7,6 +7,7 @@ import { toCdnUrl } from "@/lib/cdn";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Navigation } from "@/components/ui/navigation";
 import { Footer } from "@/components/ui/footer";
+import { SEO } from "@/components/SEO";
 
 const Rappresentanti = () => {
   const [representatives, setRepresentatives] = useState<any[]>([]);
@@ -107,6 +108,11 @@ const Rappresentanti = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Rappresentanti | ASTRA Bocconi"
+        description="Tutti i rappresentanti studenteschi ASTRA negli organi accademici dell'Università Bocconi: contatti, ruoli e organi."
+        path="/rappresentanti"
+      />
       <Navigation />
       
       <main className="pt-16">

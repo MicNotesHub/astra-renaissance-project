@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEO } from "@/components/SEO";
 import fundingCover from "@/assets/guide-covers/funding.jpg";
 import residenzeCover from "@/assets/guide-covers/residenze.jpg";
 import tesiCover from "@/assets/guide-covers/tesi.jpg";
@@ -266,6 +267,11 @@ const Guide = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
+      <SEO
+        title="Guide | ASTRA Bocconi"
+        description="Guide ASTRA per la vita universitaria in Bocconi: alloggi, tesi, stage, mobilità, associazioni e altro."
+        path="/guide"
+      />
       <Navigation />
       
       <div className="pt-24 pb-16">

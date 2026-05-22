@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FileText, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEO } from "@/components/SEO";
 import bemaccCover from "@/assets/course-covers/bemacc-new.jpg";
 import cleaccCover from "@/assets/course-covers/cleacc.jpg";
 import biemCover from "@/assets/course-covers/biem.jpg";
@@ -45,6 +46,11 @@ const Dispense = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
+      <SEO
+        title="Dispense | ASTRA Bocconi"
+        description="Dispense e materiali di studio per i corsi di laurea triennale dell'Università Bocconi."
+        path="/dispense"
+      />
       <Navigation />
       
       <div className="pt-24 pb-16">
