@@ -1,0 +1,2 @@
+UPDATE public.guides SET file_url = REPLACE(file_url, 'https://cdn.astrabocconi.com/storage/', 'https://jsuzhbspinevkzmhibop.supabase.co/storage/') WHERE file_url LIKE 'https://cdn.astrabocconi.com/storage/%';
+UPDATE public.guides SET thumbnail_url = REPLACE(thumbnail_url, 'https://cdn.astrabocconi.com/storage/', 'https://jsuzhbspinevkzmhibop.supabase.co/storage/') WHERE thumbnail_url LIKE 'https://cdn.astrabocconi.com/storage/%';
