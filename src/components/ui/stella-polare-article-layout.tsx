@@ -1,26 +1,41 @@
 import { ReactNode, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Navigation } from "@/components/ui/navigation";
 import { Footer } from "@/components/ui/footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SEO } from "@/components/SEO";
 
 interface Props {
   eyebrow: string;
   title: string;
   author?: string;
+  description?: string;
   children: ReactNode;
 }
 
-export function StellaPolareArticleLayout({ eyebrow, title, author, children }: Props) {
+export function StellaPolareArticleLayout({ eyebrow, title, author, description, children }: Props) {
+  const location = useLocation();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  const metaDescription =
+    description ||
+    `${eyebrow} · Articolo di Stella Polare, la rivista editoriale di ASTRA Bocconi.`;
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={`${title} | Stella Polare — ASTRA Bocconi`}
+        description={metaDescription}
+        path={location.pathname}
+        type="article"
+      />
       <Navigation />
+
 
       <section className="pt-24 pb-16 px-4">
         <div className="max-w-3xl mx-auto">
