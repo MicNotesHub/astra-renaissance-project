@@ -7,10 +7,16 @@ import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
 import { FreeAtBSection } from "@/components/ui/freeatb-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
 import { Footer } from "@/components/ui/footer";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="ASTRA Bocconi - Per Aspera, ad Astra"
+        description="Associazione studentesca dell'Università Bocconi: dispense, guide, calcolatori accademici, rappresentanza e iniziative per gli studenti."
+        path="/"
+      />
       <Navigation />
       <HeroSection />
       <BoardSection />
