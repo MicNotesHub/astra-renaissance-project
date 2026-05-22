@@ -266,6 +266,11 @@ const Guide = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
+      <SEO
+        title="Guide | ASTRA Bocconi"
+        description="Guide ASTRA per la vita universitaria in Bocconi: alloggi, tesi, stage, mobilità, associazioni e altro."
+        path="/guide"
+      />
       <Navigation />
       
       <div className="pt-24 pb-16">
