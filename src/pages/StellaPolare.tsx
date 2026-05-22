@@ -20,6 +20,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { SEO } from "@/components/SEO";
 import stellaPolareHero from "@/assets/stella-polare-hero.png";
 import sportCover from "@/assets/stella-polare-sport-cover.jpeg";
 import internationalCover from "@/assets/stella-polare-covers/international.jpg";
@@ -279,9 +280,14 @@ export default function StellaPolare() {
     setActiveTheme(null);
   };
 
-  return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
+ return (
+   <div className="min-h-screen bg-background">
+     <SEO
+       title="Stella Polare | ASTRA Bocconi"
+       description="Stella Polare: la rivista editoriale di ASTRA Bocconi con articoli su attualità, cultura, sport, economia e politica."
+       path="/stella-polare"
+     />
+     <Navigation />
 
       {/* Hero Section */}
       <section className="relative h-[35vh] sm:h-[50vh] min-h-[250px] sm:min-h-[400px] flex items-center justify-center overflow-hidden pt-16">
