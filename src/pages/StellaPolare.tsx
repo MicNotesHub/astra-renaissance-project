@@ -31,6 +31,7 @@ import arteCulturaCover from "@/assets/stella-polare-covers/arte-cultura.jpg";
 import liberationDayCover from "@/assets/stella-polare-covers/liberation-day.jpeg";
 import labourDayCover from "@/assets/stella-polare-covers/labour-day.png";
 import mentalHealthCover from "@/assets/stella-polare-covers/mental-health.jpg";
+import capaciCover from "@/assets/stella-polare-covers/capaci-23-maggio.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
@@ -130,6 +131,17 @@ interface MonthlyManualArticle {
 }
 
 const monthlyManualArticles: MonthlyManualArticle[] = [
+  {
+    slug: "capaci-23-maggio-1992",
+    href: "/stella-polare/capaci-23-maggio-1992",
+    cover: capaciCover,
+    eyebrow: "Maggio 2026 · Mensile",
+    title: "Capaci, 23 Maggio 1992, ore 17:58",
+    excerpt:
+      "A più di trent'anni dalla strage: il sacrificio di Giovanni Falcone, la reazione dello Stato e l'eredità di una lotta che continua a definire la nostra democrazia.",
+    accent: "from-red-600 via-amber-400 to-emerald-600",
+    author: "Francesco Carletta, Manfredi Donzelli & Marco Ferraù",
+  },
   {
     slug: "salute-mentale-maggio",
     href: "/stella-polare/salute-mentale-maggio",
