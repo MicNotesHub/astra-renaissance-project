@@ -81,18 +81,18 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/freemover/FREE-MOVER-GUIDE-ENG-BOCCONI.pdf',
   },
   'burocrazia': {
-    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
   },
   'program_change': {
-    it: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ITA.pdf',
-    en: 'https://cdn.astrabocconi.com/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ENG.pdf',
+    it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ITA.pdf',
+    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ENG.pdf',
   },
   'ecdl': {},
 };
 
 // Categories with a single, language-agnostic file. The whole card opens the PDF.
 const singleFileDownloadCategories: Record<string, string> = {
-  'bgl_domestic_track': 'https://cdn.astrabocconi.com/storage/v1/object/public/dispense-uploads/BGL%20domestic%20track%20Guide.pdf',
+  'bgl_domestic_track': 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/dispense-uploads/BGL%20domestic%20track%20Guide.pdf',
 };
 
 interface Guide {
