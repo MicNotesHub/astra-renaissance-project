@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 import fundingCover from "@/assets/guide-covers/funding.jpg";
 import residenzeCover from "@/assets/guide-covers/residenze.jpg";
 
@@ -24,6 +26,27 @@ export const MasterResultsSection = () => {
   return (
     <section className="py-10 bg-gradient-to-b from-background to-secondary/20">
       <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          className="flex justify-center mb-6"
+        >
+          <Button
+            asChild
+            size="lg"
+            className="rounded-full shadow-md"
+          >
+            <a
+              href="/downloads/Masters-Admission-2026.xlsx"
+              download
+            >
+              <Download className="mr-2 h-5 w-5" />
+              Master's Admission Results
+            </a>
+          </Button>
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
