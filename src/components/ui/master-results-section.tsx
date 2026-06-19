@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 import fundingCover from "@/assets/guide-covers/funding.jpg";
 import residenzeCover from "@/assets/guide-covers/residenze.jpg";
 
