@@ -85,7 +85,7 @@ export function Footer() {
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center">
               <img
-                src="/astra-logo-blue.png"
+                src="/astra-logo-white.png"
                 alt="ASTRA Bocconi Logo"
                 className="h-8 w-8 mr-3"
               />
