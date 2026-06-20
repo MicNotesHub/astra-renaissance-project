@@ -5,6 +5,7 @@ import { Footer } from "@/components/ui/footer";
 import { SEO } from "@/components/SEO";
 
 const posters = [
+  { src: "/representatives/cnsu.png", label: "CNSU — Consiglio Nazionale degli Studenti Universitari" },
   { src: "/representatives/cdd.png", label: "Faculty Council — Collegio dei Docenti" },
   { src: "/representatives/dipartimenti.png", label: "Department Councils — Consigli di Dipartimento" },
   { src: "/representatives/triennale.png", label: "Undergraduate School — Consiglio di Scuola Triennale" },
@@ -14,7 +15,6 @@ const posters = [
   { src: "/representatives/qualita.png", label: "Quality Committee — Presidio di Qualità" },
   { src: "/representatives/valutazione.png", label: "Evaluation Unit — Nucleo di Valutazione" },
   { src: "/representatives/sport.png", label: "Sport University Committee — Comitato Sportivo Universitario" },
-  { src: "/representatives/cnsu.png", label: "CNSU — Consiglio Nazionale degli Studenti Universitari" },
 ];
 
 const Rappresentanti = () => {
