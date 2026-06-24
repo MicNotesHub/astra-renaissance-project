@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { GraduationGradeCalculator } from "./graduation-grade-calculator";
 import { MscGraduationCalculator } from "./msc-graduation-calculator";
+import { LawGraduationCalculator } from "./law-graduation-calculator";
 import ExchangeCalculator from "./exchange-calculator";
 import ExchangeCalculatorCLMG from "./exchange-calculator-clmg";
 import ExchangeCalculatorUG from "./exchange-calculator-ug";
@@ -20,6 +21,8 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
         return <GraduationGradeCalculator />;
       case 'graduation-msc':
         return <MscGraduationCalculator />;
+      case 'graduation-law':
+        return <LawGraduationCalculator />;
       case 'exchange-calculator':
         return <ExchangeCalculator />;
       case 'exchange-calculator-clmg':
@@ -44,6 +47,8 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
         return 'Undergraduate Graduation Grade Calculator';
       case 'graduation-msc':
         return 'MSc Graduation Grade Calculator';
+      case 'graduation-law':
+        return 'Bocconi Giurisprudenza Graduation Calculator';
       case 'exchange-calculator':
         return 'Exchange Calculator MSc';
       case 'exchange-calculator-clmg':
