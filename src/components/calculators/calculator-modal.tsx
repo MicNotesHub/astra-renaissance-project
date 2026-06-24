@@ -21,6 +21,8 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
         return <GraduationGradeCalculator />;
       case 'graduation-msc':
         return <MscGraduationCalculator />;
+      case 'graduation-law':
+        return <LawGraduationCalculator />;
       case 'exchange-calculator':
         return <ExchangeCalculator />;
       case 'exchange-calculator-clmg':
