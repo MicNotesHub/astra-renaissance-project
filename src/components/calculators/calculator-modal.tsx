@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { GraduationGradeCalculator } from "./graduation-grade-calculator";
 import { MscGraduationCalculator } from "./msc-graduation-calculator";
+import { LawGraduationCalculator } from "./law-graduation-calculator";
 import ExchangeCalculator from "./exchange-calculator";
 import ExchangeCalculatorCLMG from "./exchange-calculator-clmg";
 import ExchangeCalculatorUG from "./exchange-calculator-ug";
