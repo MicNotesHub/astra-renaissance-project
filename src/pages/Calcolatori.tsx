@@ -38,6 +38,15 @@ const Calcolatori = () => {
     features: gpaFeatures,
     externalLink: null
   }, {
+    id: "graduation-law",
+    title: "Bocconi Giurisprudenza Calculator",
+    description: "Integrated Master of Arts in Law (5 years, 300 CFU). GPA, base score and final graduation grade.",
+    icon: GraduationCap,
+    color: "text-rose-500",
+    bgColor: "bg-rose-50 dark:bg-rose-950/30",
+    features: gpaFeatures,
+    externalLink: null
+  }, {
     id: "exchange-calculator-ug",
     title: t('calculators.exchange-ug.title'),
     description: t('calculators.exchange-ug.description'),
