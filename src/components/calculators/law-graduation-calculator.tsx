@@ -454,6 +454,10 @@ export function LawGraduationCalculator() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {yearRows.map((r) => {
                       const isGraded = r.gradeType === "numeric" || r.gradeType === "30L";
+                      const hasChoice =
+                        r.name.startsWith("Stage / opzionale") ||
+                        r.name.startsWith("Seminari / Moot");
+                      const choiceIsElective = hasChoice && isGraded;
                       return (
                         <motion.div
                           key={r.id}
@@ -469,6 +473,42 @@ export function LawGraduationCalculator() {
                               </p>
                             </div>
                           </div>
+
+                          {hasChoice && (
+                            <div className="flex gap-2">
+                              <Button
+                                type="button"
+                                size="sm"
+                                variant={!choiceIsElective ? "default" : "outline"}
+                                className="flex-1 text-xs h-8"
+                                onClick={() =>
+                                  update(r.id, {
+                                    gradeType: "pass_fail",
+                                    grade: "",
+                                    includeInGpa: false,
+                                    category: r.name.startsWith("Stage") ? "internship" : "seminar",
+                                  })
+                                }
+                              >
+                                {r.name.startsWith("Stage") ? "Stage (pass)" : "Seminar (pass)"}
+                              </Button>
+                              <Button
+                                type="button"
+                                size="sm"
+                                variant={choiceIsElective ? "default" : "outline"}
+                                className="flex-1 text-xs h-8"
+                                onClick={() =>
+                                  update(r.id, {
+                                    gradeType: "numeric",
+                                    includeInGpa: true,
+                                    category: "elective",
+                                  })
+                                }
+                              >
+                                Elective (grade)
+                              </Button>
+                            </div>
+                          )}
 
                           {isGraded && (
                             <div>
@@ -497,6 +537,7 @@ export function LawGraduationCalculator() {
                               Pass / Fail — non concorre alla media
                             </div>
                           )}
+
 
                           {r.gradeType === "not_applicable" && (
                             <div className="text-center p-2 bg-muted rounded-md text-xs text-muted-foreground">
