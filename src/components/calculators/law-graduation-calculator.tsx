@@ -87,23 +87,82 @@ const makeRow = (overrides: Partial<LawRow> = {}): LawRow => {
 };
 
 export function LawGraduationCalculator() {
-  const [rows, setRows] = useState<LawRow[]>([
-    makeRow({ name: "Diritto Privato I", cfu: 9, category: "compulsory_exam" }),
-    makeRow({ name: "Diritto Costituzionale", cfu: 9, category: "compulsory_exam" }),
-    makeRow({
-      id: uid(),
-      name: "Thesis",
-      cfu: THESIS_DEFAULT_CFU,
-      category: "thesis",
-      gradeType: "not_applicable",
-      grade: "",
-      includeInGpa: false,
-      includeInGraduationCredits: true,
-      status: "planned",
-      semester: "",
-      year: "",
-    }),
-  ]);
+  const [rows, setRows] = useState<LawRow[]>(() => {
+    const r = (
+      name: string,
+      cfu: number,
+      category: Category,
+      year: LawRow["year"],
+      semester: LawRow["semester"]
+    ) => makeRow({ name, cfu, category, year, semester });
+    return [
+      // ===== 1° anno =====
+      r("Metodi quantitativi (preparatory)", 0, "other", 1, 1),
+      r("Istituzioni di diritto privato - Modulo 1", 8, "compulsory_exam", 1, 1),
+      r("Diritto romano - Modulo 1", 8, "compulsory_exam", 1, 1),
+      r("Filosofia del diritto", 8, "compulsory_exam", 1, 1),
+      r("Critical thinking", 1, "compulsory_exam", 1, 1),
+      r("Inglese (I lingua) - precorso", 0, "language", 1, 1),
+      r("Quantitative methods", 6, "compulsory_exam", 1, 2),
+      r("Diritto costituzionale italiano ed europeo", 10, "compulsory_exam", 1, 2),
+      r("Principi di economia (Economia / Scienza delle finanze)", 6, "elective", 1, 2),
+      r("Istituzioni di diritto privato - Modulo 2", 6, "compulsory_exam", 1, 2),
+      r("Inglese (I lingua) - didattica ed esame", 4, "language", 1, 2),
+
+      // ===== 2° anno =====
+      r("Economia aziendale e bilancio - Modulo 1", 6, "compulsory_exam", 2, 1),
+      r("Diritto comparato (Comparative private law / Diritto comparato pubblico)", 9, "elective", 2, 1),
+      r("Legal argumentation and economic analysis of law", 8, "compulsory_exam", 2, 1),
+      r("History of law - Module 1 (Introduction to European Legal History)", 6, "compulsory_exam", 2, 1),
+      r("Legal English", 3, "language", 2, 1),
+      r("Management and Accounting - Module 2 (Accounting and Financial Statement Analysis)", 6, "compulsory_exam", 2, 2),
+      r("Storia del diritto - Modulo 2", 8, "compulsory_exam", 2, 2),
+      r("Diritto commerciale", 10, "compulsory_exam", 2, 2),
+      r("Roman law - Module 2 (Roman Foundations of European Law)", 6, "compulsory_exam", 2, 2),
+      r("Informatica per giurisprudenza", 3, "compulsory_exam", 2, 2),
+
+      // ===== 3° anno =====
+      r("Diritto penale", 10, "compulsory_exam", 3, 1),
+      r("Diritto processuale civile - Modulo 1", 8, "compulsory_exam", 3, 1),
+      r("EU law", 9, "compulsory_exam", 3, 1),
+      r("Diritto contabile e fiscale - Modulo 1", 5, "compulsory_exam", 3, 1),
+      r("Seconda lingua straniera - precorso", 0, "language", 3, 1),
+      r("Diritto processuale civile - Modulo 2", 6, "compulsory_exam", 3, 2),
+      r("Diritto contabile e fiscale - Modulo 2", 7, "compulsory_exam", 3, 2),
+      r("Diritto processuale penale", 8, "compulsory_exam", 3, 2),
+      r("Diritto del lavoro", 6, "compulsory_exam", 3, 2),
+      r("Seconda lingua straniera - didattica ed esame", 4, "language", 3, 2),
+
+      // ===== 4° anno =====
+      r("Diritto amministrativo (Diritto amministrativo / Diritto amministrativo italiano ed europeo)", 10, "elective", 4, 1),
+      r("Diritto costituzionale - corso progredito (Giustizia costituzionale / Diritto pubblico dell'economia / Transnational constitutional law and government policies)", 8, "elective", 4, 1),
+      r("Diritto commerciale - corso progredito (Casi e questioni di diritto societario / Operazioni straordinarie / Antitrust law)", 6, "elective", 4, 1),
+      r("Diritto processuale penale - corso progredito (Diritto dell'esecuzione penale / Processo penale agli enti / Procedura penale europea)", 6, "elective", 4, 1),
+      r("International law", 9, "compulsory_exam", 4, 2),
+      r("Diritto civile (Contratti e obbligazioni / European and International contracts)", 8, "elective", 4, 2),
+      r("Diritto penale - corso progredito (Parte speciale del codice penale / Focus su criminalità economica / Paths of internationalization)", 6, "elective", 4, 2),
+      r("Diritto del lavoro - corso progredito (Casi di diritto del lavoro / Istituzioni del mercato del lavoro / European social law)", 6, "elective", 4, 2),
+
+      // ===== 5° anno =====
+      r("Diritto civile - corso progredito (Diritto Bancario / Diritto Finanziario / Diritto Assicurativo)", 8, "elective", 5, 1),
+      r("Diritto amministrativo - corso progredito (Diritto processuale amministrativo / Environmental law / Global Administrative Law)", 8, "elective", 5, 1),
+      r("Computing, AI and the Law", 4, "compulsory_exam", 5, 1),
+      r("Opzionale n° 1-2", 12, "elective", 5, 1),
+      r("Stage / opzionale n° 3", 6, "internship", 5, 2),
+      r("Seminari / Moot / Cliniche legali / opzionale n° 4", 6, "seminar", 5, 2),
+      makeRow({
+        name: "Tesi",
+        cfu: THESIS_DEFAULT_CFU,
+        category: "thesis",
+        gradeType: "not_applicable",
+        grade: "",
+        includeInGpa: false,
+        includeInGraduationCredits: true,
+        year: 5,
+        semester: 2,
+      }),
+    ];
+  });
   const [thesisPoints, setThesisPoints] = useState<number>(0);
   const [thesisMax, setThesisMax] = useState<number>(7);
   const [bonusPoints, setBonusPoints] = useState<number>(0);
