@@ -200,7 +200,7 @@ export function LawGraduationCalculator() {
 
     const weightedSum = gpaRows.reduce((s, r) => {
       const raw = Number(r.grade);
-      const g = r.gradeType === "30L" || raw === 31 ? 30 : Math.min(raw, 30);
+      const g = r.gradeType === "30L" || raw === 31 ? 31 : raw;
       return s + g * r.cfu;
     }, 0);
     const gpaCfu = gpaRows.reduce((s, r) => s + r.cfu, 0);
