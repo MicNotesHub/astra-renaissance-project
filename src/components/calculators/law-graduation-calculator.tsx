@@ -164,7 +164,7 @@ export function LawGraduationCalculator() {
     ];
   });
   const [thesisPoints, setThesisPoints] = useState<number>(0);
-  const [thesisMax, setThesisMax] = useState<number>(7);
+  const [thesisMax, setThesisMax] = useState<number>(6);
   const [bonusPoints, setBonusPoints] = useState<number>(0);
 
   const update = (id: string, patch: Partial<LawRow>) => {
