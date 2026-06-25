@@ -97,12 +97,10 @@ export function LawGraduationCalculator() {
     ) => makeRow({ name, cfu, category, year, semester });
     return [
       // ===== 1° anno =====
-      r("Metodi quantitativi (preparatory)", 0, "other", 1, 1),
       r("Istituzioni di diritto privato - Modulo 1", 8, "compulsory_exam", 1, 1),
       r("Diritto romano - Modulo 1", 8, "compulsory_exam", 1, 1),
       r("Filosofia del diritto", 8, "compulsory_exam", 1, 1),
       r("Critical thinking", 1, "compulsory_exam", 1, 1),
-      r("Inglese (I lingua) - precorso", 0, "language", 1, 1),
       r("Quantitative methods", 6, "compulsory_exam", 1, 2),
       r("Diritto costituzionale italiano ed europeo", 10, "compulsory_exam", 1, 2),
       r("Principi di economia (Economia / Scienza delle finanze)", 6, "elective", 1, 2),
