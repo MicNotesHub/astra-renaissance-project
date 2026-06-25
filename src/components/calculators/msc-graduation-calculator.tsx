@@ -139,8 +139,8 @@ export function MscGraduationCalculator() {
             return false;
           }
           return lower.includes('seminar') ||
-                 lower.includes('lab') || lower.includes('foreign language') ||
-                 lower.includes('lingua') || lower.includes('privacy') ||
+                 lower.includes('lab') ||
+                 lower.includes('privacy') ||
                  lower.includes('guidelines');
         };
 
