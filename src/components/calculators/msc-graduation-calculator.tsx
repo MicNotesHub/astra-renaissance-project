@@ -445,15 +445,16 @@ export function MscGraduationCalculator() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-4">
-                    <Input
-                      type="number"
-                      min={0}
-                      step={0.5}
-                      value={bonusPoints || ''}
-                      onChange={(e) => setBonusPoints(e.target.value ? Number(e.target.value) : 0)}
-                      placeholder="0"
-                      className="w-24"
-                    />
+                    <Select
+                      value={String(bonusPoints)}
+                      onValueChange={(v) => setBonusPoints(Number(v))}
+                    >
+                      <SelectTrigger className="w-24"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="0">0</SelectItem>
+                        <SelectItem value="1">1</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <span className="text-sm text-muted-foreground">{t('msc_calc.points')}</span>
                   </div>
                 </CardContent>
