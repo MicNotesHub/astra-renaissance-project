@@ -104,7 +104,7 @@ export function GraduationGradeCalculator() {
             subject: subject.subject,
             cfu: subject.cfu,
             grade: '' as number | '',
-            completed: false,
+            completed: true,
             isSeminar: lower.includes('seminar') ||
               (selectedCourse === 'BIG' && (
                 subject.subject === 'Marketing Research Skills for Public Policy' ||
