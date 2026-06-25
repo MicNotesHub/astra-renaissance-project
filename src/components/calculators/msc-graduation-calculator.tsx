@@ -152,7 +152,7 @@ export function MscGraduationCalculator() {
             subject: subject.subject,
             cfu: subject.cfu,
             grade: '' as number | '',
-            completed: false,
+            completed: true,
             isSeminar: isPassFail(subject.subject),
             hasInternshipOption,
             internshipChoice: '' as 'internship' | 'elective' | '',
