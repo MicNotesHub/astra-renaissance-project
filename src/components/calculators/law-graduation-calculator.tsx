@@ -186,11 +186,8 @@ export function LawGraduationCalculator() {
     );
   };
 
-  const addRow = (category: Category = "compulsory_exam") => {
-    setRows((prev) => [...prev, makeRow({ category })]);
-  };
 
-  const removeRow = (id: string) => setRows((prev) => prev.filter((r) => r.id !== id));
+
 
   const results = useMemo(() => {
     const gpaRows = rows.filter((r) => {
