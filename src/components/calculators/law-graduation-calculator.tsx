@@ -438,155 +438,94 @@ export function LawGraduationCalculator() {
 
         {/* Rows */}
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0">
+          <CardHeader>
             <CardTitle>Study Plan</CardTitle>
-            <div className="flex gap-2">
-              <Button size="sm" variant="outline" onClick={() => addRow("compulsory_exam")}>
-                <Plus className="h-4 w-4 mr-1" /> Add exam
-              </Button>
-              <Button size="sm" variant="outline" onClick={() => addRow("seminar")}>
-                <Plus className="h-4 w-4 mr-1" /> Seminar
-              </Button>
-              <Button size="sm" variant="outline" onClick={() => addRow("internship")}>
-                <Plus className="h-4 w-4 mr-1" /> Internship
-              </Button>
-            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Curriculum fissato (nome, CFU e anno non modificabili). Inserisci il voto e usa la spunta per includere/escludere l'esame dal calcolo della media.
+            </p>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {rows.map((r) => (
-                <motion.div
-                  key={r.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="border rounded-lg p-4 bg-card space-y-3"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <Input
-                      value={r.name}
-                      placeholder="Course name"
-                      onChange={(e) => update(r.id, { name: e.target.value })}
-                      className="font-medium"
-                    />
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => removeRow(r.id)}
-                      className="h-8 w-8 flex-shrink-0"
-                    >
-                      <Trash2 className="h-4 w-4 text-muted-foreground" />
-                    </Button>
+          <CardContent className="space-y-6">
+            {[1, 2, 3, 4, 5].map((year) => {
+              const yearRows = rows.filter((r) => r.year === year);
+              if (yearRows.length === 0) return null;
+              return (
+                <div key={year} className="space-y-2">
+                  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                    {year}° anno
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {yearRows.map((r) => {
+                      const isGraded = r.gradeType === "numeric" || r.gradeType === "30L";
+                      return (
+                        <motion.div
+                          key={r.id}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="border rounded-lg p-3 bg-card space-y-2"
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-medium leading-snug">{r.name}</p>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                {r.cfu} CFU · {categoryLabels[r.category]}
+                              </p>
+                            </div>
+                          </div>
+
+                          {isGraded && (
+                            <div>
+                              <Label className="text-xs text-muted-foreground">Voto</Label>
+                              <Select
+                                value={r.grade?.toString() || ""}
+                                onValueChange={(v) => {
+                                  if (v === "none") update(r.id, { grade: "", gradeType: "numeric" });
+                                  else if (v === "31") update(r.id, { grade: 31, gradeType: "30L" });
+                                  else update(r.id, { grade: Number(v), gradeType: "numeric" });
+                                }}
+                              >
+                                <SelectTrigger className="mt-1 h-9"><SelectValue placeholder="—" /></SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="none">—</SelectItem>
+                                  {Array.from({ length: 14 }, (_, i) => i + 18).map((g) => (
+                                    <SelectItem key={g} value={String(g)}>{g === 31 ? "30L" : g}</SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          )}
+
+                          {r.gradeType === "pass_fail" && (
+                            <div className="text-center p-2 bg-muted rounded-md text-xs text-muted-foreground">
+                              Pass / Fail — non concorre alla media
+                            </div>
+                          )}
+
+                          {r.gradeType === "not_applicable" && (
+                            <div className="text-center p-2 bg-muted rounded-md text-xs text-muted-foreground">
+                              Tesi — punti aggiunti separatamente
+                            </div>
+                          )}
+
+                          {isGraded && (
+                            <label className="flex items-center gap-2 cursor-pointer text-xs pt-1 border-t">
+                              <Checkbox
+                                checked={r.includeInGpa}
+                                onCheckedChange={(c) => update(r.id, { includeInGpa: Boolean(c) })}
+                                className="mt-1.5"
+                              />
+                              <span className="mt-1.5">Includi nella media</span>
+                            </label>
+                          )}
+                        </motion.div>
+                      );
+                    })}
                   </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <Label className="text-xs text-muted-foreground">Category</Label>
-                      <Select value={r.category} onValueChange={(v) => update(r.id, { category: v as Category })}>
-                        <SelectTrigger className="h-9 mt-1"><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          {(Object.keys(categoryLabels) as Category[]).map((c) => (
-                            <SelectItem key={c} value={c}>{categoryLabels[c]}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label className="text-xs text-muted-foreground">CFU</Label>
-                      <Input
-                        type="number"
-                        min={0}
-                        step={1}
-                        value={r.cfu}
-                        onChange={(e) => update(r.id, { cfu: Number(e.target.value) || 0 })}
-                        className="h-9 mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label className="text-xs text-muted-foreground">Year</Label>
-                      <Select
-                        value={r.year ? String(r.year) : ""}
-                        onValueChange={(v) => update(r.id, { year: v ? (Number(v) as LawRow["year"]) : "" })}
-                      >
-                        <SelectTrigger className="h-9 mt-1"><SelectValue placeholder="—" /></SelectTrigger>
-                        <SelectContent>
-                          {[1, 2, 3, 4, 5].map((y) => <SelectItem key={y} value={String(y)}>{y}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label className="text-xs text-muted-foreground">Status</Label>
-                      <Select value={r.status} onValueChange={(v) => update(r.id, { status: v as Status })}>
-                        <SelectTrigger className="h-9 mt-1"><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="planned">Planned</SelectItem>
-                          <SelectItem value="completed">Completed</SelectItem>
-                          <SelectItem value="passed">Passed</SelectItem>
-                          <SelectItem value="failed">Failed</SelectItem>
-                          <SelectItem value="not_taken">Not taken</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  {(r.gradeType === "numeric" || r.gradeType === "30L") && (
-                    <div>
-                      <Label className="text-xs text-muted-foreground">Grade</Label>
-                      <Select
-                        value={r.grade?.toString() || ""}
-                        onValueChange={(v) => {
-                          if (v === "31") update(r.id, { grade: 31, gradeType: "30L" });
-                          else update(r.id, { grade: v ? Number(v) : "", gradeType: "numeric" });
-                        }}
-                      >
-                        <SelectTrigger className="mt-1 h-9"><SelectValue placeholder="Select grade" /></SelectTrigger>
-                        <SelectContent>
-                          {Array.from({ length: 14 }, (_, i) => i + 18).map((g) => (
-                            <SelectItem key={g} value={String(g)}>{g === 31 ? "30L" : g}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  )}
-
-                  {r.gradeType === "pass_fail" && (
-                    <div className="text-center p-2 bg-muted rounded-md text-xs text-muted-foreground">
-                      Pass / Fail — set status to mark completion
-                    </div>
-                  )}
-
-                  {r.gradeType === "not_applicable" && (
-                    <div className="text-center p-2 bg-muted rounded-md text-xs text-muted-foreground">
-                      No exam grade — affects graduation via thesis points
-                    </div>
-                  )}
-
-                  <div className="flex items-center justify-between text-xs pt-1 border-t">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <Checkbox
-                        checked={r.includeInGpa}
-                        onCheckedChange={(c) => update(r.id, { includeInGpa: Boolean(c) })}
-                      />
-                      <span>Include in GPA</span>
-                    </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <Checkbox
-                        checked={r.includeInGraduationCredits}
-                        onCheckedChange={(c) => update(r.id, { includeInGraduationCredits: Boolean(c) })}
-                      />
-                      <span>Count CFU</span>
-                    </label>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {rows.length === 0 && (
-              <div className="text-center text-sm text-muted-foreground py-8">
-                No rows yet — add an exam to get started.
-              </div>
-            )}
+                </div>
+              );
+            })}
           </CardContent>
         </Card>
+
 
         <div className="text-center text-xs text-muted-foreground bg-muted/50 rounded-lg p-4">
           <p>
