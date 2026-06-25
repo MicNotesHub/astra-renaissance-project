@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { GraduationCap, Calculator, Target, Info, Plus, Trash2, AlertTriangle, Scale } from "lucide-react";
+import { GraduationCap, Calculator, Target, Info, AlertTriangle, Scale } from "lucide-react";
 import { motion } from "framer-motion";
 
 type Category =
