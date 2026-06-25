@@ -34,7 +34,7 @@ export const CalcolatoriSection = () => {
     externalLink: null
   }, {
     id: "graduation-law",
-    title: "Bocconi Giurisprudenza Calculator",
+    title: "GPA & Graduation Score (CLMG / Giurisprudenza)",
     description: "Integrated Master of Arts in Law (5 years, 300 CFU). GPA, base score and final graduation grade.",
     icon: GraduationCap,
     color: "text-rose-500",
