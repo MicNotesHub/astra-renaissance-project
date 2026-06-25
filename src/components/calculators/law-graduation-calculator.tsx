@@ -415,16 +415,17 @@ export function LawGraduationCalculator() {
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-3">
-                <Input
-                  type="number"
-                  min={0}
-                  step={0.5}
-                  value={bonusPoints || ""}
-                  onChange={(e) => setBonusPoints(e.target.value ? Number(e.target.value) : 0)}
-                  placeholder="0"
-                  className="w-24"
-                />
-                <span className="text-sm text-muted-foreground">points</span>
+                <Select
+                  value={String(bonusPoints)}
+                  onValueChange={(v) => setBonusPoints(Number(v))}
+                >
+                  <SelectTrigger className="w-24"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="0">0</SelectItem>
+                    <SelectItem value="1">1</SelectItem>
+                  </SelectContent>
+                </Select>
+                <span className="text-sm text-muted-foreground">point</span>
               </div>
               <p className="mt-2 text-xs text-muted-foreground">
                 final = base ({results.baseScore110.toFixed(2)}) + thesis ({thesisPoints}) + bonus ({bonusPoints}) = {results.rawFinal.toFixed(2)}
