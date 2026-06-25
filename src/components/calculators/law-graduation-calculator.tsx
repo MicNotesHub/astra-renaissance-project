@@ -124,7 +124,6 @@ export function LawGraduationCalculator() {
       r("Diritto processuale civile - Modulo 1", 8, "compulsory_exam", 3, 1),
       r("EU law", 9, "compulsory_exam", 3, 1),
       r("Diritto contabile e fiscale - Modulo 1", 5, "compulsory_exam", 3, 1),
-      r("Seconda lingua straniera - precorso", 0, "language", 3, 1),
       r("Diritto processuale civile - Modulo 2", 6, "compulsory_exam", 3, 2),
       r("Diritto contabile e fiscale - Modulo 2", 7, "compulsory_exam", 3, 2),
       r("Diritto processuale penale", 8, "compulsory_exam", 3, 2),
