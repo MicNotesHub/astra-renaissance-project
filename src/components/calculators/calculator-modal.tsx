@@ -48,7 +48,7 @@ export function CalculatorModal({ isOpen, onClose, calculatorType }: CalculatorM
       case 'graduation-msc':
         return 'MSc Graduation Grade Calculator';
       case 'graduation-law':
-        return 'Bocconi Giurisprudenza Graduation Calculator';
+        return 'GPA & Graduation Score (CLMG / Giurisprudenza)';
       case 'exchange-calculator':
         return 'Exchange Calculator MSc';
       case 'exchange-calculator-clmg':

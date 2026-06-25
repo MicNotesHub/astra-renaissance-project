@@ -258,7 +258,7 @@ export function LawGraduationCalculator() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Scale className="h-5 w-5" />
-              Bocconi Giurisprudenza Graduation Calculator
+              GPA & Graduation Score (CLMG / Giurisprudenza)
             </CardTitle>
             <p className="text-sm text-muted-foreground mt-1">
               Estimate your weighted GPA, base graduation score, and final Law degree grade.
