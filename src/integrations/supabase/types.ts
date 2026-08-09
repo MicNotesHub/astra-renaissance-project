@@ -338,6 +338,48 @@ export type Database = {
         }
         Relationships: []
       }
+      Document: {
+        Row: {
+          chunkIndex: number | null
+          content: string
+          createdAt: string
+          embedding: string | null
+          id: string
+          page: number | null
+          sourceType: string | null
+          sourceUrl: string
+          subject: string | null
+          title: string | null
+          year: string | null
+        }
+        Insert: {
+          chunkIndex?: number | null
+          content: string
+          createdAt?: string
+          embedding?: string | null
+          id: string
+          page?: number | null
+          sourceType?: string | null
+          sourceUrl: string
+          subject?: string | null
+          title?: string | null
+          year?: string | null
+        }
+        Update: {
+          chunkIndex?: number | null
+          content?: string
+          createdAt?: string
+          embedding?: string | null
+          id?: string
+          page?: number | null
+          sourceType?: string | null
+          sourceUrl?: string
+          subject?: string | null
+          title?: string | null
+          year?: string | null
+        }
+        Relationships: []
+      }
       event_registrations: {
         Row: {
           attendance_status: string | null
