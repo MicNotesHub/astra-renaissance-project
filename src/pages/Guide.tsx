@@ -81,7 +81,7 @@ const directDownloadCategories: Record<string, { it?: string; en?: string }> = {
     en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/freemover/FREE-MOVER-GUIDE-ENG-BOCCONI.pdf',
   },
   'burocrazia': {
-    en: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/burocrazia/BUREACURACY101v_merged.pdf',
+    en: '/__l5e/assets-v1/0b2f229f-f976-4ee2-a95e-29bf8bac62de/Astra-Italian-Bureaucracy-101.pdf',
   },
   'program_change': {
     it: 'https://jsuzhbspinevkzmhibop.supabase.co/storage/v1/object/public/guides/guide/cambio%20corso/Guida%20cambio%20corso%20ITA.pdf',
