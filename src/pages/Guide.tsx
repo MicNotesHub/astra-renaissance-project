@@ -311,7 +311,7 @@ const Guide = () => {
                 ...(directDownloadCategories[category] || {}),
                 ...(dynamicLinks[category] || {}),
               };
-              const hasDirectDownload = directDownloadCategories[category] !== undefined;
+              const hasDirectDownload = Object.keys(links).length > 0;
               const singleFileUrl = singleFileDownloadCategories[category];
 
               return (
