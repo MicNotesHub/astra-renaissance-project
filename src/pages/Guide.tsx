@@ -154,18 +154,26 @@ const Guide = () => {
 
       setCategories(filteredCategories);
 
-      // Build dynamic links for ECDL from DB (matched by title language)
-      const ecdlGuides = (data || []).filter(g => g.category === 'ecdl');
-      const ecdlLinks: { it?: string; en?: string } = {};
-      ecdlGuides.forEach(g => {
+      // Build links for every category straight from the DB (matched by title language).
+      // These override the hardcoded fallbacks so the site always follows Supabase.
+      const linksByCategory: Record<string, { it?: string; en?: string }> = {};
+      (data || []).forEach((g) => {
         const titleLower = (g.title || '').toLowerCase();
-        if (titleLower.includes('english') || titleLower.includes(' en')) {
-          ecdlLinks.en = g.file_url;
+        const isEnglish = /\b(eng|english|guide)\b/.test(titleLower) || titleLower.endsWith(' en');
+        const bucket = linksByCategory[g.category] || (linksByCategory[g.category] = {});
+        if (isEnglish) {
+          if (!bucket.en) bucket.en = g.file_url;
         } else {
-          ecdlLinks.it = g.file_url;
+          if (!bucket.it) bucket.it = g.file_url;
         }
       });
-      setDynamicLinks({ ecdl: ecdlLinks });
+      // If a category only has a single guide, expose it for both languages
+      Object.values(linksByCategory).forEach((b) => {
+        if (b.it && !b.en) b.en = b.it;
+        if (b.en && !b.it) b.it = b.en;
+      });
+      setDynamicLinks(linksByCategory);
+
     } catch (error) {
       console.error('Error fetching categories:', error);
     } finally {
