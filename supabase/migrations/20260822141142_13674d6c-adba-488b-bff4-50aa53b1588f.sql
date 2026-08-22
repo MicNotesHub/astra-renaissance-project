@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "tmp_guides_upload" ON storage.objects;
