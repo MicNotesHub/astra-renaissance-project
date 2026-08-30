@@ -6,6 +6,7 @@ import { MasterResultsSection } from "@/components/ui/master-results-section";
 import { CalcolatoriSection } from "@/components/ui/calcolatori-section";
 import { FreeAtBSection } from "@/components/ui/freeatb-section";
 import { MarketplaceSection } from "@/components/ui/marketplace-section";
+import { BookFlowSection } from "@/components/ui/bookflow-section";
 import { Footer } from "@/components/ui/footer";
 import { SEO } from "@/components/SEO";
 
