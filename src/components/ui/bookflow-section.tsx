@@ -46,7 +46,7 @@ export const BookFlowSection = () => {
             loading="lazy"
             className="h-12 md:h-16 w-auto mx-auto mb-6"
           />
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto whitespace-pre-line">
             {t("bookflow.subtitle")}
           </p>
         </motion.div>
