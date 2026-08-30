@@ -211,6 +211,16 @@ const translations = {
     'msc_calc.disclaimer': '⚠️ Questo è uno strumento di stima. Il voto finale di laurea è determinato dalla commissione di Bocconi.',
     'msc_calc.thesis_note': 'Nota: La tesi è inclusa automaticamente nel calcolo dei crediti',
     
+    // BookFlow Section
+    'bookflow.subtitle': 'Il marketplace dedicato ai libri: compra e vendi i tuoi libri di testo tra università e scuole, in modo semplice e veloce.',
+    'bookflow.features.books': 'Solo Libri',
+    'bookflow.features.books.description': 'Libri di testo universitari e scolastici, tutti in un unico posto',
+    'bookflow.features.schools': 'Tante Università',
+    'bookflow.features.schools.description': 'Studenti di atenei e scuole diverse, un\u2019unica community',
+    'bookflow.features.fast': 'Veloce e Semplice',
+    'bookflow.features.fast.description': 'Pubblica un annuncio in pochi secondi e vendi subito',
+    'bookflow.cta.button': 'Scopri BookFlow',
+
     // Marketplace Section
     'marketplace.title': 'ASTRA x UniMarket',
     'marketplace.subtitle': 'Il marketplace ufficiale per studenti Bocconi. Merchandising esclusivo e prodotti essenziali per la vita universitaria.',
@@ -641,6 +651,16 @@ const translations = {
     'msc_calc.disclaimer': '⚠️ This is an estimation tool. The final graduation grade is determined by the Bocconi committee.',
     'msc_calc.thesis_note': 'Note: The thesis is automatically included in the credit calculation',
     
+    // BookFlow Section
+    'bookflow.subtitle': 'The marketplace made for books: buy and sell your textbooks across universities and schools, simply and fast.',
+    'bookflow.features.books': 'Books Only',
+    'bookflow.features.books.description': 'University and school textbooks, all in one place',
+    'bookflow.features.schools': 'Many Schools',
+    'bookflow.features.schools.description': 'Students from different universities and schools, one community',
+    'bookflow.features.fast': 'Fast & Simple',
+    'bookflow.features.fast.description': 'List a book in seconds and sell it right away',
+    'bookflow.cta.button': 'Discover BookFlow',
+
     // Marketplace Section
     'marketplace.title': 'ASTRA x UniMarket',
     'marketplace.subtitle': 'The official marketplace for Bocconi students. Exclusive merchandise and essential products for university life.',
