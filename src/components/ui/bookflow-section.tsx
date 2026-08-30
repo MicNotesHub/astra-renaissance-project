@@ -4,7 +4,7 @@ import { ArrowRight, BookOpen, Timer, School } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import bookflowLogo from "@/assets/bookflow-logo.png.asset.json";
 
-const BOOKFLOW_URL = "https://bookflow.it";
+const BOOKFLOW_URL = "https://bookflow.it/";
 
 export const BookFlowSection = () => {
   const { t } = useLanguage();
