@@ -212,13 +212,13 @@ const translations = {
     'msc_calc.thesis_note': 'Nota: La tesi è inclusa automaticamente nel calcolo dei crediti',
     
     // BookFlow Section
-    'bookflow.subtitle': 'Il marketplace dedicato ai libri: compra e vendi i tuoi libri di testo tra università e scuole, in modo semplice e veloce.',
-    'bookflow.features.books': 'Solo Libri',
-    'bookflow.features.books.description': 'Libri di testo universitari e scolastici, tutti in un unico posto',
-    'bookflow.features.schools': 'Tante Università',
-    'bookflow.features.schools.description': 'Studenti di atenei e scuole diverse, un\u2019unica community',
+    'bookflow.subtitle': 'Il marketplace per comprare e vendere i libri di testo tra studenti Bocconi.\nTrova i libri del tuo corso, rivendi quelli che non ti servono più. Zero commissioni, zero intermediari.',
+    'bookflow.features.books': 'Solo il Tuo Corso',
+    'bookflow.features.books.description': 'Vedi solo i libri del tuo corso e del tuo anno. Niente da cercare tra migliaia di annunci sparsi.',
+    'bookflow.features.schools': 'Zero Commissioni',
+    'bookflow.features.schools.description': 'Bookflow è gratis: nessuna fee su acquisti o vendite. Il prezzo lo decidi tu.',
     'bookflow.features.fast': 'Veloce e Semplice',
-    'bookflow.features.fast.description': 'Pubblica un annuncio in pochi secondi e vendi subito',
+    'bookflow.features.fast.description': 'Pubblica un annuncio in pochi secondi e vendi in pochi giorni.',
     'bookflow.cta.button': 'Scopri BookFlow',
 
     // Marketplace Section
@@ -652,13 +652,13 @@ const translations = {
     'msc_calc.thesis_note': 'Note: The thesis is automatically included in the credit calculation',
     
     // BookFlow Section
-    'bookflow.subtitle': 'The marketplace made for books: buy and sell your textbooks across universities and schools, simply and fast.',
-    'bookflow.features.books': 'Books Only',
-    'bookflow.features.books.description': 'University and school textbooks, all in one place',
-    'bookflow.features.schools': 'Many Schools',
-    'bookflow.features.schools.description': 'Students from different universities and schools, one community',
+    'bookflow.subtitle': 'The marketplace to buy and sell textbooks among Bocconi students.\nFind the books for your course and resell the ones you no longer need. Zero fees, no middlemen.',
+    'bookflow.features.books': 'Your Course Only',
+    'bookflow.features.books.description': 'See only the books for your course and your year. No digging through thousands of scattered listings.',
+    'bookflow.features.schools': 'Zero Fees',
+    'bookflow.features.schools.description': 'Bookflow is free: no fees on purchases or sales. You set the price.',
     'bookflow.features.fast': 'Fast & Simple',
-    'bookflow.features.fast.description': 'List a book in seconds and sell it right away',
+    'bookflow.features.fast.description': 'List an ad in seconds and sell within days.',
     'bookflow.cta.button': 'Discover BookFlow',
 
     // Marketplace Section
