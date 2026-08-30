@@ -25,6 +25,7 @@ const Index = () => {
       <DispensenSection />
       <CalcolatoriSection />
       <MarketplaceSection />
+      <BookFlowSection />
       <FreeAtBSection />
       <Footer />
     </div>
