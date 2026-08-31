@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Timer, School } from "lucide-react";
+import { ArrowRight, BookOpen, Timer, BadgePercent } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import bookflowLogo from "@/assets/bookflow-logo.png.asset.json";
 
@@ -16,7 +16,7 @@ export const BookFlowSection = () => {
       description: t("bookflow.features.books.description"),
     },
     {
-      icon: School,
+      icon: BadgePercent,
       title: t("bookflow.features.schools"),
       description: t("bookflow.features.schools.description"),
     },
