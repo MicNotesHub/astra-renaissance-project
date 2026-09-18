@@ -14,6 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          disabled: boolean
+          email: string
+          full_name: string | null
+          permissions: string[]
+          role: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          disabled?: boolean
+          email: string
+          full_name?: string | null
+          permissions?: string[]
+          role?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          disabled?: boolean
+          email?: string
+          full_name?: string | null
+          permissions?: string[]
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      articles: {
+        Row: {
+          author: string | null
+          body_html: string
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          created_by: string | null
+          excerpt: string | null
+          id: string
+          published_at: string | null
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          author?: string | null
+          body_html?: string
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          author?: string | null
+          body_html?: string
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       astra_polare_media_content: {
         Row: {
           content_type: string
@@ -140,6 +224,39 @@ export type Database = {
           cfu?: number | null
           course?: string
           id?: number
+        }
+        Relationships: []
+      }
+      content_audit: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_id: string | null
+          changed_at: string
+          id: number
+          record_id: string
+          summary: string | null
+          table_name: string
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_id?: string | null
+          changed_at?: string
+          id?: number
+          record_id: string
+          summary?: string | null
+          table_name: string
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_id?: string | null
+          changed_at?: string
+          id?: number
+          record_id?: string
+          summary?: string | null
+          table_name?: string
         }
         Relationships: []
       }
