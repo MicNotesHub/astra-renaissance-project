@@ -32,6 +32,7 @@ import StellaPolareArticleSaluteMentale from "./pages/StellaPolareArticleSaluteM
 import StellaPolareArticleCapaci from "./pages/StellaPolareArticleCapaci";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
+import DispenseAdmin from "./pages/DispenseAdmin";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -58,6 +59,7 @@ const App = () => {
               <Route path="/calcolatori" element={<Calcolatori />} />
               <Route path="/exchange" element={<ExchangeEmbed />} />
               <Route path="/dispense" element={<Dispense />} />
+              <Route path="/dispense-admin" element={<DispenseAdmin />} />
               <Route path="/dispense/magistrali" element={<MagistraliHandouts />} />
               <Route path="/dispense/clmg" element={<CLMGDispense />} />
               <Route path="/dispense/clmg/:year" element={<CLMGYearHandouts />} />
