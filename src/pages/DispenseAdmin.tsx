@@ -25,7 +25,9 @@ const DispenseAdmin = () => {
   const [busy, setBusy] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState("");
+  const [program, setProgram] = useState<"triennale" | "clmg">("triennale");
   const [year, setYear] = useState("First Year");
+  const [clmgYear, setClmgYear] = useState("1");
   const [courses, setCourses] = useState<string[]>([]);
   const [semester, setSemester] = useState("");
   const [examType, setExamType] = useState("");
@@ -46,7 +48,8 @@ const DispenseAdmin = () => {
     const fd = new FormData();
     fd.append("password", password); fd.append("file", file);
     fd.append("filename", name || file.name.replace(/\.pdf$/i, ""));
-    fd.append("year", year); fd.append("courses", courses.join(","));
+    fd.append("program", program);
+    fd.append("year", program === "clmg" ? clmgYear : year); fd.append("courses", courses.join(","));
     fd.append("semester", semester); fd.append("exam_type", examType); fd.append("track", track);
     try {
       const r = await call(fd);
@@ -76,16 +79,30 @@ const DispenseAdmin = () => {
                 <Input id="pdf-input" type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files?.[0] ?? null)} /></div>
               <div><label className="text-sm font-medium">Nome visualizzato</label>
                 <Input value={name} placeholder={file?.name.replace(/\.pdf$/i, "") || "es. Management - 1st partial"} onChange={(e) => setName(e.target.value)} /></div>
-              <div><label className="text-sm font-medium">Anno</label>
-                <select className={selectCls} value={year} onChange={(e) => setYear(e.target.value)}>
-                  <option value="First Year">Primo anno</option><option value="Second Year">Secondo anno</option><option value="Third Year">Terzo anno</option>
+              <div><label className="text-sm font-medium">Programma</label>
+                <select className={selectCls} value={program} onChange={(e) => setProgram(e.target.value as "triennale" | "clmg")}>
+                  <option value="triennale">Triennale</option><option value="clmg">CLMG (Giurisprudenza)</option>
                 </select></div>
-              <div><label className="text-sm font-medium">Corsi (anche più di uno)</label>
-                <div className="grid grid-cols-3 gap-2 mt-1">
-                  {COURSES.map((c) => (
-                    <label key={c} className="flex items-center gap-2 text-sm"><Checkbox checked={courses.includes(c)} onCheckedChange={() => toggle(c)} />{c}</label>
-                  ))}
-                </div></div>
+              {program === "clmg" ? (
+                <div><label className="text-sm font-medium">Anno di corso</label>
+                  <select className={selectCls} value={clmgYear} onChange={(e) => setClmgYear(e.target.value)}>
+                    <option value="1">Primo anno</option><option value="2">Secondo anno</option><option value="3">Terzo anno</option>
+                    <option value="4">Quarto anno</option><option value="5">Quinto anno</option>
+                  </select></div>
+              ) : (
+                <>
+                  <div><label className="text-sm font-medium">Anno</label>
+                    <select className={selectCls} value={year} onChange={(e) => setYear(e.target.value)}>
+                      <option value="First Year">Primo anno</option><option value="Second Year">Secondo anno</option><option value="Third Year">Terzo anno</option>
+                    </select></div>
+                  <div><label className="text-sm font-medium">Corsi (anche più di uno)</label>
+                    <div className="grid grid-cols-3 gap-2 mt-1">
+                      {COURSES.map((c) => (
+                        <label key={c} className="flex items-center gap-2 text-sm"><Checkbox checked={courses.includes(c)} onCheckedChange={() => toggle(c)} />{c}</label>
+                      ))}
+                    </div></div>
+                </>
+              )}
               <div className="grid grid-cols-2 gap-3">
                 <div><label className="text-sm font-medium">Semestre</label>
                   <select className={selectCls} value={semester} onChange={(e) => setSemester(e.target.value)}>
@@ -102,7 +119,7 @@ const DispenseAdmin = () => {
                     <option value="">Nessuno (entrambi)</option><option value="fin">Fin</option><option value="econ">Econ</option>
                   </select></div>
               )}
-              <Button type="submit" disabled={busy || !file || !courses.length} className="w-full">{busy ? "Caricamento..." : "Carica"}</Button>
+              <Button type="submit" disabled={busy || !file || (program === "triennale" && !courses.length)} className="w-full">{busy ? "Caricamento..." : "Carica"}</Button>
             </form>
           )}
           {msg && <p className={msg.ok ? "text-sm text-primary" : "text-sm text-destructive"}>{msg.text}</p>}
