@@ -26,6 +26,7 @@ Deno.serve(async (req) => {
     if (form.get("action") === "verify") return json({ ok: true });
 
     const file = form.get("file");
+    const program = String(form.get("program") || "triennale");
     const year = String(form.get("year") || "");
     const courses = String(form.get("courses") || "").split(",").map((c) => c.trim()).filter((c) => COURSES.includes(c));
     const displayName = String(form.get("filename") || "").trim();
