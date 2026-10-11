@@ -119,7 +119,7 @@ const DispenseAdmin = () => {
                     <option value="">Nessuno (entrambi)</option><option value="fin">Fin</option><option value="econ">Econ</option>
                   </select></div>
               )}
-              <Button type="submit" disabled={busy || !file || !courses.length} className="w-full">{busy ? "Caricamento..." : "Carica"}</Button>
+              <Button type="submit" disabled={busy || !file || (program === "triennale" && !courses.length)} className="w-full">{busy ? "Caricamento..." : "Carica"}</Button>
             </form>
           )}
           {msg && <p className={msg.ok ? "text-sm text-primary" : "text-sm text-destructive"}>{msg.text}</p>}
