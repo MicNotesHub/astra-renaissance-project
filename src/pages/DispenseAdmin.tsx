@@ -25,7 +25,9 @@ const DispenseAdmin = () => {
   const [busy, setBusy] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState("");
+  const [program, setProgram] = useState<"triennale" | "clmg">("triennale");
   const [year, setYear] = useState("First Year");
+  const [clmgYear, setClmgYear] = useState("1");
   const [courses, setCourses] = useState<string[]>([]);
   const [semester, setSemester] = useState("");
   const [examType, setExamType] = useState("");
@@ -46,7 +48,8 @@ const DispenseAdmin = () => {
     const fd = new FormData();
     fd.append("password", password); fd.append("file", file);
     fd.append("filename", name || file.name.replace(/\.pdf$/i, ""));
-    fd.append("year", year); fd.append("courses", courses.join(","));
+    fd.append("program", program);
+    fd.append("year", program === "clmg" ? clmgYear : year); fd.append("courses", courses.join(","));
     fd.append("semester", semester); fd.append("exam_type", examType); fd.append("track", track);
     try {
       const r = await call(fd);
