@@ -22,6 +22,8 @@ const DispenseAdmin = () => {
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [lastUrl, setLastUrl] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState("");
@@ -54,6 +56,7 @@ const DispenseAdmin = () => {
     try {
       const r = await call(fd);
       setMsg({ ok: true, text: `Caricato per ${r.inserted} corso/i ✓` });
+      setLastUrl(r.url ?? null);
       setFile(null); setName("");
       (document.getElementById("pdf-input") as HTMLInputElement).value = "";
     } catch (err) { setMsg({ ok: false, text: (err as Error).message }); }
