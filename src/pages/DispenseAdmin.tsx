@@ -56,7 +56,7 @@ const DispenseAdmin = () => {
     try {
       const r = await call(fd);
       setMsg({ ok: true, text: `Caricato per ${r.inserted} corso/i ✓` });
-      setLastUrl(r.url ?? null);
+      setLastUrl(r.url ?? null); setCopied(false);
       setFile(null); setName("");
       (document.getElementById("pdf-input") as HTMLInputElement).value = "";
     } catch (err) { setMsg({ ok: false, text: (err as Error).message }); }
@@ -126,6 +126,30 @@ const DispenseAdmin = () => {
             </form>
           )}
           {msg && <p className={msg.ok ? "text-sm text-primary" : "text-sm text-destructive"}>{msg.text}</p>}
+          {lastUrl && (
+            <div className="space-y-1">
+              <label className="text-sm font-medium">Link della dispensa</label>
+              <div className="flex gap-2">
+                <Input readOnly value={lastUrl} onFocus={(e) => e.target.select()} />
+                <Button
+                  type="button"
+                  className="shrink-0"
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(lastUrl);
+                    } catch {
+                      const input = document.querySelector<HTMLInputElement>("input[readonly]");
+                      input?.select();
+                      document.execCommand("copy");
+                    }
+                    setCopied(true);
+                  }}
+                >
+                  {copied ? "Copiato ✓" : "Copia"}
+                </Button>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
