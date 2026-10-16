@@ -30,6 +30,7 @@ import StellaPolareArticleLiberationDay from "./pages/StellaPolareArticleLiberat
 import StellaPolareArticleLabourDay from "./pages/StellaPolareArticleLabourDay";
 import StellaPolareArticleSaluteMentale from "./pages/StellaPolareArticleSaluteMentale";
 import StellaPolareArticleCapaci from "./pages/StellaPolareArticleCapaci";
+import StellaPolareArticleMentalHealthDay from "./pages/StellaPolareArticleMentalHealthDay";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
 import DispenseAdmin from "./pages/DispenseAdmin";
