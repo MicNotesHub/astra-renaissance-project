@@ -133,6 +133,17 @@ interface MonthlyManualArticle {
 
 const monthlyManualArticles: MonthlyManualArticle[] = [
   {
+    slug: "mental-health-day-october-10",
+    href: "/stella-polare/mental-health-day-october-10",
+    cover: mentalHealthDayCover,
+    eyebrow: "Ottobre 2026 · Mensile",
+    title: "Mental health deserves more than a day",
+    excerpt:
+      "Il 10 ottobre la salute mentale riempie i social. La domanda più difficile è cosa succede l'11 ottobre, quando l'attenzione si sposta altrove e le difficoltà restano.",
+    accent: "from-blue-600 via-indigo-400 to-sky-300",
+    author: "Giorgia Caruana",
+  },
+  {
     slug: "capaci-23-maggio-1992",
     href: "/stella-polare/capaci-23-maggio-1992",
     cover: capaciCover,
