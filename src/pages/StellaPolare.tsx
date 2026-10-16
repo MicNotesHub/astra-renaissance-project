@@ -32,6 +32,7 @@ import liberationDayCover from "@/assets/stella-polare-covers/liberation-day.jpe
 import labourDayCover from "@/assets/stella-polare-covers/labour-day.png";
 import mentalHealthCover from "@/assets/stella-polare-covers/mental-health.jpg";
 import capaciCover from "@/assets/stella-polare-covers/capaci-23-maggio.jpg";
+import mentalHealthDayCover from "@/assets/stella-polare-covers/mental-health-day-october.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type ManualCategory = "arte" | "economia" | "international" | "legal" | "sport" | "astranews";
