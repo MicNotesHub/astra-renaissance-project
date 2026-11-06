@@ -32,6 +32,7 @@ import StellaPolareArticleSaluteMentale from "./pages/StellaPolareArticleSaluteM
 import StellaPolareArticleCapaci from "./pages/StellaPolareArticleCapaci";
 import StellaPolareArticleMentalHealthDay from "./pages/StellaPolareArticleMentalHealthDay";
 import StellaPolareArticleMidterms from "./pages/StellaPolareArticleMidterms";
+import StellaPolareArticleAstraPress from "./pages/StellaPolareArticleAstraPress";
 import Calcolatori from "./pages/Calcolatori";
 import ExchangeEmbed from "./pages/ExchangeEmbed";
 import DispenseAdmin from "./pages/DispenseAdmin";
@@ -81,6 +82,7 @@ const App = () => {
               <Route path="/stella-polare/labour-day-may-1" element={<StellaPolareArticleLabourDay />} />
               <Route path="/stella-polare/salute-mentale-maggio" element={<StellaPolareArticleSaluteMentale />} />
               <Route path="/stella-polare/capaci-23-maggio-1992" element={<StellaPolareArticleCapaci />} />
+              <Route path="/stella-polare/two-protests-two-narratives" element={<StellaPolareArticleAstraPress />} />
               <Route path="/stella-polare/us-midterms-2026-blue-tsunami" element={<StellaPolareArticleMidterms />} />
               <Route path="/stella-polare/mental-health-day-october-10" element={<StellaPolareArticleMentalHealthDay />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

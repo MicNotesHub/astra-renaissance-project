@@ -32,6 +32,7 @@ import liberationDayCover from "@/assets/stella-polare-covers/liberation-day.jpe
 import labourDayCover from "@/assets/stella-polare-covers/labour-day.png";
 import mentalHealthCover from "@/assets/stella-polare-covers/mental-health.jpg";
 import capaciCover from "@/assets/stella-polare-covers/capaci-23-maggio.jpg";
+import astraPressCover from "@/assets/stella-polare-covers/astra-press-october-21.jpg";
 import midtermsCover from "@/assets/stella-polare-covers/midterms-2026.jpg";
 import mentalHealthDayCover from "@/assets/stella-polare-covers/mental-health-day-october.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -143,6 +144,17 @@ const monthlyManualArticles: MonthlyManualArticle[] = [
       "Pollsters had predicted a Democratic advance. What the American electorate delivered on November 3 surpassed every expectation.",
     accent: "from-blue-600 via-indigo-400 to-sky-300",
     author: "Lorenza Pavone",
+  },
+  {
+    slug: "two-protests-two-narratives",
+    href: "/stella-polare/two-protests-two-narratives",
+    cover: astraPressCover,
+    eyebrow: "4 novembre 2026 · Mensile",
+    title: "Two protests, two narratives: who decides what makes the news?",
+    excerpt:
+      "Milan’s shattered windows monopolised the coverage while voices from the South struggled to be heard. A reflection on the business of attention and the responsibility of the media.",
+    accent: "from-blue-600 via-indigo-400 to-sky-300",
+    author: "Giuliano Firenze",
   },
   {
     slug: "mental-health-day-october-10",
