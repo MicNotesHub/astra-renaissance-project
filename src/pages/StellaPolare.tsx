@@ -32,6 +32,7 @@ import liberationDayCover from "@/assets/stella-polare-covers/liberation-day.jpe
 import labourDayCover from "@/assets/stella-polare-covers/labour-day.png";
 import mentalHealthCover from "@/assets/stella-polare-covers/mental-health.jpg";
 import capaciCover from "@/assets/stella-polare-covers/capaci-23-maggio.jpg";
+import midtermsCover from "@/assets/stella-polare-covers/midterms-2026.jpg";
 import mentalHealthDayCover from "@/assets/stella-polare-covers/mental-health-day-october.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -132,6 +133,17 @@ interface MonthlyManualArticle {
 }
 
 const monthlyManualArticles: MonthlyManualArticle[] = [
+  {
+    slug: "us-midterms-2026-blue-tsunami",
+    href: "/stella-polare/us-midterms-2026-blue-tsunami",
+    cover: midtermsCover,
+    eyebrow: "6 novembre 2026 · Mensile",
+    title: "“The blue tsunami”: the 2026 US midterms",
+    excerpt:
+      "Pollsters had predicted a Democratic advance. What the American electorate delivered on November 3 surpassed every expectation.",
+    accent: "from-blue-600 via-indigo-400 to-sky-300",
+    author: "Lorenza Pavone",
+  },
   {
     slug: "mental-health-day-october-10",
     href: "/stella-polare/mental-health-day-october-10",
