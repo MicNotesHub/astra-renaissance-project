@@ -81,7 +81,42 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 pt-8 flex flex-col items-center">
+        <div className="border-t border-white/20 pt-8 flex flex-col items-center gap-6">
+          <div className="w-full max-w-4xl text-center text-white/80">
+            <p className="mb-1 text-lg font-semibold text-white">{t('footer.organization')}</p>
+            <address className="not-italic text-sm sm:text-base leading-7">
+              <p>{t('footer.addressValue')}</p>
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+                <a
+                  href="mailto:astra.bocconi@pec.it"
+                  className="underline decoration-white/30 underline-offset-4 hover:text-white transition-colors"
+                >
+                  {t('footer.pec')}
+                </a>
+                <span aria-hidden="true" className="hidden text-white/40 sm:inline">|</span>
+                <a
+                  href="https://www.astrabocconi.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-white/30 underline-offset-4 hover:text-white transition-colors"
+                >
+                  {t('footer.website')}
+                </a>
+                <span aria-hidden="true" className="hidden text-white/40 sm:inline">|</span>
+                <a
+                  href="mailto:info@astrabocconi.com"
+                  className="underline decoration-white/30 underline-offset-4 hover:text-white transition-colors"
+                >
+                  info@astrabocconi.com
+                </a>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+                <span>{t('footer.taxCode')}</span>
+                <span aria-hidden="true" className="hidden text-white/40 sm:inline">|</span>
+                <span>{t('footer.vatNumber')}</span>
+              </div>
+            </address>
+          </div>
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center">
               <img
